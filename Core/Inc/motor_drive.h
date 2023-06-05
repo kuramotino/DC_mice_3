@@ -11,7 +11,7 @@
 void R_test_drive(void);
 void L_test_drive(void);
 void R_L_test_drive(void);
-void test_sound(void);
+void test_sound(float c,float delay);
 int PressButton();
 void test_suction(void);
 

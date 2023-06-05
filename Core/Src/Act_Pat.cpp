@@ -21,5 +21,19 @@ namespace application
 			HAL_GPIO_WritePin(ILED2_GPIO_Port,ILED2_Pin,GPIO_PIN_SET);
 		}
 	}
+
+	void App_Command(enum command_type c_type)
+	{
+		Command bu_cm(c_type);
+		cx_obj.wake_CtrlSystem(bu_cm);
+	}
+
+	void App_Wait()
+	{
+		while(cx_obj.return_now_status()==Run)
+		{
+			HAL_GPIO_WritePin(ILED2_GPIO_Port,ILED2_Pin,GPIO_PIN_SET);
+		}
+	}
 }
 

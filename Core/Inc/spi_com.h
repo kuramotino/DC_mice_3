@@ -19,6 +19,10 @@ namespace module
 		float accel_x;
 		float accel_y;
 		float accel_z;
+		float gyro_offset=0;
+		int offset_count=0;
+		float gyro_a=1.00138889;
+		bool isStartOffset=false;
 
 	public:
 		uint8_t read_spi(uint8_t reg);//readのspi通信
@@ -29,6 +33,8 @@ namespace module
 		void Update_ICM(void);//現在の角速度、加速度を更新する
 		void Show_ICM(void);//角速度、加速度を返す
 		void sensor_input();//センサー値をInputDataに入力する関数
+		void SetGyroOffset();//オフセットを設定する関数
+		void OffsetStart();//オフセット取得をスタートさせる関数
 	};
 }
 

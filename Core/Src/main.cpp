@@ -36,6 +36,8 @@
 #include "stdio.h"
 #include "Init_Controll_Objs.h"
 #include "Act_Pat.h"
+#include "math.h"
+#include "InitAlgo.h"
 //#include "kasoku.h"
 /* USER CODE END Includes */
 
@@ -116,11 +118,11 @@ int main(void)
   float gyro;
   //gyro_init();
   HAL_TIM_Base_Start_IT(&htim6);
-  HAL_TIM_Base_Start_IT(&htim2);
-  HAL_TIM_PWM_MspInit(&htim2);
-  HAL_TIM_Base_Start_IT(&htim3);
+  //HAL_TIM_Base_Start_IT(&htim2);
+  //HAL_TIM_PWM_MspInit(&htim2);
+  //HAL_TIM_Base_Start_IT(&htim3);
   HAL_TIM_PWM_MspInit(&htim3);
-  HAL_TIM_Base_Start_IT(&htim12);
+  //HAL_TIM_Base_Start_IT(&htim12);
   HAL_TIM_PWM_MspInit(&htim12);
 
   __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3, 0);
@@ -131,20 +133,179 @@ int main(void)
   __HAL_TIM_SET_COMPARE(&htim12, TIM_CHANNEL_2, 0);
   HAL_TIM_PWM_Start(&htim12, TIM_CHANNEL_1);
   HAL_TIM_PWM_Start(&htim12, TIM_CHANNEL_2);
-  //pl_encoder_init();
+  /*pl_encoder_init();
   int16_t cnt_R=0;
   int16_t cnt_L=0;
   float t=0;
+   */
+  int mode=0;
+  int pre_mode=0;
+  int modenum=5;
+  float t=0;
   Init_Controll();
-  bool isStart=false;
+  InitAlgo();
+  bool isStart[7]={false};
   using namespace controll;
   using namespace application;
+  using namespace Algorizm;
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  mode=(int)(modenum*fabs(input_obj.enc_v_R_sum)/(32767.0));//modeの決定
+	  if(pre_mode!=mode)
+	  	  	  {
+	  	  		  test_sound(1.25,50);
+	  	  		  pre_mode=mode;
+	  	  	  }
+	  switch(mode)
+	  {
+	  case 0://0センサ計測モード
+		  HAL_Delay(100);
+		  //test_sound(1,1000);
+		  HAL_GPIO_WritePin(ILED1_GPIO_Port,ILED1_Pin,GPIO_PIN_SET);
+		  HAL_GPIO_WritePin(ILED2_GPIO_Port,ILED2_Pin,GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(ILED5_GPIO_Port,ILED5_Pin,GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(ILED6_GPIO_Port,ILED6_Pin,GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(ILED7_GPIO_Port,ILED7_Pin,GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(ILED8_GPIO_Port,ILED8_Pin,GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(ILED9_GPIO_Port,ILED9_Pin,GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(ILED10_GPIO_Port,ILED10_Pin,GPIO_PIN_RESET);
+		  printf("sensorL_1=%d,sensorL_2=%d,sensorF=%d,sensorR_1=%d,sensorR_2=%d\n\r",input_obj.g_sensor_now[0],input_obj.g_sensor_now[1],input_obj.g_sensor_now[2],input_obj.g_sensor_now[3],input_obj.g_sensor_now[4]);
+		  break;
+
+	  case 1://debugモード
+		  HAL_GPIO_WritePin(ILED1_GPIO_Port,ILED1_Pin,GPIO_PIN_RESET);
+		  		  				  HAL_GPIO_WritePin(ILED2_GPIO_Port,ILED2_Pin,GPIO_PIN_SET);
+		  		  				  HAL_GPIO_WritePin(ILED5_GPIO_Port,ILED5_Pin,GPIO_PIN_RESET);
+		  		  				  HAL_GPIO_WritePin(ILED6_GPIO_Port,ILED6_Pin,GPIO_PIN_RESET);
+		  		  				  HAL_GPIO_WritePin(ILED7_GPIO_Port,ILED7_Pin,GPIO_PIN_RESET);
+		  		  				  HAL_GPIO_WritePin(ILED8_GPIO_Port,ILED8_Pin,GPIO_PIN_RESET);
+		  		  				  HAL_GPIO_WritePin(ILED9_GPIO_Port,ILED9_Pin,GPIO_PIN_RESET);
+		  		  				  HAL_GPIO_WritePin(ILED10_GPIO_Port,ILED10_Pin,GPIO_PIN_RESET);
+		  if(isStart[1]==true)
+		  	  {
+		  		  isStart[1]=false;
+		  		  gyro_obj.OffsetStart();
+		  		  HAL_Delay(1200);
+		  		  while(!issue_obj.isStop)
+		  		  {
+		  			  UpDataAlgo();
+		  		  }
+		  		  //App_Set_Command(Stra);
+		  		  //App_Set_Command(Stra_ac_180);
+		  		  //App_Set_Command(Front_offset);
+		  		  //App_Set_Command(Left_sla);
+		  		  //App_Set_Command(Left_b_off);
+		  		  //App_Set_Command(Stra_de_180);
+		  		  //App_Set_Command(Left_sen);
+		  		  //HAL_Delay(1000);
+		  	  }
+		  break;
+
+	  case 2://Logモード
+		  HAL_GPIO_WritePin(ILED1_GPIO_Port,ILED1_Pin,GPIO_PIN_RESET);
+		  		  HAL_GPIO_WritePin(ILED2_GPIO_Port,ILED2_Pin,GPIO_PIN_RESET);
+		  		  HAL_GPIO_WritePin(ILED5_GPIO_Port,ILED5_Pin,GPIO_PIN_SET);
+		  		  HAL_GPIO_WritePin(ILED6_GPIO_Port,ILED6_Pin,GPIO_PIN_RESET);
+		  		  HAL_GPIO_WritePin(ILED7_GPIO_Port,ILED7_Pin,GPIO_PIN_RESET);
+		  		  HAL_GPIO_WritePin(ILED8_GPIO_Port,ILED8_Pin,GPIO_PIN_RESET);
+		  		  HAL_GPIO_WritePin(ILED9_GPIO_Port,ILED9_Pin,GPIO_PIN_RESET);
+		  		  HAL_GPIO_WritePin(ILED10_GPIO_Port,ILED10_Pin,GPIO_PIN_RESET);
+		  		if(isStart[2]==true)
+		  				  	  {
+		  				  		  isStart[2]=false;
+		  				  		  t=0;
+		  				  		/*for(int i=0;i<1200;i++)
+		  				  				  {
+		  				  					  //printf("now_v=%f,now_x=%f,now_R_duty=%f,now_L_duty=%f,enc=%f,gyro=%f\n\r",ksk_obj.now_v_log[i],ksk_obj.now_x_log[i],pwm_obj.now_R_log[i],pwm_obj.now_L_log[i],pid_obj.log_enc[i],pid_obj.log_gyro[i]);
+		  				  					  printf("%f,%f,%f,%f,%f,%f,%f\n\r",t,ksk_obj.now_v_log[i],ksk_obj.now_x_log[i],pwm_obj.now_R_log[i],pwm_obj.now_L_log[i],pid_obj.log_enc[i],pid_obj.log_gyro[i]);
+		  				  					  t+=0.001;
+		  				  				  }*/
+		  				  		  map_obj.ShowMap();
+		  				  		  HAL_Delay(1000);
+		  				  	  }
+		  break;
+
+	  case 3:
+		  HAL_GPIO_WritePin(ILED1_GPIO_Port,ILED1_Pin,GPIO_PIN_RESET);
+		  		  HAL_GPIO_WritePin(ILED2_GPIO_Port,ILED2_Pin,GPIO_PIN_RESET);
+		  		  HAL_GPIO_WritePin(ILED5_GPIO_Port,ILED5_Pin,GPIO_PIN_RESET);
+		  		  HAL_GPIO_WritePin(ILED6_GPIO_Port,ILED6_Pin,GPIO_PIN_SET);
+		  		  HAL_GPIO_WritePin(ILED7_GPIO_Port,ILED7_Pin,GPIO_PIN_RESET);
+		  		  HAL_GPIO_WritePin(ILED8_GPIO_Port,ILED8_Pin,GPIO_PIN_RESET);
+		  		  HAL_GPIO_WritePin(ILED9_GPIO_Port,ILED9_Pin,GPIO_PIN_RESET);
+		  		  HAL_GPIO_WritePin(ILED10_GPIO_Port,ILED10_Pin,GPIO_PIN_RESET);
+		  		if(isStart[3]==true)
+		  				  	  {
+		  				  		  isStart[3]=false;
+		  				  		  gyro_obj.OffsetStart();
+		  				  		  HAL_Delay(1200);
+		  				  		  //App_Set_Command(Stra);
+		  				  		  App_Set_Command(Stra_ac_180);
+		  				  		  App_Set_Command(Front_offset);
+		  				  		  App_Set_Command(Left_sla);
+		  				  		  App_Set_Command(Left_b_off);
+		  				  		  App_Set_Command(Stra_de_180);
+		  				  		  //App_Set_Command(Left_sen);
+		  				  		  HAL_Delay(1000);
+		  				  	  }
+		  break;
+
+	  case 4:
+		  HAL_GPIO_WritePin(ILED1_GPIO_Port,ILED1_Pin,GPIO_PIN_RESET);
+		  		  HAL_GPIO_WritePin(ILED2_GPIO_Port,ILED2_Pin,GPIO_PIN_RESET);
+		  		  HAL_GPIO_WritePin(ILED5_GPIO_Port,ILED5_Pin,GPIO_PIN_RESET);
+		  		  HAL_GPIO_WritePin(ILED6_GPIO_Port,ILED6_Pin,GPIO_PIN_RESET);
+		  		  HAL_GPIO_WritePin(ILED7_GPIO_Port,ILED7_Pin,GPIO_PIN_SET);
+		  		  HAL_GPIO_WritePin(ILED8_GPIO_Port,ILED8_Pin,GPIO_PIN_RESET);
+		  		  HAL_GPIO_WritePin(ILED9_GPIO_Port,ILED9_Pin,GPIO_PIN_RESET);
+		  		  HAL_GPIO_WritePin(ILED10_GPIO_Port,ILED10_Pin,GPIO_PIN_RESET);
+
+		  		if(isStart[4]==true)
+		  				  	{
+		  				  				  		  isStart[4]=false;
+		  				  				  		  gyro_obj.OffsetStart();
+		  				  				  		  HAL_Delay(1200);
+		  				  				  		  //App_Set_Command(Stra);
+		  				  				  		  App_Set_Command(Stra_ac_180);
+		  				  				  		  App_Set_Command(Front_offset);
+		  				  				  		  App_Set_Command(Right_sla);
+		  				  				  		  App_Set_Command(Right_b_off);
+		  				  				  		  App_Set_Command(Front_offset);
+		  				  				  		  App_Set_Command(Right_sla);
+		  				  				  		  App_Set_Command(Right_b_off);
+		  				  				  		  App_Set_Command(Stra_de_180);
+		  				  				  		  //App_Set_Command(Left_sen);
+		  				  				  		  HAL_Delay(1000);
+		  				  	}
+		  break;
+
+	  case 5:
+		  HAL_GPIO_WritePin(ILED1_GPIO_Port,ILED1_Pin,GPIO_PIN_RESET);
+		  		  HAL_GPIO_WritePin(ILED2_GPIO_Port,ILED2_Pin,GPIO_PIN_RESET);
+		  		  HAL_GPIO_WritePin(ILED5_GPIO_Port,ILED5_Pin,GPIO_PIN_RESET);
+		  		  HAL_GPIO_WritePin(ILED6_GPIO_Port,ILED6_Pin,GPIO_PIN_RESET);
+		  		  HAL_GPIO_WritePin(ILED7_GPIO_Port,ILED7_Pin,GPIO_PIN_RESET);
+		  		  HAL_GPIO_WritePin(ILED8_GPIO_Port,ILED8_Pin,GPIO_PIN_SET);
+		  		  HAL_GPIO_WritePin(ILED9_GPIO_Port,ILED9_Pin,GPIO_PIN_RESET);
+		  		  HAL_GPIO_WritePin(ILED10_GPIO_Port,ILED10_Pin,GPIO_PIN_RESET);
+		  break;
+
+	  case 6:
+		  HAL_GPIO_WritePin(ILED1_GPIO_Port,ILED1_Pin,GPIO_PIN_RESET);
+		  		  HAL_GPIO_WritePin(ILED2_GPIO_Port,ILED2_Pin,GPIO_PIN_RESET);
+		  		  HAL_GPIO_WritePin(ILED5_GPIO_Port,ILED5_Pin,GPIO_PIN_RESET);
+		  		  HAL_GPIO_WritePin(ILED6_GPIO_Port,ILED6_Pin,GPIO_PIN_RESET);
+		  		  HAL_GPIO_WritePin(ILED7_GPIO_Port,ILED7_Pin,GPIO_PIN_RESET);
+		  		  HAL_GPIO_WritePin(ILED8_GPIO_Port,ILED8_Pin,GPIO_PIN_RESET);
+		  		  HAL_GPIO_WritePin(ILED9_GPIO_Port,ILED9_Pin,GPIO_PIN_SET);
+		  		  HAL_GPIO_WritePin(ILED10_GPIO_Port,ILED10_Pin,GPIO_PIN_RESET);
+		  break;
+
+	  }
 	  /*HAL_GPIO_WritePin(ILED5_GPIO_Port,ILED5_Pin,GPIO_PIN_SET);
 	  HAL_GPIO_WritePin(ILED2_GPIO_Port,ILED2_Pin,GPIO_PIN_SET);
 	  uint8_t hello[] = "Hello\n\r";
@@ -179,8 +340,26 @@ int main(void)
 	  //printf("gyro=%f\n\r",gyro);
 	  //Update_ICM();
 	  //Show_ICM();
-	  HAL_Delay(100);
+	  //HAL_Delay(100);
+	  //HAL_GPIO_WritePin(ILED1_GPIO_Port,ILED1_Pin,GPIO_PIN_SET);
+	  		//HAL_GPIO_WritePin(ILED2_GPIO_Port,ILED2_Pin,GPIO_PIN_SET);
+	  		//HAL_GPIO_WritePin(ILED5_GPIO_Port,ILED5_Pin,GPIO_PIN_SET);
+	  		//HAL_GPIO_WritePin(ILED6_GPIO_Port,ILED6_Pin,GPIO_PIN_SET);
+	  		//HAL_GPIO_WritePin(ILED7_GPIO_Port,ILED7_Pin,GPIO_PIN_SET);
+	  		//HAL_GPIO_WritePin(ILED8_GPIO_Port,ILED8_Pin,GPIO_PIN_SET);
+	  		//HAL_GPIO_WritePin(ILED9_GPIO_Port,ILED9_Pin,GPIO_PIN_SET);
+	  		//HAL_GPIO_WritePin(ILED10_GPIO_Port,ILED10_Pin,GPIO_PIN_SET);
+	  //reg=gyro_obj.read_spi(0x75);
+	  //printf("whoami=%x\n",reg);
+	  //gyro_obj.gyro_init();
+	  //gyro_obj.Update_ICM();
+	  //gyro_obj.Show_ICM();
+	  		//HAL_Delay(1000);
+	  		//HAL_GPIO_WritePin(ILED1_GPIO_Port,ILED1_Pin,GPIO_PIN_RESET);
+	  		//HAL_Delay(1000);
+	  		  //HAL_GPIO_WritePin(ILED10_GPIO_Port,ILED10_Pin,GPIO_PIN_SET);
 	  //cpploop();
+	  //HAL_Delay(1000);
 	  //R_L_test_drive();
 	  //test_sound();
 	  //cnt_R+=pl_count_encoderR();
@@ -189,71 +368,20 @@ int main(void)
 	  //HAL_GPIO_WritePin(ILED8_GPIO_Port,ILED8_Pin,GPIO_PIN_SET);
 	  //HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED);
 	  //test_adc();
+	  //gyro_obj.Show_ICM();
 	  //printf("sensorL_1=%d,sensorL_2=%d,sensorF=%d,sensorR_1=%d,sensorR_2=%d\n\r",input_obj.g_sensor_now[0],input_obj.g_sensor_now[1],input_obj.g_sensor_now[2],input_obj.g_sensor_now[3],input_obj.g_sensor_now[4]);
 	 //HAL_GPIO_WritePin(LED1_GPIO_Port,LED1_Pin,GPIO_PIN_SET);
 	  		  //HAL_GPIO_WritePin(LED2_GPIO_Port,LED2_Pin,GPIO_PIN_SET);
 	  		  //HAL_GPIO_WritePin(LED3_GPIO_Port,LED3_Pin,GPIO_PIN_SET);
 	  		  //HAL_GPIO_WritePin(LED4_GPIO_Port,LED4_Pin,GPIO_PIN_SET);
 	  		  //HAL_GPIO_WritePin(LED5_GPIO_Port,LED5_Pin,GPIO_PIN_SET);
-	  if(isStart==true)
+	  if(input_obj.g_sensor_now[2]>450)
 	  {
-		  isStart=false;
-		  HAL_GPIO_WritePin(ILED10_GPIO_Port,ILED10_Pin,GPIO_PIN_SET);
-		  App_Set_Command(Left_f_off);
-		  //HAL_Delay(1000);
-		  //App_Set_Command(Stra_Back);
-		  //App_Set_Command(Stra);
-		  App_Set_Command(Left_sla);
-		  //App_Set_Command(Left_sen);
-		  //App_Set_Command(Right_sla);
-		  //App_Set_Command(Mid_Stra);
-		  App_Set_Command(Left_b_off);
-		  //HAL_Delay(100);
-		  //App_Set_Command(Right_sla);
-	  }
-	  //HAL_GPIO_WritePin(ILED10_GPIO_Port,ILED10_Pin,GPIO_PIN_SET);
-
-	  if(PressButton()==1)
-	  {
-		  //HAL_GPIO_WritePin(LED1_GPIO_Port,LED1_Pin,GPIO_PIN_SET);
-		  //HAL_GPIO_WritePin(LED2_GPIO_Port,LED2_Pin,GPIO_PIN_SET);
-		  //HAL_GPIO_WritePin(LED3_GPIO_Port,LED3_Pin,GPIO_PIN_SET);
-		  //HAL_GPIO_WritePin(LED4_GPIO_Port,LED4_Pin,GPIO_PIN_SET);
-		  //HAL_GPIO_WritePin(LED5_GPIO_Port,LED5_Pin,GPIO_PIN_SET);
-		  //HAL_GPIO_WritePin(ILED8_GPIO_Port,ILED8_Pin,GPIO_PIN_SET);
-		  //HAL_GPIO_WritePin(ILED9_GPIO_Port,ILED9_Pin,GPIO_PIN_SET);
-		  HAL_GPIO_WritePin(ILED10_GPIO_Port,ILED10_Pin,GPIO_PIN_RESET);
-		  //test_sound();
-		  //R_L_test_drive();
-		  //test_suction();
-		  isStart=true;
-		  //HAL_Delay(1000);
-		  t=0;
-		  for(int i=0;i<1200;i++)
-		  {
-			  //printf("now_v=%f,now_x=%f,now_R_duty=%f,now_L_duty=%f,enc=%f,gyro=%f\n\r",ksk_obj.now_v_log[i],ksk_obj.now_x_log[i],pwm_obj.now_R_log[i],pwm_obj.now_L_log[i],pid_obj.log_enc[i],pid_obj.log_gyro[i]);
-			  printf("%f,%f,%f,%f,%f,%f,%f\n\r",t,ksk_obj.now_v_log[i],ksk_obj.now_x_log[i],pwm_obj.now_R_log[i],pwm_obj.now_L_log[i],pid_obj.log_enc[i],pid_obj.log_gyro[i]);
-			  t+=0.001;
-		  }
-		  /*for(int i=0;i<1200;i++)
-		  {
-			  printf("now_R_duty=%f,now_L_duty=%f\n\r",pwm_obj.now_R_log[i],pwm_obj.now_L_log[i]);
-		  }*/
-		  /*for(int i=0;i<1200;i++)
-		  {
-		  	  printf("enc=%f,gyro=%f\n\r",pid_obj.log_enc[i],pid_obj.log_gyro[i]);
-		  }*/
+		  isStart[mode]=true;
 	  }
 	  else
 	  {
-		  //HAL_GPIO_WritePin(LED1_GPIO_Port,LED1_Pin,GPIO_PIN_RESET);
-		  //HAL_GPIO_WritePin(LED2_GPIO_Port,LED2_Pin,GPIO_PIN_RESET);
-		  //HAL_GPIO_WritePin(LED3_GPIO_Port,LED3_Pin,GPIO_PIN_RESET);
-		  //HAL_GPIO_WritePin(LED4_GPIO_Port,LED4_Pin,GPIO_PIN_RESET);
-		  //HAL_GPIO_WritePin(LED5_GPIO_Port,LED5_Pin,GPIO_PIN_RESET);
-		  //HAL_GPIO_WritePin(ILED8_GPIO_Port,ILED8_Pin,GPIO_PIN_RESET);
-		  //HAL_GPIO_WritePin(ILED9_GPIO_Port,ILED9_Pin,GPIO_PIN_RESET);
-		  //HAL_GPIO_WritePin(ILED10_GPIO_Port,ILED10_Pin,GPIO_PIN_SET);
+		  isStart[mode]=false;
 	  }
 
 

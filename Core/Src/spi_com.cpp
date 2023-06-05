@@ -73,6 +73,7 @@ namespace module
 		gyro_x=gyro_get(0x43);
 		gyro_y=gyro_get(0x45);
 		gyro_z=gyro_get(0x47);
+		SetGyroOffset();
 	}
 
 	void module::Gyro::Show_ICM(void)
@@ -84,7 +85,33 @@ namespace module
 	void module::Gyro::sensor_input()//機体の速度を計算してInputDataに入力する
 	{
 		Update_ICM();
-		my_input->omega_gyro=gyro_z;
+		my_input->omega_gyro = (offset_count==1001) ? gyro_a*(gyro_z-gyro_offset) : gyro_z;
+		my_input->x_ac_gyro=accel_x;
+		my_input->y_ac_gyro=accel_y;
+	}
+
+	void module::Gyro::SetGyroOffset()
+	{
+		if(isStartOffset)
+		{
+			if(offset_count<1000)
+			{
+				gyro_offset+=gyro_z;
+				offset_count++;
+			}
+			else if(offset_count==1000)
+			{
+				gyro_offset/=1000;
+				offset_count++;
+				isStartOffset=false;
+			}
+		}
+	}
+
+	void module::Gyro::OffsetStart()
+	{
+		isStartOffset=true;
+		offset_count=0;
 	}
 }
 

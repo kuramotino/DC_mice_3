@@ -15,6 +15,10 @@ namespace controll
 	{
 		float threshold_v=1000;
 		float threshold_omega=1000;
+		float threshold_accel=7;
+		uint16_t threshold_pl=800;
+	public:
+		bool isFail=false;
 
 	public:
 		void FailStop();//速度、角速度を監視し、FailSafeをかける関数

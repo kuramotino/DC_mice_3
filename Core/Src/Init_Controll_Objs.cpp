@@ -45,6 +45,9 @@ void Sync_Module()//TIM6の割り込み処理
 {
 	if(init_flag==true)
 	{
+	//HAL_GPIO_WritePin(ILED1_GPIO_Port,ILED1_Pin,GPIO_PIN_SET);
+	Sync_Mo_R();
+	Sync_Mo_L();
 	cx_obj.polling_cs();
 	enc_obj.sensor_input();
 	gyro_obj.sensor_input();
@@ -61,17 +64,27 @@ void Sync_Module()//TIM6の割り込み処理
 
 void Sync_Mo_R()//右モータの割り込み処理
 {
+	//HAL_GPIO_WritePin(ILED5_GPIO_Port,ILED5_Pin,GPIO_PIN_SET);
 	float duty_r;
 	float duty_l;
 	enum turn cw_R;
 	enum turn cw_L;
 	pwm_obj.out_duty(&duty_r, &duty_l,&cw_R,&cw_L);
-	if(duty_r==0)
+	if(duty_r==0 && cx_obj.return_now_status()==Run)
 	{
-		/*__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_3,10000);
-		__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_4,10000);
-		__HAL_TIM_SET_COUNTER(&htim3, 0);
-		return;*/
+		if(cw_R==Front || cw_R==Left)
+			{
+				__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_4,(uint16_t)(300));
+				__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_3,0);
+				__HAL_TIM_SET_COUNTER(&htim3, 0);
+			}
+			else if(cw_R==Back || cw_R==Right)
+			{
+				__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_4,0);
+				__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_3,(uint16_t)(300));
+				__HAL_TIM_SET_COUNTER(&htim3, 0);
+			}
+		return;
 	}
 
 	if(cw_R==Front || cw_R==Left)
@@ -90,17 +103,27 @@ void Sync_Mo_R()//右モータの割り込み処理
 
 void Sync_Mo_L()//左モータの割り込み処理
 {
+	//HAL_GPIO_WritePin(ILED6_GPIO_Port,ILED6_Pin,GPIO_PIN_SET);
 	float duty_r;
 	float duty_l;
 	enum turn cw_R;
 	enum turn cw_L;
 	pwm_obj.out_duty(&duty_r, &duty_l,&cw_R,&cw_L);
-	if(duty_l==0)
+	if(duty_l==0 && cx_obj.return_now_status()==Run)
 	{
-		/*__HAL_TIM_SET_COMPARE(&htim12,TIM_CHANNEL_2,10000);
-		__HAL_TIM_SET_COMPARE(&htim12,TIM_CHANNEL_1,10000);
-		__HAL_TIM_SET_COUNTER(&htim12, 0);
-		return;*/
+		if(cw_L==Front || cw_L==Right)
+			{
+				__HAL_TIM_SET_COMPARE(&htim12,TIM_CHANNEL_1,(uint16_t)(300));
+				__HAL_TIM_SET_COMPARE(&htim12,TIM_CHANNEL_2,0);
+				__HAL_TIM_SET_COUNTER(&htim12, 0);
+			}
+			else if(cw_L==Back || cw_L==Left)
+			{
+				__HAL_TIM_SET_COMPARE(&htim12,TIM_CHANNEL_1,0);
+				__HAL_TIM_SET_COMPARE(&htim12,TIM_CHANNEL_2,(uint16_t)(300));
+				__HAL_TIM_SET_COUNTER(&htim12, 0);
+			}
+		return;
 	}
 
 	if(cw_L==Front || cw_L==Right)

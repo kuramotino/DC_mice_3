@@ -13,7 +13,9 @@
 namespace application
 {
 	using namespace controll;
-	void App_Set_Command(enum command_type c_type);
+	void App_Set_Command(enum command_type c_type);//制御部にコマンドを発行し、動作が終わるまで待つ関数
+	void App_Command(enum command_type c_type);//コマンドの発行のみを行う関数
+	void App_Wait();//コマンドが実行されるまで待つ関数
 }
 
 

@@ -55,7 +55,7 @@ namespace controll
 		{
 			if(stop_cm.isStop==false)
 			{
-				Command bu_stop_cm(Stop);
+				Command bu_stop_cm(Stop_Cm);
 				stop_cm=bu_stop_cm;
 				//HAL_GPIO_WritePin(ILED2_GPIO_Port,ILED2_Pin,GPIO_PIN_SET);
 			}

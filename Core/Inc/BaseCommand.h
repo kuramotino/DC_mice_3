@@ -10,7 +10,7 @@
 
 namespace controll
 {
-	enum command_type{Stra,Left_sla,Right_sla,Left_sen,Right_sen,Stra_Back,Left_f_off,Left_b_off,Mid_Stra,Stop,Fail_Stop,Break_Stop};
+	enum command_type{Stra,first_Stra,Left_sla,Right_sla,Left_sen,Right_sen,Stra_Back,Left_f_off,Left_b_off,Right_f_off,Right_b_off,Mid_Stra,Stop_Cm,Stra_Stop,Fail_Stop,Break_Stop,Front_offset,Stra_de_70,Stra_ac_90,Stra_ac_180,Stra_de_180};
 	class Command
 	{
 	public:

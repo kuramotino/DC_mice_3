@@ -88,15 +88,15 @@ void R_L_test_drive(void)
 		    HAL_TIM_PWM_Stop(&htim12, TIM_CHANNEL_2);
 }
 
-void test_sound(void)
+void test_sound(float c,float delay)
 {
-	int duty=(int)(270000-(200000));
+	int duty=(int)(270000/c-(200000));
 	__HAL_TIM_SET_AUTORELOAD(&htim2, 270000);
 	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_3, duty);
 
 
 	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_3);
-	HAL_Delay(1000);
+	HAL_Delay(delay);
 
 	HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_3);
 }
