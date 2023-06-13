@@ -14,7 +14,7 @@ namespace controll
 		isStop=(now_cm.isWall_PID_Stop || now_cm.isStop);
 	}
 
-	void controll::Wall_Ctrl::transmit_Wall_PID()//壁制御の制御量を求めpwmに送信する関数(TIM6割り込みで呼ばれる)
+	void controll::Wall_Ctrl::transmit_Wall_PID()//壁制御の制御量を求めpid_ctrlに送信する関数(TIM6割り込みで呼ばれる)
 	{
 		if(isStop==false)
 		{
@@ -73,6 +73,9 @@ namespace controll
 			}
 
 		//2制御量の決定
+			float r_diff=((float)(my_input->g_sensor_now[3])-CENTER_R);
+			float l_diff=((float)(my_input->g_sensor_now[1])-CENTER_L);
+
 			if((g_WallControllStatus | 0b01) == 0b01)//1左壁なし
 			{
 				if((g_WallControllStatus | 0b10) == 0b10)//1右壁なし
@@ -83,7 +86,7 @@ namespace controll
 				else//2右壁あり
 				{
 					//2左壁なし
-					PID_Wall=my_input->v_encoder/500*SENSOR_GAIN*2*(float)(my_input->g_sensor_now[3]-CENTER_R);
+					PID_Wall=my_input->v_encoder/500*R_SENSOR_GAIN*2*r_diff;
 				}
 			}
 			else//2左壁あり
@@ -91,19 +94,46 @@ namespace controll
 				if((g_WallControllStatus | 0b10) == 0b10)//1右壁なし
 				{
 					//3右壁なし
-					PID_Wall=my_input->v_encoder/500*SENSOR_GAIN*-2*(float)(my_input->g_sensor_now[1]-CENTER_L);
+					if(l_diff>3000)
+					{
+						PID_Wall=my_input->v_encoder/500*L_SENSOR_GAIN*-2*0;
+					}
+					else
+					{
+						PID_Wall=my_input->v_encoder/500*L_SENSOR_GAIN*-2*l_diff;
+					}
 				}
 				else//2右壁あり
 				{
 					//4両壁あり
-					PID_Wall=my_input->v_encoder/500*SENSOR_GAIN*(-1*(float)(my_input->g_sensor_now[1]-CENTER_L)+(float)(my_input->g_sensor_now[3]-CENTER_R));
+					if(l_diff>3000)
+					{
+						PID_Wall=my_input->v_encoder/500*(L_SENSOR_GAIN*-1*0+(R_SENSOR_GAIN)*r_diff);
+					}
+					else
+					{
+						PID_Wall=my_input->v_encoder/500*(L_SENSOR_GAIN*-1*l_diff+R_SENSOR_GAIN*r_diff);
+					}
 				}
 			}
 
-			my_pwm->updata_Wall_PID(PID_Wall);//pwmに制御量を送信する
+			transmit(PID_Wall);//pidに制御量を送信する
 		}
 	}
 
+	void controll::Wall_Ctrl::SetPIDCtrl(BaseCtrl* pid)
+	{
+		pid_ctrl=pid;
+	}
 
+	void controll::Wall_Ctrl::receive(float message)
+	{
+
+	}
+
+	void controll::Wall_Ctrl::transmit(float message)//PID_Ctrlに壁制御量を送信する
+	{
+		pid_ctrl->receive(message);
+	}
 }
 

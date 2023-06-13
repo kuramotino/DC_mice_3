@@ -18,6 +18,7 @@ module::PL_sensor pl_obj;
 controll::PID_Ctrl pid_obj;
 controll::FailSafe fail_obj;
 controll::Wall_Ctrl wall_obj;
+module::LED_Ctrl led_obj;
 bool init_flag=false;
 using namespace controll;
 
@@ -38,6 +39,7 @@ void Init_Controll()//controll,module名前空間のオブジェクトたちを�
 	pid_obj.add_obj(&ksk_obj, &pwm_obj, &input_obj, &cs_obj);
 	fail_obj.add_obj(&ksk_obj, &pwm_obj, &input_obj, &cs_obj);
 	wall_obj.add_obj(&ksk_obj, &pwm_obj, &input_obj, &cs_obj);
+	wall_obj.SetPIDCtrl(&pid_obj);
 	init_flag=true;
 }
 
@@ -55,9 +57,9 @@ void Sync_Module()//TIM6の割り込み処理
 	pl_obj.sensor_input();
 	ksk_obj.daikei();
 	ksk_obj.transmit_pwm();//isKasokuEnd==trueならCommandStatusをオフにする
-	pid_obj.PID();
 	fail_obj.FailStop();
 	wall_obj.transmit_Wall_PID();
+	pid_obj.PID();
 	pwm_obj.pwm();
 	}
 }
@@ -72,31 +74,31 @@ void Sync_Mo_R()//右モータの割り込み処理
 	pwm_obj.out_duty(&duty_r, &duty_l,&cw_R,&cw_L);
 	if(duty_r==0 && cx_obj.return_now_status()==Run)
 	{
-		if(cw_R==Front || cw_R==Left)
-			{
-				__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_4,(uint16_t)(300));
-				__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_3,0);
-				__HAL_TIM_SET_COUNTER(&htim3, 0);
-			}
-			else if(cw_R==Back || cw_R==Right)
-			{
-				__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_4,0);
-				__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_3,(uint16_t)(300));
-				__HAL_TIM_SET_COUNTER(&htim3, 0);
-			}
+		if(cw_R==Front)
+		{
+			__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_4,(uint16_t)(3));
+			__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_3,0);
+			__HAL_TIM_SET_COUNTER(&htim3, 0);
+		}
+		else if(cw_R==Back)
+		{
+			__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_4,0);
+			__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_3,(uint16_t)(3));
+			__HAL_TIM_SET_COUNTER(&htim3, 0);
+		}
 		return;
 	}
 
-	if(cw_R==Front || cw_R==Left)
+	if(cw_R==Front)
 	{
-		__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_3,(uint16_t)(10000*duty_r));
+		__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_3,(uint16_t)(100*duty_r));
 		__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_4,0);
 		__HAL_TIM_SET_COUNTER(&htim3, 0);
 	}
-	else if(cw_R==Back || cw_R==Right)
+	else if(cw_R==Back)
 	{
 		__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_3,0);
-		__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_4,(uint16_t)(10000*duty_r));
+		__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_4,(uint16_t)(100*duty_r));
 		__HAL_TIM_SET_COUNTER(&htim3, 0);
 	}
 }
@@ -111,31 +113,31 @@ void Sync_Mo_L()//左モータの割り込み処理
 	pwm_obj.out_duty(&duty_r, &duty_l,&cw_R,&cw_L);
 	if(duty_l==0 && cx_obj.return_now_status()==Run)
 	{
-		if(cw_L==Front || cw_L==Right)
-			{
-				__HAL_TIM_SET_COMPARE(&htim12,TIM_CHANNEL_1,(uint16_t)(300));
-				__HAL_TIM_SET_COMPARE(&htim12,TIM_CHANNEL_2,0);
-				__HAL_TIM_SET_COUNTER(&htim12, 0);
-			}
-			else if(cw_L==Back || cw_L==Left)
-			{
-				__HAL_TIM_SET_COMPARE(&htim12,TIM_CHANNEL_1,0);
-				__HAL_TIM_SET_COMPARE(&htim12,TIM_CHANNEL_2,(uint16_t)(300));
-				__HAL_TIM_SET_COUNTER(&htim12, 0);
-			}
+		if(cw_L==Front)
+		{
+			__HAL_TIM_SET_COMPARE(&htim12,TIM_CHANNEL_1,(uint16_t)(3));
+			__HAL_TIM_SET_COMPARE(&htim12,TIM_CHANNEL_2,0);
+			__HAL_TIM_SET_COUNTER(&htim12, 0);
+		}
+		else if(cw_L==Back)
+		{
+			__HAL_TIM_SET_COMPARE(&htim12,TIM_CHANNEL_1,0);
+			__HAL_TIM_SET_COMPARE(&htim12,TIM_CHANNEL_2,(uint16_t)(3));
+			__HAL_TIM_SET_COUNTER(&htim12, 0);
+		}
 		return;
 	}
 
-	if(cw_L==Front || cw_L==Right)
+	if(cw_L==Front)
 	{
-		__HAL_TIM_SET_COMPARE(&htim12,TIM_CHANNEL_2,(uint16_t)(10000*duty_l));
+		__HAL_TIM_SET_COMPARE(&htim12,TIM_CHANNEL_2,(uint16_t)(100*duty_l));
 		__HAL_TIM_SET_COMPARE(&htim12,TIM_CHANNEL_1,0);
 		__HAL_TIM_SET_COUNTER(&htim12, 0);
 	}
-	else if(cw_L==Back || cw_L==Left)
+	else if(cw_L==Back)
 	{
 		__HAL_TIM_SET_COMPARE(&htim12,TIM_CHANNEL_2,0);
-		__HAL_TIM_SET_COMPARE(&htim12,TIM_CHANNEL_1,(uint16_t)(10000*duty_l));
+		__HAL_TIM_SET_COMPARE(&htim12,TIM_CHANNEL_1,(uint16_t)(100*duty_l));
 		__HAL_TIM_SET_COUNTER(&htim12, 0);
 	}
 }

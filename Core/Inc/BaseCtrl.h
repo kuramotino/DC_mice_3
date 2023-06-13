@@ -31,6 +31,8 @@ namespace controll
 		virtual void updata(Command cm);
 		void add_obj(kasoku* ka,PWM_Out* pwm,InputData* input,CommandStatus* cs);
 		void status_off(enum status st);
+		virtual void transmit(float message);
+		virtual void receive(float message);
 	};
 }
 

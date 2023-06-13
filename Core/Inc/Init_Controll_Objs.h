@@ -19,6 +19,7 @@
 #include "Wall_Controll.h"
 #include "PL_sensor.h"
 #include "FailSafe.h"
+#include "LED_Ctrl.h"
 
 extern controll::CommandExecuter cx_obj;
 extern controll::kasoku ksk_obj;
@@ -33,6 +34,7 @@ extern controll::PID_Ctrl pid_obj;
 extern controll::FailSafe fail_obj;
 extern controll::Wall_Ctrl wall_obj;
 extern bool init_flag;
+extern module::LED_Ctrl led_obj;
 
 void Init_Controll();
 void Sync_Module();

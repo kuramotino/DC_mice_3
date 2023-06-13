@@ -15,8 +15,8 @@ namespace controll
 	{
 		float threshold_v=1000;
 		float threshold_omega=1000;
-		float threshold_accel=7;
-		uint16_t threshold_pl=800;
+		float threshold_accel=70;
+		uint16_t threshold_pl=5200;
 	public:
 		bool isFail=false;
 

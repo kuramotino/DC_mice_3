@@ -31,4 +31,14 @@ namespace controll
 	{
 		my_cs->off_command(st);//-1:強制終了
 	}
+
+	void controll::BaseCtrl::transmit(float message)
+	{
+
+	}
+
+	void controll::BaseCtrl::receive(float message)
+	{
+
+	}
 }

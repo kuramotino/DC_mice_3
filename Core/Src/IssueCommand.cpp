@@ -36,8 +36,11 @@ namespace Algorizm
 			{
 			case Left:
 				//application::App_Set_Command(Left_f_off);
-				application::App_Set_Command(Left_sla);
-				application::App_Set_Command(Left_b_off);
+				//application::App_Set_Command(Left_sla);
+				//application::App_Set_Command(Left_b_off);
+				application::App_Set_Command(Stra_Senkai_de_73);
+				application::App_Set_Command(Left_sen);
+				application::App_Set_Command(Stra_Senkai_ac_77);
 				break;
 
 			case Front:
@@ -46,14 +49,21 @@ namespace Algorizm
 
 			case Right:
 				//application::App_Set_Command(Right_f_off);
-				application::App_Set_Command(Right_sla);
-				application::App_Set_Command(Right_b_off);
+				//application::App_Set_Command(Right_sla);
+				//application::App_Set_Command(Right_b_off);
+				application::App_Set_Command(Stra_Senkai_de_73);
+				application::App_Set_Command(Right_sen);
+				application::App_Set_Command(Stra_Senkai_ac_77);
 				break;
 
 			case Back:
-				application::App_Set_Command(Stra_de_70);
+				//application::App_Set_Command(Stra_de_70);
+				//application::App_Set_Command(Right_sen);
+				//application::App_Set_Command(Stra_ac_90);
+				application::App_Set_Command(Stra_Senkai_de_83);
 				application::App_Set_Command(Right_sen);
-				application::App_Set_Command(Stra_ac_90);
+				application::App_Set_Command(Right_sen);
+				application::App_Set_Command(Stra_Senkai_ac_90);
 				break;
 			}
 			isStop = my_plan->RetTansakuEnd();

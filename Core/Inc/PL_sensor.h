@@ -21,7 +21,11 @@ namespace module
 		uint16_t g_sensor_now_diff[5];
 		uint16_t g_ADCBuffer[5];
 		uint16_t adc_value=0;
+		int logcount=0;
 		int AD_step=0;
+	public:
+		uint16_t log_sensor_lr[2][1000];
+		bool log_flag=false;
 
 
 	public:

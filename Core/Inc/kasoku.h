@@ -46,6 +46,7 @@ namespace controll
 		void updata(Command cm);//コマンドを更新する(CommandExecuterに呼ばれる)
 		void transmit_pwm();//pwm_outに計算した速度と位置とフラグを送る関数
 		float show_v();//now_vを返す関数(PID_Ctrlに呼ばれる)
+		float show_x();//now_xを返す関数(PID_Ctrlに呼ばれる)
 	};
 }
 

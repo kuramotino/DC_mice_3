@@ -24,6 +24,7 @@ namespace controll
 		int enc_R_sum;//右エンコーダの合計値
 		int enc_L_sum;//左エンコーダの合計値
 		float omega_gyro;//ジャイロから取得した機体の角速度
+		float deg_gyro=0;//gyroから取得した機体の角度
 		uint16_t g_sensor_on[5];//1点灯時の光センサーのAD値
 		uint16_t g_sensor_off[5];//2消灯時の光センサーのAD値
 		uint16_t g_sensor_now[5];//3現在の光センサーのAD値

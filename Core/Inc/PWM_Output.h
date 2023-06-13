@@ -12,7 +12,7 @@
 
 namespace controll
 {
-	enum turn {Left,Right,Back,Front};
+	enum turn {Back,Front};
 	class PWM_Out
 	{
 		Command now_cm;//現在のコマンド
@@ -30,7 +30,6 @@ namespace controll
 		float duty_FF_turn;
 		float duty_FB_stra;
 		float duty_FB_turn;
-		float duty_Wall_PID;
 
 		enum turn cw_R;//turnの向き
 		enum turn cw_L;
@@ -43,8 +42,8 @@ namespace controll
 		float ke=0.000414;//0.414mV/rpm(0.000414 V/rpm) :逆起電圧定数
 		float L=50;//50mm:トレッド幅
 		float I=0.000543;//0.000543kg*m^2:慣性モーメント*/
-		float turn_A=0.5;//A:角加速度依存の補正係数
-		float turn_B=1.0;//B:角速度依存の補正係数
+		float turn_A=0.7;//A:角加速度依存の補正係数0.5
+		float turn_B=0.0;//B:角速度依存の補正係数1.0
 
 	public:
 		float now_R_log[1200];
@@ -58,7 +57,6 @@ namespace controll
 		void updata(Command cm);//現在のコマンドを更新(CommandExecuterに呼ばれる)
 		void updata_x_v(float x,float v,bool isKasokuEnd,bool isBreak);//kasokuから現在のxとvとフラグを取得
 		void updata_PID(float ff_turn,float fb_turn);//PIDから現在のPID値を取得
-		void updata_Wall_PID(float wall_pid);//Wall_Ctrlから現在の壁制御量を取得
 		void set_pwm();//duty変換に必要なパラメータをセットする関数
 		void pwm();//duty変換を行う関数
 		void out_duty(float* dutyR,float* dutyL,enum turn* bu_cw_R,enum turn* bu_cw_L);//Dutyを返す関数

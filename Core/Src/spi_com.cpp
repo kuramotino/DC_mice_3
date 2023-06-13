@@ -10,6 +10,7 @@
 #include "spi_com.h"
 #include "stdio.h"
 #include "BaseSencing.h"
+#include "math.h"
 
 namespace module
 {
@@ -88,6 +89,7 @@ namespace module
 		my_input->omega_gyro = (offset_count==1001) ? gyro_a*(gyro_z-gyro_offset) : gyro_z;
 		my_input->x_ac_gyro=accel_x;
 		my_input->y_ac_gyro=accel_y;
+		my_input->deg_gyro+=fabs(my_input->omega_gyro)*0.001;
 	}
 
 	void module::Gyro::SetGyroOffset()

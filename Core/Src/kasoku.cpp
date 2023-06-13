@@ -39,6 +39,7 @@ namespace controll
 			{
 				now_x+=now_v*dt;
 				now_v+=target_a*dt;
+				now_v=(now_v>target_v_max) ? target_v_max : now_v;
 			}
 			else if(target_x-now_x>xde)//2定速区間
 			{
@@ -94,6 +95,11 @@ namespace controll
 	float controll::kasoku::show_v()//now_vを返す関数(PID_Ctrlに呼ばれる)
 	{
 		return now_v;
+	}
+
+	float controll::kasoku::show_x()//now_xを返す関数(PID_Ctrlに呼ばれる)
+	{
+		return now_x;
 	}
 }
 

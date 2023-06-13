@@ -135,5 +135,14 @@ namespace module
 			my_input->g_sensor_off[i]=g_sensor_off[i];
 			my_input->g_sensor_now_diff[i]=g_sensor_now_diff[i];
 		}
+		if(logcount<5000 && log_flag)
+		{
+			if(logcount%5==0)
+			{
+				log_sensor_lr[0][logcount/5]=g_sensor_now[1];
+				log_sensor_lr[1][logcount/5]=g_sensor_now[3];
+			}
+			logcount++;
+		}
 	}
 }
