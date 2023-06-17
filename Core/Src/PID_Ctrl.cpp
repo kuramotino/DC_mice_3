@@ -89,7 +89,7 @@ namespace controll
 						fb_stra=1/V_bat/(10*10*10)*(K_senkai_p*enc_error+K_senkai_i*enc_sigma_error+K_senkai_d*enc_delta_error);
 					}
 
-					gy_error=now_omega-ccw*omega_gyro;
+					gy_error=ccw*now_omega-omega_gyro;
 					gy_delta_error=gy_error-gy_old_error;
 					gy_old_error=gy_error;
 					gy_sigma_error+=gy_error;
@@ -103,7 +103,7 @@ namespace controll
 					enc_sigma_error+=enc_error;
 					fb_stra=1/V_bat/(10*10*10)*(K_tu_st_p*enc_error+K_tu_st_i*enc_sigma_error+K_tu_st_d*enc_delta_error);
 
-					gy_error=now_omega-ccw*omega_gyro;
+					gy_error=ccw*now_omega-omega_gyro;
 					gy_delta_error=gy_error-gy_old_error;
 					gy_old_error=gy_error;
 					gy_sigma_error+=gy_error;

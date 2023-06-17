@@ -42,8 +42,12 @@ namespace controll
 		float ke=0.000414;//0.414mV/rpm(0.000414 V/rpm) :逆起電圧定数
 		float L=50;//50mm:トレッド幅
 		float I=0.000543;//0.000543kg*m^2:慣性モーメント*/
-		float turn_A=0.7;//A:角加速度依存の補正係数0.5
-		float turn_B=0.0;//B:角速度依存の補正係数1.0
+		float turn_A=0.3;//A:角加速度依存の補正係数0.5
+		float turn_B=1.5;//B:角速度依存の補正係数1.0
+		float turn_C=0.0;//C摩擦項
+		float first_turn_C=0.2;//0.8動き始めの摩擦項
+		float second_turn_C=0.1;//0.3動摩擦項
+		float threshold_turn_C=30;//10摩擦項を切り替える角度
 
 	public:
 		float now_R_log[1200];

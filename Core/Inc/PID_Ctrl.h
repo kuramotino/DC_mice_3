@@ -42,8 +42,8 @@ namespace controll
 		float K_st_tu_d=0;//1直進時の回転成分のDゲイン
 
 		float Ktp=17;//2回転時の回転成分のPゲイン17
-		float Kti=2.5;//2回転時の回転成分のIゲイン0.45
-		float Ktd=35;//2回転時の回転成分のDゲイン112
+		float Kti=2.25;//2回転時の回転成分のIゲイン0.45
+		float Ktd=30;//2回転時の回転成分のDゲイン112
 		float K_tu_st_p=15;//1回転時の直進成分のPゲイン5
 		float K_tu_st_i=1.0;//1回転時の直進成分のIゲイン0.05
 		float K_tu_st_d=30;//1回転時の直進成分のDゲイン

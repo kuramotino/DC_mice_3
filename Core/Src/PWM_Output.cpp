@@ -87,21 +87,14 @@ namespace controll
 			}
 			else//スラローム又は超信地旋回のとき
 			{
+				turn_C=(now_v<threshold_turn_C) ? first_turn_C : second_turn_C;
 				duty_FF_stra=1/V_bat*(R/kt*(m*now_cm.ga/(2*10*10*10))*taiya_dirmeter/n+ke*(60*n*now_cm.gv/2/3.14/taiya_dirmeter));
-				duty_FF_turn=1/V_bat*((turn_A*R*10*10*10)/kt*(I*target_a*(3.14/180)/L)*taiya_dirmeter/n+ke*(turn_B*60*n*L*now_v*(3.14/180)/4/3.14/taiya_dirmeter));
+				duty_FF_turn=1/V_bat*((turn_A*R*10*10*10)/kt*(I*target_a*(3.14/180)/L)*taiya_dirmeter/n+ke*(turn_B*60*n*L*now_v*(3.14/180)/4/3.14/taiya_dirmeter) + turn_C);
+				duty_FF_turn=(now_cm.MoveVec) ? duty_FF_turn : -1*duty_FF_turn;
+				//duty_FF_stra=0;
 
-				float cwvec;//回転方向
-				if(now_cm.MoveVec==true)//左回転
-				{
-					cwvec=1;
-				}
-				else//右回転
-				{
-					cwvec=-1;
-				}
-
-				duty_R=duty_FF_stra+cwvec*duty_FF_turn+duty_FB_stra+cwvec*duty_FB_turn;
-				duty_L=duty_FF_stra-1*cwvec*duty_FF_turn+duty_FB_stra-1*cwvec*duty_FB_turn;
+				duty_R=duty_FF_stra+duty_FF_turn+duty_FB_stra+duty_FB_turn;
+				duty_L=duty_FF_stra-duty_FF_turn+duty_FB_stra-duty_FB_turn;
 
 				cw_R=(duty_R<0) ? Back : Front;//右のモータの回転方向の決定
 				cw_L=(duty_L<0) ? Back : Front;//左のモータの回転方向の決定
