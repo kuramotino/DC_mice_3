@@ -30,6 +30,8 @@ namespace controll
 		bool isTurn=false;//turnかどうか
 		bool isSenkai=false;//旋回かどうか
 		bool isFrontOffset=false;//前壁制御をおこなうかどうか
+		bool isCalBackOffset=false;//横壁制御量を計算するかどうか
+		bool isSetBackOffset=false;//横壁制御量をセットするかどうか
 
 	public:
 		Command();

@@ -164,6 +164,7 @@ namespace controll
 				isPID_Stop=false;//PIDをstopさせるか
 				isWall_PID_Stop=true;
 				isTurn=false;//turnかどうか
+				isSetBackOffset=true;//back_offsetの補正量をセットする
 				break;
 
 			case Right_f_off:
@@ -195,6 +196,7 @@ namespace controll
 				isPID_Stop=false;//PIDをstopさせるか
 				isWall_PID_Stop=true;
 				isTurn=false;//turnかどうか
+				isSetBackOffset=true;//back_offsetの補正量をセットする
 				break;
 
 			case Front_offset:
@@ -210,6 +212,7 @@ namespace controll
 				isPID_Stop=false;//PIDをstopさせるか
 				isWall_PID_Stop=true;
 				isTurn=false;//turnかどうか
+				isCalBackOffset=true;//back_offsetの補正量を計算させる
 				break;
 
 			case Mid_Stra:

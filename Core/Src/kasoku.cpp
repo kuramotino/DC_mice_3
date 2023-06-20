@@ -27,7 +27,8 @@ namespace controll
 		now_v=target_v_start;
 		target_v_max=now_cm.bu_tar_v_max;//最大速度
 		target_v_end=now_cm.bu_tar_v_end;//終端速度
-		target_x=now_cm.bu_tar_x;//目標距離
+		target_x=(now_cm.isSetBackOffset) ? now_cm.bu_tar_x+add_back_offset : now_cm.bu_tar_x;//目標距離
+		add_back_offset=(target_x!=now_cm.bu_tar_x) ? 0 : add_back_offset;//もし使ったら後距離の補正量をリセット
 		xde=(target_v_max*target_v_max-target_v_end*target_v_end)/(2*target_a);//減速距離の計算
 	}
 
@@ -100,6 +101,11 @@ namespace controll
 	float controll::kasoku::show_x()//now_xを返す関数(PID_Ctrlに呼ばれる)
 	{
 		return now_x;
+	}
+
+	void controll::kasoku::Receive_Back_Offset(float bu_offset)//BackOffsetをセットする関数(Back_Offset_Ctrlに呼ばれる)
+	{
+		add_back_offset=bu_offset;
 	}
 }
 

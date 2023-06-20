@@ -32,6 +32,8 @@ namespace controll
 		Command now_cm;//現在のコマンド
 		PWM_Out* my_pwm;//pwmのオブジェクト
 
+		float add_back_offset=0;//1後距離の補正量
+
 	public:
 		float now_v_log[1200];
 		float now_x_log[1200];
@@ -47,6 +49,7 @@ namespace controll
 		void transmit_pwm();//pwm_outに計算した速度と位置とフラグを送る関数
 		float show_v();//now_vを返す関数(PID_Ctrlに呼ばれる)
 		float show_x();//now_xを返す関数(PID_Ctrlに呼ばれる)
+		void Receive_Back_Offset(float bu_offset);//BackOffsetをセットする関数(Back_Offset_Ctrlに呼ばれる)
 	};
 }
 

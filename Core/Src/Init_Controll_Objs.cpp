@@ -20,6 +20,7 @@ controll::FailSafe fail_obj;
 controll::Wall_Ctrl wall_obj;
 module::LED_Ctrl led_obj;
 controll::Front_Offset_Ctrl front_offset_obj;
+controll::Back_Offset_Ctrl back_offset_obj;
 bool init_flag=false;
 using namespace controll;
 
@@ -29,6 +30,7 @@ void Init_Controll()//controll,module名前空間のオブジェクトたちを�
 	cx_obj.addCtrl(&fail_obj);
 	cx_obj.addCtrl(&wall_obj);
 	cx_obj.addCtrl(&front_offset_obj);
+	cx_obj.addCtrl(&back_offset_obj);
 	cx_obj.add_kasoku_PWM(&ksk_obj, &pwm_obj);
 	cx_obj.set_cs(&cs_obj);
 	ksk_obj.add_pwm(&pwm_obj);
@@ -43,6 +45,7 @@ void Init_Controll()//controll,module名前空間のオブジェクトたちを�
 	wall_obj.add_obj(&ksk_obj, &pwm_obj, &input_obj, &cs_obj);
 	wall_obj.SetPIDCtrl(&pid_obj);
 	front_offset_obj.add_obj(&ksk_obj, &pwm_obj, &input_obj, &cs_obj);
+	back_offset_obj.add_obj(&ksk_obj, &pwm_obj, &input_obj, &cs_obj);
 	init_flag=true;
 }
 
