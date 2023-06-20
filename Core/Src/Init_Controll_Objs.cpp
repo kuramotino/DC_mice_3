@@ -19,6 +19,7 @@ controll::PID_Ctrl pid_obj;
 controll::FailSafe fail_obj;
 controll::Wall_Ctrl wall_obj;
 module::LED_Ctrl led_obj;
+controll::Front_Offset_Ctrl front_offset_obj;
 bool init_flag=false;
 using namespace controll;
 
@@ -27,6 +28,7 @@ void Init_Controll()//controll,module名前空間のオブジェクトたちを�
 	cx_obj.addCtrl(&pid_obj);
 	cx_obj.addCtrl(&fail_obj);
 	cx_obj.addCtrl(&wall_obj);
+	cx_obj.addCtrl(&front_offset_obj);
 	cx_obj.add_kasoku_PWM(&ksk_obj, &pwm_obj);
 	cx_obj.set_cs(&cs_obj);
 	ksk_obj.add_pwm(&pwm_obj);
@@ -40,6 +42,7 @@ void Init_Controll()//controll,module名前空間のオブジェクトたちを�
 	fail_obj.add_obj(&ksk_obj, &pwm_obj, &input_obj, &cs_obj);
 	wall_obj.add_obj(&ksk_obj, &pwm_obj, &input_obj, &cs_obj);
 	wall_obj.SetPIDCtrl(&pid_obj);
+	front_offset_obj.add_obj(&ksk_obj, &pwm_obj, &input_obj, &cs_obj);
 	init_flag=true;
 }
 
@@ -48,19 +51,20 @@ void Sync_Module()//TIM6の割り込み処理
 	if(init_flag==true)
 	{
 	//HAL_GPIO_WritePin(ILED1_GPIO_Port,ILED1_Pin,GPIO_PIN_SET);
-	Sync_Mo_R();
-	Sync_Mo_L();
+	front_offset_obj.BreakFrontOffset();
 	cx_obj.polling_cs();
-	enc_obj.sensor_input();
-	gyro_obj.sensor_input();
 	pl_obj.pl_interupt_getSensor();
 	pl_obj.sensor_input();
+	enc_obj.sensor_input();
+	gyro_obj.sensor_input();
 	ksk_obj.daikei();
 	ksk_obj.transmit_pwm();//isKasokuEnd==trueならCommandStatusをオフにする
 	fail_obj.FailStop();
 	wall_obj.transmit_Wall_PID();
 	pid_obj.PID();
 	pwm_obj.pwm();
+	Sync_Mo_R();
+	Sync_Mo_L();
 	}
 }
 

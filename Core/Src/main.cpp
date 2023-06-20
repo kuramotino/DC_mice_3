@@ -220,13 +220,13 @@ int main(void)
 		  {
 			  isStart[2]=false;
 			  t=0;
-			  for(int i=0;i<1200;i++)
+			  /*for(int i=0;i<1200;i++)
 			  {
 				  printf("%f,%f,%f,%f,%f,%f,%f\n\r",t,ksk_obj.now_v_log[i],ksk_obj.now_x_log[i],pwm_obj.now_R_log[i],pwm_obj.now_L_log[i],pid_obj.log_enc[i],pid_obj.log_gyro[i]);
 				  //printf("%f,%d,%d,\n\r",t,pl_obj.log_sensor_lr[0][i],pl_obj.log_sensor_lr[1][i]);
 				  t+=0.001;
-			  }
-			  //map_obj.ShowMap();
+			  }*/
+			  map_obj.ShowMap();
 			  HAL_Delay(1000);
 		  }
 		  break;

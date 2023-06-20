@@ -31,7 +31,7 @@ namespace controll
 		uint16_t g_sensor_now_diff[5];//4現在の光センサーのAD値変化(前-後)
 		uint16_t LEFT_SLESHOLD=120;//1左壁のセンサー閾値
 		uint16_t FRONT_SLESHOLD=100;//2前壁のセンサー閾値
-		uint16_t RIGHT_SLESHOLD=60;//3右壁のセンサー閾値
+		uint16_t RIGHT_SLESHOLD=80;//3右壁のセンサー閾値
 	};
 }
 

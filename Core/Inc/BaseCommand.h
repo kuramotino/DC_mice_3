@@ -29,6 +29,7 @@ namespace controll
 		bool isWall_PID_Stop=false;//壁制御のPIDをstopさせるか
 		bool isTurn=false;//turnかどうか
 		bool isSenkai=false;//旋回かどうか
+		bool isFrontOffset=false;//前壁制御をおこなうかどうか
 
 	public:
 		Command();

@@ -35,12 +35,12 @@ namespace Algorizm
 			switch (nextVec)
 			{
 			case Left:
-				//application::App_Set_Command(Left_f_off);
-				//application::App_Set_Command(Left_sla);
-				//application::App_Set_Command(Left_b_off);
-				application::App_Set_Command(Stra_Senkai_de_73);
-				application::App_Set_Command(Left_sen);
-				application::App_Set_Command(Stra_Senkai_ac_77);
+				application::App_Set_Command(Left_f_off);
+				application::App_Set_Command(Left_sla);
+				application::App_Set_Command(Left_b_off);
+				//application::App_Set_Command(Stra_Senkai_de_73);
+				//application::App_Set_Command(Left_sen);
+				//application::App_Set_Command(Stra_Senkai_ac_77);
 				break;
 
 			case Front:
@@ -48,12 +48,12 @@ namespace Algorizm
 				break;
 
 			case Right:
-				//application::App_Set_Command(Right_f_off);
-				//application::App_Set_Command(Right_sla);
-				//application::App_Set_Command(Right_b_off);
-				application::App_Set_Command(Stra_Senkai_de_73);
-				application::App_Set_Command(Right_sen);
-				application::App_Set_Command(Stra_Senkai_ac_77);
+				application::App_Set_Command(Right_f_off);
+				application::App_Set_Command(Right_sla);
+				application::App_Set_Command(Right_b_off);
+				//application::App_Set_Command(Stra_Senkai_de_73);
+				//application::App_Set_Command(Right_sen);
+				//application::App_Set_Command(Stra_Senkai_ac_77);
 				break;
 
 			case Back:
