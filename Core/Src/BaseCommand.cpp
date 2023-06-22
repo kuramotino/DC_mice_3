@@ -45,7 +45,7 @@ namespace controll
 				bu_tar_v_start=0;//2目標初速度
 				bu_tar_v_max=500;//3目標最高速度
 				bu_tar_v_end=500;//4目標終端速度
-				bu_tar_x=180;//5目標距離132.5
+				bu_tar_x=90;//5目標距離132.5
 				gv=500;//6重心速度
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
@@ -235,7 +235,7 @@ namespace controll
 				bu_tar_v_start=500;//2目標初速度
 				bu_tar_v_max=500;//3目標最高速度
 				bu_tar_v_end=0;//4目標終端速度
-				bu_tar_x=180;//5目標距離
+				bu_tar_x=90;//5目標距離
 				gv=500;//6重心速度
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
@@ -280,7 +280,7 @@ namespace controll
 				bu_tar_v_start=0;//2目標初速度
 				bu_tar_v_max=500;//3目標最高速度
 				bu_tar_v_end=500;//4目標終端速度
-				bu_tar_x=150;//5目標距離
+				bu_tar_x=160;//5目標距離
 				gv=500;//6重心速度
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか

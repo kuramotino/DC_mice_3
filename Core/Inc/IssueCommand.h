@@ -15,7 +15,7 @@ namespace Algorizm
 	class IssueCommand
 	{
 		Planning* my_plan;
-		POS goal_pos[4] = { {1,0},{1,1},{2,0},{2,1} };
+		POS goal_pos[4] = { {4,6},{4,6},{4,6},{4,6} };//{ {1,0},{1,1},{2,0},{2,1} }
 		POS start_pos[1] = { {0,0} };
 		enum Vec nextVec;
 

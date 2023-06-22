@@ -41,6 +41,12 @@ namespace controll
 				dif_len=-1*r_back_offset;
 			}
 
+			//6補正量が大きすぎる場合は修正
+			if(dif_len>max_offset_ctrl)
+			{
+				dif_len=max_offset_ctrl;
+			}
+
 			//7補正後距離を返す
 			return dif_len;
 		}
@@ -65,15 +71,33 @@ namespace controll
 				dif_len=-1*l_back_offset;
 			}
 
+			//6補正量が大きすぎる場合は修正
+			if(dif_len>max_offset_ctrl)
+			{
+				dif_len=max_offset_ctrl;
+			}
+
 			//7補正後距離を返す
 			return dif_len;
 		}
-		return 0;
+
+		return sub_back_offset;//0横壁制御できない場合、前壁の補正量を返す
+		//return 0;
 	}
 
 	void controll::Back_Offset_Ctrl::Transmit_Back_Offset(float bu_back_offset)
 	{
 		my_kasoku->Receive_Back_Offset(bu_back_offset);
+	}
+
+	void controll::Back_Offset_Ctrl::receive(float message)
+	{
+		Set_sbu_queue(message);
+	}
+
+	void controll::Back_Offset_Ctrl::Set_sbu_queue(float sub_offset)
+	{
+		sub_back_offset=sub_offset;
 	}
 }
 

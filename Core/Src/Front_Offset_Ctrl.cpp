@@ -5,6 +5,7 @@
  *      Author: Ryu
  */
 #include "Front_Offset_Ctrl.h"
+#include "math.h"
 
 namespace controll
 {
@@ -20,6 +21,8 @@ namespace controll
 		{
 			if(my_input->g_sensor_now[2]>turn_start_ad)
 			{
+				sub_back_offset_ctrl=(my_kasoku->show_x()<10)?-1*fabs(10-my_kasoku->show_x()):0;
+				transmit(sub_back_offset_ctrl);
 				status_off(Forced_End);
 			}
 		}
@@ -27,9 +30,20 @@ namespace controll
 		{
 			if(my_kasoku->show_x()>10)
 			{
+				transmit(0);
 				status_off(Forced_End);
 			}
 		}
+	}
+
+	void controll::Front_Offset_Ctrl::transmit(float message)
+	{
+		my_back->receive(message);
+	}
+
+	void controll::Front_Offset_Ctrl::SetBackOffset(BaseCtrl* back_obj)
+	{
+		my_back=back_obj;
 	}
 }
 

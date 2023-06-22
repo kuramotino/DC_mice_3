@@ -45,6 +45,7 @@ void Init_Controll()//controll,module名前空間のオブジェクトたちを�
 	wall_obj.add_obj(&ksk_obj, &pwm_obj, &input_obj, &cs_obj);
 	wall_obj.SetPIDCtrl(&pid_obj);
 	front_offset_obj.add_obj(&ksk_obj, &pwm_obj, &input_obj, &cs_obj);
+	front_offset_obj.SetBackOffset(&back_offset_obj);
 	back_offset_obj.add_obj(&ksk_obj, &pwm_obj, &input_obj, &cs_obj);
 	init_flag=true;
 }

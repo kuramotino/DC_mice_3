@@ -19,13 +19,17 @@ namespace controll
 		float CENTER_L=255;//L機体が中心にあるときの左AD値
 		float ABS_CENTER_R=155;
 		float ABS_CENTER_L=255;
+		float max_offset_ctrl=20;
 		float Side_R_ADtoX[5]={198.56,-1.8756,0.0085,-0.00002,0.00000002};//R距離変換関数の係数
 		float Side_L_ADtoX[5]={136.58,-0.7365,0.0019,-0.000002,0.0000000009};//L距離変換関数の係数
+		float sub_back_offset=0;//1横壁制御が使えないときに補正する量のキュー//index1を使う
 
 	public:
 		void updata(Command cm);//overrideする
 		float Side_Wall_Offset();//横壁制御を行う関数
 		void Transmit_Back_Offset(float bu_back_offset);//kasokuに後距離の制御量を送信する関数
+		void receive(float message);
+		void Set_sbu_queue(float sub_offset);//キューにセットする関数
 	};
 }
 

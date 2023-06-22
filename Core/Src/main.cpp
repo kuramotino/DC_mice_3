@@ -210,7 +210,7 @@ int main(void)
 			  {
 				  UpDataAlgo();
 			  }
-			  HAL_Delay(1000);
+			  HAL_Delay(3000);
 		  }
 		  break;
 
@@ -259,18 +259,29 @@ int main(void)
 			  gyro_obj.OffsetStart();
 			  HAL_Delay(1200);
 			  //App_Set_Command(Stra);
-			  App_Set_Command(Stra_ac_180);
+			  /*App_Set_Command(Stra_ac_180);
 			  App_Set_Command(Front_offset);
 			  App_Set_Command(Right_sla);
 			  App_Set_Command(Right_b_off);
-			  App_Set_Command(Stra_de_180);
+			  App_Set_Command(Stra_de_180);*/
 			  //App_Set_Command(Left_sen);
+			  App_Set_Command(Right_sen);
+			  App_Set_Command(Right_sen);
 			  HAL_Delay(1000);
 		  }
 		  break;
 
 	  case 5:
-		  led_obj.set_all_led(0b00100000);
+		  if(isStart[5]==true)
+		  {
+			  led_obj.set_all_led(0b00100000);
+			  isStart[5]=false;
+			  gyro_obj.OffsetStart();
+			  HAL_Delay(1200);
+			  App_Set_Command(Right_sen);
+			  App_Set_Command(Right_sen);
+			  HAL_Delay(1000);
+		  }
 		  break;
 
 	  case 6:
