@@ -19,6 +19,7 @@ Algorizm::MakePotential potential_obj;
 Algorizm::MiceStatus status_obj;
 Algorizm::Planning plan_obj;
 Algorizm::IssueCommand issue_obj;
+Algorizm::Pass_Generator pass_gene_obj;
 
 void InitAlgo()
 {
@@ -27,9 +28,16 @@ void InitAlgo()
 	potential_obj.SetMap(&map_obj);
 	plan_obj.SetObj(&status_obj, &potential_obj, &map_obj);
 	issue_obj.SetPlan(&plan_obj);
+	issue_obj.SetPassGene(&pass_gene_obj);
+	pass_gene_obj.SetPlan(&plan_obj);
 }
 
 void UpDataAlgo()
 {
 	issue_obj.Tansaku();
+}
+
+void M_UpDataAlgo()
+{
+	issue_obj.Saitan();
 }

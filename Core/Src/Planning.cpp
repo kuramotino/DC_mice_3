@@ -1,10 +1,3 @@
-/*
- * Planning.cpp
- *
- *  Created on: 2023/06/03
- *      Author: Ryu
- */
-
 #include "Planning.h"
 #include "MiceStatus.h"
 
@@ -231,4 +224,127 @@ namespace Algorizm
 	{
 		return isTansakuEnd;
 	}
+
+	enum Vec Algorizm::Planning::s_dijkstra(int goal_size, POS* goal_pos)
+	{
+		NODE node;
+		NODE pre_node;
+		int pre_x, pre_y;
+		my_potential->search_dijkstra(goal_size, goal_pos);//���݂̃m�[�h���X�V����
+		my_status->RetPos(&x, &y, &MiceVec);
+		node = my_potential->ret_search_node(x, y);
+		pre_node = *(node.pre_node);
+		pre_x = pre_node.pos_x;
+		pre_y = pre_node.pos_y;
+
+
+		//1����ʒu(x,y)�ɂȂ����Ă���m�[�h�̍��W���玟�ɐi�ތ���������
+		if (MiceVec == North)
+		{
+			ret = (y + 1 == pre_y) ? Front : ((x + 1 == pre_x) ? Right : ((x - 1 == pre_x) ? Left : Back));
+		}
+		else if (MiceVec == East)
+		{
+			ret = (x + 1 == pre_x) ? Front : ((y - 1 == pre_y) ? Right : ((y + 1 == pre_y) ? Left : Back));
+		}
+		else if (MiceVec == South)
+		{
+			ret = (y - 1 == pre_y) ? Front : ((x - 1 == pre_x) ? Right : ((x + 1 == pre_x) ? Left : Back));
+		}
+		else if (MiceVec == West)
+		{
+			ret = (x - 1 == pre_x) ? Front : ((y + 1 == pre_y) ? Right : ((y - 1 == pre_y) ? Left : Back));
+		}
+
+		UpDataVecPos(ret);//���ɐi�ތ�������ʒu�ƌ������X�V
+
+		for (int i = 0; i < goal_size; i++)//�S�[�����W�ɓ��B���Ă�����T���I��
+		{
+			isTansakuEnd = my_status->GoalCheck(goal_size, (goal_pos + i)->x, (goal_pos + i)->y);
+			if (isTansakuEnd)
+			{
+				break;
+			}
+		}
+		return ret;
+	}
+
+	int Algorizm::Planning::saitan_dijkstra(int goal_size, POS* goal_pos)
+	{
+		NODE node;
+		NODE pre_node;
+		int pre_x, pre_y;
+		my_potential->saitan_dijkstra(goal_size, goal_pos);//���݂̃m�[�h���X�V����
+		my_status->RetPos(&x, &y, &MiceVec);
+
+		if (MiceVec == North)
+		{
+			node = *(my_potential->RetSaitanNode(y - 1, x, true));
+		}
+		else if (MiceVec == East)
+		{
+			node = *(my_potential->RetSaitanNode(x - 1, y, false));
+		}
+		else if (MiceVec == South)
+		{
+			node = *(my_potential->RetSaitanNode(y, x, true));
+		}
+		else if (MiceVec == West)
+		{
+			node = *(my_potential->RetSaitanNode(x, y, false));
+		}
+
+
+		//pre_node = *(node.pre_node);
+		//pre_x = pre_node.pos_x;
+		//pre_y = pre_node.pos_y;
+
+
+		//1����ʒu(x,y)�ɂȂ����Ă���m�[�h�̍��W���玟�ɐi�ތ���������
+		if (MiceVec == North)
+		{
+			ret = (node.node_dir == NW) ? Left : ((node.node_dir == NE) ? Right : Front);
+		}
+		else if (MiceVec == East)
+		{
+			ret = (node.node_dir == NE) ? Left : ((node.node_dir == SE) ? Right : Front);
+		}
+		else if (MiceVec == South)
+		{
+			ret = (node.node_dir == SE) ? Left : ((node.node_dir == SW) ? Right : Front);
+		}
+		else if (MiceVec == West)
+		{
+			ret = (node.node_dir == SW) ? Left : ((node.node_dir == NW) ? Right : Front);
+		}
+
+		UpDataVecPos(ret);//���ɐi�ތ�������ʒu�ƌ������X�V
+
+		for (int i = 0; i < goal_size; i++)//�S�[�����W�ɓ��B���Ă�����T���I��
+		{
+			isSimEnd = my_status->GoalCheck(goal_size, (goal_pos + i)->x, (goal_pos + i)->y);
+			if (isSimEnd)
+			{
+				break;
+			}
+		}
+		int nextpass = (ret == Left) ? -2 : ((ret == Right) ? -3 : 2);
+		return nextpass;
+	}
+
+	void Algorizm::Planning::BlockWall()
+	{
+		my_potential->BlockKnowWall();
+	}
+
+	void Algorizm::Planning::MiceInit()//�@�̂̈ʒu����������������
+	{
+		my_status->InitStatus();
+	}
+
+	bool Algorizm::Planning::RetIsSimEnd()
+	{
+		return isSimEnd;
+	}
+
 }

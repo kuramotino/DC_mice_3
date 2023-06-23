@@ -36,6 +36,9 @@ namespace Algorizm
 		void isLFRKnowWall(int* l, int* f, int* r, int x, int y, enum Dir dir);//�ʒux,y,����dir�̂Ƃ��̍��ƑO�ƉE�̕ǂ̗L���𒲂ׂ�֐�
 		void SetInputStatus(controll::InputData* input, MiceStatus* status);//Input��MiceStatus�̃I�u�W�F�N�g���Z�b�g����
 		void ShowMap();
+		void RetPos(int* x, int* y);
+		bool isExistRowColumn(int x, int y, bool isRow);
+		void BlockWall(int x, int y);//����ʒu�̕ǂ��ӂ����֐�
 	};
 }
 

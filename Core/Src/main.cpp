@@ -227,6 +227,7 @@ int main(void)
 				  t+=0.001;
 			  }*/
 			  map_obj.ShowMap();
+			  pass_gene_obj.Show_Pass();
 			  HAL_Delay(1000);
 		  }
 		  break;
@@ -265,9 +266,11 @@ int main(void)
 			  App_Set_Command(Right_b_off);
 			  App_Set_Command(Stra_de_180);*/
 			  //App_Set_Command(Left_sen);
-			  App_Set_Command(Right_sen);
-			  App_Set_Command(Right_sen);
-			  HAL_Delay(1000);
+			  while(!issue_obj.isM_Stop)
+			  {
+				  M_UpDataAlgo();
+			  }
+			  HAL_Delay(3000);
 		  }
 		  break;
 
@@ -278,9 +281,11 @@ int main(void)
 			  isStart[5]=false;
 			  gyro_obj.OffsetStart();
 			  HAL_Delay(1200);
-			  App_Set_Command(Right_sen);
-			  App_Set_Command(Right_sen);
-			  HAL_Delay(1000);
+			  while(!issue_obj.isM_Stop)
+			  {
+				  M_UpDataAlgo();
+			  }
+			  HAL_Delay(3000);
 		  }
 		  break;
 

@@ -331,4 +331,51 @@ namespace Algorizm
 				}
 	}
 
+	void Algorizm::Map::RetPos(int* x, int* y)
+		{
+			int bu_x;
+			int bu_y;
+			Dir bu_dir;
+			my_status->RetPos(&bu_x, &bu_y, &bu_dir);
+			*x = bu_x;
+			*y = bu_y;
+		}
+
+		bool Algorizm::Map::isExistRowColumn(int x, int y, bool isRow)
+		{
+			bool Ret;
+			if (isRow)
+			{
+				Ret = ((Row[x] & (1 << y)) == (1 << y)) ? true : false;
+			}
+			else
+			{
+				Ret = ((Column[x] & (1 << y)) == (1 << y)) ? true : false;
+			}
+			return Ret;
+		}
+
+		void Algorizm::Map::BlockWall(int x, int y)//����ʒux,y�̕ǂ����ׂĂӂ����֐�
+		{
+			//if(!(x==4&&y==6))
+			//{
+				if (y != 0)
+				{
+					Row[y - 1] = (Row[y - 1] | (1 << x));
+				}
+				if (y != 15)
+				{
+					Row[y] = (Row[y] | (1 << x));
+				}
+				if (x != 0)
+				{
+					Column[x - 1] = (Column[x - 1] | (1 << y));
+				}
+				if (x != 15)
+				{
+					Column[x] = (Column[x] | (1 << y));
+				}
+			//}
+		}
+
 }

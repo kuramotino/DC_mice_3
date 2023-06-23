@@ -380,6 +380,21 @@ namespace controll
 				isTurn=false;//turnかどうか
 				break;
 
+			case Saitan_Stra:
+				bu_tar_a=12000;//1目標加速度
+				bu_tar_v_start=1500;//2目標初速度
+				bu_tar_v_max=1500;//3目標最高速度
+				bu_tar_v_end=1500;//4目標終端速度
+				bu_tar_x=90;//5目標距離
+				gv=500;//6重心速度
+				MoveVec=true;//前進
+				isStop=false;//stopさせるかどうか
+				isFailStop=false;//FailSafeでstopさせるか
+				isPID_Stop=false;//PIDをstopさせるか
+				isWall_PID_Stop=false;//壁制御のPIDをstopさせるか
+				isTurn=false;//turnかどうか
+				break;
+
 		}
 	}
 }
