@@ -203,6 +203,7 @@ int main(void)
 		  led_obj.set_all_led(0b00000010);
 		  if(isStart[1]==true)
 		  {
+			  test_sound(1.25,100);
 			  isStart[1]=false;
 			  gyro_obj.OffsetStart();
 			  HAL_Delay(1200);
@@ -220,14 +221,14 @@ int main(void)
 		  {
 			  isStart[2]=false;
 			  t=0;
-			  /*for(int i=0;i<1200;i++)
+			  for(int i=0;i<1200;i++)
 			  {
-				  printf("%f,%f,%f,%f,%f,%f,%f\n\r",t,ksk_obj.now_v_log[i],ksk_obj.now_x_log[i],pwm_obj.now_R_log[i],pwm_obj.now_L_log[i],pid_obj.log_enc[i],pid_obj.log_gyro[i]);
-				  //printf("%f,%d,%d,\n\r",t,pl_obj.log_sensor_lr[0][i],pl_obj.log_sensor_lr[1][i]);
+				  //printf("%f,%f,%f,%f,%f,%f,%f\n\r",t,ksk_obj.now_v_log[i],ksk_obj.now_x_log[i],pwm_obj.now_R_log[i],pwm_obj.now_L_log[i],pid_obj.log_enc[i],pid_obj.log_gyro[i]);
+				  printf("%f,%d,%d,%d,%d,%d,\n\r",t,pl_obj.log_sensor_lr[0][i],pl_obj.log_sensor_lr[1][i],wall_obj.wall_ctrl_log[i],wall_obj.wall_l_diff[i],wall_obj.wall_r_diff[i]);
 				  t+=0.001;
-			  }*/
-			  map_obj.ShowMap();
-			  pass_gene_obj.Show_Pass();
+			  }
+			  //map_obj.ShowMap();
+			  //pass_gene_obj.Show_Pass();
 			  HAL_Delay(1000);
 		  }
 		  break;
@@ -239,14 +240,16 @@ int main(void)
 			  isStart[3]=false;
 			  gyro_obj.OffsetStart();
 			  HAL_Delay(1200);
-			  //App_Set_Command(Stra);
-			  App_Set_Command(Stra_ac_180);
-			  App_Set_Command(Front_offset);
-			  App_Set_Command(Left_sla);
-			  //App_Set_Command(Right_sen);
-			  App_Set_Command(Left_b_off);
-			  App_Set_Command(Stra_de_180);
-			  //App_Set_Command(Right_sen);
+			  pl_obj.log_flag=true;
+			  wall_obj.wall_log_flag=true;
+			  App_Set_Command(Stra);
+//			  App_Set_Command(Stra_ac_180);
+//			  App_Set_Command(Front_offset);
+//			  App_Set_Command(Left_sla);
+//			  //App_Set_Command(Right_sen);
+//			  App_Set_Command(Left_b_off);
+//			  App_Set_Command(Stra_de_180);
+//			  App_Set_Command(Right_sen);
 			  HAL_Delay(1000);
 		  }
 		  break;
@@ -285,6 +288,12 @@ int main(void)
 			  {
 				  M_UpDataAlgo();
 			  }
+
+			  issue_obj.isM_Start=false;
+			  issue_obj.isM_Stop=false;
+			  issue_obj.isPass=false;
+			  fail_obj.isFail=false;
+
 			  HAL_Delay(3000);
 		  }
 		  break;

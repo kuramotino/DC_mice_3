@@ -382,6 +382,18 @@ namespace Algorizm
 			{
 				heap.push_heap(saitan_node_row[bupos.y][bupos.x]);//�X�^�[�g�m�[�h���L���[�Ƀv�b�V������
 			}
+
+			saitan_node_column[bupos.x - 1][bupos.y].cost = 0;//�X�^�[�g�m�[�h�̃R�X�g��0�ɂ���
+			if (saitan_node_column[bupos.x - 1][bupos.y].isNoWall)
+			{
+				heap.push_heap(saitan_node_column[bupos.x - 1][bupos.y]);//�X�^�[�g�m�[�h���L���[�Ƀv�b�V������
+			}
+
+			saitan_node_row[bupos.y - 1][bupos.x].cost = 0;//�X�^�[�g�m�[�h�̃R�X�g��0�ɂ���
+			if (saitan_node_row[bupos.y - 1][bupos.x].isNoWall)
+			{
+				heap.push_heap(saitan_node_row[bupos.y - 1][bupos.x]);//�X�^�[�g�m�[�h���L���[�Ƀv�b�V������
+			}
 		}
 		bool isRow = false;
 		int x = bupos.x;

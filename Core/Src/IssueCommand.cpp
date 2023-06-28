@@ -91,7 +91,7 @@ namespace Algorizm
 			my_pass->InitPassCount();
 			isM_Start = true;
 		}
-		if (!isM_Stop && isM_Start && !fail_obj.isFail)
+		if (!isM_Stop && isM_Start)
 		{
 			int nextpass = 0;
 			nextpass = my_pass->DecodePass();
