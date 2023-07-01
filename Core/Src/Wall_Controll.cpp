@@ -83,7 +83,7 @@ namespace controll
 //			float r_diff=((float)(my_input->g_sensor_now[3])-CENTER_R);
 //			float l_diff=((float)(my_input->g_sensor_now[1])-CENTER_L);
 			float r_diff=(-1*(float)ADtoMeter(my_input->g_sensor_now[3],true)+(float)ADtoMeter(CENTER_R,true));
-			float l_diff=(-1*(float)ADtoMeter(my_input->g_sensor_now[1],false)+(float)ADtoMeter(CENTER_L,false));
+			float l_diff=(-1*ADtoMeter(my_input->g_sensor_now[1],false)+ADtoMeter(CENTER_L,false));
 
 			if((g_WallControllStatus | 0b01) == 0b01)//1左壁なし
 			{
@@ -103,26 +103,26 @@ namespace controll
 				if((g_WallControllStatus | 0b10) == 0b10)//1右壁なし
 				{
 					//3右壁なし
-					if(l_diff>80)
-					{
-						PID_Wall=my_input->v_encoder/500*L_SENSOR_GAIN*-2*10;
-					}
-					else
-					{
+//					if(l_diff>80)
+//					{
+//						PID_Wall=my_input->v_encoder/500*L_SENSOR_GAIN*-2*10;
+//					}
+//					else
+//					{
 						PID_Wall=my_input->v_encoder/500*L_SENSOR_GAIN*-2*l_diff;
-					}
+//					}
 				}
 				else//2右壁あり
 				{
 					//4両壁あり
-					if(l_diff>80)
-					{
-						PID_Wall=my_input->v_encoder/500*(L_SENSOR_GAIN*-1*10+(R_SENSOR_GAIN)*r_diff);
-					}
-					else
-					{
+//					if(l_diff>80)
+//					{
+//						PID_Wall=my_input->v_encoder/500*(L_SENSOR_GAIN*-1*10+(R_SENSOR_GAIN)*r_diff);
+//					}
+//					else
+//					{
 						PID_Wall=my_input->v_encoder/500*(L_SENSOR_GAIN*-1*l_diff+R_SENSOR_GAIN*r_diff);
-					}
+//					}
 				}
 			}
 
@@ -133,6 +133,8 @@ namespace controll
 				wall_ctrl_log[wall_counter]=g_WallControllStatus;
 				wall_r_diff[wall_counter]=my_input->g_sensor_now_diff[3];
 				wall_l_diff[wall_counter]=my_input->g_sensor_now_diff[1];
+				wall_r_meter[wall_counter]=r_diff;
+				wall_l_meter[wall_counter]=l_diff;
 				wall_counter++;
 			}
 		}
@@ -163,6 +165,7 @@ namespace controll
 
 			//2左壁との距離を計算
 			float len=Side_L_ADtoX[0]+Side_L_ADtoX[1]*adc+Side_L_ADtoX[2]*adc*adc+Side_L_ADtoX[3]*adc*adc*adc+Side_L_ADtoX[4]*adc*adc*adc*adc;
+			len=(adc>520) ? -1*len : len;
 			return len;
 		}
 		else if(isR)

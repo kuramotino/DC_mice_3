@@ -16,21 +16,21 @@ namespace controll
 	{
 		int g_WallControllStatus;//壁の存在状態(2進数で1bit目が左、2bit目が右)
 		int wall_status[2];
-		float THRESHOLD_R=130;//1右壁の閾値
-		float THRESHOLD_DIFF_R=20;//1右壁の変化量の閾値20
-		float THRESHOLD_L=220;//2左壁の閾値
+		float THRESHOLD_R=110;//1右壁の閾値130
+		float THRESHOLD_DIFF_R=15;//1右壁の変化量の閾値20
+		float THRESHOLD_L=150;//2左壁の閾値200
 		float THRESHOLD_DIFF_L=30;//2左壁の変化量の閾値20
 		float R_SENSOR_GAIN=1.8;//1壁制御のゲイン0.0033/2
 		float L_SENSOR_GAIN=1.8;//1壁制御のゲイン0.0033/2
 		float CENTER_R=155;//機体が中心にあるときの右AD値
-		float CENTER_L=255;//機体が中心にあるときの左AD値
+		float CENTER_L=230;//機体が中心にあるときの左AD値255
 		float ABS_CENTER_R=155;
 		float ABS_CENTER_L=255;
 		float Side_R_ADtoX[5]={198.56,-1.8756,0.0085,-0.00002,0.00000002};//R距離変換関数の係数
 		float Side_L_ADtoX[5]={136.58,-0.7365,0.0019,-0.000002,0.0000000009};//L距離変換関数の係数
 		float PID_Wall=0;//pid_ctrlに送信する壁制御の制御量
 		int wall_ctrl_counter[2]={0,0};
-		int wall_ctrl_count[2]={1,1};//2,2
+		int wall_ctrl_count[2]={10,10};//2,2
 		float diff_queue_r[DIFF_QUEUE_SIZE];
 		float diff_queue_l[DIFF_QUEUE_SIZE];
 		int diff_count_r=0;
@@ -41,6 +41,8 @@ namespace controll
 		int wall_ctrl_log[1200];
 		int wall_r_diff[1200];
 		int wall_l_diff[1200];
+		float wall_r_meter[1200];
+		float wall_l_meter[1200];
 		int wall_counter=0;
 		bool wall_log_flag=false;
 

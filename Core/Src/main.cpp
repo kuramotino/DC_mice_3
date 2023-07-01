@@ -224,7 +224,7 @@ int main(void)
 			  for(int i=0;i<1200;i++)
 			  {
 				  //printf("%f,%f,%f,%f,%f,%f,%f\n\r",t,ksk_obj.now_v_log[i],ksk_obj.now_x_log[i],pwm_obj.now_R_log[i],pwm_obj.now_L_log[i],pid_obj.log_enc[i],pid_obj.log_gyro[i]);
-				  printf("%f,%d,%d,%d,%d,%d,\n\r",t,pl_obj.log_sensor_lr[0][i],pl_obj.log_sensor_lr[1][i],wall_obj.wall_ctrl_log[i],wall_obj.wall_l_diff[i],wall_obj.wall_r_diff[i]);
+				  printf("%f,%d,%d,%d,%d,%d,%f,%f,\n\r",t,pl_obj.log_sensor_lr[0][i],pl_obj.log_sensor_lr[1][i],wall_obj.wall_ctrl_log[i],wall_obj.wall_l_diff[i],wall_obj.wall_r_diff[i],wall_obj.wall_l_meter[i],wall_obj.wall_r_meter[i]);
 				  t+=0.001;
 			  }
 			  //map_obj.ShowMap();

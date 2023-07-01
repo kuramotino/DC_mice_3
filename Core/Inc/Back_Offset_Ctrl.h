@@ -16,7 +16,7 @@ namespace controll
 		float r_back_offset=30;
 		float l_back_offset=30;
 		float CENTER_R=155;//R機体が中心にあるときの右AD値
-		float CENTER_L=255;//L機体が中心にあるときの左AD値
+		float CENTER_L=230;//L機体が中心にあるときの左AD値255
 		float ABS_CENTER_R=155;
 		float ABS_CENTER_L=255;
 		float max_offset_ctrl=20;
