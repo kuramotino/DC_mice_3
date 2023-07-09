@@ -10,10 +10,12 @@
 
 #include "Planning.h"
 #include "Pass_Generator.h"
+#include "CtrlWindow.h"
+using namespace controll;
 
 namespace Algorizm
 {
-	class IssueCommand
+	class IssueCommand : public CtrlWindow
 	{
 		Planning* my_plan;
 		Pass_Generator* my_pass;

@@ -20,6 +20,7 @@ namespace controll
 
 	void controll::kasoku::set_kasoku()//台形加速をスタートさせる関数
 	{
+		v_status=accel;
 		isKasokuEnd=false;
 		now_x=0;
 		target_a=now_cm.bu_tar_a;//加速度
@@ -29,6 +30,8 @@ namespace controll
 		target_v_end=now_cm.bu_tar_v_end;//終端速度
 		target_x=(now_cm.isSetBackOffset) ? now_cm.bu_tar_x+add_back_offset : now_cm.bu_tar_x;//目標距離
 		add_back_offset=(target_x!=now_cm.bu_tar_x) ? 0 : add_back_offset;//もし使ったら後距離の補正量をリセット
+		target_x=(now_cm.isBreakWallStra)?break_wall_offset:target_x;//壁切れ後の直進なら距離を変更
+		break_wall_offset=(now_cm.isBreakWallStra && target_x!=now_cm.bu_tar_x) ? 0 : break_wall_offset;//もし使ったなら壁切れ後の距離をリセット
 		xde=(target_v_max*target_v_max-target_v_end*target_v_end)/(2*target_a);//減速距離の計算
 	}
 
@@ -41,15 +44,18 @@ namespace controll
 				now_x+=now_v*dt;
 				now_v+=target_a*dt;
 				now_v=(now_v>target_v_max) ? target_v_max : now_v;
+				v_status=accel;
 			}
 			else if(target_x-now_x>xde)//2定速区間
 			{
 				now_x+=now_v*dt;
+				v_status=constant;
 			}
 			else if(now_v>target_v_end)//3減速区間
 			{
 				now_x+=now_v*dt;
 				now_v-=target_a*dt;
+				v_status=deceleration;
 			}
 			else
 			{
@@ -90,7 +96,7 @@ namespace controll
 
 	void controll::kasoku::transmit_pwm()//pwm_outに計算した速度と位置をと加速が終了したかどうかのフラグを送る関数
 	{
-			my_pwm->updata_x_v(now_x, now_v,isKasokuEnd,isBreak);
+			my_pwm->updata_x_v(now_x, now_v,isKasokuEnd,isBreak,v_status);
 	}
 
 	float controll::kasoku::show_v()//now_vを返す関数(PID_Ctrlに呼ばれる)
@@ -107,5 +113,11 @@ namespace controll
 	{
 		add_back_offset=bu_offset;
 	}
+
+	void controll::kasoku::Receive_Wall_Break_Offset(float bu_offset)//Wall_Break_Offsetをセットする関数(Break_Wall_Ctrlに呼ばれる)
+	{
+		break_wall_offset=bu_offset;
+	}
+
 }
 

@@ -23,6 +23,8 @@ namespace controll
 		float Side_R_ADtoX[5]={198.56,-1.8756,0.0085,-0.00002,0.00000002};//R距離変換関数の係数
 		float Side_L_ADtoX[5]={136.58,-0.7365,0.0019,-0.000002,0.0000000009};//L距離変換関数の係数
 		float sub_back_offset=0;//1横壁制御が使えないときに補正する量のキュー//index1を使う
+		bool isR=false;//制御に使った壁が右か左か
+		float max_back_offset=30;//0袋小路での位置補正の最大の補正量
 
 	public:
 		void updata(Command cm);//overrideする

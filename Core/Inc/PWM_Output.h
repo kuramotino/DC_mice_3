@@ -12,6 +12,7 @@
 
 namespace controll
 {
+	enum now_v_status {accel,constant,deceleration};
 	enum turn {Back,Front};
 	class PWM_Out
 	{
@@ -20,6 +21,7 @@ namespace controll
 
 		bool isDutyEnd=true;//Duty変換が終わったかどうか
 		bool bu_isBreak=false;
+		enum now_v_status v_status;//現在の速度の状態
 
 		float now_x;//現在位置
 		float now_v;//現在速度 mm/s
@@ -42,12 +44,16 @@ namespace controll
 		float ke=0.000414;//0.414mV/rpm(0.000414 V/rpm) :逆起電圧定数
 		float L=50;//50mm:トレッド幅
 		float I=0.000543;//0.000543kg*m^2:慣性モーメント*/
-		float turn_A=0.3;//A:角加速度依存の補正係数0.5
-		float turn_B=1.5;//B:角速度依存の補正係数1.0
-		float turn_C=0.0;//C摩擦項
-		float first_turn_C=0.2;//0.8動き始めの摩擦項
-		float second_turn_C=0.1;//0.3動摩擦項
-		float threshold_turn_C=30;//10摩擦項を切り替える角度
+		float st_A=1.0;//A:加速度依存の補正係数0.5\A項は加速度×2.1741*10^-5
+		float st_B=1.5;//B:速度依存の補正係数1.0\0.7
+		float st_C=0.69;//C摩擦項/0.75
+		float st_const_C=-0.3;//C摩擦項、定速
+		float st_de_C=-0.69;//C摩擦項、減速
+		float turn_A=0.045;//A:角加速度依存の補正係数0\A項は各加速度×7.0407*10^-5/0.3*3900*7.0407*10^-5=0.0823/A+C=0.43636
+		float turn_B=13;//B:角速度依存の補正係数1.0
+		float turn_C=0.18694;//C摩擦項/0.8
+		float turn_const_C=-2.7;//C動摩擦項,定速
+		float turn_de_C=-2.3;//C動摩擦項、減速
 
 	public:
 		float now_R_log[1200];
@@ -59,7 +65,7 @@ namespace controll
 		PWM_Out(void);//pwmのコンストラクタ
 		void set_cs(CommandStatus* cs);//CommandStatusオブジェクトをフィールドにセットする
 		void updata(Command cm);//現在のコマンドを更新(CommandExecuterに呼ばれる)
-		void updata_x_v(float x,float v,bool isKasokuEnd,bool isBreak);//kasokuから現在のxとvとフラグを取得
+		void updata_x_v(float x,float v,bool isKasokuEnd,bool isBreak,enum now_v_status buv_status);//kasokuから現在のxとvとフラグを取得
 		void updata_PID(float ff_turn,float fb_turn);//PIDから現在のPID値を取得
 		void set_pwm();//duty変換に必要なパラメータをセットする関数
 		void pwm();//duty変換を行う関数

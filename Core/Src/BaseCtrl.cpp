@@ -27,6 +27,15 @@ namespace controll
 		my_cs=cs;
 	}
 
+	void controll::BaseCtrl::add_obj(kasoku* ka,PWM_Out* pwm,InputData* input,CommandStatus* cs,CtrlWindow* window)
+	{
+		my_kasoku=ka;
+		my_pwm=pwm;
+		my_input=input;
+		my_cs=cs;
+		my_ctrlwin=window;
+	}
+
 	void controll::BaseCtrl::status_off(enum status st)//CommandStatusをoffにする
 	{
 		my_cs->off_command(st);//-1:強制終了

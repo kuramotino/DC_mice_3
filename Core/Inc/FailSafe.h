@@ -14,7 +14,7 @@ namespace controll
 	class FailSafe : public BaseCtrl
 	{
 		float threshold_v=1000;
-		float threshold_omega=1000;
+		float threshold_omega=500;
 		float threshold_accel_y=-5;
 
 		bool v_logical;

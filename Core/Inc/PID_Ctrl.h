@@ -34,26 +34,26 @@ namespace controll
 
 		float V_bat=8.4;//8.4V:電源電圧
 
-		float Ksp=15;//1直進時の直進成分のPゲイン1.5
-		float Ksi=1;//1直進時の直進成分のIゲイン0.1
-		float Ksd=0;//1直進時の直進成分のDゲイン
-		float K_st_tu_p=15;//1直進時の回転成分のPゲイン1
-		float K_st_tu_i=1;//1直進時の回転成分のIゲイン0.1
-		float K_st_tu_d=0;//1直進時の回転成分のDゲイン
+		float Ksp=15;//1直進時の直進成分のPゲイン15
+		float Ksi=1;//1直進時の直進成分のIゲイン1
+		float Ksd=0;//1直進時の直進成分のDゲイン0
+		float K_st_tu_p=15;//1直進時の回転成分のPゲイン15
+		float K_st_tu_i=1;//1直進時の回転成分のIゲイン1
+		float K_st_tu_d=0;//1直進時の回転成分のDゲイン0
 
-		float Ktp=10;//2回転時の回転成分のPゲイン17//10
-		float Kti=3.0;//2回転時の回転成分のIゲイン0.45//2
-		float Ktd=45;//2回転時の回転成分のDゲイン112//50
-		float K_tu_st_p=15;//1回転時の直進成分のPゲイン5
-		float K_tu_st_i=1.0;//1回転時の直進成分のIゲイン0.05
-		float K_tu_st_d=30;//1回転時の直進成分のDゲイン
+		float Ktp=15;//2回転時の回転成分のPゲイン17//10/10
+		float Kti=0.05;//2回転時の回転成分のIゲイン0.45//2/3
+		float Ktd=97.5;//2回転時の回転成分のDゲイン112//50/45
+		float K_tu_st_p=15;//1回転時の直進成分のPゲイン5/15
+		float K_tu_st_i=0;//1回転時の直進成分のIゲイン0.05/1
+		float K_tu_st_d=30;//1回転時の直進成分のDゲイン/30
 
-		float K_tu_senkai_p=17;//2超信地旋回時の回転成分のPゲイン17
-		float K_tu_senkai_i=2;//2超信地旋回時の回転成分のIゲイン0.45
-		float K_tu_senkai_d=0.25;//2超信地旋回時の回転成分のDゲイン0.25
+		float K_tu_senkai_p=12;//2超信地旋回時の回転成分のPゲイン17/5/12.5
+		float K_tu_senkai_i=1.5;//2超信地旋回時の回転成分のIゲイン2/0.09/0.05
+		float K_tu_senkai_d=0;//2超信地旋回時の回転成分のDゲイン0.25/0/0.25
 		float K_senkai_p=5;//1超信地旋回時の直進成分のPゲイン5
-		float K_senkai_i=0.1;//1超信地旋回時の直進成分のIゲイン0.1
-		float K_senkai_d=0;//1超信地旋回時の直進成分のDゲイン
+		float K_senkai_i=0;//1超信地旋回時の直進成分のIゲイン0.1
+		float K_senkai_d=0;//1超信地旋回時の直進成分のDゲイン0
 
 
 	public:

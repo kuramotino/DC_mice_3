@@ -5,6 +5,7 @@
  *      Author: Ryu
  */
 #include "Init_Controll_Objs.h"
+#include "InitAlgo.h"
 #include "tim.h"
 controll::CommandExecuter cx_obj;
 controll::kasoku ksk_obj;
@@ -21,6 +22,8 @@ controll::Wall_Ctrl wall_obj;
 module::LED_Ctrl led_obj;
 controll::Front_Offset_Ctrl front_offset_obj;
 controll::Back_Offset_Ctrl back_offset_obj;
+controll::Senkai_Offset_Ctrl senkai_offset_obj;
+controll::Break_Wall_Ctrl break_wall_obj;
 bool init_flag=false;
 using namespace controll;
 
@@ -31,6 +34,8 @@ void Init_Controll()//controll,module名前空間のオブジェクトたちを�
 	cx_obj.addCtrl(&wall_obj);
 	cx_obj.addCtrl(&front_offset_obj);
 	cx_obj.addCtrl(&back_offset_obj);
+	cx_obj.addCtrl(&senkai_offset_obj);
+	cx_obj.addCtrl(&break_wall_obj);
 	cx_obj.add_kasoku_PWM(&ksk_obj, &pwm_obj);
 	cx_obj.set_cs(&cs_obj);
 	ksk_obj.add_pwm(&pwm_obj);
@@ -46,7 +51,10 @@ void Init_Controll()//controll,module名前空間のオブジェクトたちを�
 	wall_obj.SetPIDCtrl(&pid_obj);
 	front_offset_obj.add_obj(&ksk_obj, &pwm_obj, &input_obj, &cs_obj);
 	front_offset_obj.SetBackOffset(&back_offset_obj);
-	back_offset_obj.add_obj(&ksk_obj, &pwm_obj, &input_obj, &cs_obj);
+	back_offset_obj.add_obj(&ksk_obj, &pwm_obj, &input_obj, &cs_obj, &issue_obj);
+	senkai_offset_obj.add_obj(&ksk_obj, &pwm_obj, &input_obj, &cs_obj);
+	senkai_offset_obj.SetBackOffset(&back_offset_obj);
+	break_wall_obj.add_obj(&ksk_obj, &pwm_obj, &input_obj, &cs_obj);
 	init_flag=true;
 }
 
@@ -56,6 +64,8 @@ void Sync_Module()//TIM6の割り込み処理
 	{
 	//HAL_GPIO_WritePin(ILED1_GPIO_Port,ILED1_Pin,GPIO_PIN_SET);
 	front_offset_obj.BreakFrontOffset();
+	senkai_offset_obj.BreakFrontOffset();
+	break_wall_obj.BreakWall();
 	cx_obj.polling_cs();
 	pl_obj.pl_interupt_getSensor();
 	pl_obj.sensor_input();

@@ -16,6 +16,9 @@ namespace Algorizm
 	{
 		isStart = false;
 		isStop = false;
+		isM_Start=false;
+		isM_Stop=false;
+		isPass=false;
 		my_plan->SetReturn(false);
 		my_plan->SetTansakuEnd(false);
 	}
@@ -47,6 +50,7 @@ namespace Algorizm
 
 			case Front:
 				application::App_Set_Command(Mid_Stra);
+				application::App_Set_Command(Stra_Wall_Break);
 				break;
 
 			case Right:
@@ -62,9 +66,26 @@ namespace Algorizm
 				//application::App_Set_Command(Stra_de_70);
 				//application::App_Set_Command(Right_sen);
 				//application::App_Set_Command(Stra_ac_90);
-				application::App_Set_Command(Stra_Senkai_de_83);
-				application::App_Set_Command(Right_sen);
-				application::App_Set_Command(Right_sen);
+				//application::App_Set_Command(Stra_Senkai_de_83);
+				application::App_Set_Command(Senkai_Offset_40);//0横壁との距離を測る
+				application::App_Set_Command(Stra_Senkai_de_40);
+				if(offset==0)
+				{
+					application::App_Set_Command(Right_sen);
+					application::App_Set_Command(Right_sen);
+				}
+				else if(offset>0)//1右に寄っているとき
+				{
+					application::App_Set_Command(Left_sen);
+					application::App_Set_Command(UturnOffset, offset);
+					application::App_Set_Command(Left_sen);
+				}
+				else if(offset<0)//2左に寄っているとき
+				{
+					application::App_Set_Command(Right_sen);
+					application::App_Set_Command(UturnOffset, -1.0*offset);
+					application::App_Set_Command(Right_sen);
+				}
 				application::App_Set_Command(Stra_Senkai_ac_90);
 				break;
 			}
@@ -72,6 +93,8 @@ namespace Algorizm
 			if(isStop)
 			{
 				application::App_Set_Command(Stra_Stop);
+				application::App_Set_Command(Right_sen);
+				application::App_Set_Command(Right_sen);
 				//application::App_Command(Stop_Cm);
 			}
 		}

@@ -36,12 +36,13 @@ namespace controll
 		}
 	}
 
-	void controll::PWM_Out::updata_x_v(float x,float v,bool isKasokuEnd,bool isBreak)//kasokuから現在のxとvとフラグを取得(kasokuから呼ばれる)
+	void controll::PWM_Out::updata_x_v(float x,float v,bool isKasokuEnd,bool isBreak,enum now_v_status buv_status)//kasokuから現在のxとvとフラグを取得(kasokuから呼ばれる)
 	{
 		now_x=x;
 		now_v=v;
 		bool bu_isKasokuEnd=isKasokuEnd;
 		bu_isBreak=isBreak;
+		v_status=buv_status;
 		if(bu_isKasokuEnd==true && isDutyEnd==false)
 		{
 			status_off();
@@ -68,7 +69,9 @@ namespace controll
 
 			if(!now_cm.isTurn)//直進のとき
 			{
-				duty_FF_stra=1/V_bat*(R/kt*(m*target_a/(2*10*10*10))*taiya_dirmeter/n+ke*(60*n*now_v/2/3.14/taiya_dirmeter));
+				duty_FF_stra=1/V_bat*(st_A*R/kt*(m*target_a/(2*10*10*10))*taiya_dirmeter/n+ke*(st_B*60*n*now_v/2/3.14/taiya_dirmeter) + st_C);
+				duty_FF_stra=(v_status==constant)?1/V_bat*(ke*(st_B*60*n*now_v/2/3.14/taiya_dirmeter) + st_const_C):duty_FF_stra;
+				duty_FF_stra=(v_status==deceleration)?1/V_bat*(st_A*R/kt*(m*-1.0*target_a/(2*10*10*10))*taiya_dirmeter/n+ke*(st_B*60*n*now_v/2/3.14/taiya_dirmeter + st_de_C)):duty_FF_stra;
 				duty_FF_turn=0;
 
 //				if(now_cm.MoveVec==true)//前進のとき
@@ -93,9 +96,12 @@ namespace controll
 			}
 			else//スラローム又は超信地旋回のとき
 			{
-				turn_C=(now_v<threshold_turn_C) ? first_turn_C : second_turn_C;
-				duty_FF_stra=1/V_bat*(R/kt*(m*now_cm.ga/(2*10*10*10))*taiya_dirmeter/n+ke*(60*n*now_cm.gv/2/3.14/taiya_dirmeter));
+				//turn_C=(now_v<threshold_turn_C) ? first_turn_C : second_turn_C;
+				duty_FF_stra=1/V_bat*(ke*(st_B*60*n*now_cm.gv/2/3.14/taiya_dirmeter));
+				//duty_FF_stra=(!now_cm.isSenkai)?duty_FF_stra+1/V_bat*turn_const_C:duty_FF_stra;
 				duty_FF_turn=1/V_bat*((turn_A*R*10*10*10)/kt*(I*target_a*(3.14/180)/L)*taiya_dirmeter/n+ke*(turn_B*60*n*L*now_v*(3.14/180)/4/3.14/taiya_dirmeter) + turn_C);
+				duty_FF_turn=(v_status==constant)?1/V_bat*((turn_A*R*10*10*10)/kt*(I*target_a*(3.14/180)/L)*taiya_dirmeter/n+ke*(turn_B*60*n*L*now_v*(3.14/180)/4/3.14/taiya_dirmeter) + turn_const_C):duty_FF_turn;
+				duty_FF_turn=(v_status==deceleration)?1/V_bat*((-1.0*turn_A*R*10*10*10)/kt*(I*target_a*(3.14/180)/L)*taiya_dirmeter/n+ke*(turn_B*60*n*L*now_v*(3.14/180)/4/3.14/taiya_dirmeter) + turn_de_C):duty_FF_turn;
 				duty_FF_turn=(now_cm.MoveVec) ? duty_FF_turn : -1*duty_FF_turn;
 				//duty_FF_stra=0;
 

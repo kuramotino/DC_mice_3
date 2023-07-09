@@ -18,6 +18,7 @@ namespace controll
 	{
 		bool isKasokuEnd=true;//加速が終わったかどうか
 		bool isBreak=false;//breakをかけるか
+		enum now_v_status v_status;//現在の速度の状態
 
 		float now_x=0;//現在の位置
 		float dt=0.001;//刻み時間1ms
@@ -33,6 +34,7 @@ namespace controll
 		PWM_Out* my_pwm;//pwmのオブジェクト
 
 		float add_back_offset=0;//1後距離の補正量
+		float break_wall_offset=0;//2壁切れ後の距離
 
 	public:
 		float now_v_log[1200];
@@ -50,6 +52,7 @@ namespace controll
 		float show_v();//now_vを返す関数(PID_Ctrlに呼ばれる)
 		float show_x();//now_xを返す関数(PID_Ctrlに呼ばれる)
 		void Receive_Back_Offset(float bu_offset);//BackOffsetをセットする関数(Back_Offset_Ctrlに呼ばれる)
+		void Receive_Wall_Break_Offset(float bu_offset);//Wall_Break_Offsetをセットする関数(Break_Wall_Ctrlに呼ばれる)
 	};
 }
 
