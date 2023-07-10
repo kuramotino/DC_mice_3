@@ -37,11 +37,12 @@ namespace Algorizm
 		Map* my_map;
 
 	public:
-		enum Vec Adati(int goal_size, POS* goal_pos);//�����@�ɑ����Ď��̍s����Ԃ��֐�
-		enum Vec s_dijkstra(int goal_size, POS* goal_pos);//�_�C�N�X�g���@�ɑ����Ď��̍s����Ԃ��֐�
+		int Adati(int goal_size, POS* goal_pos,bool isKitikasoku);//�����@�ɑ����Ď��̍s����Ԃ��֐�
+		int s_dijkstra(int goal_size, POS* goal_pos,bool isKitikasoku);//�_�C�N�X�g���@�ɑ����Ď��̍s����Ԃ��֐�
 		int saitan_dijkstra(int goal_size, POS* goal_pos);//�΂߂̃_�C�N�X�g���@�ɑ����Ď��̍s����Ԃ��֐�
 		void SetObj(MiceStatus* status, MakePotential* potential, Map* map);//�K�v�ȃI�u�W�F�N�g���Z�b�g����֐�
 		void UpDataVecPos(enum Vec vec);//���ɐi�ތ���(���C�E�C�O�C��)����C���̈ʒu�C�������X�V����֐�
+		void UpDataSimVecPos(enum Vec vec);
 		void SetReturn(bool isreturn);//�߂�T���t���O���Z�b�g����֐�
 		bool RetReturn();//�߂�T���t���O��Ԃ��֐�
 		void SetTansakuEnd(bool istansakuend);//�T���I���t���O���Z�b�g����֐�

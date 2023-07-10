@@ -66,6 +66,7 @@ namespace Algorizm
 		int CalEdgeCost(NODE* prenode,NODE* nownode);//����m�[�h�ɐڑ����ꂽ�G�b�W�̃R�X�g���v�Z����֐�
 		void SaitanPushNode(NODE* node, NODE* new_node, int edge_cost, saitan_node_dir dir);//����m�[�h���v�b�V������֐�
 		void BlockKnowWall();//���m��Ԃ̕ǂ��ӂ����֐�
+		int RetKnowMap(int x,int y);//ある位置x,yが既知かどうかを返す関数
 	};
 }
 

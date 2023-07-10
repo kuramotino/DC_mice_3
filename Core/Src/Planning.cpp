@@ -3,10 +3,17 @@
 
 namespace Algorizm
 {
-	enum Vec Planning::Adati(int goal_size,POS* goal_pos)
+	int Planning::Adati(int goal_size,POS* goal_pos,bool isKitikasoku)
 	{
-		my_potential->DecideDist(goal_size, goal_pos);
-		my_status->RetPos(&x, &y, &MiceVec);
+		if(!isKitikasoku)
+		{
+			my_potential->DecideDist(goal_size, goal_pos);
+			my_status->RetPos(&x, &y, &MiceVec);
+		}
+		else
+		{
+			my_status->RetSimPos(&x, &y, &MiceVec);
+		}
 
 		front_dist = 255;
 		back_dist = 255;
@@ -148,8 +155,19 @@ namespace Algorizm
 
 		//6setnum�ɕύX
 		ret = (num == 0) ? Front : ((num == 1) ? Right : ((num == 2) ? Left : Back));
+		int ret_num = (ret==Front) ? 1 : ((ret==Left) ? -2 : ((ret==Right) ? -3 : -4));
 
-		UpDataVecPos(ret);
+		if(isKitikasoku)
+		{
+			UpDataSimVecPos(ret);
+		}
+		else
+		{
+			UpDataVecPos(ret);
+			my_status->SetSimPosVec();
+		}
+
+
 		for (int i = 0; i < goal_size; i++)
 		{
 			if (isReturn)
@@ -169,7 +187,30 @@ namespace Algorizm
 				}
 			}
 		}
-		return ret;
+
+
+		//1次の座標が既知で、次の行動が直進ならば
+		int next_x=0;
+		int next_y=0;
+		enum Dir next_dir;
+		my_status->RetSimPos(&next_x, &next_y, &next_dir);
+		int isKnow=(my_potential->RetKnowMap(next_x, next_y));
+
+		if(isKnow==1 && ret==Front)//次の座標が既知で、次の行動が直進
+		{
+			my_status->UpDataPreSim();
+			int bu_comp=1;
+			bu_comp+=Adati(goal_size,goal_pos,true);//既知加速onにして再帰呼び出し/onのときは歩数マップ、壁情報の更新をせず、仮想的に位置を更新する
+			return bu_comp;
+		}
+		else if(isKitikasoku)
+		{
+			my_status->UndoSim();
+			my_status->CopyFromSimtoPosVec();//PosとVecをSimPos,SimVecで上書きする
+			return 0;
+		}
+
+		return ret_num;
 	}
 
 	void Algorizm::Planning::SetObj(MiceStatus* status, MakePotential* potential, Map* map)//�K�v�ȃI�u�W�F�N�g���Z�b�g����֐�
@@ -205,6 +246,33 @@ namespace Algorizm
 		}
 	}
 
+	void Algorizm::Planning::UpDataSimVecPos(enum Vec vec)//���ɐi�ތ���(���C�E�C�O�C��)����C���̈ʒu�C�������X�V����֐�
+		{
+			switch (vec)
+			{
+			case Left:
+				my_status->SimVecDecide(false);
+				my_status->SimPosDecide();
+				break;
+
+			case Front:
+				my_status->SimPosDecide();
+				break;
+
+			case Right:
+				my_status->SimVecDecide(true);
+				my_status->SimPosDecide();
+				break;
+
+			case Back:
+				my_status->SimVecDecide(false);
+				my_status->SimVecDecide(false);
+				my_status->SimPosDecide();
+				break;
+			}
+		}
+
+
 	void Algorizm::Planning::SetReturn(bool isreturn)//�߂�T���t���O���Z�b�g����֐�
 	{
 		isReturn = isreturn;
@@ -225,13 +293,20 @@ namespace Algorizm
 		return isTansakuEnd;
 	}
 
-	enum Vec Algorizm::Planning::s_dijkstra(int goal_size, POS* goal_pos)
+	int Algorizm::Planning::s_dijkstra(int goal_size, POS* goal_pos,bool isKitikasoku)
 	{
 		NODE node;
 		NODE pre_node;
 		int pre_x, pre_y;
-		my_potential->search_dijkstra(goal_size, goal_pos);//���݂̃m�[�h���X�V����
-		my_status->RetPos(&x, &y, &MiceVec);
+		if(!isKitikasoku)
+		{
+			my_potential->search_dijkstra(goal_size, goal_pos);//���݂̃m�[�h���X�V����
+			my_status->RetPos(&x, &y, &MiceVec);
+		}
+		else
+		{
+			my_status->RetSimPos(&x, &y, &MiceVec);
+		}
 		node = my_potential->ret_search_node(x, y);
 		pre_node = *(node.pre_node);
 		pre_x = pre_node.pos_x;
@@ -256,7 +331,17 @@ namespace Algorizm
 			ret = (x - 1 == pre_x) ? Front : ((y + 1 == pre_y) ? Right : ((y - 1 == pre_y) ? Left : Back));
 		}
 
-		UpDataVecPos(ret);//���ɐi�ތ�������ʒu�ƌ������X�V
+		int ret_num = (ret==Front) ? 1 : ((ret==Left) ? -2 : ((ret==Right) ? -3 : -4));
+
+		if(isKitikasoku)
+		{
+			UpDataSimVecPos(ret);
+		}
+		else
+		{
+			UpDataVecPos(ret);//���ɐi�ތ�������ʒu�ƌ������X�V
+			my_status->SetSimPosVec();
+		}
 
 		for (int i = 0; i < goal_size; i++)//�S�[�����W�ɓ��B���Ă�����T���I��
 		{
@@ -266,7 +351,29 @@ namespace Algorizm
 				break;
 			}
 		}
-		return ret;
+
+		//1次の座標が既知で、次の行動が直進ならば
+		int next_x=0;
+		int next_y=0;
+		enum Dir next_dir;
+		my_status->RetSimPos(&next_x, &next_y, &next_dir);
+		int isKnow=(my_potential->RetKnowMap(next_x, next_y));
+
+		if(isKnow==1 && ret==Front)//次の座標が既知で、次の行動が直進
+		{
+			my_status->UpDataPreSim();
+			int bu_comp=1;
+			bu_comp+=s_dijkstra(goal_size,goal_pos,true);//既知加速onにして再帰呼び出し/onのときは歩数マップ、壁情報の更新をせず、仮想的に位置を更新する
+			return bu_comp;
+		}
+		else if(isKitikasoku)
+		{
+			my_status->UndoSim();
+			my_status->CopyFromSimtoPosVec();//PosとVecをSimPos,SimVecで上書きする
+			return 0;
+		}
+
+		return ret_num;
 	}
 
 	int Algorizm::Planning::saitan_dijkstra(int goal_size, POS* goal_pos)

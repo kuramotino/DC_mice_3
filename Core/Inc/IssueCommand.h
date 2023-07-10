@@ -24,7 +24,8 @@ namespace Algorizm
 		enum Vec nextVec;
 
 		float TURN_V=500;
-		float MAX_V=2500;
+		float MAX_V=500;
+		float Know_MAX_V=1000;
 
 	public:
 		bool isStart = false;

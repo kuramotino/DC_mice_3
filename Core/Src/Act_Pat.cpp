@@ -26,6 +26,7 @@ namespace application
 	{
 		Command bu_cm(c_type);
 		bu_cm.bu_tar_x*=st_num;
+		bu_cm.bu_tar_x-=(c_type==Mid_Stra_180)?10:0;//0既知加速の直線なら
 		bu_cm.bu_tar_v_start=v_start;
 		bu_cm.bu_tar_v_max=v_max;
 		bu_cm.bu_tar_v_end=v_end;

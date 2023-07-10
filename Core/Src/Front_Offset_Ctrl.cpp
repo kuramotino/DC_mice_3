@@ -13,6 +13,7 @@ namespace controll
 	{
 		now_cm=cm;
 		isStop=(!(now_cm.isFrontOffset) || now_cm.isStop);
+		offset_x=now_cm.offset_x;
 	}
 
 	void controll::Front_Offset_Ctrl::BreakFrontOffset()
@@ -21,14 +22,14 @@ namespace controll
 		{
 			if(my_input->g_sensor_now[2]>turn_start_ad)
 			{
-				sub_back_offset_ctrl=(my_kasoku->show_x()<10)?-1*fabs(10-my_kasoku->show_x()):0;
+				sub_back_offset_ctrl=(my_kasoku->show_x()<offset_x)?-1*fabs(offset_x-my_kasoku->show_x()):0;
 				transmit(sub_back_offset_ctrl);
 				status_off(Forced_End);
 			}
 		}
 		else if(isStop==false)
 		{
-			if(my_kasoku->show_x()>10)
+			if(my_kasoku->show_x()>offset_x)
 			{
 				transmit(0);
 				status_off(Forced_End);

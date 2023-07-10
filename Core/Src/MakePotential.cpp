@@ -581,4 +581,9 @@ namespace Algorizm
 			}
 		}
 	}
+
+	int Algorizm::MakePotential::RetKnowMap(int x,int y)//ある位置x,yが既知かどうかを返す関数
+	{
+		return ((isKnowMap[x] & (1<<y))>>y);
+	}
 }

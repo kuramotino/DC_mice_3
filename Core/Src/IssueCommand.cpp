@@ -21,6 +21,7 @@ namespace Algorizm
 		isPass=false;
 		my_plan->SetReturn(false);
 		my_plan->SetTansakuEnd(false);
+		fail_obj.isFail=false;
 	}
 
 	void IssueCommand::Tansaku()
@@ -33,8 +34,9 @@ namespace Algorizm
 		if (!isStop && isStart && !fail_obj.isFail)
 		{
 			application::App_Command(Front_offset);
-			nextVec = (!my_plan->RetReturn()) ? my_plan->Adati(4, goal_pos) : my_plan->Adati(1, start_pos);
-			//nextVec = (!my_plan->RetReturn()) ? my_plan->Adati(4, goal_pos) : my_plan->s_dijkstra(1, start_pos);
+			//int bu_next_vec = (!my_plan->RetReturn()) ? my_plan->Adati(4, goal_pos,false) : my_plan->Adati(1, start_pos,false);
+			int bu_next_vec = (!my_plan->RetReturn()) ? my_plan->Adati(4, goal_pos,false) : my_plan->s_dijkstra(1, start_pos,false);
+			nextVec = (bu_next_vec > 0) ? Front : ((bu_next_vec == -3) ? Right : ((bu_next_vec == -2) ? Left : Back));
 			application::App_Wait();
 
 			switch (nextVec)
@@ -49,8 +51,15 @@ namespace Algorizm
 				break;
 
 			case Front:
-				application::App_Set_Command(Mid_Stra);
-				application::App_Set_Command(Stra_Wall_Break);
+				if(bu_next_vec<=1)
+				{
+					application::App_Set_Command(Mid_Stra);
+					application::App_Set_Command(Stra_Wall_Break);
+				}
+				else
+				{
+					application::App_Set_Command(Mid_Stra_180,bu_next_vec,TURN_V,Know_MAX_V,TURN_V);
+				}
 				break;
 
 			case Right:
@@ -137,13 +146,13 @@ namespace Algorizm
 				}
 				else if (nextpass == -2)
 				{
-					application::App_Set_Command(Left_f_off);
+					application::App_Set_Command(Saitan_Left_f_off);
 					application::App_Set_Command(Left_sla);
 					application::App_Set_Command(Left_b_off);
 				}
 				else if (nextpass == -3)
 				{
-					application::App_Set_Command(Right_f_off);
+					application::App_Set_Command(Saitan_Right_f_off);
 					application::App_Set_Command(Right_sla);
 					application::App_Set_Command(Right_b_off);
 				}

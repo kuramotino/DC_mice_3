@@ -331,6 +331,82 @@ namespace Algorizm
 				}
 	}
 
+	void Algorizm::Map::ShowKnowMap(void)//マップを表示する関数
+	{
+		int MapSize=16;
+		printf("\n\r");
+
+		int i,j;
+		for(i=2*MapSize+1;i>0;i--)
+		{
+			if(i==2*MapSize+1 || i==1)
+			{
+				for(int f=0;f<MapSize-1;f++)
+				{
+					printf("+---");
+				}
+				printf("+---+\n\r");
+			}
+			else if(i%2==0)
+			{
+				//columnの出力
+				printf("|%3d",(potential_obj.RetKnowMap(0, i/2-1)));
+				for(j=0;j<MapSize-1;j++)
+				{
+					if((Column[j] & (1<<(i/2-1))) == (1<<(i/2-1)))
+					{
+						if(j==0)
+						{
+							printf("|");
+						}
+						else
+						{
+							printf("%3d|",(potential_obj.RetKnowMap(j,i/2-1)));
+						}
+
+					}
+					else
+					{
+						if(j==0)
+						{
+							printf(" ");
+						}
+						else
+						{
+							printf("%3d ",(potential_obj.RetKnowMap(j,i/2-1)));
+						}
+
+					}
+				}
+				if((Column[MapSize-1] & (1<<(i/2-1)))== (1<<(i/2-1)))
+				{
+					printf("%3d|\n\r",(potential_obj.RetKnowMap(MapSize-1,i/2-1)));
+				}
+				else
+				{
+					printf("%3d|\n\r",(potential_obj.RetKnowMap(MapSize-1,i/2-1)));
+				}
+			}
+			else
+			{
+				//Rowの出力
+				printf("+");
+				for(j=0;j<MapSize;j++)
+				{
+					if((Row[(i-1)/2-1] & (1<<j))== (1<<j))
+					{
+						printf("---+");
+					}
+					else
+					{
+						printf("   +");
+					}
+				}
+				printf("   +\n\r");
+			}
+		}
+	}
+
 	void Algorizm::Map::RetPos(int* x, int* y)
 		{
 			int bu_x;
