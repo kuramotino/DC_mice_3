@@ -7,6 +7,7 @@
 #include "kasoku.h"
 #include "BaseCommand.h"
 #include "PWM_Output.h"
+#include "math.h"
 
 namespace controll
 {
@@ -32,6 +33,10 @@ namespace controll
 		add_back_offset=(target_x!=now_cm.bu_tar_x) ? 0 : add_back_offset;//もし使ったら後距離の補正量をリセット
 		target_x=(now_cm.isBreakWallStra)?break_wall_offset:target_x;//壁切れ後の直進なら距離を変更
 		break_wall_offset=(now_cm.isBreakWallStra && target_x!=now_cm.bu_tar_x) ? 0 : break_wall_offset;//もし使ったなら壁切れ後の距離をリセット
+
+		target_v_max=((target_v_max*target_v_max-target_v_start*target_v_start)/(2*target_a)+
+				(target_v_max*target_v_max-target_v_end*target_v_end)/(2*target_a)>target_x)?
+				sqrt(target_a*target_x+(target_v_start*target_v_start+target_v_end*target_v_end)/2):target_v_max;//最高速を調整
 		xde=(target_v_max*target_v_max-target_v_end*target_v_end)/(2*target_a);//減速距離の計算
 	}
 

@@ -21,11 +21,11 @@ namespace controll
 			float buoffset=Side_Wall_Offset();
 			if(isR)
 			{
-				my_ctrlwin->Set_Offset(buoffset);//横壁との距離をissueCommandに渡す
+				my_ctrlwin->Set_Offset(uturn_gain*buoffset);//横壁との距離をissueCommandに渡す
 			}
 			else
 			{
-				my_ctrlwin->Set_Offset(-1.0*buoffset);//横壁との距離をissueCommandに渡す
+				my_ctrlwin->Set_Offset(-1.0*uturn_gain*buoffset);//横壁との距離をissueCommandに渡す
 			}
 		}
 	}

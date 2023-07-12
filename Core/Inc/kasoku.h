@@ -29,6 +29,7 @@ namespace controll
 		float target_v_end;//終端速度
 		float target_x;//目標距離
 		float xde;//減速距離
+		float axde;//加速距離
 
 		Command now_cm;//現在のコマンド
 		PWM_Out* my_pwm;//pwmのオブジェクト

@@ -23,8 +23,8 @@ namespace Algorizm
 		POS start_pos[1] = { {0,0} };
 		enum Vec nextVec;
 
-		float TURN_V=500;
-		float MAX_V=500;
+		float TURN_V=700;
+		float MAX_V=2500;
 		float Know_MAX_V=1000;
 
 	public:

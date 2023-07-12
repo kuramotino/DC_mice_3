@@ -229,9 +229,9 @@ int main(void)
 //				  //printf("%f,%d,%d,%d,%d,%d,%f,%f,\n\r",t,pl_obj.log_sensor_lr[0][i],pl_obj.log_sensor_lr[1][i],wall_obj.wall_ctrl_log[i],wall_obj.wall_l_diff[i],wall_obj.wall_r_diff[i],wall_obj.wall_l_meter[i],wall_obj.wall_r_meter[i]);
 //				  t+=0.001;
 //			  }
-			  //map_obj.ShowMap();
-			  map_obj.ShowKnowMap();
-			  //pass_gene_obj.Show_Pass();
+			  map_obj.ShowMap();
+			  //map_obj.ShowKnowMap();
+			  pass_gene_obj.Show_Pass();
 			  HAL_Delay(1000);
 		  }
 		  break;
@@ -245,8 +245,11 @@ int main(void)
 			  HAL_Delay(1200);
 			  pl_obj.log_flag=true;
 			  wall_obj.wall_log_flag=true;
-//			  App_Set_Command(FF_Test_Stra_1);
-//			  App_Set_Command(FF_Test_Stra_2);
+			  App_Set_Command(FF_Test_Stra_1);
+			  application::App_Set_Command(Saitan_OO_90_foff);
+			  application::App_Set_Command(Saitan_OO_90_R);
+			  application::App_Set_Command(Saitan_OO_90_boff);
+			  App_Set_Command(FF_Test_Stra_2);
 			  //App_Set_Command(FF_Test_Senkai_1);
 			  //App_Set_Command(FF_Test_Senkai_2);
 //			  App_Set_Command(Stra);
@@ -256,8 +259,8 @@ int main(void)
 //			  //App_Set_Command(Right_sen);
 //			  App_Set_Command(Left_b_off);
 //			  App_Set_Command(Stra_de_180);
-			  App_Set_Command(Left_sen);
-			  App_Set_Command(Left_sen);
+//			  App_Set_Command(Left_sen);
+//			  App_Set_Command(Left_sen);
 			  HAL_Delay(3000);
 		  }
 		  break;

@@ -21,12 +21,13 @@ namespace controll
 		}
 
 		accel_logical_y=(my_input->y_ac_gyro<threshold_accel_y);
+		enc_logical=(fabs((my_input->enc_v_R-my_input->enc_v_L))>threshold_enc);
 		if(!now_cm.isTurn && !now_cm.MoveVec)
 		{
 			accel_logical_y=false;
 		}
 
-		if(v_logical||accel_logical_y)
+		if(v_logical||accel_logical_y||enc_logical)
 		{
 			status_off(Abnormal_End);
 			isFail=true;

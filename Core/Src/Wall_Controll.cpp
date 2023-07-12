@@ -95,7 +95,7 @@ namespace controll
 				else//2右壁あり
 				{
 					//2左壁なし
-					PID_Wall=my_input->v_encoder/500*R_SENSOR_GAIN*2*r_diff;
+					PID_Wall=(my_input->v_encoder<1000)?my_input->v_encoder/500*R_SENSOR_GAIN*2*r_diff:2*R_SENSOR_GAIN*2*r_diff;
 				}
 			}
 			else//2左壁あり
@@ -109,7 +109,7 @@ namespace controll
 //					}
 //					else
 //					{
-						PID_Wall=my_input->v_encoder/500*L_SENSOR_GAIN*-2*l_diff;
+						PID_Wall=(my_input->v_encoder<1000)?my_input->v_encoder/500*L_SENSOR_GAIN*-2*l_diff:2*L_SENSOR_GAIN*-2*l_diff;
 //					}
 				}
 				else//2右壁あり
@@ -121,7 +121,7 @@ namespace controll
 //					}
 //					else
 //					{
-						PID_Wall=my_input->v_encoder/500*(L_SENSOR_GAIN*-1*l_diff+R_SENSOR_GAIN*r_diff);
+						PID_Wall=(my_input->v_encoder<1000)?my_input->v_encoder/500*(L_SENSOR_GAIN*-1*l_diff+R_SENSOR_GAIN*r_diff):2*(L_SENSOR_GAIN*-1*l_diff+R_SENSOR_GAIN*r_diff);
 //					}
 				}
 			}

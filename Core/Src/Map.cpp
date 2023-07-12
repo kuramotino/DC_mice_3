@@ -25,9 +25,19 @@ namespace Algorizm
 	void Algorizm::Map::Updata_current()
 	{
 		my_status->RetPos(&current_x, &current_y, &current_vec);
+		int pre_wall[3];
+		isLFRKnowWall(&pre_wall[0],&pre_wall[1],&pre_wall[2],current_x,current_y,current_vec);
 		currentWall[Left] = (my_input->g_sensor_now[1]>my_input->LEFT_SLESHOLD) ? 1:0;
 		currentWall[Front] = (my_input->g_sensor_now[2]>my_input->FRONT_SLESHOLD) ? 1:0;
 		currentWall[Right] = (my_input->g_sensor_now[3]>my_input->RIGHT_SLESHOLD) ? 1:0;
+		for(int i=0;i<3;i++)
+		{
+			if(pre_wall[i]==1 && currentWall[i]==0)
+			{
+				currentWall[i]=1;
+			}
+		}
+
 	}
 
 	void Algorizm::Map::MapDecide()

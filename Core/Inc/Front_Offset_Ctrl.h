@@ -13,7 +13,7 @@ namespace controll
 {
 	class Front_Offset_Ctrl : public BaseCtrl
 	{
-		uint16_t turn_start_ad=330;//1ターンを行うAD値
+		uint16_t turn_start_ad=0;//1ターンを行うAD値
 		float sub_back_offset_ctrl=0;//1前壁で補正できなかったときに補正する後距離
 		BaseCtrl* my_back;
 		float offset_x=0;//1前壁の制御なしで進むオフセット量

@@ -204,7 +204,7 @@ namespace Algorizm
 		int now_y;
 		map->RetPos(&now_x, &now_y);
 		updata_knowmap(now_x, now_y);//���m��Ԃ̍X�V
-		//Init_Dist();//�����}�b�v�̏�����
+		Init_Dist();//�����}�b�v�̏�����
 		init_search_node();//�m�[�h�̏�����
 
 		POS bupos = { 0,0 };//�V���Ɋm�肵���m�[�h�̍��W

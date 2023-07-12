@@ -23,6 +23,9 @@ namespace Algorizm
 		int OO180_R[4] = { 1,-3,-3,1 };
 		int OO180_L[4] = { 1,-2,-2,1 };
 
+		float OO_90_conect_v=1000;//0大回り90の接続速度
+		float OO_180_conect_v=1000;//1大回り180の接続速度
+
 	public:
 		void SetPlan(Planning* bu_plan);
 		void M_Pass(int goal_size, POS* goal_pos);//pass�𐶐�����
@@ -30,7 +33,7 @@ namespace Algorizm
 		void InitPassCount();//pass������������֐�
 		void Comp_Pass(int* tar_pass, int pass_size, int setpassnum);//pass�����k����֐�
 		void St_Comp_Pass(void);//�����̈��k
-		void Conect_v_cal(int passcount);//���i�̐ڑ����x���v�Z
+		void Conect_v_cal(float turn_v,float* M_start_conect_v,float* M_end_conect_v);//���i�̐ڑ����x���v�Z
 		int Ret_NextPass();
 		void Show_Pass();
 	};

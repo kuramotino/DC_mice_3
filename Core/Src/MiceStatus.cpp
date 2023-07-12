@@ -88,6 +88,18 @@ namespace Algorizm
 		return false;
 	}
 
+	bool MiceStatus::SimGoalCheck(int goal_size, int x, int y)//�S�[���������ǂ����𔻒肷��֐�
+	{
+		for (int i = 0; i < goal_size; i++)
+		{
+			if (SimPosX == x && SimPosY == y)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
 	void MiceStatus::RetPos(int* x, int* y, enum Dir* dir)
 	{
 		*x = PosX;

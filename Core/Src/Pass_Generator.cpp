@@ -57,10 +57,10 @@ namespace Algorizm
 			}
 		}
 
-		//Comp_Pass(OO90_R, 3, -7);
-		//Comp_Pass(OO90_L, 3, -5);
-		//Comp_Pass(OO180_R, 4, -6);
-		//Comp_Pass(OO180_L, 4, -4);
+		Comp_Pass(OO90_R, 3, -7);
+		Comp_Pass(OO90_L, 3, -5);
+		Comp_Pass(OO180_R, 4, -6);
+		Comp_Pass(OO180_L, 4, -4);
 		St_Comp_Pass();
 	}
 
@@ -84,6 +84,11 @@ namespace Algorizm
 		int size = pass_size;
 		for (int i = 0; i <= 255 - size; i++)//1pass�z���S����
 		{
+			if(i==0)
+			{
+				continue;
+			}
+
 			int isEq = 1;
 			for (int j = 0; j < size; j++)//2pass�z���tar�z����r
 			{
@@ -147,6 +152,41 @@ namespace Algorizm
 		for (int i = 0; i < 100; i++)
 		{
 			pass[i] = bu_pass[i];
+		}
+	}
+
+	void Pass_Generator::Conect_v_cal(float turn_v,float* M_start_conect_v,float* M_end_conect_v)//直進の接続速度を計算
+	{
+		if(passcount!=254)
+		{
+			if((pass[passcount]>0) && (pass[passcount+1]==-6 || pass[passcount+1]==-4))//1現在が直進、次が大回り
+			{
+				*M_end_conect_v=OO_180_conect_v-turn_v;
+			}
+			else if((pass[passcount]>0) && (pass[passcount+1]==-7 || pass[passcount+1]==-5))//2現在が直進、次が小回り
+			{
+				*M_end_conect_v=OO_90_conect_v-turn_v;
+			}
+			else
+			{
+				*M_end_conect_v=0.0;
+			}
+		}
+
+		if(passcount!=0)
+		{
+			if((pass[passcount]>0) && (pass[passcount-1]==-6 || pass[passcount-1]==-4))//1現在が直進、一個前が大回り
+			{
+				*M_start_conect_v=OO_180_conect_v-turn_v;
+			}
+			else if((pass[passcount]>0) && (pass[passcount-1]==-7 || pass[passcount-1]==-5))//2現在が直進、一個前が小回り
+			{
+				*M_start_conect_v=OO_90_conect_v-turn_v;
+			}
+			else
+			{
+				*M_start_conect_v=0.0;
+			}
 		}
 	}
 

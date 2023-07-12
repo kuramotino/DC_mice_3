@@ -168,23 +168,31 @@ namespace Algorizm
 		}
 
 
+		bool isSimGoal=false;
 		for (int i = 0; i < goal_size; i++)
 		{
-			if (isReturn)
+			if(!isKitikasoku)
 			{
-				isTansakuEnd = my_status->GoalCheck(goal_size, (goal_pos + i)->x, (goal_pos + i)->y);
-				if (isTansakuEnd)
+				if (isReturn)
 				{
-					break;
+					isTansakuEnd = my_status->GoalCheck(goal_size, (goal_pos + i)->x, (goal_pos + i)->y);
+					if (isTansakuEnd)
+					{
+						break;
+					}
+				}
+				else
+				{
+					isReturn = my_status->GoalCheck(goal_size, (goal_pos + i)->x, (goal_pos + i)->y);
+					if (isReturn)
+					{
+						break;
+					}
 				}
 			}
 			else
 			{
-				isReturn = my_status->GoalCheck(goal_size, (goal_pos + i)->x, (goal_pos + i)->y);
-				if (isReturn)
-				{
-					break;
-				}
+				isSimGoal = my_status->SimGoalCheck(goal_size, (goal_pos + i)->x, (goal_pos + i)->y);
 			}
 		}
 
@@ -196,7 +204,7 @@ namespace Algorizm
 		my_status->RetSimPos(&next_x, &next_y, &next_dir);
 		int isKnow=(my_potential->RetKnowMap(next_x, next_y));
 
-		if(isKnow==1 && ret==Front)//次の座標が既知で、次の行動が直進
+		if(isKnow==1 && ret==Front && !isSimGoal)//次の座標が既知で、次の行動が直進で、次の座標がゴールではないとき
 		{
 			my_status->UpDataPreSim();
 			int bu_comp=1;
@@ -332,6 +340,8 @@ namespace Algorizm
 		}
 
 		int ret_num = (ret==Front) ? 1 : ((ret==Left) ? -2 : ((ret==Right) ? -3 : -4));
+		ret_num=(node.cost==999)?-4:ret_num;
+		ret=(node.cost==999)?Back:ret;
 
 		if(isKitikasoku)
 		{
@@ -343,12 +353,31 @@ namespace Algorizm
 			my_status->SetSimPosVec();
 		}
 
+		bool isSimGoal=false;
 		for (int i = 0; i < goal_size; i++)//�S�[�����W�ɓ��B���Ă�����T���I��
 		{
-			isTansakuEnd = my_status->GoalCheck(goal_size, (goal_pos + i)->x, (goal_pos + i)->y);
+			if(!isKitikasoku)
+			{
+				isTansakuEnd = my_status->GoalCheck(goal_size, (goal_pos + i)->x, (goal_pos + i)->y);
+				//			isTentativeTansakuEnd = my_status->GoalCheck(goal_size, (goal_pos + i)->x, (goal_pos + i)->y);
+			}
+			else
+			{
+				isSimGoal = my_status->SimGoalCheck(goal_size, (goal_pos + i)->x, (goal_pos + i)->y);
+			}
+//
+//			if(isTentativeTansakuEnd && (goal_pos+i)->x==0 && (goal_pos+i)->y==0)
+//			{
+//				isTansakuEnd=true;
+//			}
+
+//			if (isTansakuEnd || isTentativeTansakuEnd)
+//			{
+//				break;
+//			}
 			if (isTansakuEnd)
 			{
-				break;
+					break;
 			}
 		}
 
@@ -359,7 +388,7 @@ namespace Algorizm
 		my_status->RetSimPos(&next_x, &next_y, &next_dir);
 		int isKnow=(my_potential->RetKnowMap(next_x, next_y));
 
-		if(isKnow==1 && ret==Front)//次の座標が既知で、次の行動が直進
+		if(isKnow==1 && ret==Front && !isSimGoal)//次の座標が既知で、次の行動が直進で、次の座標がゴールでないとき
 		{
 			my_status->UpDataPreSim();
 			int bu_comp=1;
@@ -374,6 +403,64 @@ namespace Algorizm
 		}
 
 		return ret_num;
+	}
+
+	int Algorizm::Planning::z_dijkstra()//全面探索を行う関数
+	{
+		if(isTentativeTansakuEnd && !isTansakuEnd)
+		{
+			//goal座標を設定する
+			set_goal_pos();
+			isTentativeTansakuEnd=false;
+		}
+
+		int t_x;
+		int t_y;
+		enum Dir t_vec;
+		my_status->RetPos(&t_x, &t_y, &t_vec);
+		int t_dist=my_potential->RetDist(t_x, t_y);
+
+		if(t_dist>=255)//goalが塞がれていたらgoalを変更する
+		{
+			set_goal_pos();
+		}
+
+		int ret_num=s_dijkstra(1, &Tentative_goal_pos,false);
+		return ret_num;
+	}
+
+	void Algorizm::Planning::set_goal_pos()//現在の座標から最も近い未知区画をgoalに設定する関数
+	{
+		POS bu_pos={255,255};
+		int goal_len=0;//0ゴールへの距離
+		int pre_goal_len=512;
+		int n_x;
+		int n_y;
+		enum Dir n_vec;
+		my_status->RetPos(&n_x, &n_y, &n_vec);
+
+		for(int i=0;i<16;i++)
+		{
+			for(int j=0;j<16;j++)
+			{
+				if(my_potential->RetDist(i, j)<255 && my_potential->RetKnowMap(i, j)==0)//0その区画が塞がれておらず、未知区間なら
+				{
+					goal_len=(n_x-i)*(n_x-i)+(n_y-j)*(n_y-j);
+					if(goal_len<pre_goal_len)
+					{
+						pre_goal_len=goal_len;
+						bu_pos.x=i;
+						bu_pos.y=j;
+					}
+				}
+			}
+		}
+		Tentative_goal_pos=bu_pos;
+
+		if(bu_pos.x==255 || bu_pos.y==255)//1仮のゴールが見つからないならスタート地点をゴールにする
+		{
+			Tentative_goal_pos={0,0};
+		}
 	}
 
 	int Algorizm::Planning::saitan_dijkstra(int goal_size, POS* goal_pos)

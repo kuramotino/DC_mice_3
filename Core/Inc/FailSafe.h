@@ -13,12 +13,14 @@ namespace controll
 {
 	class FailSafe : public BaseCtrl
 	{
-		float threshold_v=1000;
+		float threshold_v=300;
 		float threshold_omega=500;
 		float threshold_accel_y=-5;
+		float threshold_enc=15000;
 
 		bool v_logical;
 		bool accel_logical_y;
+		bool enc_logical;
 	public:
 		bool isFail=false;
 

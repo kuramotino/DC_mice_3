@@ -30,6 +30,7 @@ namespace Algorizm
 		void PosDecide(void);//�ʒu���ߊ֐�
 		void CopyFromSimtoPosVec(void);
 		bool GoalCheck(int goal_size, int x, int y);//�S�[���������ǂ����𔻒肷��֐�
+		bool SimGoalCheck(int goal_size,int x,int y);
 		void RetPos(int* x, int* y, enum Dir* dir);
 		void SetSimPosVec();
 		void SimVecDecide(bool isRight);
