@@ -118,11 +118,11 @@ int main(void)
   float gyro;
   //gyro_init();
   HAL_TIM_Base_Start_IT(&htim6);
-  //HAL_TIM_Base_Start_IT(&htim2);
-  //HAL_TIM_PWM_MspInit(&htim2);
-  //HAL_TIM_Base_Start_IT(&htim3);
+  HAL_TIM_Base_Start_IT(&htim2);
+  HAL_TIM_PWM_MspInit(&htim2);
+  HAL_TIM_Base_Start_IT(&htim3);
   HAL_TIM_PWM_MspInit(&htim3);
-  //HAL_TIM_Base_Start_IT(&htim12);
+  HAL_TIM_Base_Start_IT(&htim12);
   HAL_TIM_PWM_MspInit(&htim12);
 
   __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3, 0);
@@ -185,7 +185,7 @@ int main(void)
 	  }
 
 
-	  mode=(int)(modenum*fabs(input_obj.enc_v_R_sum)/(32767.0));//modeの決�?
+	  mode=(int)(modenum*fabs(input_obj.enc_v_R_sum)/(32767.0));//modeの決?��?
 	  if(pre_mode!=mode)
 	  {
 		  test_sound(1.25,50);
@@ -193,13 +193,20 @@ int main(void)
 	  }
 	  switch(mode)
 	  {
-	  case 0://0センサ計測モー�?
+	  case 0://0センサ計測モー?��?
 		  HAL_Delay(100);
 		  led_obj.set_all_led(0b00000001);
-		  printf("sensorL_1=%d,sensorL_2=%d,sensorF=%d,sensorR_1=%d,sensorR_2=%d\n\r",input_obj.g_sensor_now[0],input_obj.g_sensor_now[1],input_obj.g_sensor_now[2],input_obj.g_sensor_now[3],input_obj.g_sensor_now[4]);
+//		  HAL_GPIO_WritePin(LED3_GPIO_Port, LED3_Pin, GPIO_PIN_SET);
+//		  HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_SET);
+//		  HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_SET);
+//		  HAL_GPIO_WritePin(LED4_GPIO_Port, LED4_Pin, GPIO_PIN_SET);
+//		  HAL_GPIO_WritePin(LED5_GPIO_Port, LED5_Pin, GPIO_PIN_SET);
+		  //gyro_obj.read_spi(0x75)
+		  printf("sensorL_1=%d,sensorL_2=%d,sensorF=%d,sensorR_1=%d,sensorR_2=%d,who=%x\n\r",input_obj.g_sensor_now[0],input_obj.g_sensor_now[1],input_obj.g_sensor_now[2],input_obj.g_sensor_now[3],input_obj.g_sensor_now[4],gyro_obj.read_spi(0x75));
+		  gyro_obj.Show_ICM();
 		  break;
 
-	  case 1://1探索モード
+	  case 1://1探索モー�?
 		  led_obj.set_all_led(0b00000010);
 		  if(isStart[1]==true)
 		  {
@@ -213,11 +220,11 @@ int main(void)
 				  UpDataAlgo();
 			  }
 			  HAL_Delay(3000);
-			  issue_obj.Init();//flagのリセット
+			  issue_obj.Init();//flagのリセ�?�?
 		  }
 		  break;
 
-	  case 2://Logモー�?
+	  case 2://Logモー?��?
 		  led_obj.set_all_led(0b00000100);
 		  if(isStart[2]==true)
 		  {
@@ -229,14 +236,14 @@ int main(void)
 //				  //printf("%f,%d,%d,%d,%d,%d,%f,%f,\n\r",t,pl_obj.log_sensor_lr[0][i],pl_obj.log_sensor_lr[1][i],wall_obj.wall_ctrl_log[i],wall_obj.wall_l_diff[i],wall_obj.wall_r_diff[i],wall_obj.wall_l_meter[i],wall_obj.wall_r_meter[i]);
 //				  t+=0.001;
 //			  }
-			  map_obj.ShowMap();
-			  //map_obj.ShowKnowMap();
-			  pass_gene_obj.Show_Pass();
+			  //map_obj.ShowMap();
+			  map_obj.ShowKnowMap();
+			  //pass_gene_obj.Show_Pass();
 			  HAL_Delay(1000);
 		  }
 		  break;
 
-	  case 3://3左スラロームテスト
+	  case 3://3左スラロー�?�?ス�?
 		  led_obj.set_all_led(0b00001000);
 		  if(isStart[3]==true)
 		  {
@@ -245,27 +252,27 @@ int main(void)
 			  HAL_Delay(1200);
 			  pl_obj.log_flag=true;
 			  wall_obj.wall_log_flag=true;
-			  App_Set_Command(FF_Test_Stra_1);
-			  application::App_Set_Command(Saitan_OO_90_foff);
-			  application::App_Set_Command(Saitan_OO_90_R);
-			  application::App_Set_Command(Saitan_OO_90_boff);
-			  App_Set_Command(FF_Test_Stra_2);
+//			  App_Set_Command(FF_Test_Stra_1);
+//			  application::App_Set_Command(Saitan_OO_90_foff);
+//			  application::App_Set_Command(Saitan_OO_90_R);
+//			  application::App_Set_Command(Saitan_OO_90_boff);
+//			  App_Set_Command(FF_Test_Stra_2);
 			  //App_Set_Command(FF_Test_Senkai_1);
 			  //App_Set_Command(FF_Test_Senkai_2);
 //			  App_Set_Command(Stra);
-//			  App_Set_Command(Stra_ac_180);
-//			  App_Set_Command(Front_offset);
-//			  App_Set_Command(Left_sla);
-//			  //App_Set_Command(Right_sen);
-//			  App_Set_Command(Left_b_off);
-//			  App_Set_Command(Stra_de_180);
+			  App_Set_Command(Stra_ac_180);
+			  App_Set_Command(Front_offset);
+			  App_Set_Command(Left_sla);
+			  //App_Set_Command(Right_sen);
+			  App_Set_Command(Left_b_off);
+			  App_Set_Command(Stra_de_180);
 //			  App_Set_Command(Left_sen);
 //			  App_Set_Command(Left_sen);
 			  HAL_Delay(3000);
 		  }
 		  break;
 
-	  case 4://4右スラロームテスト
+	  case 4://4右スラロー�?�?ス�?
 		  led_obj.set_all_led(0b00010000);
 
 		  if(isStart[4]==true)
@@ -284,7 +291,7 @@ int main(void)
 			  {
 				  M_UpDataAlgo();
 			  }
-			  issue_obj.Init();//flagのリセット
+			  issue_obj.Init();//flagのリセ�?�?
 			  HAL_Delay(5000);
 		  }
 		  break;
@@ -300,7 +307,7 @@ int main(void)
 			  {
 				  M_UpDataAlgo();
 			  }
-			  issue_obj.Init();//flagのリセット
+			  issue_obj.Init();//flagのリセ�?�?
 			  HAL_Delay(5000);
 		  }
 		  break;
@@ -311,7 +318,7 @@ int main(void)
 
 	  }
 
-	  if(input_obj.g_sensor_now[2]>450)
+	  if(input_obj.g_sensor_now[3]>300)//450
 	  {
 		  isStart[mode]=true;
 	  }
@@ -320,9 +327,9 @@ int main(void)
 		  isStart[mode]=false;
 	  }
 
-	  /* USER CODE END WHILE */
+    /* USER CODE END WHILE */
 
-	  /* USER CODE BEGIN 3 */
+    /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
 }

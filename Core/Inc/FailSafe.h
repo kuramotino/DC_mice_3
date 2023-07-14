@@ -21,6 +21,7 @@ namespace controll
 		bool v_logical;
 		bool accel_logical_y;
 		bool enc_logical;
+		bool who_logical;
 	public:
 		bool isFail=false;
 

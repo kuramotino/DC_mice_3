@@ -68,12 +68,20 @@ namespace module
 
 	void module::Gyro::Update_ICM(void)
 	{
+//		if(read_spi(0x75==0))
+//		{
+//			write_spi(0x6B,0x00);//pwr
+//			write_spi(0x1A,0x00);//config
+//			write_spi(0x1B,0x18);//gyro_config
+//			write_spi(0x1C,0x18);//accel_config
+//		}
 		accel_x=accel_get(0x3B);
 		accel_y=accel_get(0x3D);
 		accel_z=accel_get(0x3F);
 		gyro_x=gyro_get(0x43);
 		gyro_y=gyro_get(0x45);
 		gyro_z=gyro_get(0x47);
+		who_am_i=read_spi(0x75);
 		SetGyroOffset();
 	}
 
@@ -90,6 +98,7 @@ namespace module
 		my_input->x_ac_gyro=accel_x;
 		my_input->y_ac_gyro=accel_y;
 		my_input->deg_gyro+=fabs(my_input->omega_gyro)*0.001;
+		my_input->who_am_i=who_am_i;
 	}
 
 	void module::Gyro::SetGyroOffset()

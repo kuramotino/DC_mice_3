@@ -26,9 +26,9 @@ namespace controll
 		switch (type)
 		{
 			case Stra:
-				bu_tar_a=12000;//1目標加速度
+				bu_tar_a=3000;//1目標加速度
 				bu_tar_v_start=0;//2目標初速度
-				bu_tar_v_max=2000;//3目標最高速度
+				bu_tar_v_max=500;//3目標最高速度
 				bu_tar_v_end=0;//4目標終端速度
 				bu_tar_x=720;//5目標距離
 				gv=500;//6重心速度
@@ -142,7 +142,7 @@ namespace controll
 				bu_tar_v_end=500;//4目標終端速度
 				bu_tar_x=100;//5目標距離
 				gv=500;//6重心速度
-				turn_start_ad=350;//7前壁制御でターンを始めるAD値
+				turn_start_ad=250;//7前壁制御でターンを始めるAD値
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
@@ -176,7 +176,7 @@ namespace controll
 				bu_tar_v_end=500;//4目標終端速度
 				bu_tar_x=100;//5目標距離
 				gv=500;//6重心速度
-				turn_start_ad=350;//7前壁制御でターンを始めるAD値
+				turn_start_ad=250;//7前壁制御でターンを始めるAD値
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
@@ -585,7 +585,7 @@ namespace controll
 				bu_tar_v_end=700;//4目標終端速度
 				bu_tar_x=20;//5目標距離
 				gv=500;//6重心速度
-				turn_start_ad=350;//7前壁制御でターンを始めるAD値
+				turn_start_ad=250;//7前壁制御でターンを始めるAD値
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
@@ -717,7 +717,7 @@ namespace controll
 				bu_tar_v_end=1000;//4目標終端速度
 				bu_tar_x=100;//5目標距離
 				gv=500;//6重心速度
-				turn_start_ad=200;//7前壁制御でターンを始めるAD値
+				turn_start_ad=175;//7前壁制御でターンを始めるAD値
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
@@ -733,9 +733,9 @@ namespace controll
 				bu_tar_v_start=1000;//2目標初速度
 				bu_tar_v_max=1000;//3目標最高速度
 				bu_tar_v_end=1000;//4目標終端速度
-				bu_tar_x=110;//5目標距離
+				bu_tar_x=100;//5目標距離
 				gv=500;//6重心速度
-				turn_start_ad=225;//7前壁制御でターンを始めるAD値
+				turn_start_ad=175;//7前壁制御でターンを始めるAD値/215
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
@@ -743,7 +743,7 @@ namespace controll
 				isWall_PID_Stop=false;
 				isTurn=false;//turnかどうか
 				isFrontOffset=true;//前壁制御をおこなうかどうか
-				offset_x=90;
+				offset_x=80;//90
 				break;
 
 			case Saitan_OO_180_R:

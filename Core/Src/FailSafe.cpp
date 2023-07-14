@@ -26,8 +26,9 @@ namespace controll
 		{
 			accel_logical_y=false;
 		}
+		who_logical=(my_input->who_am_i!=0x98)?true:false;
 
-		if(v_logical||accel_logical_y||enc_logical)
+		if(v_logical||accel_logical_y||enc_logical||who_logical)
 		{
 			status_off(Abnormal_End);
 			isFail=true;
