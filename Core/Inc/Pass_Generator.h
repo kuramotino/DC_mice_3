@@ -25,6 +25,7 @@ namespace Algorizm
 
 		float OO_90_conect_v=1000;//0大回り90の接続速度
 		float OO_180_conect_v=1000;//1大回り180の接続速度
+		bool isOO_Zip=true;//2大回りのパス圧縮をするかどうか
 
 	public:
 		void SetPlan(Planning* bu_plan);
@@ -36,6 +37,7 @@ namespace Algorizm
 		void Conect_v_cal(float turn_v,float* M_start_conect_v,float* M_end_conect_v);//���i�̐ڑ����x���v�Z
 		int Ret_NextPass();
 		void Show_Pass();
+		void PassZipSetting(bool iszip);//pass圧縮に関する設定を行う関数
 	};
 }
 

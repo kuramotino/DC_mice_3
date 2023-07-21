@@ -22,6 +22,7 @@ namespace Algorizm
 		my_plan->SetReturn(false);
 		my_plan->SetTansakuEnd(false);
 		fail_obj.isFail=false;
+		my_plan->MiceInit();
 	}
 
 	void IssueCommand::Tansaku()

@@ -464,4 +464,13 @@ namespace Algorizm
 			//}
 		}
 
+		int* Algorizm::Map::RetRowArray()
+		{
+			return Row;
+		}
+
+		int* Algorizm::Map::RetColumnArray()
+		{
+			return Column;
+		}
 }

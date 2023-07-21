@@ -586,4 +586,9 @@ namespace Algorizm
 	{
 		return ((isKnowMap[x] & (1<<y))>>y);
 	}
+
+	int* Algorizm::MakePotential::RetKnowArray()
+	{
+		return isKnowMap;
+	}
 }

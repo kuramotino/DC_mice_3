@@ -11,6 +11,7 @@
 #include "MakePotential.h"
 #include "Map.h"
 #include "MiceStatus.h"
+#include "MazeInfKeeper.h"
 
 namespace Algorizm
 {
@@ -37,6 +38,7 @@ namespace Algorizm
 		MiceStatus* my_status;
 		MakePotential* my_potential;
 		Map* my_map;
+		MazeInfKeeper mazekeeper;
 
 	public:
 		int Adati(int goal_size, POS* goal_pos,bool isKitikasoku);//�����@�ɑ����Ď��̍s����Ԃ��֐�
@@ -54,6 +56,7 @@ namespace Algorizm
 		void BlockWall();//�ǂ��ӂ����֐�
 		void MiceInit();//�@�̂̈ʒu����������������
 		bool RetIsSimEnd();//�o�H���o���I�����Ă��邩�ǂ����̃t���O��Ԃ��֐�
+		void UndoMazeData();
 	};
 }
 #endif /* INC_PLANNING_H_ */

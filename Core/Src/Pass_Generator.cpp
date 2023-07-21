@@ -57,10 +57,13 @@ namespace Algorizm
 			}
 		}
 
-		Comp_Pass(OO90_R, 3, -7);
-		Comp_Pass(OO90_L, 3, -5);
-		Comp_Pass(OO180_R, 4, -6);
-		Comp_Pass(OO180_L, 4, -4);
+		if(isOO_Zip)
+		{
+			Comp_Pass(OO90_R, 3, -7);
+			Comp_Pass(OO90_L, 3, -5);
+			Comp_Pass(OO180_R, 4, -6);
+			Comp_Pass(OO180_L, 4, -4);
+		}
 		St_Comp_Pass();
 	}
 
@@ -206,6 +209,11 @@ namespace Algorizm
 		{
 			printf("pass[%d]=%d\n\r",i,pass[i]);
 		}
+	}
+
+	void Pass_Generator::PassZipSetting(bool iszip)
+	{
+		isOO_Zip=iszip;
 	}
 }
 

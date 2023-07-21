@@ -40,6 +40,8 @@ namespace Algorizm
 		void RetPos(int* x, int* y);
 		bool isExistRowColumn(int x, int y, bool isRow);
 		void BlockWall(int x, int y);//����ʒu�̕ǂ��ӂ����֐�
+		int* RetRowArray();
+		int* RetColumnArray();
 	};
 }
 

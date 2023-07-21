@@ -35,9 +35,28 @@ void InitAlgo()
 void UpDataAlgo()
 {
 	issue_obj.Tansaku();
+	if(fail_obj.isFail)
+	{
+		plan_obj.UndoMazeData();
+	}
 }
 
 void M_UpDataAlgo()
 {
+	pass_gene_obj.PassZipSetting(true);
 	issue_obj.Saitan();
+	if(fail_obj.isFail)
+	{
+		plan_obj.UndoMazeData();
+	}
+}
+
+void No_Zip_M_UpDataAlgo()
+{
+	pass_gene_obj.PassZipSetting(false);
+	issue_obj.Saitan();
+	if(fail_obj.isFail)
+	{
+		plan_obj.UndoMazeData();
+	}
 }
