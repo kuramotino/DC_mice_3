@@ -9,7 +9,7 @@ namespace Algorizm
 		{
 			my_potential->DecideDist(goal_size, goal_pos);
 			my_status->RetPos(&x, &y, &MiceVec);
-			mazekeeper.SetMazeData(my_map->RetRowArray(), my_map->RetColumnArray(), my_potential->RetKnowArray());
+			mazekeeper.SetMazeData(my_map->RetRowArray(), my_map->RetColumnArray(),my_map->RetM_RowArray(), my_map->RetM_ColumnArray(), my_potential->RetKnowArray());
 		}
 		else
 		{
@@ -311,7 +311,7 @@ namespace Algorizm
 		{
 			my_potential->search_dijkstra(goal_size, goal_pos);//���݂̃m�[�h���X�V����
 			my_status->RetPos(&x, &y, &MiceVec);
-			mazekeeper.SetMazeData(my_map->RetRowArray(), my_map->RetColumnArray(), my_potential->RetKnowArray());
+			mazekeeper.SetMazeData(my_map->RetRowArray(), my_map->RetColumnArray(),my_map->RetM_RowArray(), my_map->RetM_ColumnArray(), my_potential->RetKnowArray());
 		}
 		else
 		{
@@ -545,7 +545,7 @@ namespace Algorizm
 
 	void Algorizm::Planning::UndoMazeData()
 	{
-		mazekeeper.GetMazeData(my_map->RetRowArray(), my_map->RetColumnArray(), my_potential->RetKnowArray());
+		mazekeeper.GetMazeData(my_map->RetRowArray(), my_map->RetColumnArray(),my_map->RetM_RowArray(), my_map->RetM_ColumnArray(), my_potential->RetKnowArray());
 	}
 
 }

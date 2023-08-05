@@ -12,5 +12,10 @@ namespace controll
 	{
 		offset=buoffset;
 	}
+
+	void controll::CtrlWindow::Set_HitStatus(int bustatus)
+	{
+		lfr_wall_status=bustatus;
+	}
 }
 

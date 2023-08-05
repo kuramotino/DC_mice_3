@@ -9,6 +9,7 @@
 #define INC_PASS_GENERATOR_H_
 
 #include "Planning.h"
+#include "Shortest_PARAM.h"
 
 namespace Algorizm
 {
@@ -22,9 +23,19 @@ namespace Algorizm
 		int OO90_L[3] = { 1,-2,1 };
 		int OO180_R[4] = { 1,-3,-3,1 };
 		int OO180_L[4] = { 1,-2,-2,1 };
+		int Diag_in45_R[2] = { 1,-3 };
+		int Diag_in45_L[2] = { 1,-2 };
+		int Diag_out45_R[2] = { -3,1 };
+		int Diag_out45_L[2] = { -2,1 };
+		int Diag_in135_R[3] = { 1,-3,-3 };
+		int Diag_in135_L[3] = { 1,-2,-2 };
+		int Diag_out135_R[3] = { -3,-3,1 };
+		int Diag_out135_L[3] = { -2,-2,1 };
+		int Diag_V90_R[2] = { -3,-3 };
+		int Diag_V90_L[2] = { -2,-2 };
+		int Diag_Stra_R[1] = { -3 };
+		int Diag_Stra_L[1] = { -2 };
 
-		float OO_90_conect_v=1000;//0大回り90の接続速度
-		float OO_180_conect_v=1000;//1大回り180の接続速度
 		bool isOO_Zip=true;//2大回りのパス圧縮をするかどうか
 
 	public:
@@ -34,7 +45,8 @@ namespace Algorizm
 		void InitPassCount();//pass������������֐�
 		void Comp_Pass(int* tar_pass, int pass_size, int setpassnum);//pass�����k����֐�
 		void St_Comp_Pass(void);//�����̈��k
-		void Conect_v_cal(float turn_v,float* M_start_conect_v,float* M_end_conect_v);//���i�̐ڑ����x���v�Z
+		void Diag_Comp_Pass(void);
+		void Conect_v_cal(Shortest_PARAM* s_param,float* M_start_conect_v,float* M_end_conect_v);//���i�̐ڑ����x���v�Z
 		int Ret_NextPass();
 		void Show_Pass();
 		void PassZipSetting(bool iszip);//pass圧縮に関する設定を行う関数

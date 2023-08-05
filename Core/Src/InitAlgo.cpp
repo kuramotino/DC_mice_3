@@ -41,20 +41,20 @@ void UpDataAlgo()
 	}
 }
 
-void M_UpDataAlgo()
+void M_UpDataAlgo(int index)
 {
 	pass_gene_obj.PassZipSetting(true);
-	issue_obj.Saitan();
+	issue_obj.Saitan(index);
 	if(fail_obj.isFail)
 	{
 		plan_obj.UndoMazeData();
 	}
 }
 
-void No_Zip_M_UpDataAlgo()
+void No_Zip_M_UpDataAlgo(int index)
 {
 	pass_gene_obj.PassZipSetting(false);
-	issue_obj.Saitan();
+	issue_obj.Saitan(index);
 	if(fail_obj.isFail)
 	{
 		plan_obj.UndoMazeData();

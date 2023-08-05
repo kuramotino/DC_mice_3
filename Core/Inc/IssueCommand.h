@@ -11,6 +11,7 @@
 #include "Planning.h"
 #include "Pass_Generator.h"
 #include "CtrlWindow.h"
+#include "Shortest_PARAM.h"
 using namespace controll;
 
 namespace Algorizm
@@ -19,13 +20,14 @@ namespace Algorizm
 	{
 		Planning* my_plan;
 		Pass_Generator* my_pass;
-		POS goal_pos[4] = { {7,7},{7,8},{8,7},{8,8} };//{ {1,0},{1,1},{2,0},{2,1} }
+		POS goal_pos[4] = { {2,0},{2,0},{3,1},{3,1} };//{ {1,0},{1,1},{2,0},{2,1} }
 		POS start_pos[1] = { {0,0} };
 		enum Vec nextVec;
 
 		float TURN_V=700;
 		float MAX_V=2500;
 		float Know_MAX_V=1000;
+		Shortest_PARAM s_param;
 
 	public:
 		bool isStart = false;
@@ -37,7 +39,7 @@ namespace Algorizm
 	public:
 		void Init();//��Ԃ�����������֐�
 		void Tansaku();//�T�����s���֐�
-		void Saitan();//�ŒZ���s���֐�
+		void Saitan(int index);//�ŒZ���s���֐�
 		void SetPlan(Planning* plan);
 		void SetPassGene(Pass_Generator* bu_pass);
 	};

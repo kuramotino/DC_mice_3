@@ -50,10 +50,11 @@ namespace controll
 		float st_const_C=-0.3;//C摩擦項、定速
 		float st_de_C=-0.69;//C摩擦項、減速
 		float turn_A=0.045;//A:角加速度依存の補正係数0\A項は各加速度×7.0407*10^-5/0.3*3900*7.0407*10^-5=0.0823/A+C=0.43636
-		float turn_B=13;//B:角速度依存の補正係数1.0
-		float turn_C=0.18694;//C摩擦項/0.8
-		float turn_const_C=-2.7;//C動摩擦項,定速
-		float turn_de_C=-2.3;//C動摩擦項、減速
+		float turn_B=3;//B:角速度依存の補正係数1.0
+		float turn_C=0.88694;//C摩擦項/0.8
+		float turn_const_C=0;//C動摩擦項,定速
+		float turn_de_C=-3;//C動摩擦項、減速
+		bool isChangeToConstant=false;
 
 	public:
 		float now_R_log[1200];
@@ -71,6 +72,7 @@ namespace controll
 		void pwm();//duty変換を行う関数
 		void out_duty(float* dutyR,float* dutyL,enum turn* bu_cw_R,enum turn* bu_cw_L);//Dutyを返す関数
 		void status_off();//CommandStatusをオフにする関数
+		bool RetChangeflag();//定速になったかどうかのフラグを返す
 	};
 }
 

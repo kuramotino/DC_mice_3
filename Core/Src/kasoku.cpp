@@ -26,6 +26,7 @@ namespace controll
 		now_x=0;
 		target_a=now_cm.bu_tar_a;//加速度
 		target_v_start=now_cm.bu_tar_v_start;//初速度
+		target_v_start=(now_cm.isSmooth)?pre_target_v_end:target_v_start;//オフセットをなめらかにつなぐ場合は初速度を前回の終端速度で上書きする
 		now_v=target_v_start;
 		target_v_max=now_cm.bu_tar_v_max;//最大速度
 		target_v_end=now_cm.bu_tar_v_end;//終端速度
@@ -56,7 +57,7 @@ namespace controll
 				now_x+=now_v*dt;
 				v_status=constant;
 			}
-			else if(now_v>target_v_end)//3減速区間
+			else if(now_v>target_v_end && target_x-now_x>0)//3減速区間
 			{
 				now_x+=now_v*dt;
 				now_v-=target_a*dt;
@@ -64,6 +65,7 @@ namespace controll
 			}
 			else
 			{
+				pre_target_v_end=now_v;//前回の終端速度の更新
 				isKasokuEnd=true;
 				if(now_v<=0)
 				{

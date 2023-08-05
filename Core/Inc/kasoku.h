@@ -27,6 +27,7 @@ namespace controll
 		float now_v=0;//現在の速度
 		float target_v_max;//最大速度
 		float target_v_end;//終端速度
+		float pre_target_v_end;//前回の終端速度
 		float target_x;//目標距離
 		float xde;//減速距離
 		float axde;//加速距離

@@ -24,6 +24,7 @@ controll::Front_Offset_Ctrl front_offset_obj;
 controll::Back_Offset_Ctrl back_offset_obj;
 controll::Senkai_Offset_Ctrl senkai_offset_obj;
 controll::Break_Wall_Ctrl break_wall_obj;
+controll::Wall_Hit_Ctrl hit_ctrl_obj;
 bool init_flag=false;
 using namespace controll;
 
@@ -36,6 +37,7 @@ void Init_Controll()//controll,module名前空間のオブジェクトたちを�
 	cx_obj.addCtrl(&back_offset_obj);
 	cx_obj.addCtrl(&senkai_offset_obj);
 	cx_obj.addCtrl(&break_wall_obj);
+	cx_obj.addCtrl(&hit_ctrl_obj);
 	cx_obj.add_kasoku_PWM(&ksk_obj, &pwm_obj);
 	cx_obj.set_cs(&cs_obj);
 	ksk_obj.add_pwm(&pwm_obj);
@@ -55,6 +57,7 @@ void Init_Controll()//controll,module名前空間のオブジェクトたちを�
 	senkai_offset_obj.add_obj(&ksk_obj, &pwm_obj, &input_obj, &cs_obj);
 	senkai_offset_obj.SetBackOffset(&back_offset_obj);
 	break_wall_obj.add_obj(&ksk_obj, &pwm_obj, &input_obj, &cs_obj);
+	hit_ctrl_obj.add_obj(&ksk_obj, &pwm_obj, &input_obj, &cs_obj, &issue_obj);
 	init_flag=true;
 }
 

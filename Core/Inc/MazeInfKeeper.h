@@ -15,6 +15,8 @@ namespace Algorizm
 	{
 		int Maze_Row[15];
 		int Maze_Column[15];
+		int Maze_M_Row[15];
+		int Maze_M_Column[15];
 		int Maze_KnowMap[16];
 	}MAZEINF;
 
@@ -23,8 +25,8 @@ namespace Algorizm
 		MAZEINF maze_data[MAZE_DATA_SIZE];//常に最後尾に最新のデータ、先頭に最も古いデータ
 
 	public:
-		void SetMazeData(int* row,int* column,int* know);//壁情報、既知区画更新後に呼ぶ、迷路情報をキューにプッシュする
-		void GetMazeData(int* row,int* column,int* know);//壁情報、既知区画更新後に呼ぶ、迷路情報をキューからポップする
+		void SetMazeData(int* row,int* column,int* m_row,int* m_column,int* know);//壁情報、既知区画更新後に呼ぶ、迷路情報をキューにプッシュする
+		void GetMazeData(int* row,int* column,int* m_row,int* m_column,int* know);//壁情報、既知区画更新後に呼ぶ、迷路情報をキューからポップする
 	};
 }
 

@@ -13,8 +13,15 @@ namespace controll
 	enum command_type{Stra,first_Stra,Left_sla,Right_sla,Left_sen,Right_sen,Stra_Back,Left_f_off,Left_b_off,Right_f_off,Right_b_off,Mid_Stra,Stop_Cm,Stra_Stop,Fail_Stop,Break_Stop,Front_offset,Stra_de_70,Stra_ac_90,Stra_ac_180,Stra_de_180,Stra_Senkai_ac_77,Stra_Senkai_de_73,Stra_Senkai_de_83,Stra_Senkai_ac_90
 	,Saitan_Stra,FF_Test_Stra_1,FF_Test_Stra_2,FF_Test_Senkai_1,FF_Test_Senkai_2,Senkai_Offset_40,Stra_Senkai_de_40,Stra_Wall_Break
 	,UturnOffset,Saitan_Right_f_off,Saitan_Left_f_off,Mid_Stra_180,Saitan_KO_90_foff,Saitan_KO_90_R,Saitan_KO_90_L,Saitan_KO_90_boff
-	,Saitan_OO_90_foff,Saitan_OO_90_R,Saitan_OO_90_L,Saitan_OO_90_boff
-	,Saitan_OO_180_foff_R,Saitan_OO_180_foff_L,Saitan_OO_180_R,Saitan_OO_180_L,Saitan_OO_180_boff_R,Saitan_OO_180_boff_L};
+	,Saitan_OO_90_foff_R,Saitan_OO_90_foff_L,Saitan_OO_90_R,Saitan_OO_90_L,Saitan_OO_90_boff_R,Saitan_OO_90_boff_L
+	,Saitan_OO_180_foff_R,Saitan_OO_180_foff_L,Saitan_OO_180_R,Saitan_OO_180_L,Saitan_OO_180_boff_R,Saitan_OO_180_boff_L
+	,Stra_ac_142,Stra_Wall_Hit
+	,S_Diag_in45_L_foff,S_Diag_in45_R_foff,S_Diag_in45_L,S_Diag_in45_R,S_Diag_in45_L_boff,S_Diag_in45_R_boff
+	,S_Diag_out45_L_foff,S_Diag_out45_R_foff,S_Diag_out45_L,S_Diag_out45_R,S_Diag_out45_L_boff,S_Diag_out45_R_boff
+	,S_Diag_in135_L_foff,S_Diag_in135_R_foff,S_Diag_in135_L,S_Diag_in135_R,S_Diag_in135_L_boff,S_Diag_in135_R_boff
+	,S_Diag_out135_L_foff,S_Diag_out135_R_foff,S_Diag_out135_L,S_Diag_out135_R,S_Diag_out135_L_boff,S_Diag_out135_R_boff
+	,S_Diag_V90_L_foff,S_Diag_V90_R_foff,S_Diag_V90_L,S_Diag_V90_R,S_Diag_V90_L_boff,S_Diag_V90_R_boff
+	,S_Diag_Stra};
 	class Command
 	{
 	public:
@@ -42,6 +49,8 @@ namespace controll
 		bool isBreakWall=false;//壁切れを見るか
 		bool isBreakWallStra=false;//壁切れ後の直進かどうか
 		bool isCalSideWall=false;//袋小路での位置補正を行うかどうか
+		bool isHitWall=false;//袋小路で壁当てを行うかどうか
+		bool isSmooth=false;//オフセットをなめらかに接続させるかどうか
 
 	public:
 		Command();

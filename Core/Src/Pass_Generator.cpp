@@ -29,6 +29,8 @@ namespace Algorizm
 		//pass[0] = 2;
 		pass[0]=1;
 		n++;
+		pass[1]=1;
+		n++;
 
 		while (1)
 		{
@@ -63,6 +65,20 @@ namespace Algorizm
 			Comp_Pass(OO90_L, 3, -5);
 			Comp_Pass(OO180_R, 4, -6);
 			Comp_Pass(OO180_L, 4, -4);
+
+			Comp_Pass(Diag_in135_R, 3, -11);
+			Comp_Pass(Diag_in135_L, 3, -10);
+			Comp_Pass(Diag_in45_R, 2, -9);
+			Comp_Pass(Diag_in45_L, 2, -8);
+			Comp_Pass(Diag_out135_R, 3, -15);
+			Comp_Pass(Diag_out135_L, 3, -14);
+			Comp_Pass(Diag_out45_R, 2, -13);
+			Comp_Pass(Diag_out45_L, 2, -12);
+			Comp_Pass(Diag_V90_R, 2, -17);
+			Comp_Pass(Diag_V90_L, 2, -16);
+			Comp_Pass(Diag_Stra_R, 1, -100);
+			Comp_Pass(Diag_Stra_L, 1, -100);
+			Diag_Comp_Pass();
 		}
 		St_Comp_Pass();
 	}
@@ -158,37 +174,115 @@ namespace Algorizm
 		}
 	}
 
-	void Pass_Generator::Conect_v_cal(float turn_v,float* M_start_conect_v,float* M_end_conect_v)//直進の接続速度を計算
+	void Pass_Generator::Diag_Comp_Pass()
+	{
+		int bu_pass[100];
+		int n = 0;
+		int count = 0;
+		bool isSt = false;
+
+		while (1)
+		{
+			if (pass[count] > -100)
+			{
+				n = (isSt) ? n + 1 : n;
+				isSt = false;
+				bu_pass[n] = pass[count];
+				n++;
+			}
+			else if (pass[count] <= -100)
+			{
+				if (isSt == false)
+				{
+					isSt = true;
+					bu_pass[n] = -100;
+				}
+				else
+				{
+					bu_pass[n] += -100;
+				}
+			}
+			count++;
+
+			if (n == 100)
+			{
+				break;
+			}
+		}
+
+		for (int i = 0; i < 255; i++)
+		{
+			pass[i] = 0;
+		}
+		for (int i = 0; i < 100; i++)
+		{
+			pass[i] = bu_pass[i];
+		}
+	}
+
+	void Pass_Generator::Conect_v_cal(Shortest_PARAM* s_param,float* M_start_conect_v,float* M_end_conect_v)//直進の接続速度を計算
 	{
 		if(passcount!=254)
 		{
-			if((pass[passcount]>0) && (pass[passcount+1]==-6 || pass[passcount+1]==-4))//1現在が直進、次が大回り
+			if((pass[passcount+1]==-6 || pass[passcount+1]==-4))//1現在が直進、次が大回り
 			{
-				*M_end_conect_v=OO_180_conect_v-turn_v;
+				*M_end_conect_v=s_param->OO180_V;
 			}
-			else if((pass[passcount]>0) && (pass[passcount+1]==-7 || pass[passcount+1]==-5))//2現在が直進、次が小回り
+			else if((pass[passcount+1]==-7 || pass[passcount+1]==-5))//2現在が直進、次が小回り
 			{
-				*M_end_conect_v=OO_90_conect_v-turn_v;
+				*M_end_conect_v=s_param->OO90_V;
 			}
-			else
+			else if((pass[passcount+1]==-8 || pass[passcount+1]==-9))//2現在が直進、次がin45
 			{
-				*M_end_conect_v=0.0;
+				*M_end_conect_v=s_param->Diag_in45_V;
+			}
+			else if((pass[passcount+1]==-10 || pass[passcount+1]==-11))//2現在が直進、次がin135
+			{
+				*M_end_conect_v=s_param->Diag_in135_V;
+			}
+			else if((pass[passcount+1]==-12 || pass[passcount+1]==-13))//2現在が斜め直進、次がout45
+			{
+				*M_end_conect_v=s_param->Diag_out45_V;
+			}
+			else if((pass[passcount+1]==-14 || pass[passcount+1]==-15))//2現在が斜め直進、次がout135
+			{
+				*M_end_conect_v=s_param->Diag_out135_V;
+			}
+			else if((pass[passcount+1]==-16 || pass[passcount+1]==-17))//2現在が斜め直進、次がV90
+			{
+				*M_end_conect_v=s_param->Diag_V90_V;
 			}
 		}
 
 		if(passcount!=0)
 		{
-			if((pass[passcount]>0) && (pass[passcount-1]==-6 || pass[passcount-1]==-4))//1現在が直進、一個前が大回り
+			if((pass[passcount-1]==-6 || pass[passcount-1]==-4))//1現在が直進、一個前が大回り
 			{
-				*M_start_conect_v=OO_180_conect_v-turn_v;
+				*M_start_conect_v=s_param->OO180_V;
 			}
-			else if((pass[passcount]>0) && (pass[passcount-1]==-7 || pass[passcount-1]==-5))//2現在が直進、一個前が小回り
+			else if((pass[passcount-1]==-7 || pass[passcount-1]==-5))//2現在が直進、一個前が小回り
 			{
-				*M_start_conect_v=OO_90_conect_v-turn_v;
+				*M_start_conect_v=s_param->OO90_V;
 			}
-			else
+			else if((pass[passcount-1]==-12 || pass[passcount-1]==-13))//2現在が直進、一個前がout45
 			{
-				*M_start_conect_v=0.0;
+				*M_start_conect_v=s_param->Diag_out45_V;
+			}
+			else if((pass[passcount-1]==-14 || pass[passcount-1]==-15))//2現在が直進、一個前がout135
+			{
+				*M_start_conect_v=s_param->Diag_out135_V;
+			}
+			else if((pass[passcount-1]==-8 || pass[passcount-1]==-9))//2現在が斜め直進、一個前がin45
+			{
+				*M_start_conect_v=s_param->Diag_out45_V;
+			}
+			else if((pass[passcount-1]==-10 || pass[passcount-1]==-11))//2現在が斜め直進、一個前がin135
+			{
+				*M_start_conect_v=s_param->Diag_out135_V;
+			}
+			else if((pass[passcount-1]==-16 || pass[passcount-1]==-17))//2現在が斜め直進一個前がV90
+			{
+				*M_start_conect_v=s_param->Diag_V90_V;
 			}
 		}
 	}

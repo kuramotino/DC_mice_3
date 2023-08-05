@@ -33,6 +33,7 @@ namespace Algorizm
 		void Updata_current(void);//InputData����ǂ̗L�����CMiceStatus����ʒu�����𓾂�
 		void MapDecide(void);//�}�b�v�����X�V����֐�
 		int isKnowWall(int x,int y,Dir wall_dir);//�ʒux,y��wall_dir�����̕ǂ̗L����Ԃ��֐�
+		int isMKnowWall(int x, int y, Dir wall_dir);//位置x,yのwall_dir方向の壁の有無を返す関数
 		void isLFRKnowWall(int* l, int* f, int* r, int x, int y, enum Dir dir);//�ʒux,y,����dir�̂Ƃ��̍��ƑO�ƉE�̕ǂ̗L���𒲂ׂ�֐�
 		void SetInputStatus(controll::InputData* input, MiceStatus* status);//Input��MiceStatus�̃I�u�W�F�N�g���Z�b�g����
 		void ShowMap();
@@ -42,6 +43,8 @@ namespace Algorizm
 		void BlockWall(int x, int y);//����ʒu�̕ǂ��ӂ����֐�
 		int* RetRowArray();
 		int* RetColumnArray();
+		int* RetM_RowArray();
+		int* RetM_ColumnArray();
 	};
 }
 

@@ -25,7 +25,7 @@ extern Algorizm::Pass_Generator pass_gene_obj;
 
 void InitAlgo();
 void UpDataAlgo();
-void M_UpDataAlgo();
-void No_Zip_M_UpDataAlgo();
+void M_UpDataAlgo(int index);
+void No_Zip_M_UpDataAlgo(int index);
 
 #endif /* INC_INITALGO_H_ */

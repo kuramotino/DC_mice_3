@@ -42,6 +42,7 @@ namespace controll
 		now_v=v;
 		bool bu_isKasokuEnd=isKasokuEnd;
 		bu_isBreak=isBreak;
+		isChangeToConstant=(buv_status==constant && v_status==accel) ? true:false;
 		v_status=buv_status;
 		if(bu_isKasokuEnd==true && isDutyEnd==false)
 		{
@@ -87,6 +88,8 @@ namespace controll
 
 				duty_R=duty_FF_stra+duty_FF_turn+duty_FB_stra+duty_FB_turn;
 				duty_L=duty_FF_stra-duty_FF_turn+duty_FB_stra-duty_FB_turn;
+				duty_R=(now_cm.MoveVec==false) ? -1*duty_R : duty_R;
+				duty_L=(now_cm.MoveVec==false) ? -1*duty_L : duty_L;
 
 				cw_R=(duty_R<0) ? Back : Front;//右のモータの回転方向の決定
 				cw_L=(duty_L<0) ? Back : Front;//左のモータの回転方向の決定
@@ -104,6 +107,7 @@ namespace controll
 				duty_FF_turn=(v_status==deceleration)?1/V_bat*((-1.0*turn_A*R*10*10*10)/kt*(I*target_a*(3.14/180)/L)*taiya_dirmeter/n+ke*(turn_B*60*n*L*now_v*(3.14/180)/4/3.14/taiya_dirmeter) + turn_de_C):duty_FF_turn;
 				duty_FF_turn=(now_cm.MoveVec) ? duty_FF_turn : -1*duty_FF_turn;
 				//duty_FF_stra=0;
+				//duty_FF_turn=0;//FFをオフにする
 
 				duty_R=duty_FF_stra+duty_FF_turn+duty_FB_stra+duty_FB_turn;
 				duty_L=duty_FF_stra-duty_FF_turn+duty_FB_stra-duty_FB_turn;
@@ -152,5 +156,10 @@ namespace controll
 		{
 			my_cs->off_command(Break_End);//2:Break終了
 		}
+	}
+
+	bool controll::PWM_Out::RetChangeflag()
+	{
+		return isChangeToConstant;
 	}
 }

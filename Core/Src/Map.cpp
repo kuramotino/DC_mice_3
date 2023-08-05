@@ -19,6 +19,7 @@ namespace Algorizm
 			M_Row[i] = 0b1111111111111111;
 			M_Column[i] = 0b1111111111111111;
 		}
+		M_Row[0] = 0b1111111111111110;
 		Column[0] = 0b0000000000000001;
 	}
 
@@ -41,163 +42,175 @@ namespace Algorizm
 	}
 
 	void Algorizm::Map::MapDecide()
-	{
-		Updata_current();
-		switch (current_vec)
 		{
-		case North:
-			if (current_x != 0)
+			Updata_current();
+			switch (current_vec)
 			{
-				if (currentWall[Left] == 1)
+			case North:
+				if (current_x != 0)
 				{
-					Column[current_x - 1] = Column[current_x - 1] | (1 << current_y);
+					if (currentWall[Left] == 1)
+					{
+						Column[current_x - 1] = Column[current_x - 1] | (1 << current_y);
+					}
+					else
+					{
+						Column[current_x - 1] = Column[current_x - 1] & ~(1 << current_y);
+						M_Column[current_x - 1] = M_Column[current_x - 1] & ~(1 << current_y);
+					}
 				}
-				else
-				{
-					Column[current_x - 1] = Column[current_x - 1] & ~(1 << current_y);
-				}
-			}
 
-			if (current_x != 15)
-			{
-				if (currentWall[Right] == 1)
+				if (current_x != 15)
 				{
-					Column[current_x] = Column[current_x] | (1 << current_y);
+					if (currentWall[Right] == 1)
+					{
+						Column[current_x] = Column[current_x] | (1 << current_y);
+					}
+					else
+					{
+						Column[current_x] = Column[current_x] & ~(1 << current_y);
+						M_Column[current_x] = M_Column[current_x] & ~(1 << current_y);
+					}
 				}
-				else
-				{
-					Column[current_x] = Column[current_x] & ~(1 << current_y);
-				}
-			}
 
-			if (current_y != 15)
-			{
-				if (currentWall[Front] == 1)
+				if (current_y != 15)
 				{
-					Row[current_y] = Row[current_y] | (1 << current_x);
+					if (currentWall[Front] == 1)
+					{
+						Row[current_y] = Row[current_y] | (1 << current_x);
+					}
+					else
+					{
+						Row[current_y] = Row[current_y] & ~(1 << current_x);
+						M_Row[current_y] = M_Row[current_y] & ~(1 << current_x);
+					}
 				}
-				else
-				{
-					Row[current_y] = Row[current_y] & ~(1 << current_x);
-				}
-			}
-			break;
+				break;
 
-		case East:
-			if (current_x != 15)
-			{
-				if (currentWall[Front] == 1)
+			case East:
+				if (current_x != 15)
 				{
-					Column[current_x] = Column[current_x] | (1 << current_y);
+					if (currentWall[Front] == 1)
+					{
+						Column[current_x] = Column[current_x] | (1 << current_y);
+					}
+					else
+					{
+						Column[current_x] = Column[current_x] & ~(1 << current_y);
+						M_Column[current_x] = M_Column[current_x] & ~(1 << current_y);
+					}
 				}
-				else
-				{
-					Column[current_x] = Column[current_x] & ~(1 << current_y);
-				}
-			}
 
-			if (current_y != 0)
-			{
-				if (currentWall[Right] == 1)
+				if (current_y != 0)
 				{
-					Row[current_y - 1] = Row[current_y - 1] | (1 << current_x);
+					if (currentWall[Right] == 1)
+					{
+						Row[current_y - 1] = Row[current_y - 1] | (1 << current_x);
+					}
+					else
+					{
+						Row[current_y - 1] = Row[current_y - 1] & ~(1 << current_x);
+						M_Row[current_y - 1] = M_Row[current_y - 1] & ~(1 << current_x);
+					}
 				}
-				else
-				{
-					Row[current_y - 1] = Row[current_y - 1] & ~(1 << current_x);
-				}
-			}
 
-			if (current_y != 15)
-			{
-				if (currentWall[Left] == 1)
+				if (current_y != 15)
 				{
-					Row[current_y] = Row[current_y] | (1 << current_x);
+					if (currentWall[Left] == 1)
+					{
+						Row[current_y] = Row[current_y] | (1 << current_x);
+					}
+					else
+					{
+						Row[current_y] = Row[current_y] & ~(1 << current_x);
+						M_Row[current_y] = M_Row[current_y] & ~(1 << current_x);
+					}
 				}
-				else
-				{
-					Row[current_y] = Row[current_y] & ~(1 << current_x);
-				}
-			}
-			break;
+				break;
 
-		case South:
-			if (current_x != 0)
-			{
-				if (currentWall[Right] == 1)
+			case South:
+				if (current_x != 0)
 				{
-					Column[current_x - 1] = Column[current_x - 1] | (1 << current_y);
+					if (currentWall[Right] == 1)
+					{
+						Column[current_x - 1] = Column[current_x - 1] | (1 << current_y);
+					}
+					else
+					{
+						Column[current_x - 1] = Column[current_x - 1] & ~(1 << current_y);
+						M_Column[current_x - 1] = M_Column[current_x - 1] & ~(1 << current_y);
+					}
 				}
-				else
-				{
-					Column[current_x - 1] = Column[current_x - 1] & ~(1 << current_y);
-				}
-			}
 
-			if (current_x != 15)
-			{
-				if (currentWall[Left] == 1)
+				if (current_x != 15)
 				{
-					Column[current_x] = Column[current_x] | (1 << current_y);
+					if (currentWall[Left] == 1)
+					{
+						Column[current_x] = Column[current_x] | (1 << current_y);
+					}
+					else
+					{
+						Column[current_x] = Column[current_x] & ~(1 << current_y);
+						M_Column[current_x] = M_Column[current_x] & ~(1 << current_y);
+					}
 				}
-				else
-				{
-					Column[current_x] = Column[current_x] & ~(1 << current_y);
-				}
-			}
 
-			if (current_y != 0)
-			{
-				if (currentWall[Front] == 1)
+				if (current_y != 0)
 				{
-					Row[current_y - 1] = Row[current_y - 1] | (1 << current_x);
+					if (currentWall[Front] == 1)
+					{
+						Row[current_y - 1] = Row[current_y - 1] | (1 << current_x);
+					}
+					else
+					{
+						Row[current_y - 1] = Row[current_y - 1] & ~(1 << current_x);
+						M_Row[current_y - 1] = M_Row[current_y - 1] & ~(1 << current_x);
+					}
 				}
-				else
-				{
-					Row[current_y - 1] = Row[current_y - 1] & ~(1 << current_x);
-				}
-			}
-			break;
+				break;
 
-		case West:
-			if (current_x != 0)
-			{
-				if (currentWall[Front] == 1)
+			case West:
+				if (current_x != 0)
 				{
-					Column[current_x - 1] = Column[current_x - 1] | (1 << current_y);
+					if (currentWall[Front] == 1)
+					{
+						Column[current_x - 1] = Column[current_x - 1] | (1 << current_y);
+					}
+					else
+					{
+						Column[current_x - 1] = Column[current_x - 1] & ~(1 << current_y);
+						M_Column[current_x - 1] = M_Column[current_x - 1] & ~(1 << current_y);
+					}
 				}
-				else
-				{
-					Column[current_x - 1] = Column[current_x - 1] & ~(1 << current_y);
-				}
-			}
 
-			if (current_y != 0)
-			{
-				if (currentWall[Left] == 1)
+				if (current_y != 0)
 				{
-					Row[current_y - 1] = Row[current_y - 1] | (1 << current_x);
+					if (currentWall[Left] == 1)
+					{
+						Row[current_y - 1] = Row[current_y - 1] | (1 << current_x);
+					}
+					else
+					{
+						Row[current_y - 1] = Row[current_y - 1] & ~(1 << current_x);
+						M_Row[current_y - 1] = M_Row[current_y - 1] & ~(1 << current_x);
+					}
 				}
-				else
-				{
-					Row[current_y - 1] = Row[current_y - 1] & ~(1 << current_x);
-				}
-			}
 
-			if (current_y != 15)
-			{
-				if (currentWall[Right] == 1)
+				if (current_y != 15)
 				{
-					Row[current_y] = Row[current_y] | (1 << current_x);
+					if (currentWall[Right] == 1)
+					{
+						Row[current_y] = Row[current_y] | (1 << current_x);
+					}
+					else
+					{
+						Row[current_y] = Row[current_y] & ~(1 << current_x);
+						M_Row[current_y] = M_Row[current_y] & ~(1 << current_x);
+					}
 				}
-				else
-				{
-					Row[current_y] = Row[current_y] & ~(1 << current_x);
-				}
+				break;
 			}
-			break;
 		}
-	}
 
 	int Algorizm::Map::isKnowWall(int x, int y,enum Dir wall_dir)
 	{
@@ -224,6 +237,36 @@ namespace Algorizm
 		case West:
 
 			return (x != 0) ? (Column[x - 1] & (1 << y)) >> y : 1;
+
+			break;
+		}
+	}
+
+	int Algorizm::Map::isMKnowWall(int x, int y, enum Dir wall_dir)
+	{
+		switch (wall_dir)
+		{
+		case North:
+
+			return (y != 15) ? (M_Row[y] & (1 << x)) >> x : 1;
+
+			break;
+
+		case East:
+
+			return (x != 15) ? (M_Column[x] & (1 << y)) >> y : 1;
+
+			break;
+
+		case South:
+
+			return (y != 0) ? (M_Row[y - 1] & (1 << x)) >> x : 1;
+
+			break;
+
+		case West:
+
+			return (x != 0) ? (M_Column[x - 1] & (1 << y)) >> y : 1;
 
 			break;
 		}
@@ -472,5 +515,15 @@ namespace Algorizm
 		int* Algorizm::Map::RetColumnArray()
 		{
 			return Column;
+		}
+
+		int* Algorizm::Map::RetM_RowArray()
+		{
+			return M_Row;
+		}
+
+		int* Algorizm::Map::RetM_ColumnArray()
+		{
+			return M_Column;
 		}
 }

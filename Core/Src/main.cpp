@@ -270,7 +270,7 @@ int main(void)
 //			  App_Set_Command(Left_sen);
 //			  while(!issue_obj.isM_Stop)
 //			  {
-//				  No_Zip_M_UpDataAlgo();
+//				  No_Zip_M_UpDataAlgo(0);
 //			  }
 			  issue_obj.Init();//flagのリセ�?�?
 			  HAL_Delay(5000);
@@ -294,7 +294,7 @@ int main(void)
 			  //App_Set_Command(Left_sen);
 			  while(!issue_obj.isM_Stop)
 			  {
-				  M_UpDataAlgo();
+				  M_UpDataAlgo(0);
 			  }
 			  issue_obj.Init();//flagのリセ�?�?
 			  HAL_Delay(5000);
@@ -310,7 +310,7 @@ int main(void)
 			  HAL_Delay(1200);
 			  while(!issue_obj.isM_Stop)
 			  {
-				  M_UpDataAlgo();
+				  M_UpDataAlgo(0);
 			  }
 			  issue_obj.Init();//flagのリセ�?�?
 			  HAL_Delay(5000);
