@@ -49,11 +49,12 @@ namespace controll
 		float st_C=0.69;//C摩擦項/0.75
 		float st_const_C=-0.3;//C摩擦項、定速
 		float st_de_C=-0.69;//C摩擦項、減速
-		float turn_A=0.045;//A:角加速度依存の補正係数0\A項は各加速度×7.0407*10^-5/0.3*3900*7.0407*10^-5=0.0823/A+C=0.43636
-		float turn_B=3;//B:角速度依存の補正係数1.0
-		float turn_C=0.88694;//C摩擦項/0.8
+		float turn_A=0;//A:角加速度依存の補正係数0\A項は各加速度×7.0407*10^-5/0.3*3900*7.0407*10^-5=0.0823/A+C=0.43636
+		float turn_B=1.5;//B:角速度依存の補正係数1.0
+		float turn_C=2.5;//C摩擦項/0.8
 		float turn_const_C=0;//C動摩擦項,定速
-		float turn_de_C=-3;//C動摩擦項、減速
+		float turn_de_C=0;//C動摩擦項、減速
+		float turn_de_B=1.5;
 		bool isChangeToConstant=false;
 
 	public:

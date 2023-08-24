@@ -154,42 +154,46 @@ namespace Algorizm
 		if (x != 0)
 		{
 			int sum_west = 0;
+			int sum_M_west=4;
 			for (int i = 0; i < 4; i++)
 			{
 				sum_west += map->isKnowWall(x - 1, y, (Dir)i);
-				sum_west = (map->isMKnowWall(x - 1, y, (Dir)i) == 0) ? sum_west + 1 : sum_west;
+				sum_M_west -= map->isMKnowWall(x - 1, y, (Dir)i);
 			}
-			isKnowMap[x - 1] = (sum_west >= 3) ? isKnowMap[x - 1] | (1 << y) : isKnowMap[x - 1];
+			isKnowMap[x - 1] = (sum_west >= 3 || sum_M_west==4 || (sum_west+sum_M_west)==4) ? isKnowMap[x - 1] | (1 << y) : isKnowMap[x - 1];
 		}
 		if (x != 15)
 		{
 			int sum_east = 0;
+			int sum_M_east=4;
 			for (int i = 0; i < 4; i++)
 			{
 				sum_east+=map->isKnowWall(x + 1, y, (Dir)i);
-				sum_east = (map->isMKnowWall(x + 1, y, (Dir)i) == 0) ? sum_east + 1 : sum_east;
+				sum_M_east -= map->isMKnowWall(x + 1, y, (Dir)i);
 			}
-			isKnowMap[x + 1] = (sum_east >= 3) ? isKnowMap[x + 1] | (1 << y) : isKnowMap[x + 1];
+			isKnowMap[x + 1] = (sum_east >= 3 || sum_M_east==4 || (sum_east+sum_M_east)==4) ? isKnowMap[x + 1] | (1 << y) : isKnowMap[x + 1];
 		}
 		if (y != 0)
 		{
 			int sum_south = 0;
+			int sum_M_south=4;
 			for (int i = 0; i < 4; i++)
 			{
 				sum_south+=map->isKnowWall(x, y - 1, (Dir)i);
-				sum_south = (map->isMKnowWall(x, y - 1, (Dir)i) == 0) ? sum_south + 1 : sum_south;
+				sum_M_south -= map->isMKnowWall(x, y - 1, (Dir)i);
 			}
-			isKnowMap[x] = (sum_south >= 3) ? isKnowMap[x] | (1 << (y - 1)) : isKnowMap[x];
+			isKnowMap[x] = (sum_south >= 3 || sum_M_south==4 || (sum_south+sum_M_south)==4) ? isKnowMap[x] | (1 << (y - 1)) : isKnowMap[x];
 		}
 		if (y != 15)
 		{
 			int sum_north = 0;
+			int sum_M_north=4;
 			for (int i = 0; i < 4; i++)
 			{
 				sum_north+=map->isKnowWall(x, y + 1, (Dir)i);
-				sum_north = (map->isMKnowWall(x, y + 1, (Dir)i) == 0) ? sum_north + 1 : sum_north;
+				sum_M_north -= map->isMKnowWall(x, y + 1, (Dir)i);
 			}
-			isKnowMap[x] = (sum_north >= 3) ? isKnowMap[x] | (1 << (y + 1)) : isKnowMap[x];
+			isKnowMap[x] = (sum_north >= 3 || sum_M_north==4 || (sum_north+sum_M_north)==4) ? isKnowMap[x] | (1 << (y + 1)) : isKnowMap[x];
 		}
 	}
 

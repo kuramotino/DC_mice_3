@@ -55,6 +55,8 @@ namespace controll
 		float show_x();//now_xを返す関数(PID_Ctrlに呼ばれる)
 		void Receive_Back_Offset(float bu_offset);//BackOffsetをセットする関数(Back_Offset_Ctrlに呼ばれる)
 		void Receive_Wall_Break_Offset(float bu_offset);//Wall_Break_Offsetをセットする関数(Break_Wall_Ctrlに呼ばれる)
+		void Set_Pre_v();//Pre_vをセットする関数(Break_Wall_Ctrlに呼ばれる)
+		bool Ret_KasokuEnd();//kasokuEndを返す関数(Break_Wall_Ctrlに呼ばれる)
 	};
 }
 

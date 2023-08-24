@@ -21,7 +21,7 @@ namespace controll
 	,S_Diag_in135_L_foff,S_Diag_in135_R_foff,S_Diag_in135_L,S_Diag_in135_R,S_Diag_in135_L_boff,S_Diag_in135_R_boff
 	,S_Diag_out135_L_foff,S_Diag_out135_R_foff,S_Diag_out135_L,S_Diag_out135_R,S_Diag_out135_L_boff,S_Diag_out135_R_boff
 	,S_Diag_V90_L_foff,S_Diag_V90_R_foff,S_Diag_V90_L,S_Diag_V90_R,S_Diag_V90_L_boff,S_Diag_V90_R_boff
-	,S_Diag_Stra};
+	,S_Diag_Stra,S_Wall_Break};
 	class Command
 	{
 	public:
@@ -34,6 +34,7 @@ namespace controll
 		float ga=3000;//7重心加速度
 		float offset_x=0;//8前壁制御で進むオフセット量
 		float turn_start_ad=0;//9前壁制御でターンを始めるAD値
+		float breakwall_start_offset=0;//10壁切れ制御開始時に中心線からどれだけ進んだ位置にいるか
 		bool MoveVec=true;//運動の向き(前進、左回転が正の向きでtrue、後進、右回転が負の向きでfalse)
 		bool isStop=false;//stopさせるかどうか
 		bool isFailStop=false;//FailSafeでstopさせるか

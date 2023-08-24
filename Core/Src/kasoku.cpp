@@ -57,7 +57,7 @@ namespace controll
 				now_x+=now_v*dt;
 				v_status=constant;
 			}
-			else if(now_v>target_v_end && target_x-now_x>0)//3減速区間
+			else if(now_v>target_v_end)//3減速区間
 			{
 				now_x+=now_v*dt;
 				now_v-=target_a*dt;
@@ -124,6 +124,16 @@ namespace controll
 	void controll::kasoku::Receive_Wall_Break_Offset(float bu_offset)//Wall_Break_Offsetをセットする関数(Break_Wall_Ctrlに呼ばれる)
 	{
 		break_wall_offset=bu_offset;
+	}
+
+	void controll::kasoku::Set_Pre_v()//Pre_vをセットする関数(Break_Wall_Ctrlに呼ばれる)
+	{
+		pre_target_v_end=now_v;
+	}
+
+	bool controll::kasoku::Ret_KasokuEnd()//kasokuEndを返す関数(Break_Wall_Ctrlに呼ばれる)
+	{
+		return isKasokuEnd;
 	}
 
 }

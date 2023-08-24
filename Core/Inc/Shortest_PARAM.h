@@ -60,6 +60,7 @@ namespace Algorizm
 		enum command_type S_Stra;
 		enum command_type Diag_Stra;
 		enum command_type F_Stra;
+		enum command_type S_WBreak;
 		float TURN_V;
 		float OO90_V;
 		float OO180_V;

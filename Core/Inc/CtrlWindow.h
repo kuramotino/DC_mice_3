@@ -15,10 +15,12 @@ namespace controll
 	protected:
 		float offset=0;
 		int lfr_wall_status=0;//1壁当て時の周囲の壁の状態(0:壁あてなし、1:前ののみ、2前+左、3:前+右)
+		bool isContinueStra=false;//直進を壁切れが起こらなくなるまで続けるかどうか
 
 	public:
 		void Set_Offset(float buoffset);//オフセットをセットする関数
 		void Set_HitStatus(int bustatus);//1壁当ての周囲の壁の状態をセットする関数
+		void Set_ContinueStra(bool flag);//直進を続けるかのフラッグをセットする関数
 	};
 }
 

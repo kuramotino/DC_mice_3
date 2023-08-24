@@ -230,14 +230,14 @@ int main(void)
 		  {
 			  isStart[2]=false;
 			  t=0;
-			  for(int i=0;i<1200;i++)
-			  {
-				  printf("%f,%f,%f,%f,%f,%f,%f\n\r",t,ksk_obj.now_v_log[i],ksk_obj.now_x_log[i],pwm_obj.now_R_log[i],pwm_obj.now_L_log[i],pid_obj.log_enc[i],pid_obj.log_gyro[i]);
-				  //printf("%f,%d,%d,%d,%d,%d,%f,%f,\n\r",t,pl_obj.log_sensor_lr[0][i],pl_obj.log_sensor_lr[1][i],wall_obj.wall_ctrl_log[i],wall_obj.wall_l_diff[i],wall_obj.wall_r_diff[i],wall_obj.wall_l_meter[i],wall_obj.wall_r_meter[i]);
-				  t+=0.001;
-			  }
-			  //map_obj.ShowMap();
-			  //map_obj.ShowKnowMap();
+//			  for(int i=0;i<1200;i++)
+//			  {
+//				  printf("%f,%f,%f,%f,%f,%f,%f\n\r",t,ksk_obj.now_v_log[i],ksk_obj.now_x_log[i],pwm_obj.now_R_log[i],pwm_obj.now_L_log[i],pid_obj.log_enc[i],pid_obj.log_gyro[i]);
+//				  //printf("%f,%d,%d,%d,%d,%d,%f,%f,\n\r",t,pl_obj.log_sensor_lr[0][i],pl_obj.log_sensor_lr[1][i],wall_obj.wall_ctrl_log[i],wall_obj.wall_l_diff[i],wall_obj.wall_r_diff[i],wall_obj.wall_l_meter[i],wall_obj.wall_r_meter[i]);
+//				  t+=0.001;
+//			  }
+			  map_obj.ShowMap();
+			  map_obj.ShowKnowMap();
 			  //pass_gene_obj.Show_Pass();
 			  HAL_Delay(1000);
 		  }
@@ -253,19 +253,24 @@ int main(void)
 			  pl_obj.log_flag=true;
 			  wall_obj.wall_log_flag=true;
 //			  App_Set_Command(FF_Test_Stra_1);
-//			  application::App_Set_Command(Saitan_OO_90_foff);
-//			  application::App_Set_Command(Saitan_OO_90_R);
-//			  application::App_Set_Command(Saitan_OO_90_boff);
+
 //			  App_Set_Command(FF_Test_Stra_2);
 			  //App_Set_Command(FF_Test_Senkai_1);
 			  //App_Set_Command(FF_Test_Senkai_2);
 //			  App_Set_Command(Stra);
 			  App_Set_Command(Stra_ac_180);
-			  App_Set_Command(Front_offset);
-			  App_Set_Command(Left_sla);
+			  application::App_Set_Command(S_Diag_in135_L_foff);
+			  application::App_Set_Command(S_Diag_in135_L);
+			  application::App_Set_Command(S_Diag_in135_L_boff);
+//			  application::App_Set_Command(Saitan_OO_90_foff_L);
+//			  application::App_Set_Command(Saitan_OO_90_L);
+//			  application::App_Set_Command(Saitan_OO_90_boff_L);
+//			  App_Set_Command(Front_offset);
+//			  App_Set_Command(Left_sla);
 //			  //App_Set_Command(Right_sen);
-			  App_Set_Command(Left_b_off);
-			  App_Set_Command(Stra_de_180);
+//			  App_Set_Command(Left_b_off);
+			  application::App_Set_Command(S_Diag_Stra);
+//			  App_Set_Command(Stra_de_180);
 //			  App_Set_Command(Left_sen);
 //			  App_Set_Command(Left_sen);
 //			  while(!issue_obj.isM_Stop)

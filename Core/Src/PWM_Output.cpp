@@ -104,7 +104,7 @@ namespace controll
 				//duty_FF_stra=(!now_cm.isSenkai)?duty_FF_stra+1/V_bat*turn_const_C:duty_FF_stra;
 				duty_FF_turn=1/V_bat*((turn_A*R*10*10*10)/kt*(I*target_a*(3.14/180)/L)*taiya_dirmeter/n+ke*(turn_B*60*n*L*now_v*(3.14/180)/4/3.14/taiya_dirmeter) + turn_C);
 				duty_FF_turn=(v_status==constant)?1/V_bat*((turn_A*R*10*10*10)/kt*(I*target_a*(3.14/180)/L)*taiya_dirmeter/n+ke*(turn_B*60*n*L*now_v*(3.14/180)/4/3.14/taiya_dirmeter) + turn_const_C):duty_FF_turn;
-				duty_FF_turn=(v_status==deceleration)?1/V_bat*((-1.0*turn_A*R*10*10*10)/kt*(I*target_a*(3.14/180)/L)*taiya_dirmeter/n+ke*(turn_B*60*n*L*now_v*(3.14/180)/4/3.14/taiya_dirmeter) + turn_de_C):duty_FF_turn;
+				duty_FF_turn=(v_status==deceleration)?1/V_bat*((-1.0*turn_A*R*10*10*10)/kt*(I*target_a*(3.14/180)/L)*taiya_dirmeter/n+ke*(turn_de_B*60*n*L*now_v*(3.14/180)/4/3.14/taiya_dirmeter) + turn_de_C):duty_FF_turn;
 				duty_FF_turn=(now_cm.MoveVec) ? duty_FF_turn : -1*duty_FF_turn;
 				//duty_FF_stra=0;
 				//duty_FF_turn=0;//FFをオフにする

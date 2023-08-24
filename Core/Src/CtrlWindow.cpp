@@ -17,5 +17,10 @@ namespace controll
 	{
 		lfr_wall_status=bustatus;
 	}
+
+	void controll::CtrlWindow::Set_ContinueStra(bool flag)
+	{
+		isContinueStra=flag;
+	}
 }
 

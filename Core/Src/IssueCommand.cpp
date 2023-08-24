@@ -172,18 +172,40 @@ namespace Algorizm
 			{
 				if (nextpass > 0)
 				{
+					isContinueStra=true;
 					if(!isPass)
 					{
 						application::App_Set_Command(s_param.F_Stra,1,0,conect_v_end,conect_v_end);
-						application::App_Set_Command(s_param.S_Stra,nextpass-1,conect_v_end,s_param.MAX_V,conect_v_end);
+						for(int i=0;i<nextpass-1;i++)
+						{
+							application::App_Set_Command(s_param.S_Stra,nextpass-1,conect_v_end,s_param.MAX_V,conect_v_end);
+							if(!isContinueStra)
+							{
+								break;
+							}
+						}
 					}
 					else if(my_pass->Ret_NextPass()==0)
 					{
-						application::App_Set_Command(s_param.S_Stra,nextpass,conect_v_start,s_param.MAX_V,0);
+						for(int i=0;i<nextpass;i++)
+						{
+							application::App_Set_Command(s_param.S_Stra,nextpass,conect_v_start,s_param.MAX_V,0);
+							if(!isContinueStra)
+							{
+								break;
+							}
+						}
 					}
 					else
 					{
-						application::App_Set_Command(s_param.S_Stra,nextpass,conect_v_start,s_param.MAX_V,conect_v_end);
+						for(int i=0;i<nextpass;i++)
+						{
+							application::App_Set_Command(s_param.S_Stra,nextpass,conect_v_start,s_param.MAX_V,conect_v_end);
+							if(!isContinueStra)
+							{
+								break;
+							}
+						}
 					}
 				}
 				else if (nextpass <= -100)
@@ -214,8 +236,10 @@ namespace Algorizm
 					conect_v_start = (conect_v_start==0) ? s_param.OO180_V : conect_v_start;
 					conect_v_end = (conect_v_end==0) ? s_param.OO180_V : conect_v_end;
 					application::App_Set_Command(s_param.OO_180_L_foff,1,conect_v_start,s_param.OO180_V,s_param.OO180_V);
+					application::App_Set_Command(s_param.S_WBreak,1,s_param.OO180_V,s_param.OO180_V,s_param.OO180_V);
 					application::App_Set_Command(s_param.OO_180_L);
 					application::App_Set_Command(s_param.OO_180_L_boff,1,s_param.OO180_V,s_param.OO180_V,conect_v_end);
+					application::App_Set_Command(s_param.S_WBreak,1,s_param.OO180_V,s_param.OO180_V,conect_v_end);
 				}
 				else if (nextpass == -6)
 				{
@@ -223,8 +247,10 @@ namespace Algorizm
 					conect_v_start = (conect_v_start==0) ? s_param.OO180_V : conect_v_start;
 					conect_v_end = (conect_v_end==0) ? s_param.OO180_V : conect_v_end;
 					application::App_Set_Command(s_param.OO_180_R_foff,1,conect_v_start,s_param.OO180_V,s_param.OO180_V);
+					application::App_Set_Command(s_param.S_WBreak,1,s_param.OO180_V,s_param.OO180_V,s_param.OO180_V);
 					application::App_Set_Command(s_param.OO_180_R);
 					application::App_Set_Command(s_param.OO_180_R_boff,1,s_param.OO180_V,s_param.OO180_V,conect_v_end);
+					application::App_Set_Command(s_param.S_WBreak,1,s_param.OO180_V,s_param.OO180_V,conect_v_end);
 				}
 				else if (nextpass == -5)
 				{
@@ -232,8 +258,10 @@ namespace Algorizm
 					conect_v_start = (conect_v_start==0) ? s_param.OO90_V : conect_v_start;
 					conect_v_end = (conect_v_end==0) ? s_param.OO90_V : conect_v_end;
 					application::App_Set_Command(s_param.OO_90_L_foff,1,conect_v_start,s_param.OO90_V,s_param.OO90_V);
+					application::App_Set_Command(s_param.S_WBreak,1,s_param.OO90_V,s_param.OO90_V,s_param.OO90_V);
 					application::App_Set_Command(s_param.OO_90_L);
 					application::App_Set_Command(s_param.OO_90_L_boff,1,s_param.OO90_V,s_param.OO90_V,conect_v_end);
+					application::App_Set_Command(s_param.S_WBreak,1,s_param.OO90_V,s_param.OO90_V,conect_v_end);
 				}
 				else if (nextpass == -7)
 				{
@@ -241,14 +269,17 @@ namespace Algorizm
 					conect_v_start = (conect_v_start==0) ? s_param.OO90_V : conect_v_start;
 					conect_v_end = (conect_v_end==0) ? s_param.OO90_V : conect_v_end;
 					application::App_Set_Command(s_param.OO_90_R_foff,1,conect_v_start,s_param.OO90_V,s_param.OO90_V);
+					application::App_Set_Command(s_param.S_WBreak,1,s_param.OO90_V,s_param.OO90_V,s_param.OO90_V);
 					application::App_Set_Command(s_param.OO_90_R);
 					application::App_Set_Command(s_param.OO_90_R_boff,1,s_param.OO90_V,s_param.OO90_V,conect_v_end);
+					application::App_Set_Command(s_param.S_WBreak,1,s_param.OO90_V,s_param.OO90_V,conect_v_end);
 				}
 				else if (nextpass == -8)
 				{
 					conect_v_start = (conect_v_start==0) ? s_param.Diag_in45_V : conect_v_start;
 					conect_v_end = (conect_v_end==0) ? s_param.Diag_in45_V : conect_v_end;
 					application::App_Set_Command(s_param.Diag_in45_L_foff,1,conect_v_start,s_param.Diag_in45_V,s_param.Diag_in45_V);
+					application::App_Set_Command(s_param.S_WBreak,1,s_param.Diag_in45_V,s_param.Diag_in45_V,s_param.Diag_in45_V);
 					application::App_Set_Command(s_param.Diag_in45_L);
 					application::App_Set_Command(s_param.Diag_in45_L_boff,1,s_param.Diag_in45_V,s_param.Diag_in45_V,conect_v_end);
 				}
@@ -257,6 +288,7 @@ namespace Algorizm
 					conect_v_start = (conect_v_start==0) ? s_param.Diag_in45_V : conect_v_start;
 					conect_v_end = (conect_v_end==0) ? s_param.Diag_in45_V : conect_v_end;
 					application::App_Set_Command(s_param.Diag_in45_R_foff,1,conect_v_start,s_param.Diag_in45_V,s_param.Diag_in45_V);
+					application::App_Set_Command(s_param.S_WBreak,1,s_param.Diag_in45_V,s_param.Diag_in45_V,s_param.Diag_in45_V);
 					application::App_Set_Command(s_param.Diag_in45_R);
 					application::App_Set_Command(s_param.Diag_in45_R_boff,1,s_param.Diag_in45_V,s_param.Diag_in45_V,conect_v_end);
 				}
@@ -265,6 +297,7 @@ namespace Algorizm
 					conect_v_start = (conect_v_start==0) ? s_param.Diag_in135_V : conect_v_start;
 					conect_v_end = (conect_v_end==0) ? s_param.Diag_in135_V : conect_v_end;
 					application::App_Set_Command(s_param.Diag_in135_L_foff,1,conect_v_start,s_param.Diag_in135_V,s_param.Diag_in135_V);
+					application::App_Set_Command(s_param.S_WBreak,1,s_param.Diag_in135_V,s_param.Diag_in135_V,s_param.Diag_in135_V);
 					application::App_Set_Command(s_param.Diag_in135_L);
 					application::App_Set_Command(s_param.Diag_in135_L_boff,1,s_param.Diag_in135_V,s_param.Diag_in135_V,conect_v_end);
 				}
@@ -273,6 +306,7 @@ namespace Algorizm
 					conect_v_start = (conect_v_start==0) ? s_param.Diag_in135_V : conect_v_start;
 					conect_v_end = (conect_v_end==0) ? s_param.Diag_in135_V : conect_v_end;
 					application::App_Set_Command(s_param.Diag_in135_R_foff,1,conect_v_start,s_param.Diag_in135_V,s_param.Diag_in135_V);
+					application::App_Set_Command(s_param.S_WBreak,1,s_param.Diag_in135_V,s_param.Diag_in135_V,s_param.Diag_in135_V);
 					application::App_Set_Command(s_param.Diag_in135_R);
 					application::App_Set_Command(s_param.Diag_in135_R_boff,1,s_param.Diag_in135_V,s_param.Diag_in135_V,conect_v_end);
 				}

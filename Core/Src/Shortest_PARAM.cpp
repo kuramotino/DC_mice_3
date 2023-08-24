@@ -65,6 +65,7 @@ namespace Algorizm
 			S_Stra=Saitan_Stra;
 			Diag_Stra=S_Diag_Stra;
 			F_Stra=first_Stra;
+			S_WBreak=S_Wall_Break;
 			TURN_V=1000;
 			OO90_V=1000;
 			OO180_V=1000;
@@ -73,8 +74,8 @@ namespace Algorizm
 			Diag_in135_V=1000;
 			Diag_out135_V=1000;
 			Diag_V90_V=1000;
-			MAX_V=2500;
-			MAX_DIAG_V=1500;
+			MAX_V=1200;
+			MAX_DIAG_V=1000;
 			break;
 
 		case 1:
