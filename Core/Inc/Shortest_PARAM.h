@@ -58,6 +58,7 @@ namespace Algorizm
 		enum command_type Diag_V90_L_boff;
 		enum command_type Diag_V90_R_boff;
 		enum command_type S_Stra;
+		enum command_type L_Stra;
 		enum command_type Diag_Stra;
 		enum command_type F_Stra;
 		enum command_type S_WBreak;
@@ -71,6 +72,7 @@ namespace Algorizm
 		float Diag_V90_V;
 		float MAX_V;
 		float MAX_DIAG_V;
+		float MAX_LAST_V;
 
 	public:
 		Shortest_PARAM();

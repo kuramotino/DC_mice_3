@@ -18,7 +18,7 @@ namespace application
 		//HAL_GPIO_WritePin(ILED2_GPIO_Port,ILED2_Pin,GPIO_PIN_SET);
 		while(cx_obj.return_now_status()==Run)
 		{
-			HAL_GPIO_WritePin(ILED2_GPIO_Port,ILED2_Pin,GPIO_PIN_SET);
+			//HAL_GPIO_WritePin(ILED2_GPIO_Port,ILED2_Pin,GPIO_PIN_SET);
 		}
 	}
 
@@ -34,7 +34,7 @@ namespace application
 		//HAL_GPIO_WritePin(ILED2_GPIO_Port,ILED2_Pin,GPIO_PIN_SET);
 		while(cx_obj.return_now_status()==Run)
 		{
-			HAL_GPIO_WritePin(ILED2_GPIO_Port,ILED2_Pin,GPIO_PIN_SET);
+			//HAL_GPIO_WritePin(ILED2_GPIO_Port,ILED2_Pin,GPIO_PIN_SET);
 		}
 	}
 
@@ -46,7 +46,7 @@ namespace application
 		//HAL_GPIO_WritePin(ILED2_GPIO_Port,ILED2_Pin,GPIO_PIN_SET);
 		while(cx_obj.return_now_status()==Run)
 		{
-			HAL_GPIO_WritePin(ILED2_GPIO_Port,ILED2_Pin,GPIO_PIN_SET);
+			//HAL_GPIO_WritePin(ILED2_GPIO_Port,ILED2_Pin,GPIO_PIN_SET);
 		}
 	}
 
@@ -60,7 +60,7 @@ namespace application
 	{
 		while(cx_obj.return_now_status()==Run)
 		{
-			HAL_GPIO_WritePin(ILED2_GPIO_Port,ILED2_Pin,GPIO_PIN_SET);
+			//HAL_GPIO_WritePin(ILED2_GPIO_Port,ILED2_Pin,GPIO_PIN_SET);
 		}
 	}
 }

@@ -33,7 +33,8 @@ namespace controll
 		target_x=(now_cm.isSetBackOffset) ? now_cm.bu_tar_x+add_back_offset : now_cm.bu_tar_x;//目標距離
 		add_back_offset=(target_x!=now_cm.bu_tar_x) ? 0 : add_back_offset;//もし使ったら後距離の補正量をリセット
 		target_x=(now_cm.isBreakWallStra)?break_wall_offset:target_x;//壁切れ後の直進なら距離を変更
-		break_wall_offset=(now_cm.isBreakWallStra && target_x!=now_cm.bu_tar_x) ? 0 : break_wall_offset;//もし使ったなら壁切れ後の距離をリセット
+		//break_wall_offset=(now_cm.isBreakWallStra && target_x!=now_cm.bu_tar_x) ? 0 : break_wall_offset;//もし使ったなら壁切れ後の距離をリセット
+		break_wall_offset=0;//0壁切れ後の距離をリセット
 
 		target_v_max=((target_v_max*target_v_max-target_v_start*target_v_start)/(2*target_a)+
 				(target_v_max*target_v_max-target_v_end*target_v_end)/(2*target_a)>target_x)?
@@ -134,6 +135,18 @@ namespace controll
 	bool controll::kasoku::Ret_KasokuEnd()//kasokuEndを返す関数(Break_Wall_Ctrlに呼ばれる)
 	{
 		return isKasokuEnd;
+	}
+
+	bool controll::kasoku::IsConstV()
+	{
+		if(v_status==constant)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 }

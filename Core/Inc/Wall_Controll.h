@@ -23,7 +23,7 @@ namespace controll
 		float R_SENSOR_GAIN=1.8;//1壁制御のゲイン0.0033/2
 		float L_SENSOR_GAIN=1.8;//1壁制御のゲイン0.0033/2
 		float CENTER_R=155;//機体が中心にあるときの右AD値
-		float CENTER_L=230;//機体が中心にあるときの左AD値255
+		float CENTER_L=188;//機体が中心にあるときの左AD値255
 		float ABS_CENTER_R=155;
 		float ABS_CENTER_L=255;
 		float Side_R_ADtoX[5]={198.56,-1.8756,0.0085,-0.00002,0.00000002};//R距離変換関数の係数

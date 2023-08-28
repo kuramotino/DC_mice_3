@@ -19,6 +19,8 @@ namespace module
 		int16_t sum_enc_l=0;//1左エンコーダの合計カウント数
 		int16_t enc_count_r=0;//1右エンコーダのカウント数
 		int16_t enc_count_l=0;//1左エンコーダのカウント数
+		float enc_unit_count_l=73723;//l左エンコーダの単位パルス/(探索)73723/(2最短)74723
+		float enc_unit_count_r=74946;//r右エンコーダの単位パルス/(探索)74946/(2最短)75946
 		float v_encoder;//エンコーダから取得した機体の速度
 		float enc_v_R;//エンコーダから取得した右タイヤの速度
 		float enc_v_L;//エンコーダから取得した左タイヤの速度

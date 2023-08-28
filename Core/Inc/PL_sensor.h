@@ -9,6 +9,7 @@
 #define INC_PL_SENSOR_H_
 #include "stm32f4xx_hal.h"
 #include "BaseSencing.h"
+#define DIFF_QUEUE_SIZE 10
 
 namespace module
 {
@@ -23,8 +24,13 @@ namespace module
 		uint16_t adc_value=0;
 		int logcount=0;
 		int AD_step=0;
+		float diff_queue_r[DIFF_QUEUE_SIZE];
+		float diff_queue_l[DIFF_QUEUE_SIZE];
+		int diff_count_r=0;
+		int diff_count_l=0;
 	public:
-		uint16_t log_sensor_lr[2][1200];
+		uint16_t log_sensor_lr[5][1200];
+		float log_diff_lr[2][1200];
 		bool log_flag=false;
 
 
@@ -32,6 +38,8 @@ namespace module
 		void pl_callback_getSensor(void);//dma終了の割り込みで呼ばれる関数(adc.cppで呼ばれる)
 		void pl_interupt_getSensor(void);//ADCを開始し、TIM6の割り込みで呼ばれる関数
 		void sensor_input();//センサー値をInputDataに入力する関数(TIM6の割り込みで呼ばれる)
+		void setDiffqueue(bool isR);//now_diffをqueueにセットする
+		float getDiffqueue(bool isR);//now_diffの積分値を返す関数
 	};
 }
 

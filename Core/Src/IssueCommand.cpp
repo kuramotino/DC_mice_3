@@ -176,7 +176,7 @@ namespace Algorizm
 					if(!isPass)
 					{
 						application::App_Set_Command(s_param.F_Stra,1,0,conect_v_end,conect_v_end);
-						for(int i=0;i<nextpass-1;i++)
+						while(1)
 						{
 							application::App_Set_Command(s_param.S_Stra,nextpass-1,conect_v_end,s_param.MAX_V,conect_v_end);
 							if(!isContinueStra)
@@ -187,18 +187,11 @@ namespace Algorizm
 					}
 					else if(my_pass->Ret_NextPass()==0)
 					{
-						for(int i=0;i<nextpass;i++)
-						{
-							application::App_Set_Command(s_param.S_Stra,nextpass,conect_v_start,s_param.MAX_V,0);
-							if(!isContinueStra)
-							{
-								break;
-							}
-						}
+						application::App_Set_Command(s_param.L_Stra,nextpass,conect_v_start,s_param.MAX_LAST_V,0);
 					}
 					else
 					{
-						for(int i=0;i<nextpass;i++)
+						while(1)
 						{
 							application::App_Set_Command(s_param.S_Stra,nextpass,conect_v_start,s_param.MAX_V,conect_v_end);
 							if(!isContinueStra)
@@ -379,5 +372,18 @@ namespace Algorizm
 	void IssueCommand::SetPassGene(Pass_Generator* bu_pass)
 	{
 		my_pass = bu_pass;
+	}
+
+	void IssueCommand::DebugWallBreak()
+	{
+		isContinueStra=true;
+		while(1)
+		{
+			application::App_Set_Command(FF_Test_Stra_1,30,0,500,0);//30
+			if(!isContinueStra)
+			{
+				break;
+			}
+		}
 	}
 }

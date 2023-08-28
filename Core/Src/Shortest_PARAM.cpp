@@ -63,6 +63,7 @@ namespace Algorizm
 			Diag_V90_L_boff=S_Diag_V90_L_boff;
 			Diag_V90_R_boff=S_Diag_V90_R_boff;
 			S_Stra=Saitan_Stra;
+			L_Stra=Last_Stra;
 			Diag_Stra=S_Diag_Stra;
 			F_Stra=first_Stra;
 			S_WBreak=S_Wall_Break;
@@ -74,8 +75,9 @@ namespace Algorizm
 			Diag_in135_V=1000;
 			Diag_out135_V=1000;
 			Diag_V90_V=1000;
-			MAX_V=1200;
+			MAX_V=1000;
 			MAX_DIAG_V=1000;
+			MAX_LAST_V=1000;
 			break;
 
 		case 1:

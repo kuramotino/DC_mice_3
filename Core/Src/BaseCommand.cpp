@@ -151,7 +151,7 @@ namespace controll
 				isWall_PID_Stop=false;
 				isTurn=false;//turnかどうか
 				isFrontOffset=true;//前壁制御をおこなうかどうか
-				offset_x=10;
+				offset_x=0;
 				break;
 
 			case Left_b_off:
@@ -185,7 +185,7 @@ namespace controll
 				isWall_PID_Stop=false;
 				isTurn=false;//turnかどうか
 				isFrontOffset=true;//前壁制御をおこなうかどうか
-				offset_x=10;
+				offset_x=0;
 				break;
 
 			case Right_b_off:
@@ -234,7 +234,7 @@ namespace controll
 				isPID_Stop=false;//PIDをstopさせるか
 				isWall_PID_Stop=false;
 				isTurn=false;//turnかどうか
-				isBreakWall=true;//壁切れを見る
+				isBreakWall=false;//壁切れを見る
 				break;
 
 			case Stra_Stop:
@@ -410,29 +410,33 @@ namespace controll
 				bu_tar_a=12000;//1目標加速度
 				bu_tar_v_start=0;//2目標初速度
 				bu_tar_v_max=1000;//3目標最高速度
-				bu_tar_v_end=1000;//4目標終端速度
-				bu_tar_x=180;//5目標距離
+				bu_tar_v_end=0;//4目標終端速度
+				bu_tar_x=90;//5目標距離862
 				gv=500;//6重心速度
+				breakwall_start_offset=90;//8壁切れ制御開始時に中心線から90mm進んだ位置にいる
+				isBreakWall=true;//壁切れを見る
+				isBreakWallStra=true;//壁切れ後の直進
+				isSmooth=true;//なめらかにつなぐ
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
 				isPID_Stop=false;//PIDをstopさせるか
-				isWall_PID_Stop=true;//壁制御のPIDをstopさせるか
+				isWall_PID_Stop=false;//壁制御のPIDをstopさせるか
 				isTurn=false;//turnかどうか
 				break;
 
 			case FF_Test_Stra_2:
 				bu_tar_a=12000;//1目標加速度
-				bu_tar_v_start=1000;//2目標初速度
-				bu_tar_v_max=1000;//3目標最高速度
+				bu_tar_v_start=0;//2目標初速度
+				bu_tar_v_max=500;//3目標最高速度
 				bu_tar_v_end=0;//4目標終端速度
-				bu_tar_x=180;//5目標距離
+				bu_tar_x=1800;//5目標距離/2700
 				gv=500;//6重心速度
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
 				isPID_Stop=false;//PIDをstopさせるか
-				isWall_PID_Stop=true;//壁制御のPIDをstopさせるか
+				isWall_PID_Stop=false;//壁制御のPIDをstopさせるか
 				isTurn=false;//turnかどうか
 				break;
 
@@ -1440,6 +1444,22 @@ namespace controll
 				isTurn=false;//turnかどうか
 				isBreakWallStra=true;//壁切れ後の直進
 				isSmooth=true;//オフセットをなめらかにつなぐ
+				break;
+
+			case Last_Stra:
+				bu_tar_a=12000;//1目標加速度
+				bu_tar_v_start=1500;//2目標初速度
+				bu_tar_v_max=1500;//3目標最高速度
+				bu_tar_v_end=1500;//4目標終端速度
+				bu_tar_x=90;//5目標距離
+				gv=500;//6重心速度
+				isSmooth=false;//なめらかにつなぐ
+				MoveVec=true;//前進
+				isStop=false;//stopさせるかどうか
+				isFailStop=false;//FailSafeでstopさせるか
+				isPID_Stop=false;//PIDをstopさせるか
+				isWall_PID_Stop=false;//壁制御のPIDをstopさせるか
+				isTurn=false;//turnかどうか
 				break;
 		}
 	}

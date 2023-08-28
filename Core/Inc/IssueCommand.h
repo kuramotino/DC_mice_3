@@ -42,6 +42,7 @@ namespace Algorizm
 		void Saitan(int index);//�ŒZ���s���֐�
 		void SetPlan(Planning* plan);
 		void SetPassGene(Pass_Generator* bu_pass);
+		void DebugWallBreak();
 	};
 }
 

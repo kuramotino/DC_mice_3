@@ -56,7 +56,7 @@ void Init_Controll()//controll,module名前空間のオブジェクトたちを�
 	back_offset_obj.add_obj(&ksk_obj, &pwm_obj, &input_obj, &cs_obj, &issue_obj);
 	senkai_offset_obj.add_obj(&ksk_obj, &pwm_obj, &input_obj, &cs_obj);
 	senkai_offset_obj.SetBackOffset(&back_offset_obj);
-	break_wall_obj.add_obj(&ksk_obj, &pwm_obj, &input_obj, &cs_obj);
+	break_wall_obj.add_obj(&ksk_obj, &pwm_obj, &input_obj, &cs_obj,&issue_obj);
 	hit_ctrl_obj.add_obj(&ksk_obj, &pwm_obj, &input_obj, &cs_obj, &issue_obj);
 	init_flag=true;
 }
@@ -93,6 +93,15 @@ void Sync_Mo_R()//右モータの割り込み処理
 	enum turn cw_R;
 	enum turn cw_L;
 	pwm_obj.out_duty(&duty_r, &duty_l,&cw_R,&cw_L);
+
+	if(fail_obj.isFail)
+	{
+		duty_r=0;
+		duty_l=0;
+		cw_R=Front;
+		cw_L=Front;
+	}
+
 	if(duty_r==0 && cx_obj.return_now_status()==Run)
 	{
 		if(cw_R==Front)
@@ -132,6 +141,15 @@ void Sync_Mo_L()//左モータの割り込み処理
 	enum turn cw_R;
 	enum turn cw_L;
 	pwm_obj.out_duty(&duty_r, &duty_l,&cw_R,&cw_L);
+
+	if(fail_obj.isFail)
+	{
+		duty_r=0;
+		duty_l=0;
+		cw_R=Front;
+		cw_L=Front;
+	}
+
 	if(duty_l==0 && cx_obj.return_now_status()==Run)
 	{
 		if(cw_L==Front)

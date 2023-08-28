@@ -6,6 +6,7 @@
  */
 #include "Break_Wall_Ctrl.h"
 #include "math.h"
+#include "Init_Controll_Objs.h"
 
 namespace controll
 {
@@ -13,18 +14,21 @@ namespace controll
 	{
 		now_cm=cm;
 		isStop=(!(now_cm.isBreakWall) || now_cm.isStop);
-		isRSIDE=(my_input->g_sensor_now[4]>my_input->RIGHT_SIDE_SLESHOLD)?true:false;
-		isLSIDE=(my_input->g_sensor_now[0]>my_input->LEFT_SIDE_SLESHOLD)?true:false;
-		isRWall=(my_input->g_sensor_now[3]>my_input->RIGHT_SLESHOLD)?true:false;
-		isLWall=(my_input->g_sensor_now[1]>my_input->LEFT_SLESHOLD)?true:false;
 		isRecursive=(now_cm.isBreakWall && now_cm.isBreakWallStra)?true:false;
 		end_pos=(now_cm.isFrontOffset) ? now_cm.offset_x+now_cm.breakwall_start_offset : now_cm.bu_tar_x+now_cm.breakwall_start_offset;
 		if(isRecursive && !preRecursive && !now_cm.isStop)
 		{
 			my_kasoku->Receive_Wall_Break_Offset(now_cm.bu_tar_x);
 			blocknum=0;
-			sum_x=now_cm.breakwall_start_offset;
+			//sum_x=now_cm.breakwall_start_offset;
+			sum_x=0;
+			OKPollDetect=true;
+			isWallBreaked=false;
+			isdxBreak=false;
+			polldetecttimer=0.0;
 		}
+		OKPollDetect=(!isRecursive && !now_cm.isStop)?true:OKPollDetect;
+		polldetecttimer=(!isRecursive && !now_cm.isStop)?0.0:polldetecttimer;
 
 		preRecursive=(!now_cm.isStop)?isRecursive:preRecursive;
 	}
@@ -36,48 +40,73 @@ namespace controll
 			if(isRecursive)
 			{
 				sum_x+=my_kasoku->show_v()*0.001;
-				blocknum=(int)(sum_x/180);
+				blocknum=(int)(((int)(sum_x))/((int)(180)));
 			}
 			else
 			{
 				sum_x=0;
 				blocknum=0;
+				//polldetecttimer=0.0;
+				//OKPollDetect=true;
 			}
 
-			if(my_input->g_sensor_now[1]<my_input->LEFT_SLESHOLD && isLWall)
+			if(now_cm.bu_tar_x+now_cm.breakwall_start_offset-sum_x<=threshold_sum_x && isWallBreaked)
 			{
-				sum_x=(isRecursive)?l_offset+180*blocknum:sum_x;
-				end_pos=(end_pos-l_offset-180*blocknum<=0) ? l_offset + 180*blocknum : end_pos;
-				my_kasoku->Receive_Wall_Break_Offset(end_pos-l_offset-180*blocknum);
-				my_kasoku->Set_Pre_v();
-				status_off(Forced_End);
+				isdxBreak=true;
 			}
-			else if(my_input->g_sensor_now[3]<my_input->RIGHT_SLESHOLD && isRWall)
+			else if(now_cm.bu_tar_x-sum_x<=threshold_sum_x && !isWallBreaked)
 			{
-				sum_x=(isRecursive)?r_offset+180*blocknum:sum_x;
-				end_pos=(end_pos-r_offset-180*blocknum<=0) ? r_offset + 180*blocknum : end_pos;
-				my_kasoku->Receive_Wall_Break_Offset(end_pos-r_offset-180*blocknum);
-				my_kasoku->Set_Pre_v();
-				status_off(Forced_End);
+				isdxBreak=true;
 			}
-			else if(my_input->g_sensor_now[0]<my_input->LEFT_SIDE_SLESHOLD && isLSIDE)
+
+			if(my_input->g_sensor_diff_sum_l>my_input->LEFT_SIDE_SLESHOLD && OKPollDetect && !isdxBreak)//sensor0が左の柱を検知したとき
 			{
+				led_obj.set_all_led(0b01000000);
+				OKPollDetect=false;
+				isWallBreaked=true;
 				sum_x=(isRecursive)?l_side_offset+180*blocknum:sum_x;
-				end_pos=(end_pos-l_side_offset-180*blocknum<=0) ? l_side_offset + 180*blocknum : end_pos;
-				my_kasoku->Receive_Wall_Break_Offset(end_pos-l_side_offset-180*blocknum);
+				float set_break_x=end_pos-l_side_offset-180*blocknum;
+				set_break_x=(set_break_x<=0)?0:set_break_x;
+				//set_break_x=(!isRecursive)?set_break_x:2000;
+				//end_pos=(end_pos-l_side_offset-180*blocknum<=0) ? l_side_offset + 180*blocknum : end_pos;
+				my_kasoku->Receive_Wall_Break_Offset(set_break_x);
 				my_kasoku->Set_Pre_v();
 				status_off(Forced_End);
 			}
-			else if(my_input->g_sensor_now[4]<my_input->RIGHT_SIDE_SLESHOLD && isRSIDE)
+			else if(my_input->g_sensor_diff_sum_r>my_input->RIGHT_SIDE_SLESHOLD && OKPollDetect && !isdxBreak)//sensor4が右の柱を検知したとき
 			{
+				led_obj.set_all_led(0b10000000);
+				OKPollDetect=false;
+				isWallBreaked=true;
 				sum_x=(isRecursive)?r_side_offset+180*blocknum:sum_x;
-				end_pos=(end_pos-r_side_offset-180*blocknum<=0) ? r_side_offset + 180*blocknum : end_pos;
-				my_kasoku->Receive_Wall_Break_Offset(end_pos-r_side_offset-180*blocknum);
+				float set_break_x=end_pos-r_side_offset-180*blocknum;
+				set_break_x=(set_break_x<=0)?0:set_break_x;
+				//set_break_x=(!isRecursive)?set_break_x:2000;
+				//end_pos=(end_pos-r_side_offset-180*blocknum<=0) ? r_side_offset + 180*blocknum : end_pos;
+				my_kasoku->Receive_Wall_Break_Offset(set_break_x);
 				my_kasoku->Set_Pre_v();
 				status_off(Forced_End);
 			}
 
-			if(now_cm.bu_tar_x<=(sum_x-now_cm.breakwall_start_offset))
+			if(!OKPollDetect && isRecursive)
+			{
+				if(polldetecttimer>90.0)
+				{
+					polldetecttimer=0.0;
+					OKPollDetect=true;
+				}
+				else
+				{
+					polldetecttimer+=my_kasoku->show_v()*0.001;
+				}
+			}
+
+			if(now_cm.bu_tar_x<=(sum_x-now_cm.breakwall_start_offset) && isWallBreaked)
+			{
+				my_ctrlwin->Set_ContinueStra(false);
+				//preRecursive=false;//debug
+			}
+			else if(now_cm.bu_tar_x<=sum_x && !isWallBreaked)
 			{
 				my_ctrlwin->Set_ContinueStra(false);
 			}

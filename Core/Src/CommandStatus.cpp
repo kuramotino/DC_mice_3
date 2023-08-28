@@ -14,7 +14,7 @@ namespace controll
 		if(cs!=Run)
 		{
 			command_status=cs;
-			HAL_GPIO_WritePin(ILED2_GPIO_Port,ILED2_Pin,GPIO_PIN_SET);
+			//HAL_GPIO_WritePin(ILED2_GPIO_Port,ILED2_Pin,GPIO_PIN_SET);
 		}
 	}
 
@@ -23,7 +23,7 @@ namespace controll
 		if(cs==Run)
 		{
 			command_status=cs;
-			HAL_GPIO_WritePin(ILED10_GPIO_Port,ILED10_Pin,GPIO_PIN_SET);
+			//HAL_GPIO_WritePin(ILED10_GPIO_Port,ILED10_Pin,GPIO_PIN_SET);
 		}
 	}
 

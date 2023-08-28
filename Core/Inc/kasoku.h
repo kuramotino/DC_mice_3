@@ -57,6 +57,7 @@ namespace controll
 		void Receive_Wall_Break_Offset(float bu_offset);//Wall_Break_Offsetをセットする関数(Break_Wall_Ctrlに呼ばれる)
 		void Set_Pre_v();//Pre_vをセットする関数(Break_Wall_Ctrlに呼ばれる)
 		bool Ret_KasokuEnd();//kasokuEndを返す関数(Break_Wall_Ctrlに呼ばれる)
+		bool IsConstV();
 	};
 }
 

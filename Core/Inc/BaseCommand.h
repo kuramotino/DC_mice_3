@@ -21,7 +21,7 @@ namespace controll
 	,S_Diag_in135_L_foff,S_Diag_in135_R_foff,S_Diag_in135_L,S_Diag_in135_R,S_Diag_in135_L_boff,S_Diag_in135_R_boff
 	,S_Diag_out135_L_foff,S_Diag_out135_R_foff,S_Diag_out135_L,S_Diag_out135_R,S_Diag_out135_L_boff,S_Diag_out135_R_boff
 	,S_Diag_V90_L_foff,S_Diag_V90_R_foff,S_Diag_V90_L,S_Diag_V90_R,S_Diag_V90_L_boff,S_Diag_V90_R_boff
-	,S_Diag_Stra,S_Wall_Break};
+	,S_Diag_Stra,S_Wall_Break,Last_Stra};
 	class Command
 	{
 	public:

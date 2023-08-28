@@ -6,6 +6,7 @@
  */
 #include "FailSafe.h"
 #include "math.h"
+#include "Init_Controll_Objs.h"
 
 namespace controll
 {
@@ -14,6 +15,7 @@ namespace controll
 		if(!now_cm.isTurn)
 		{
 			v_logical=(fabs(my_input->v_encoder>-my_kasoku->show_v())>threshold_v);
+			//v_logical=(((my_input->enc_v_R+my_input->enc_v_L)/2)<threshold_v);
 		}
 		else
 		{
@@ -27,10 +29,12 @@ namespace controll
 			accel_logical_y=false;
 		}
 		who_logical=(my_input->who_am_i!=0x98)?true:false;
+		//zero_gyro_logical=(my_input->omega_gyro==0)?true:false;
 
 		if(v_logical||accel_logical_y||enc_logical||who_logical)
 		{
 			status_off(Abnormal_End);
+			led_obj.set_all_led(0b111111111);
 			isFail=true;
 		}
 	}

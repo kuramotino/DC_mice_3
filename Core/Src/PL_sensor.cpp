@@ -8,6 +8,7 @@
 #include "adc.h"
 #include "stdio.h"
 #include "PL_sensor.h"
+#include "math.h"
 
 namespace module
 {
@@ -135,14 +136,81 @@ namespace module
 			my_input->g_sensor_off[i]=g_sensor_off[i];
 			my_input->g_sensor_now_diff[i]=g_sensor_now_diff[i];
 		}
+		setDiffqueue(true);
+		setDiffqueue(false);
+		my_input->g_sensor_diff_sum_r=getDiffqueue(true);
+		my_input->g_sensor_diff_sum_l=getDiffqueue(false);
 		if(logcount<1200 && log_flag)
 		{
 //			if(logcount%5==0)
 //			{
-				log_sensor_lr[0][logcount]=g_sensor_now[1];
-				log_sensor_lr[1][logcount]=g_sensor_now[3];
+				log_sensor_lr[0][logcount]=g_sensor_now[0];
+				log_sensor_lr[1][logcount]=g_sensor_now[1];
+				log_sensor_lr[2][logcount]=g_sensor_now[2];
+				log_sensor_lr[3][logcount]=g_sensor_now[3];
+				log_sensor_lr[4][logcount]=g_sensor_now[4];
+				log_diff_lr[0][logcount]=my_input->g_sensor_diff_sum_l;
+				log_diff_lr[1][logcount]=my_input->g_sensor_diff_sum_r;
 //			}
 			logcount++;
+		}
+	}
+
+	void module::PL_sensor::setDiffqueue(bool isR)//now_diffをqueueにセットする関数
+	{
+		if(isR)
+		{
+			if(diff_count_r!=DIFF_QUEUE_SIZE-1)
+			{
+				diff_queue_r[DIFF_QUEUE_SIZE-1-diff_count_r]=g_sensor_now_diff[4];
+				diff_count_r++;
+			}
+			else
+			{
+				for(int i=DIFF_QUEUE_SIZE-2;i>=0;i--)
+				{
+					diff_queue_r[i+1]=diff_queue_r[i];
+				}
+				diff_queue_r[0]=g_sensor_now_diff[4];
+			}
+		}
+		else
+		{
+			if(diff_count_l!=DIFF_QUEUE_SIZE-1)
+			{
+				diff_queue_l[DIFF_QUEUE_SIZE-1-diff_count_l]=g_sensor_now_diff[0];
+				diff_count_l++;
+			}
+			else
+			{
+				for(int i=DIFF_QUEUE_SIZE-2;i>=0;i--)
+				{
+					diff_queue_l[i+1]=diff_queue_l[i];
+				}
+				diff_queue_l[0]=g_sensor_now_diff[0];
+			}
+		}
+	}
+
+	float module::PL_sensor::getDiffqueue(bool isR)//now_diffの積分値を返す関数
+	{
+		if(isR)
+		{
+			float sum=0;
+			for(int i=0;i<DIFF_QUEUE_SIZE;i++)
+			{
+				sum+=fabs(diff_queue_r[i]);
+			}
+			return sum;
+		}
+		else
+		{
+			float sum=0;
+			for(int i=0;i<DIFF_QUEUE_SIZE;i++)
+			{
+				sum+=fabs(diff_queue_l[i]);
+			}
+			return sum;
 		}
 	}
 }
