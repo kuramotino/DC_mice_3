@@ -75,7 +75,7 @@ namespace Algorizm
 			Diag_in135_V=1000;
 			Diag_out135_V=1000;
 			Diag_V90_V=1000;
-			MAX_V=1000;
+			MAX_V=1700;
 			MAX_DIAG_V=1000;
 			MAX_LAST_V=1000;
 			break;

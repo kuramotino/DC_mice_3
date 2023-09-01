@@ -379,7 +379,7 @@ namespace Algorizm
 		isContinueStra=true;
 		while(1)
 		{
-			application::App_Set_Command(FF_Test_Stra_1,30,0,500,0);//30
+			application::App_Set_Command(FF_Test_Stra_1,10,0,500,0);//30
 			if(!isContinueStra)
 			{
 				break;

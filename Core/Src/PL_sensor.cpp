@@ -136,10 +136,14 @@ namespace module
 			my_input->g_sensor_off[i]=g_sensor_off[i];
 			my_input->g_sensor_now_diff[i]=g_sensor_now_diff[i];
 		}
-		setDiffqueue(true);
-		setDiffqueue(false);
-		my_input->g_sensor_diff_sum_r=getDiffqueue(true);
-		my_input->g_sensor_diff_sum_l=getDiffqueue(false);
+		setDiffqueue(true,true);
+		setDiffqueue(false,true);
+		setDiffqueue(true,false);
+		setDiffqueue(false,false);
+		my_input->g_sensor_diff_sum_r=getDiffqueue(true,true);
+		my_input->g_sensor_diff_sum_l=getDiffqueue(false,true);
+		my_input->g_sensor_diff_sum_diag_r=getDiffqueue(true,false);
+		my_input->g_sensor_diff_sum_diag_l=getDiffqueue(false,false);
 		if(logcount<1200 && log_flag)
 		{
 //			if(logcount%5==0)
@@ -151,66 +155,130 @@ namespace module
 				log_sensor_lr[4][logcount]=g_sensor_now[4];
 				log_diff_lr[0][logcount]=my_input->g_sensor_diff_sum_l;
 				log_diff_lr[1][logcount]=my_input->g_sensor_diff_sum_r;
+				log_diff_diag_lr[0][logcount]=my_input->g_sensor_diff_sum_diag_l;
+				log_diff_diag_lr[1][logcount]=my_input->g_sensor_diff_sum_diag_r;
 //			}
 			logcount++;
 		}
 	}
 
-	void module::PL_sensor::setDiffqueue(bool isR)//now_diffをqueueにセットする関数
+	void module::PL_sensor::setDiffqueue(bool isR,bool isSide)//now_diffをqueueにセットする関数
 	{
-		if(isR)
+		if(isSide)
 		{
-			if(diff_count_r!=DIFF_QUEUE_SIZE-1)
+			if(isR)
 			{
-				diff_queue_r[DIFF_QUEUE_SIZE-1-diff_count_r]=g_sensor_now_diff[4];
-				diff_count_r++;
+				if(diff_count_r!=DIFF_QUEUE_SIZE-1)
+				{
+					diff_queue_r[DIFF_QUEUE_SIZE-1-diff_count_r]=g_sensor_now_diff[4];
+					diff_count_r++;
+				}
+				else
+				{
+					for(int i=DIFF_QUEUE_SIZE-2;i>=0;i--)
+					{
+						diff_queue_r[i+1]=diff_queue_r[i];
+					}
+					diff_queue_r[0]=g_sensor_now_diff[4];
+				}
 			}
 			else
 			{
-				for(int i=DIFF_QUEUE_SIZE-2;i>=0;i--)
+				if(diff_count_l!=DIFF_QUEUE_SIZE-1)
 				{
-					diff_queue_r[i+1]=diff_queue_r[i];
+					diff_queue_l[DIFF_QUEUE_SIZE-1-diff_count_l]=g_sensor_now_diff[0];
+					diff_count_l++;
 				}
-				diff_queue_r[0]=g_sensor_now_diff[4];
+				else
+				{
+					for(int i=DIFF_QUEUE_SIZE-2;i>=0;i--)
+					{
+						diff_queue_l[i+1]=diff_queue_l[i];
+					}
+					diff_queue_l[0]=g_sensor_now_diff[0];
+				}
 			}
 		}
 		else
 		{
-			if(diff_count_l!=DIFF_QUEUE_SIZE-1)
+			if(isR)
 			{
-				diff_queue_l[DIFF_QUEUE_SIZE-1-diff_count_l]=g_sensor_now_diff[0];
-				diff_count_l++;
+				if(diff_count_diag_r!=DIFF_DIAG_QUEUE_SIZE-1)
+				{
+					diff_queue_diag_r[DIFF_DIAG_QUEUE_SIZE-1-diff_count_diag_r]=g_sensor_now_diff[3];
+					diff_count_diag_r++;
+				}
+				else
+				{
+					for(int i=DIFF_DIAG_QUEUE_SIZE-2;i>=0;i--)
+					{
+						diff_queue_diag_r[i+1]=diff_queue_diag_r[i];
+					}
+					diff_queue_diag_r[0]=g_sensor_now_diff[3];
+				}
 			}
 			else
 			{
-				for(int i=DIFF_QUEUE_SIZE-2;i>=0;i--)
+				if(diff_count_diag_l!=DIFF_DIAG_QUEUE_SIZE-1)
 				{
-					diff_queue_l[i+1]=diff_queue_l[i];
+					diff_queue_diag_l[DIFF_DIAG_QUEUE_SIZE-1-diff_count_diag_l]=g_sensor_now_diff[1];
+					diff_count_diag_l++;
 				}
-				diff_queue_l[0]=g_sensor_now_diff[0];
+				else
+				{
+					for(int i=DIFF_DIAG_QUEUE_SIZE-2;i>=0;i--)
+					{
+						diff_queue_diag_l[i+1]=diff_queue_diag_l[i];
+					}
+					diff_queue_diag_l[0]=g_sensor_now_diff[1];
+				}
 			}
 		}
 	}
 
-	float module::PL_sensor::getDiffqueue(bool isR)//now_diffの積分値を返す関数
+	float module::PL_sensor::getDiffqueue(bool isR,bool isSide)//now_diffの積分値を返す関数
 	{
-		if(isR)
+		if(isSide)
 		{
-			float sum=0;
-			for(int i=0;i<DIFF_QUEUE_SIZE;i++)
+			if(isR)
 			{
-				sum+=fabs(diff_queue_r[i]);
+				float sum=0;
+				for(int i=0;i<DIFF_QUEUE_SIZE;i++)
+				{
+					sum+=fabs(diff_queue_r[i]);
+				}
+				return sum;
 			}
-			return sum;
+			else
+			{
+				float sum=0;
+				for(int i=0;i<DIFF_QUEUE_SIZE;i++)
+				{
+					sum+=fabs(diff_queue_l[i]);
+				}
+				return sum;
+			}
 		}
 		else
 		{
-			float sum=0;
-			for(int i=0;i<DIFF_QUEUE_SIZE;i++)
+			if(isR)
 			{
-				sum+=fabs(diff_queue_l[i]);
+				float sum=0;
+				for(int i=0;i<DIFF_DIAG_QUEUE_SIZE;i++)
+				{
+					sum+=fabs(diff_queue_diag_r[i]);
+				}
+				return sum;
 			}
-			return sum;
+			else
+			{
+				float sum=0;
+				for(int i=0;i<DIFF_DIAG_QUEUE_SIZE;i++)
+				{
+					sum+=fabs(diff_queue_diag_l[i]);
+				}
+				return sum;
+			}
 		}
 	}
 }

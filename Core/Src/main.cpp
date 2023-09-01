@@ -184,6 +184,20 @@ int main(void)
 		  }
 	  }
 
+//	  while(1)//debug
+//	  {
+//		  HAL_Delay(300);
+//		  led_obj.set_all_led(0b00000001);
+//		  HAL_Delay(300);
+//		  led_obj.set_all_led(0b00000000);
+//	  }
+
+//	  while(1)
+//	  {
+//		  HAL_Delay(100);
+//		  printf("Hello");
+//	  }
+
 
 	  mode=(int)(modenum*fabs(input_obj.enc_v_R_sum)/(32767.0));//modeの決?��?
 	  if(pre_mode!=mode)
@@ -232,14 +246,14 @@ int main(void)
 			  t=0;
 			  for(int i=0;i<1200;i++)
 			  {
-				  printf("%f,%f,%f,%f,%f,%f,%f\n\r",t,ksk_obj.now_v_log[i],ksk_obj.now_x_log[i],pwm_obj.now_R_log[i],pwm_obj.now_L_log[i],pid_obj.log_enc[i],pid_obj.log_gyro[i]);
-				  //printf("%f,%d,%d,%d,%d,%d,%f,%f,%f,\n\r",t,pl_obj.log_sensor_lr[0][i],pl_obj.log_sensor_lr[1][i],pl_obj.log_sensor_lr[2][i],pl_obj.log_sensor_lr[3][i],pl_obj.log_sensor_lr[4][i],ksk_obj.now_x_log[i],pl_obj.log_diff_lr[0][i],pl_obj.log_diff_lr[1][i]);
+				  //printf("%f,%f,%f,%f,%f,%f,%f\n\r",t,ksk_obj.now_v_log[i],ksk_obj.now_x_log[i],pwm_obj.now_R_log[i],pwm_obj.now_L_log[i],pid_obj.log_enc[i],pid_obj.log_gyro[i]);
+				  printf("%f,%d,%d,%d,%d,%d,%f,%f,%f,%f,%f,\n\r",t,pl_obj.log_sensor_lr[0][i],pl_obj.log_sensor_lr[1][i],pl_obj.log_sensor_lr[2][i],pl_obj.log_sensor_lr[3][i],pl_obj.log_sensor_lr[4][i],ksk_obj.now_x_log[i],pl_obj.log_diff_lr[0][i],pl_obj.log_diff_diag_lr[0][i],pl_obj.log_diff_diag_lr[1][i],pl_obj.log_diff_lr[1][i]);
 				  t+=0.001;
 			  }
-			  //map_obj.ShowMap();
-			  //map_obj.ShowKnowMap();
-
-			  //pass_gene_obj.Show_Pass();
+//			  map_obj.ShowMap();
+//			  map_obj.ShowKnowMap();
+//
+//			  pass_gene_obj.Show_Pass();
 			  HAL_Delay(1000);
 		  }
 		  break;
@@ -253,14 +267,15 @@ int main(void)
 			  HAL_Delay(1200);
 			  pl_obj.log_flag=true;
 			  wall_obj.wall_log_flag=true;
-			  //App_Set_Command(FF_Test_Stra_1);
-			  issue_obj.DebugWallBreak();
+//			  App_Set_Command(first_Stra,1,0,500,500);
+//			  App_Set_Command(FF_Test_Stra_1);
+//			  issue_obj.DebugWallBreak();
+//			  application::App_Set_Command(S_Wall_Break,1,500,500,500);
 
-			  //App_Set_Command(FF_Test_Stra_2);
+			  App_Set_Command(FF_Test_Stra_2);
 			  //App_Set_Command(FF_Test_Senkai_1);
 			  //App_Set_Command(FF_Test_Senkai_2);
 //			  App_Set_Command(Stra);
-//			  App_Set_Command(Stra_ac_180);
 //			  application::App_Set_Command(S_Diag_in135_L_foff);
 //			  application::App_Set_Command(S_Diag_in135_L);
 //			  application::App_Set_Command(S_Diag_in135_L_boff);

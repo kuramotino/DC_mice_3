@@ -300,8 +300,8 @@ namespace controll
 			case Stra_ac_180:
 				bu_tar_a=12000;//1目標加速度
 				bu_tar_v_start=0;//2目標初速度
-				bu_tar_v_max=1000;//3目標最高速度
-				bu_tar_v_end=1000;//4目標終端速度
+				bu_tar_v_max=500;//3目標最高速度
+				bu_tar_v_end=500;//4目標終端速度
 				bu_tar_x=180;//5目標距離
 				gv=500;//6重心速度
 				MoveVec=true;//前進
@@ -314,8 +314,8 @@ namespace controll
 
 			case Stra_de_180:
 				bu_tar_a=12000;//1目標加速度
-				bu_tar_v_start=1000;//2目標初速度
-				bu_tar_v_max=1000;//3目標最高速度
+				bu_tar_v_start=500;//2目標初速度
+				bu_tar_v_max=500;//3目標最高速度
 				bu_tar_v_end=0;//4目標終端速度
 				bu_tar_x=180;//5目標距離
 				gv=500;//6重心速度
@@ -408,9 +408,9 @@ namespace controll
 
 			case FF_Test_Stra_1:
 				bu_tar_a=12000;//1目標加速度
-				bu_tar_v_start=0;//2目標初速度
-				bu_tar_v_max=1000;//3目標最高速度
-				bu_tar_v_end=0;//4目標終端速度
+				bu_tar_v_start=500;//2目標初速度
+				bu_tar_v_max=500;//3目標最高速度
+				bu_tar_v_end=500;//4目標終端速度
 				bu_tar_x=90;//5目標距離862
 				gv=500;//6重心速度
 				breakwall_start_offset=90;//8壁切れ制御開始時に中心線から90mm進んだ位置にいる
@@ -430,13 +430,13 @@ namespace controll
 				bu_tar_v_start=0;//2目標初速度
 				bu_tar_v_max=500;//3目標最高速度
 				bu_tar_v_end=0;//4目標終端速度
-				bu_tar_x=1800;//5目標距離/2700
+				bu_tar_x=635;//5目標距離/2700
 				gv=500;//6重心速度
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
 				isPID_Stop=false;//PIDをstopさせるか
-				isWall_PID_Stop=false;//壁制御のPIDをstopさせるか
+				isWall_PID_Stop=true;//壁制御のPIDをstopさせるか
 				isTurn=false;//turnかどうか
 				break;
 
@@ -911,7 +911,7 @@ namespace controll
 				gv=500;//6重心速度
 				turn_start_ad=95;//7前壁制御でターンを始めるAD値/215
 				breakwall_start_offset=90;//8壁切れ制御開始時に中心線から90mm進んだ位置にいる
-				isBreakWall=false;//壁切れを見る
+				isBreakWall=true;//壁切れを見る
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
@@ -932,7 +932,7 @@ namespace controll
 				gv=500;//6重心速度
 				turn_start_ad=95;//7前壁制御でターンを始めるAD値/215
 				breakwall_start_offset=90;//8壁切れ制御開始時に中心線から90mm進んだ位置にいる
-				isBreakWall=false;//壁切れを見る
+				isBreakWall=true;//壁切れを見る
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
@@ -1117,7 +1117,7 @@ namespace controll
 				gv=500;//6重心速度
 				turn_start_ad=100;//7前壁制御でターンを始めるAD値/215
 				breakwall_start_offset=90;//8壁切れ制御開始時に中心線から90mm進んだ位置にいる
-				isBreakWall=false;//壁切れを見る
+				isBreakWall=true;//壁切れを見る
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
@@ -1138,7 +1138,7 @@ namespace controll
 				gv=500;//6重心速度
 				turn_start_ad=100;//7前壁制御でターンを始めるAD値/215
 				breakwall_start_offset=90;//8壁切れ制御開始時に中心線から90mm進んだ位置にいる
-				isBreakWall=false;//壁切れを見る
+				isBreakWall=true;//壁切れを見る
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
