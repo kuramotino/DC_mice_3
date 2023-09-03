@@ -267,12 +267,14 @@ int main(void)
 			  HAL_Delay(1200);
 			  pl_obj.log_flag=true;
 			  wall_obj.wall_log_flag=true;
-//			  App_Set_Command(first_Stra,1,0,500,500);
+//			  App_Set_Command(first_Stra,1,0,1000,1000);
 //			  App_Set_Command(FF_Test_Stra_1);
 //			  issue_obj.DebugWallBreak();
+//			  App_Set_Command(Stra_de_70);
+			  issue_obj.DebugDiagBW();
 //			  application::App_Set_Command(S_Wall_Break,1,500,500,500);
 
-			  App_Set_Command(FF_Test_Stra_2);
+//			  App_Set_Command(FF_Test_Stra_2);
 			  //App_Set_Command(FF_Test_Senkai_1);
 			  //App_Set_Command(FF_Test_Senkai_2);
 //			  App_Set_Command(Stra);
@@ -345,7 +347,7 @@ int main(void)
 
 	  }
 
-	  if(input_obj.g_sensor_now[3]>300)//450
+	  if(input_obj.g_sensor_now[3]>300 && input_obj.g_sensor_now[1]>150)//450
 	  {
 		  isStart[mode]=true;
 	  }

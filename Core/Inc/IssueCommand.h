@@ -43,6 +43,7 @@ namespace Algorizm
 		void SetPlan(Planning* plan);
 		void SetPassGene(Pass_Generator* bu_pass);
 		void DebugWallBreak();
+		void DebugDiagBW();
 	};
 }
 

@@ -203,7 +203,15 @@ namespace Algorizm
 				}
 				else if (nextpass <= -100)
 				{
-					application::App_Set_Command(s_param.Diag_Stra,nextpass/(-100),conect_v_start,s_param.MAX_DIAG_V,conect_v_end);
+					isContinueStra=true;
+					while(1)
+					{
+						application::App_Set_Command(s_param.Diag_Stra,nextpass/(-100),conect_v_start,s_param.MAX_DIAG_V,conect_v_end);
+						if(!isContinueStra)
+						{
+							break;
+						}
+					}
 				}
 				else if (nextpass == -2)
 				{
@@ -379,7 +387,20 @@ namespace Algorizm
 		isContinueStra=true;
 		while(1)
 		{
-			application::App_Set_Command(FF_Test_Stra_1,10,0,500,0);//30
+			application::App_Set_Command(FF_Test_Stra_1,2,1000,1000,1000);//30
+			if(!isContinueStra)
+			{
+				break;
+			}
+		}
+	}
+
+	void IssueCommand::DebugDiagBW()
+	{
+		isContinueStra=true;
+		while(1)
+		{
+			application::App_Set_Command(S_Diag_Stra,4,0,500,0);
 			if(!isContinueStra)
 			{
 				break;

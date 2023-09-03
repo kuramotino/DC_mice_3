@@ -39,6 +39,12 @@ namespace controll
 		uint16_t RIGHT_SLESHOLD=80;//3右壁のセンサー閾値
 		uint16_t LEFT_SIDE_SLESHOLD=400;//4左側面のセンサー閾値
 		uint16_t RIGHT_SIDE_SLESHOLD=300;//5右側面のセンサー閾値
+		uint16_t LEFT_DIAG_SLESHOLD=0;//4左側面のセンサー閾値/100
+		uint16_t RIGHT_DIAG_SLESHOLD=0;//5右側面のセンサー閾値/140
+		uint16_t LEFT_POLL_DIAG_SLESHOLD=30;//6左斜めのセンサー閾値
+		uint16_t RIGHT_POLL_DIAG_SLESHOLD=25;//7右斜めのセンサー閾値
+		uint16_t LEFT_POLL_SIDE_SLESHOLD=400;//8左側面のセンサー閾値
+		uint16_t RIGHT_POLL_SIDE_SLESHOLD=250;//9右側面のセンサー閾値
 	};
 }
 

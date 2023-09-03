@@ -49,6 +49,8 @@ namespace controll
 		bool isSenkaiOffset=false;//Uターンのときにオフセットを調整するか
 		bool isBreakWall=false;//壁切れを見るか
 		bool isBreakWallStra=false;//壁切れ後の直進かどうか
+		bool isDiagBreakWall=false;//斜めの壁切れを見るか
+		bool isDiagBreakWallStra=false;//斜めの壁切れ後の直進かどうか
 		bool isCalSideWall=false;//袋小路での位置補正を行うかどうか
 		bool isHitWall=false;//袋小路で壁当てを行うかどうか
 		bool isSmooth=false;//オフセットをなめらかに接続させるかどうか

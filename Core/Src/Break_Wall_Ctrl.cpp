@@ -57,30 +57,30 @@ namespace controll
 				isdxBreak=true;
 				isExistWall_R=(my_input->g_sensor_now[3]>my_input->RIGHT_SLESHOLD)?true:false;
 				isExistWall_L=(my_input->g_sensor_now[1]>my_input->LEFT_SLESHOLD)?true:false;
-				if(isExistWall_R || isExistWall_L)
-				{
-					sum_x-=diag_breakwall_offset;
-					float set_break_x=end_pos-sum_x;
-					set_break_x=(set_break_x<=0)?0:set_break_x;
-					my_kasoku->Receive_Wall_Break_Offset(set_break_x);
-					my_kasoku->Set_Pre_v();
-					status_off(Forced_End);
-				}
+//				if(isExistWall_R || isExistWall_L)
+//				{
+//					sum_x-=diag_breakwall_offset;
+//					float set_break_x=end_pos-sum_x;
+//					set_break_x=(set_break_x<=0)?0:set_break_x;
+//					my_kasoku->Receive_Wall_Break_Offset(set_break_x);
+//					my_kasoku->Set_Pre_v();
+//					status_off(Forced_End);
+//				}
 			}
 			else if(now_cm.bu_tar_x-sum_x<=threshold_sum_x && !isWallBreaked && !isdxBreak)
 			{
 				isdxBreak=true;
 				isExistWall_R=(my_input->g_sensor_now[3]>my_input->RIGHT_SLESHOLD)?true:false;
 				isExistWall_L=(my_input->g_sensor_now[1]>my_input->LEFT_SLESHOLD)?true:false;
-				if(isExistWall_R || isExistWall_L)
-				{
-					sum_x-=diag_breakwall_offset;
-					float set_break_x=now_cm.bu_tar_x-sum_x;
-					set_break_x=(set_break_x<=0)?0:set_break_x;
-					my_kasoku->Receive_Wall_Break_Offset(set_break_x);
-					my_kasoku->Set_Pre_v();
-					status_off(Forced_End);
-				}
+//				if(isExistWall_R || isExistWall_L)
+//				{
+//					sum_x-=diag_breakwall_offset;
+//					float set_break_x=now_cm.bu_tar_x-sum_x;
+//					set_break_x=(set_break_x<=0)?0:set_break_x;
+//					my_kasoku->Receive_Wall_Break_Offset(set_break_x);
+//					my_kasoku->Set_Pre_v();
+//					status_off(Forced_End);
+//				}
 			}
 
 			if(my_input->g_sensor_diff_sum_l>my_input->LEFT_SIDE_SLESHOLD && OKPollDetect && !isdxBreak)//sensor0が左の柱を検知したとき
@@ -113,7 +113,7 @@ namespace controll
 				my_kasoku->Set_Pre_v();
 				status_off(Forced_End);
 			}
-			else if(my_input->g_sensor_now[1]<my_input->LEFT_SLESHOLD && isExistWall_L && isdxBreak)//sensor1が左の壁切れを検知したとき
+			else if(my_input->g_sensor_now[1]<my_input->LEFT_DIAG_SLESHOLD && isExistWall_L && isdxBreak)//sensor1が左の壁切れを検知したとき
 			{
 				blocknum=(!isWallBreaked)?(int)(((int)(sum_x)+(int)(80))/((int)(180))):(int)(((int)(sum_x))/((int)(180)));
 				led_obj.set_all_led(0b01000000);
@@ -127,7 +127,7 @@ namespace controll
 				my_kasoku->Set_Pre_v();
 				status_off(Forced_End);
 			}
-			else if(my_input->g_sensor_now[3]<my_input->RIGHT_SLESHOLD && isExistWall_R && isdxBreak)//sensor3が右の壁切れを検知したとき
+			else if(my_input->g_sensor_now[3]<my_input->RIGHT_DIAG_SLESHOLD && isExistWall_R && isdxBreak)//sensor3が右の壁切れを検知したとき
 			{
 				blocknum=(!isWallBreaked)?(int)(((int)(sum_x)+(int)(80))/((int)(180))):(int)(((int)(sum_x))/((int)(180)));
 				led_obj.set_all_led(0b10000000);

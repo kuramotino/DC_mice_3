@@ -268,11 +268,11 @@ namespace controll
 				break;
 
 			case Stra_de_70:
-				bu_tar_a=3000;//1目標加速度
-				bu_tar_v_start=500;//2目標初速度
-				bu_tar_v_max=500;//3目標最高速度
+				bu_tar_a=12000;//1目標加速度
+				bu_tar_v_start=1000;//2目標初速度
+				bu_tar_v_max=1000;//3目標最高速度
 				bu_tar_v_end=0;//4目標終端速度
-				bu_tar_x=160;//5目標距離
+				bu_tar_x=90;//5目標距離
 				gv=500;//6重心速度
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
@@ -436,7 +436,7 @@ namespace controll
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
 				isPID_Stop=false;//PIDをstopさせるか
-				isWall_PID_Stop=true;//壁制御のPIDをstopさせるか
+				isWall_PID_Stop=false;//壁制御のPIDをstopさせるか
 				isTurn=false;//turnかどうか
 				break;
 
@@ -662,9 +662,9 @@ namespace controll
 				bu_tar_v_end=1000;//4目標終端速度
 				bu_tar_x=100;//5目標距離
 				gv=500;//6重心速度
-				turn_start_ad=120;//7前壁制御でターンを始めるAD値
+				turn_start_ad=90;//7前壁制御でターンを始めるAD値
 				breakwall_start_offset=90;//8壁切れ制御開始時に中心線から90mm進んだ位置にいる
-				isBreakWall=true;//壁切れを見る
+				isBreakWall=false;//壁切れを見る
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
@@ -682,9 +682,9 @@ namespace controll
 				bu_tar_v_end=1000;//4目標終端速度
 				bu_tar_x=100;//5目標距離
 				gv=500;//6重心速度
-				turn_start_ad=120;//7前壁制御でターンを始めるAD値
+				turn_start_ad=90;//7前壁制御でターンを始めるAD値
 				breakwall_start_offset=90;//8壁切れ制御開始時に中心線から90mm進んだ位置にいる
-				isBreakWall=true;//壁切れを見る
+				isBreakWall=false;//壁切れを見る
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
@@ -909,9 +909,9 @@ namespace controll
 				bu_tar_v_end=1000;//4目標終端速度
 				bu_tar_x=100;//5目標距離
 				gv=500;//6重心速度
-				turn_start_ad=95;//7前壁制御でターンを始めるAD値/215
+				turn_start_ad=90;//7前壁制御でターンを始めるAD値/215
 				breakwall_start_offset=90;//8壁切れ制御開始時に中心線から90mm進んだ位置にいる
-				isBreakWall=true;//壁切れを見る
+				isBreakWall=false;//壁切れを見る
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
@@ -930,9 +930,9 @@ namespace controll
 				bu_tar_v_end=1000;//4目標終端速度
 				bu_tar_x=100;//5目標距離
 				gv=500;//6重心速度
-				turn_start_ad=95;//7前壁制御でターンを始めるAD値/215
+				turn_start_ad=90;//7前壁制御でターンを始めるAD値/215
 				breakwall_start_offset=90;//8壁切れ制御開始時に中心線から90mm進んだ位置にいる
-				isBreakWall=true;//壁切れを見る
+				isBreakWall=false;//壁切れを見る
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
@@ -1115,9 +1115,9 @@ namespace controll
 				bu_tar_v_end=1000;//4目標終端速度
 				bu_tar_x=100;//5目標距離
 				gv=500;//6重心速度
-				turn_start_ad=100;//7前壁制御でターンを始めるAD値/215
+				turn_start_ad=83;//7前壁制御でターンを始めるAD値/215
 				breakwall_start_offset=90;//8壁切れ制御開始時に中心線から90mm進んだ位置にいる
-				isBreakWall=true;//壁切れを見る
+				isBreakWall=false;//壁切れを見る
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
@@ -1136,9 +1136,9 @@ namespace controll
 				bu_tar_v_end=1000;//4目標終端速度
 				bu_tar_x=100;//5目標距離
 				gv=500;//6重心速度
-				turn_start_ad=100;//7前壁制御でターンを始めるAD値/215
+				turn_start_ad=83;//7前壁制御でターンを始めるAD値/215
 				breakwall_start_offset=90;//8壁切れ制御開始時に中心線から90mm進んだ位置にいる
-				isBreakWall=true;//壁切れを見る
+				isBreakWall=false;//壁切れを見る
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
@@ -1319,7 +1319,7 @@ namespace controll
 				bu_tar_v_start=1000;//2目標初速度
 				bu_tar_v_max=1000;//3目標最高速度
 				bu_tar_v_end=1000;//4目標終端速度
-				bu_tar_x=20;//5目標距離
+				bu_tar_x=8;//5目標距離
 				gv=500;//6重心速度
 				turn_start_ad=175;//7前壁制御でターンを始めるAD値/215
 				MoveVec=true;//前進
@@ -1338,7 +1338,7 @@ namespace controll
 				bu_tar_v_start=1000;//2目標初速度
 				bu_tar_v_max=1000;//3目標最高速度
 				bu_tar_v_end=1000;//4目標終端速度
-				bu_tar_x=20;//5目標距離
+				bu_tar_x=8;//5目標距離
 				gv=500;//6重心速度
 				turn_start_ad=175;//7前壁制御でターンを始めるAD値/215
 				MoveVec=true;//前進
@@ -1427,6 +1427,9 @@ namespace controll
 				isPID_Stop=false;//PIDをstopさせるか
 				isWall_PID_Stop=true;//壁制御のPIDをstopさせるか
 				isTurn=false;//turnかどうか
+				isDiagBreakWall=true;//斜めの壁切れを見るか
+				isDiagBreakWallStra=true;//斜めの壁切れ後の直線かどうか
+				isSmooth=true;//なめらかにつなぐ
 				break;
 
 			case S_Wall_Break:

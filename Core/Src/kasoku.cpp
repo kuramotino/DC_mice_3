@@ -32,7 +32,7 @@ namespace controll
 		target_v_end=now_cm.bu_tar_v_end;//終端速度
 		target_x=(now_cm.isSetBackOffset) ? now_cm.bu_tar_x+add_back_offset : now_cm.bu_tar_x;//目標距離
 		add_back_offset=(target_x!=now_cm.bu_tar_x) ? 0 : add_back_offset;//もし使ったら後距離の補正量をリセット
-		target_x=(now_cm.isBreakWallStra)?break_wall_offset:target_x;//壁切れ後の直進なら距離を変更
+		target_x=(now_cm.isBreakWallStra || now_cm.isDiagBreakWallStra)?break_wall_offset:target_x;//壁切れ後の直進なら距離を変更
 		//break_wall_offset=(now_cm.isBreakWallStra && target_x!=now_cm.bu_tar_x) ? 0 : break_wall_offset;//もし使ったなら壁切れ後の距離をリセット
 		break_wall_offset=0;//0壁切れ後の距離をリセット
 

@@ -16,7 +16,7 @@ namespace controll
 	{
 		float l_side_offset=153;//1左壁の切れ目から27mm進む(sensor0で左の壁切れを見たとき、中心線から153mm進んだ位置にいる)
 		float r_side_offset=160;//2右壁の切れ目から20mm進む(sensor4で右の壁切れを見たとき、中心線から160mm進んだ位置にいる)
-		float l_diag_offset=71;//1左壁の切れ目から109mm進む(sensor1で左の壁切れを見たとき、中心線から71mm進んだ位置にいる)
+		float l_diag_offset=76;//1左壁の切れ目から109mm進む(sensor1で左の壁切れを見たとき、中心線から71mm進んだ位置にいる)
 		float r_diag_offset=76;//2右壁の切れ目から104mm進む(sensor3で右の壁切れを見たとき、中心線から76mm進んだ位置にいる)
 		float end_pos=0;//3中心線を基準とした到達位置
 		float sum_x=0;
@@ -30,7 +30,7 @@ namespace controll
 		bool isWallBreaked=false;
 		bool isRecursive=false;//再帰的に壁切れを見るか
 		bool preRecursive=false;
-		float diag_breakwall_offset=30;//6残り90での壁切れ時にどれだけ直進を追加するか
+		float diag_breakwall_offset=0;//6残り90での壁切れ時にどれだけ直進を追加するか
 
 	public:
 		void updata(Command cm);//overrideする

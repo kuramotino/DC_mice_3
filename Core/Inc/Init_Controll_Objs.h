@@ -24,6 +24,7 @@
 #include "Back_Offset_Ctrl.h"
 #include "Senkai_Offset_Ctrl.h"
 #include "Break_Wall_Ctrl.h"
+#include "Diag_BW_Ctrl.h"
 #include "Wall_Hit_Ctrl.h"
 
 extern controll::CommandExecuter cx_obj;
@@ -44,6 +45,7 @@ extern controll::Front_Offset_Ctrl front_offset_obj;
 extern controll::Back_Offset_Ctrl back_offset_obj;
 extern controll::Senkai_Offset_Ctrl senkai_offset_obj;
 extern controll::Break_Wall_Ctrl break_wall_obj;
+extern controll::Diag_BW_Ctrl diag_bw_obj;
 extern controll::Wall_Hit_Ctrl hit_ctrl_obj;
 
 void Init_Controll();

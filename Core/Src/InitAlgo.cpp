@@ -47,7 +47,7 @@ void M_UpDataAlgo(int index)
 	issue_obj.Saitan(index);
 	if(fail_obj.isFail)
 	{
-		plan_obj.UndoMazeData();
+		//plan_obj.UndoMazeData();
 	}
 }
 
@@ -57,6 +57,6 @@ void No_Zip_M_UpDataAlgo(int index)
 	issue_obj.Saitan(index);
 	if(fail_obj.isFail)
 	{
-		plan_obj.UndoMazeData();
+		//plan_obj.UndoMazeData();
 	}
 }
