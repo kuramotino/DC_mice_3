@@ -36,6 +36,7 @@ namespace controll
 		void status_off(enum status st);
 		virtual void transmit(float message);
 		virtual void receive(float message);
+		virtual int RetData();
 	};
 }
 

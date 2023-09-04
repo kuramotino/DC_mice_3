@@ -400,7 +400,7 @@ namespace Algorizm
 		isContinueStra=true;
 		while(1)
 		{
-			application::App_Set_Command(S_Diag_Stra,4,0,500,0);
+			application::App_Set_Command(S_Diag_Stra,10,0,500,0);
 			if(!isContinueStra)
 			{
 				break;

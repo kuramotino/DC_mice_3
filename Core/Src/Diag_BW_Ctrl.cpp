@@ -88,6 +88,7 @@ namespace controll
 					my_kasoku->Receive_Wall_Break_Offset(set_break_x);
 					my_kasoku->Set_Pre_v();
 					status_off(Forced_End);
+					BW_Status=2;
 				}
 				else
 				{
@@ -108,6 +109,7 @@ namespace controll
 					my_kasoku->Receive_Wall_Break_Offset(set_break_x);
 					my_kasoku->Set_Pre_v();
 					status_off(Forced_End);
+					BW_Status=1;
 				}
 				else
 				{
@@ -133,5 +135,12 @@ namespace controll
 				my_ctrlwin->Set_ContinueStra(false);
 			}
 		}
+	}
+
+	int controll::Diag_BW_Ctrl::RetData()
+	{
+		int bu_status=BW_Status;
+		BW_Status=0;
+		return bu_status;
 	}
 }

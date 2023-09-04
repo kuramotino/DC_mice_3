@@ -25,6 +25,7 @@ controll::Back_Offset_Ctrl back_offset_obj;
 controll::Senkai_Offset_Ctrl senkai_offset_obj;
 controll::Break_Wall_Ctrl break_wall_obj;
 controll::Diag_BW_Ctrl diag_bw_obj;
+controll::Diag_Wall_Ctrl diag_wall_obj;
 controll::Wall_Hit_Ctrl hit_ctrl_obj;
 bool init_flag=false;
 using namespace controll;
@@ -39,6 +40,7 @@ void Init_Controll()//controll,module名前空間のオブジェクトたちを�
 	cx_obj.addCtrl(&senkai_offset_obj);
 	cx_obj.addCtrl(&break_wall_obj);
 	cx_obj.addCtrl(&diag_bw_obj);
+	cx_obj.addCtrl(&diag_wall_obj);
 	cx_obj.addCtrl(&hit_ctrl_obj);
 	cx_obj.add_kasoku_PWM(&ksk_obj, &pwm_obj);
 	cx_obj.set_cs(&cs_obj);
@@ -60,6 +62,9 @@ void Init_Controll()//controll,module名前空間のオブジェクトたちを�
 	senkai_offset_obj.SetBackOffset(&back_offset_obj);
 	break_wall_obj.add_obj(&ksk_obj, &pwm_obj, &input_obj, &cs_obj,&issue_obj);
 	diag_bw_obj.add_obj(&ksk_obj, &pwm_obj, &input_obj, &cs_obj, &issue_obj);
+	diag_wall_obj.add_obj(&ksk_obj, &pwm_obj, &input_obj, &cs_obj);
+	diag_wall_obj.SetPIDCtrl(&pid_obj);
+	diag_wall_obj.SetDiagBW(&diag_bw_obj);
 	hit_ctrl_obj.add_obj(&ksk_obj, &pwm_obj, &input_obj, &cs_obj, &issue_obj);
 	init_flag=true;
 }
@@ -82,6 +87,7 @@ void Sync_Module()//TIM6の割り込み処理
 	ksk_obj.transmit_pwm();//isKasokuEnd==trueならCommandStatusをオフにする
 	fail_obj.FailStop();
 	wall_obj.transmit_Wall_PID();
+	diag_wall_obj.transmit_DiagWall_PID();
 	pid_obj.PID();
 	pwm_obj.pwm();
 	Sync_Mo_R();

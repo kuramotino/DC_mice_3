@@ -1430,6 +1430,7 @@ namespace controll
 				isDiagBreakWall=true;//斜めの壁切れを見るか
 				isDiagBreakWallStra=true;//斜めの壁切れ後の直線かどうか
 				isSmooth=true;//なめらかにつなぐ
+				isDiagWallPID=true;//斜めの壁制御を行う
 				break;
 
 			case S_Wall_Break:

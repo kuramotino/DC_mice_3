@@ -50,4 +50,9 @@ namespace controll
 	{
 
 	}
+
+	int controll::BaseCtrl::RetData()
+	{
+
+	}
 }

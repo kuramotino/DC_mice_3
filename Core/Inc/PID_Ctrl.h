@@ -31,6 +31,7 @@ namespace controll
 		float gy_delta_error;//前回と今回のerrorの差分
 
 		float gy_wall_pid;//角速度に入れる壁制御量
+		float gy_diagwall_pid=0;//角速度に入れる壁制御量
 
 		float V_bat=8.4;//8.4V:電源電圧
 
@@ -67,6 +68,7 @@ namespace controll
 		void PID();//PID値を計算する
 		void updata(Command cm);//overrideする
 		void receive(float message);//壁制御の角速度を取得する、Wall_Controllから呼ばれる
+		void transmit(float message);//壁制御の角速度を取得する、Diag_Wall_Controllから呼ばれる
 	};
 }
 

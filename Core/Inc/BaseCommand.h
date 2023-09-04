@@ -54,6 +54,7 @@ namespace controll
 		bool isCalSideWall=false;//袋小路での位置補正を行うかどうか
 		bool isHitWall=false;//袋小路で壁当てを行うかどうか
 		bool isSmooth=false;//オフセットをなめらかに接続させるかどうか
+		bool isDiagWallPID=false;//斜めの壁制御を行うかどうか
 
 	public:
 		Command();

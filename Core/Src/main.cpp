@@ -271,7 +271,7 @@ int main(void)
 //			  App_Set_Command(FF_Test_Stra_1);
 //			  issue_obj.DebugWallBreak();
 //			  App_Set_Command(Stra_de_70);
-			  issue_obj.DebugDiagBW();
+//			  issue_obj.DebugDiagBW();
 //			  application::App_Set_Command(S_Wall_Break,1,500,500,500);
 
 //			  App_Set_Command(FF_Test_Stra_2);
@@ -286,7 +286,10 @@ int main(void)
 //			  application::App_Set_Command(Saitan_OO_90_boff_L);
 //			  App_Set_Command(Front_offset);
 //			  App_Set_Command(Left_sla);
-//			  //App_Set_Command(Right_sen);
+			  for(int i=0;i<10;i++)
+			  {
+			  App_Set_Command(Right_sen);
+			  }
 //			  App_Set_Command(Left_b_off);
 //			  application::App_Set_Command(S_Diag_Stra);
 //			  App_Set_Command(Stra_de_180);

@@ -63,6 +63,7 @@ namespace controll
 				fb_stra=1/V_bat/(10*10*10)*(Ksp*enc_error+Ksi*enc_sigma_error+Ksd*enc_delta_error);
 
 				gy_error= (now_cm.isWall_PID_Stop) ? now_omega-ccw*omega_gyro : now_omega-ccw*omega_gyro+gy_wall_pid;
+				gy_error=(now_cm.isDiagWallPID)?now_omega-ccw*omega_gyro+gy_diagwall_pid:gy_error;
 				gy_error=(ccw==-1)?0:gy_error;
 				gy_delta_error=gy_error-gy_old_error;
 				gy_old_error=gy_error;
@@ -142,6 +143,11 @@ namespace controll
 	void controll::PID_Ctrl::receive(float message)//壁制御の角速度を取得する、Wall_Controllから呼ばれる
 	{
 		gy_wall_pid=message;
+	}
+
+	void controll::PID_Ctrl::transmit(float message)//壁制御の角速度を取得する、Diag_Wall_Controllから呼ばれる
+	{
+		gy_diagwall_pid=message;
 	}
 }
 
