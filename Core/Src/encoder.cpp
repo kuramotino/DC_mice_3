@@ -56,8 +56,8 @@ namespace module
 	{
 		enc_count_r=pl_count_encoderR();
 		enc_count_l=pl_count_encoderL();
-		sum_enc_r+=enc_count_r;
-		sum_enc_l+=enc_count_l;
+		sum_enc_r+=(int)enc_count_r;
+		sum_enc_l+=(int)enc_count_l;
 		enc_v_R=(float)enc_count_r*180/enc_unit_count_r/0.001;//2*PI*TaiyaDirmeterをかける72896
 		enc_v_L=(float)enc_count_l*180/enc_unit_count_l/0.001;//2*PI*TaiayDirmeterをかける71673
 		v_encoder=fabs((enc_v_R+enc_v_L)/2);//1重心の速度を求める

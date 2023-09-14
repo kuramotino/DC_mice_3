@@ -112,22 +112,24 @@ void Sync_Mo_R()//右モータの割り込み処理
 		cw_L=Front;
 	}
 
-	if(duty_r==0 && cx_obj.return_now_status()==Run)
-	{
-		if(cw_R==Front)
-		{
-			__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_4,(uint16_t)(3));
-			__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_3,0);
-			__HAL_TIM_SET_COUNTER(&htim3, 0);
-		}
-		else if(cw_R==Back)
-		{
-			__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_4,0);
-			__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_3,(uint16_t)(3));
-			__HAL_TIM_SET_COUNTER(&htim3, 0);
-		}
-		return;
-	}
+//	if(duty_r==0 && cx_obj.return_now_status()==Run)
+//	{
+//		if(cw_R==Front)
+//		{
+//			__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_4,(uint16_t)(3));
+//			__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_3,0);
+//			__HAL_TIM_SET_COUNTER(&htim3, 0);
+//		}
+//		else if(cw_R==Back)
+//		{
+//			__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_4,0);
+//			__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_3,(uint16_t)(3));
+//			__HAL_TIM_SET_COUNTER(&htim3, 0);
+//		}
+//		return;
+//	}
+//	duty_r=(cx_obj.return_now_status()==Run)?0.25:0;
+//	cw_R=Front;
 
 	if(cw_R==Front)
 	{
@@ -160,22 +162,24 @@ void Sync_Mo_L()//左モータの割り込み処理
 		cw_L=Front;
 	}
 
-	if(duty_l==0 && cx_obj.return_now_status()==Run)
-	{
-		if(cw_L==Front)
-		{
-			__HAL_TIM_SET_COMPARE(&htim12,TIM_CHANNEL_1,(uint16_t)(3));
-			__HAL_TIM_SET_COMPARE(&htim12,TIM_CHANNEL_2,0);
-			__HAL_TIM_SET_COUNTER(&htim12, 0);
-		}
-		else if(cw_L==Back)
-		{
-			__HAL_TIM_SET_COMPARE(&htim12,TIM_CHANNEL_1,0);
-			__HAL_TIM_SET_COMPARE(&htim12,TIM_CHANNEL_2,(uint16_t)(3));
-			__HAL_TIM_SET_COUNTER(&htim12, 0);
-		}
-		return;
-	}
+//	if(duty_l==0 && cx_obj.return_now_status()==Run)
+//	{
+//		if(cw_L==Front)
+//		{
+//			__HAL_TIM_SET_COMPARE(&htim12,TIM_CHANNEL_1,(uint16_t)(3));
+//			__HAL_TIM_SET_COMPARE(&htim12,TIM_CHANNEL_2,0);
+//			__HAL_TIM_SET_COUNTER(&htim12, 0);
+//		}
+//		else if(cw_L==Back)
+//		{
+//			__HAL_TIM_SET_COMPARE(&htim12,TIM_CHANNEL_1,0);
+//			__HAL_TIM_SET_COMPARE(&htim12,TIM_CHANNEL_2,(uint16_t)(3));
+//			__HAL_TIM_SET_COUNTER(&htim12, 0);
+//		}
+//		return;
+//	}
+//	duty_l=(cx_obj.return_now_status()==Run)?0.25:0;
+//	cw_L=Back;
 
 	if(cw_L==Front)
 	{

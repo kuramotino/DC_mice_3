@@ -176,13 +176,20 @@ namespace Algorizm
 					if(!isPass)
 					{
 						application::App_Set_Command(s_param.F_Stra,1,0,conect_v_end,conect_v_end);
-						while(1)
+						if(s_param.isBW)
+						{
+							while(1)
+							{
+								application::App_Set_Command(s_param.S_Stra,nextpass-1,conect_v_end,s_param.MAX_V,conect_v_end);
+								if(!isContinueStra)
+								{
+									break;
+								}
+							}
+						}
+						else
 						{
 							application::App_Set_Command(s_param.S_Stra,nextpass-1,conect_v_end,s_param.MAX_V,conect_v_end);
-							if(!isContinueStra)
-							{
-								break;
-							}
 						}
 					}
 					else if(my_pass->Ret_NextPass()==0)
@@ -191,13 +198,20 @@ namespace Algorizm
 					}
 					else
 					{
-						while(1)
+						if(s_param.isBW)
+						{
+							while(1)
+							{
+								application::App_Set_Command(s_param.S_Stra,nextpass,conect_v_start,s_param.MAX_V,conect_v_end);
+								if(!isContinueStra)
+								{
+									break;
+								}
+							}
+						}
+						else
 						{
 							application::App_Set_Command(s_param.S_Stra,nextpass,conect_v_start,s_param.MAX_V,conect_v_end);
-							if(!isContinueStra)
-							{
-								break;
-							}
 						}
 					}
 				}
@@ -218,18 +232,22 @@ namespace Algorizm
 //					application::App_Set_Command(Saitan_Left_f_off);
 //					application::App_Set_Command(Left_sla);
 //					application::App_Set_Command(Left_b_off);
-					application::App_Set_Command(Saitan_KO_90_foff);
-					application::App_Set_Command(Saitan_KO_90_L);
-					application::App_Set_Command(Saitan_KO_90_boff);
+					conect_v_start = (conect_v_start==0) ? s_param.TURN_V : conect_v_start;
+					conect_v_end = (conect_v_end==0) ? s_param.TURN_V : conect_v_end;
+					application::App_Set_Command(s_param.KO_90_L_foff,1,conect_v_start,s_param.TURN_V,s_param.TURN_V);
+					application::App_Set_Command(s_param.KO_90_L);
+					application::App_Set_Command(s_param.KO_90_L_boff,1,s_param.TURN_V,s_param.TURN_V,conect_v_end);
 				}
 				else if (nextpass == -3)
 				{
 //					application::App_Set_Command(Saitan_Right_f_off);
 //					application::App_Set_Command(Right_sla);
 //					application::App_Set_Command(Right_b_off);
-					application::App_Set_Command(Saitan_KO_90_foff);
-					application::App_Set_Command(Saitan_KO_90_R);
-					application::App_Set_Command(Saitan_KO_90_boff);
+					conect_v_start = (conect_v_start==0) ? s_param.TURN_V : conect_v_start;
+					conect_v_end = (conect_v_end==0) ? s_param.TURN_V : conect_v_end;
+					application::App_Set_Command(s_param.KO_90_R_foff,1,conect_v_start,s_param.TURN_V,s_param.TURN_V);
+					application::App_Set_Command(s_param.KO_90_R);
+					application::App_Set_Command(s_param.KO_90_R_boff,1,s_param.TURN_V,s_param.TURN_V,conect_v_end);
 				}
 				else if (nextpass == -4)
 				{
@@ -283,6 +301,7 @@ namespace Algorizm
 					application::App_Set_Command(s_param.S_WBreak,1,s_param.Diag_in45_V,s_param.Diag_in45_V,s_param.Diag_in45_V);
 					application::App_Set_Command(s_param.Diag_in45_L);
 					application::App_Set_Command(s_param.Diag_in45_L_boff,1,s_param.Diag_in45_V,s_param.Diag_in45_V,conect_v_end);
+					application::App_Set_Command(s_param.S_D_WBreak,1,s_param.Diag_in45_V,s_param.Diag_in45_V,conect_v_end);
 				}
 				else if (nextpass == -9)
 				{
@@ -292,6 +311,7 @@ namespace Algorizm
 					application::App_Set_Command(s_param.S_WBreak,1,s_param.Diag_in45_V,s_param.Diag_in45_V,s_param.Diag_in45_V);
 					application::App_Set_Command(s_param.Diag_in45_R);
 					application::App_Set_Command(s_param.Diag_in45_R_boff,1,s_param.Diag_in45_V,s_param.Diag_in45_V,conect_v_end);
+					application::App_Set_Command(s_param.S_D_WBreak,1,s_param.Diag_in45_V,s_param.Diag_in45_V,conect_v_end);
 				}
 				else if (nextpass == -10)
 				{
@@ -301,6 +321,7 @@ namespace Algorizm
 					application::App_Set_Command(s_param.S_WBreak,1,s_param.Diag_in135_V,s_param.Diag_in135_V,s_param.Diag_in135_V);
 					application::App_Set_Command(s_param.Diag_in135_L);
 					application::App_Set_Command(s_param.Diag_in135_L_boff,1,s_param.Diag_in135_V,s_param.Diag_in135_V,conect_v_end);
+					application::App_Set_Command(s_param.S_D_WBreak,1,s_param.Diag_in135_V,s_param.Diag_in135_V,conect_v_end);
 				}
 				else if (nextpass == -11)
 				{
@@ -310,38 +331,47 @@ namespace Algorizm
 					application::App_Set_Command(s_param.S_WBreak,1,s_param.Diag_in135_V,s_param.Diag_in135_V,s_param.Diag_in135_V);
 					application::App_Set_Command(s_param.Diag_in135_R);
 					application::App_Set_Command(s_param.Diag_in135_R_boff,1,s_param.Diag_in135_V,s_param.Diag_in135_V,conect_v_end);
+					application::App_Set_Command(s_param.S_D_WBreak,1,s_param.Diag_in135_V,s_param.Diag_in135_V,conect_v_end);
 				}
 				else if (nextpass == -12)
 				{
 					conect_v_start = (conect_v_start==0) ? s_param.Diag_out45_V : conect_v_start;
 					conect_v_end = (conect_v_end==0) ? s_param.Diag_out45_V : conect_v_end;
 					application::App_Set_Command(s_param.Diag_out45_L_foff,1,conect_v_start,s_param.Diag_out45_V,s_param.Diag_out45_V);
+					application::App_Set_Command(s_param.S_D_WBreak,1,conect_v_start,s_param.Diag_out45_V,s_param.Diag_out45_V);
 					application::App_Set_Command(s_param.Diag_out45_L);
 					application::App_Set_Command(s_param.Diag_out45_L_boff,1,s_param.Diag_out45_V,s_param.Diag_out45_V,conect_v_end);
+					application::App_Set_Command(s_param.S_WBreak,1,s_param.Diag_out45_V,s_param.Diag_out45_V,conect_v_end);
 				}
 				else if (nextpass == -13)
 				{
 					conect_v_start = (conect_v_start==0) ? s_param.Diag_out45_V : conect_v_start;
 					conect_v_end = (conect_v_end==0) ? s_param.Diag_out45_V : conect_v_end;
 					application::App_Set_Command(s_param.Diag_out45_R_foff,1,conect_v_start,s_param.Diag_out45_V,s_param.Diag_out45_V);
+					application::App_Set_Command(s_param.S_D_WBreak,1,conect_v_start,s_param.Diag_out45_V,s_param.Diag_out45_V);
 					application::App_Set_Command(s_param.Diag_out45_R);
 					application::App_Set_Command(s_param.Diag_out45_R_boff,1,s_param.Diag_out45_V,s_param.Diag_out45_V,conect_v_end);
+					application::App_Set_Command(s_param.S_WBreak,1,s_param.Diag_out45_V,s_param.Diag_out45_V,conect_v_end);
 				}
 				else if (nextpass == -14)
 				{
 					conect_v_start = (conect_v_start==0) ? s_param.Diag_out135_V : conect_v_start;
 					conect_v_end = (conect_v_end==0) ? s_param.Diag_out135_V : conect_v_end;
 					application::App_Set_Command(s_param.Diag_out135_L_foff,1,conect_v_start,s_param.Diag_out135_V,s_param.Diag_out135_V);
+					application::App_Set_Command(s_param.S_D_WBreak,1,conect_v_start,s_param.Diag_out135_V,s_param.Diag_out135_V);
 					application::App_Set_Command(s_param.Diag_out135_L);
 					application::App_Set_Command(s_param.Diag_out135_L_boff,1,s_param.Diag_out135_V,s_param.Diag_out135_V,conect_v_end);
+					application::App_Set_Command(s_param.S_WBreak,1,s_param.Diag_out135_V,s_param.Diag_out135_V,conect_v_end);
 				}
 				else if (nextpass == -15)
 				{
 					conect_v_start = (conect_v_start==0) ? s_param.Diag_out135_V : conect_v_start;
 					conect_v_end = (conect_v_end==0) ? s_param.Diag_out135_V : conect_v_end;
 					application::App_Set_Command(s_param.Diag_out135_R_foff,1,conect_v_start,s_param.Diag_out135_V,s_param.Diag_out135_V);
+					application::App_Set_Command(s_param.S_D_WBreak,1,conect_v_start,s_param.Diag_out135_V,s_param.Diag_out135_V);
 					application::App_Set_Command(s_param.Diag_out135_R);
 					application::App_Set_Command(s_param.Diag_out135_R_boff,1,s_param.Diag_out135_V,s_param.Diag_out135_V,conect_v_end);
+					application::App_Set_Command(s_param.S_WBreak,1,s_param.Diag_out135_V,s_param.Diag_out135_V,conect_v_end);
 				}
 				else if (nextpass == -16)
 				{
@@ -350,6 +380,7 @@ namespace Algorizm
 					application::App_Set_Command(s_param.Diag_V90_L_foff,1,conect_v_start,s_param.Diag_V90_V,s_param.Diag_V90_V);
 					application::App_Set_Command(s_param.Diag_V90_L);
 					application::App_Set_Command(s_param.Diag_V90_L_boff,1,s_param.Diag_V90_V,s_param.Diag_V90_V,conect_v_end);
+					application::App_Set_Command(s_param.S_D_WBreak,1,s_param.Diag_V90_V,s_param.Diag_V90_V,conect_v_end);
 				}
 				else if (nextpass == -17)
 				{
@@ -358,6 +389,7 @@ namespace Algorizm
 					application::App_Set_Command(s_param.Diag_V90_R_foff,1,conect_v_start,s_param.Diag_V90_V,s_param.Diag_V90_V);
 					application::App_Set_Command(s_param.Diag_V90_R);
 					application::App_Set_Command(s_param.Diag_V90_R_boff,1,s_param.Diag_V90_V,s_param.Diag_V90_V,conect_v_end);
+					application::App_Set_Command(s_param.S_D_WBreak,1,s_param.Diag_V90_V,s_param.Diag_V90_V,conect_v_end);
 				}
 			}
 			if(nextpass==0)

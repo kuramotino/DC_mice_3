@@ -50,70 +50,86 @@ namespace controll
 
 			if(my_input->g_sensor_diff_sum_l>my_input->LEFT_POLL_SIDE_SLESHOLD && OKPollDetect && !isdxBreak)//sensor0が左の柱を検知したとき
 			{
-				blocknum=(int)(((int)(sum_x))/((int)(127)));
-				led_obj.set_all_led(0b01000000);
-				OKPollDetect=false;
-				isWallBreaked=true;
-				sum_x=(isRecursive)?l_side_offset+127*blocknum:sum_x;
-				float set_break_x=end_pos-l_side_offset-127*blocknum;
-				set_break_x=(set_break_x<=0)?0:set_break_x;
-				my_kasoku->Receive_Wall_Break_Offset(set_break_x);
-				my_kasoku->Set_Pre_v();
-				status_off(Forced_End);
-			}
-			else if(my_input->g_sensor_diff_sum_r>my_input->RIGHT_POLL_SIDE_SLESHOLD && OKPollDetect && !isdxBreak)//sensor4が右の柱を検知したとき
-			{
-				blocknum=(int)(((int)(sum_x))/((int)(127)));
-				led_obj.set_all_led(0b10000000);
-				OKPollDetect=false;
-				isWallBreaked=true;
-				sum_x=(isRecursive)?r_side_offset+127*blocknum:sum_x;
-				float set_break_x=end_pos-r_side_offset-127*blocknum;
-				set_break_x=(set_break_x<=0)?0:set_break_x;
-				my_kasoku->Receive_Wall_Break_Offset(set_break_x);
-				my_kasoku->Set_Pre_v();
-				status_off(Forced_End);
-			}
-			else if(my_input->g_sensor_now_diff[1]>my_input->LEFT_POLL_DIAG_SLESHOLD && OKPollDetect && !isdxBreak)//sensor1が左の壁切れを検知したとき
-			{
-				if(sum_x>diag_bw_th_x)
+				if(isRecursive || (!isRecursive && !now_cm.isUseDiagSensor))
 				{
 					blocknum=(int)(((int)(sum_x))/((int)(127)));
 					led_obj.set_all_led(0b01000000);
 					OKPollDetect=false;
 					isWallBreaked=true;
-					sum_x=(isRecursive)?l_diag_offset+127*blocknum:sum_x;
-					float set_break_x=end_pos-l_diag_offset-127*blocknum;
+					sum_x=(isRecursive)?l_side_offset+127*blocknum:sum_x;
+					float set_break_x=end_pos-l_side_offset-127*blocknum;
 					set_break_x=(set_break_x<=0)?0:set_break_x;
+					set_break_x=(!isRecursive)?now_cm.breakwall_left_offset:set_break_x;
 					my_kasoku->Receive_Wall_Break_Offset(set_break_x);
 					my_kasoku->Set_Pre_v();
 					status_off(Forced_End);
-					BW_Status=2;
-				}
-				else
-				{
-					OKPollDetect=false;
 				}
 			}
-			else if(my_input->g_sensor_now_diff[3]>my_input->RIGHT_POLL_DIAG_SLESHOLD && OKPollDetect && !isdxBreak)//sensor3が右の壁切れを検知したとき
+			else if(my_input->g_sensor_diff_sum_r>my_input->RIGHT_POLL_SIDE_SLESHOLD && OKPollDetect && !isdxBreak)//sensor4が右の柱を検知したとき
 			{
-				if(sum_x>diag_bw_th_x)
+				if(isRecursive || (!isRecursive && !now_cm.isUseDiagSensor))
 				{
 					blocknum=(int)(((int)(sum_x))/((int)(127)));
 					led_obj.set_all_led(0b10000000);
 					OKPollDetect=false;
 					isWallBreaked=true;
-					sum_x=(isRecursive)?r_diag_offset+127*blocknum:sum_x;
-					float set_break_x=end_pos-r_diag_offset-127*blocknum;
+					sum_x=(isRecursive)?r_side_offset+127*blocknum:sum_x;
+					float set_break_x=end_pos-r_side_offset-127*blocknum;
 					set_break_x=(set_break_x<=0)?0:set_break_x;
+					set_break_x=(!isRecursive)?now_cm.breakwall_right_offset:set_break_x;
 					my_kasoku->Receive_Wall_Break_Offset(set_break_x);
 					my_kasoku->Set_Pre_v();
 					status_off(Forced_End);
-					BW_Status=1;
 				}
-				else
+			}
+			else if(my_input->g_sensor_now_diff[1]>my_input->LEFT_POLL_DIAG_SLESHOLD && OKPollDetect && !isdxBreak)//sensor1が左の壁切れを検知したとき
+			{
+				if(isRecursive || (!isRecursive && now_cm.isUseDiagSensor))
 				{
-					OKPollDetect=false;
+					if(sum_x>diag_bw_th_x || !isRecursive)
+					{
+						blocknum=(int)(((int)(sum_x))/((int)(127)));
+						led_obj.set_all_led(0b01000000);
+						OKPollDetect=false;
+						isWallBreaked=true;
+						sum_x=(isRecursive)?l_diag_offset+127*blocknum:sum_x;
+						float set_break_x=end_pos-l_diag_offset-127*blocknum;
+						set_break_x=(set_break_x<=0)?0:set_break_x;
+						set_break_x=(!isRecursive)?now_cm.breakwall_left_offset:set_break_x;
+						my_kasoku->Receive_Wall_Break_Offset(set_break_x);
+						my_kasoku->Set_Pre_v();
+						status_off(Forced_End);
+						BW_Status=2;
+					}
+					else
+					{
+						OKPollDetect=false;
+					}
+				}
+			}
+			else if(my_input->g_sensor_now_diff[3]>my_input->RIGHT_POLL_DIAG_SLESHOLD && OKPollDetect && !isdxBreak)//sensor3が右の壁切れを検知したとき
+			{
+				if(isRecursive || (!isRecursive && now_cm.isUseDiagSensor))
+				{
+					if(sum_x>diag_bw_th_x || !isRecursive)
+					{
+						blocknum=(int)(((int)(sum_x))/((int)(127)));
+						led_obj.set_all_led(0b10000000);
+						OKPollDetect=false;
+						isWallBreaked=true;
+						sum_x=(isRecursive)?r_diag_offset+127*blocknum:sum_x;
+						float set_break_x=end_pos-r_diag_offset-127*blocknum;
+						set_break_x=(set_break_x<=0)?0:set_break_x;
+						set_break_x=(!isRecursive)?now_cm.breakwall_right_offset:set_break_x;
+						my_kasoku->Receive_Wall_Break_Offset(set_break_x);
+						my_kasoku->Set_Pre_v();
+						status_off(Forced_End);
+						BW_Status=1;
+					}
+					else
+					{
+						OKPollDetect=false;
+					}
 				}
 			}
 

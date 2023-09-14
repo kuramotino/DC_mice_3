@@ -224,7 +224,11 @@ namespace Algorizm
 	{
 		if(passcount!=254)
 		{
-			if((pass[passcount+1]==-6 || pass[passcount+1]==-4))//1現在が直進、次が大回り
+			if((pass[passcount+1]==-2 || pass[passcount+1]==-3))//1現在が直進、次がスラローム
+			{
+				*M_end_conect_v=s_param->TURN_V;
+			}
+			else if((pass[passcount+1]==-6 || pass[passcount+1]==-4))//1現在が直進、次が大回り
 			{
 				*M_end_conect_v=s_param->OO180_V;
 			}
@@ -256,7 +260,11 @@ namespace Algorizm
 
 		if(passcount!=0)
 		{
-			if((pass[passcount-1]==-6 || pass[passcount-1]==-4))//1現在が直進、一個前が大回り
+			if((pass[passcount+1]==-2 || pass[passcount+1]==-3))//1現在が直進、一個前がスラローム
+			{
+				*M_start_conect_v=s_param->TURN_V;
+			}
+			else if((pass[passcount-1]==-6 || pass[passcount-1]==-4))//1現在が直進、一個前が大回り
 			{
 				*M_start_conect_v=s_param->OO180_V;
 			}

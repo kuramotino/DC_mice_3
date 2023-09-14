@@ -15,6 +15,12 @@ namespace Algorizm
 	class Shortest_PARAM
 	{
 	public:
+		enum command_type KO_90_L_foff;
+		enum command_type KO_90_R_foff;
+		enum command_type KO_90_L;
+		enum command_type KO_90_R;
+		enum command_type KO_90_L_boff;
+		enum command_type KO_90_R_boff;
 		enum command_type OO_90_L_foff;
 		enum command_type OO_90_R_foff;
 		enum command_type OO_90_L;
@@ -62,6 +68,7 @@ namespace Algorizm
 		enum command_type Diag_Stra;
 		enum command_type F_Stra;
 		enum command_type S_WBreak;
+		enum command_type S_D_WBreak;
 		float TURN_V;
 		float OO90_V;
 		float OO180_V;
@@ -73,6 +80,7 @@ namespace Algorizm
 		float MAX_V;
 		float MAX_DIAG_V;
 		float MAX_LAST_V;
+		bool isBW;
 
 	public:
 		Shortest_PARAM();

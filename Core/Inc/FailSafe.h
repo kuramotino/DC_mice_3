@@ -15,12 +15,12 @@ namespace controll
 	{
 		float threshold_v=500;
 		float threshold_omega=500;
-		float threshold_accel_y=-5;//5
+		float threshold_accel_y=-8;//-5
 		float threshold_enc=15000;
 
-		bool v_logical;
+		bool v_logical=false;
 		bool accel_logical_y;
-		bool enc_logical;
+		bool enc_logical=false;
 		bool who_logical;
 		bool zero_gyro_logical;
 	public:

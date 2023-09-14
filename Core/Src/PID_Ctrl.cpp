@@ -117,6 +117,8 @@ namespace controll
 			if(log_count!=1200)
 			{
 				log_enc[log_count]=my_input->v_encoder;
+				log_enc_r[log_count]=my_input->enc_v_R;
+				log_enc_l[log_count]=my_input->enc_v_L;
 				log_gyro[log_count]=omega_gyro;
 				log_count++;
 			}
@@ -131,10 +133,10 @@ namespace controll
 		isStop=(now_cm.isPID_Stop || now_cm.isStop);
 		//if(now_cm.isFailStop || now_cm.isBreakStop)
 		//{
-			enc_old_error=0;
-			enc_sigma_error=0;
-			gy_old_error=0;
-			gy_sigma_error=0;
+//			enc_old_error=0;
+//			enc_sigma_error=0;
+//			gy_old_error=0;
+//			gy_sigma_error=0;
 			gy_wall_pid=0;
 			my_input->deg_gyro=0;
 		//}

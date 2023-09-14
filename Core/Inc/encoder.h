@@ -15,8 +15,9 @@ namespace module
 {
 	class Enc : public BaseSencing
 	{
-		int16_t sum_enc_r=0;//1右エンコーダの合計カウント数
-		int16_t sum_enc_l=0;//1左エンコーダの合計カウント数
+	public:
+		int sum_enc_r=0;//1右エンコーダの合計カウント数
+		int sum_enc_l=0;//1左エンコーダの合計カウント数
 		int16_t enc_count_r=0;//1右エンコーダのカウント数
 		int16_t enc_count_l=0;//1左エンコーダのカウント数
 		float enc_unit_count_l=73723;//l左エンコーダの単位パルス/(探索)73723/(2最短)74723

@@ -38,11 +38,11 @@ namespace controll
 		BaseCtrl* pid_ctrl;
 
 	public:
-		int wall_ctrl_log[1200];
-		int wall_r_diff[1200];
-		int wall_l_diff[1200];
-		float wall_r_meter[1200];
-		float wall_l_meter[1200];
+//		int wall_ctrl_log[1200];
+//		int wall_r_diff[1200];
+//		int wall_l_diff[1200];
+//		float wall_r_meter[1200];
+//		float wall_l_meter[1200];
 		int wall_counter=0;
 		bool wall_log_flag=false;
 

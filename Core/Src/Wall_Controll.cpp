@@ -130,11 +130,11 @@ namespace controll
 
 			if(wall_counter<1200 && wall_log_flag)
 			{
-				wall_ctrl_log[wall_counter]=g_WallControllStatus;
-				wall_r_diff[wall_counter]=my_input->g_sensor_now_diff[3];
-				wall_l_diff[wall_counter]=my_input->g_sensor_now_diff[1];
-				wall_r_meter[wall_counter]=r_diff;
-				wall_l_meter[wall_counter]=l_diff;
+//				wall_ctrl_log[wall_counter]=g_WallControllStatus;
+//				wall_r_diff[wall_counter]=my_input->g_sensor_now_diff[3];
+//				wall_l_diff[wall_counter]=my_input->g_sensor_now_diff[1];
+//				wall_r_meter[wall_counter]=r_diff;
+//				wall_l_meter[wall_counter]=l_diff;
 				wall_counter++;
 			}
 		}

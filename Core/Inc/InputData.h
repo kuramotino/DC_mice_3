@@ -17,8 +17,8 @@ namespace controll
 		float v_encoder;//エンコーダから取得した機体の速度
 		float enc_v_R;//エンコーダから取得した右タイヤの速度
 		float enc_v_L;//エンコーダから取得した左タイヤの速度
-		int16_t enc_v_R_sum;//右エンコーダの合計値
-		int16_t enc_v_L_sum;//左エンコーダの合計値
+		int enc_v_R_sum;//右エンコーダの合計値
+		int enc_v_L_sum;//左エンコーダの合計値
 		float x_ac_gyro;//x軸の加速度
 		float y_ac_gyro;//y軸の加速度
 		int enc_R_sum;//右エンコーダの合計値
@@ -39,12 +39,12 @@ namespace controll
 		uint16_t RIGHT_SLESHOLD=80;//3右壁のセンサー閾値
 		uint16_t LEFT_SIDE_SLESHOLD=400;//4左側面のセンサー閾値
 		uint16_t RIGHT_SIDE_SLESHOLD=300;//5右側面のセンサー閾値
-		uint16_t LEFT_DIAG_SLESHOLD=0;//4左側面のセンサー閾値/100
-		uint16_t RIGHT_DIAG_SLESHOLD=0;//5右側面のセンサー閾値/140
+		uint16_t LEFT_DIAG_SLESHOLD=120;//4左側面のセンサー閾値/100
+		uint16_t RIGHT_DIAG_SLESHOLD=80;//5右側面のセンサー閾値/140
 		uint16_t LEFT_POLL_DIAG_SLESHOLD=30;//6左斜めのセンサー閾値
 		uint16_t RIGHT_POLL_DIAG_SLESHOLD=25;//7右斜めのセンサー閾値
 		uint16_t LEFT_POLL_SIDE_SLESHOLD=400;//8左側面のセンサー閾値
-		uint16_t RIGHT_POLL_SIDE_SLESHOLD=250;//9右側面のセンサー閾値
+		uint16_t RIGHT_POLL_SIDE_SLESHOLD=150;//9右側面のセンサー閾値
 	};
 }
 
