@@ -43,8 +43,9 @@ namespace Algorizm
 	public:
 		int Adati(int goal_size, POS* goal_pos,bool isKitikasoku);//�����@�ɑ����Ď��̍s����Ԃ��֐�
 		int s_dijkstra(int goal_size, POS* goal_pos,bool isKitikasoku);//�_�C�N�X�g���@�ɑ����Ď��̍s����Ԃ��֐�
-		int z_dijkstra();//全面探索を行う関数
+		int z_dijkstra(bool isKitikasoku);//全面探索を行う関数
 		void set_goal_pos();//goalを設定する関数
+		void BlockIsopos();//孤立区画をつぶす関数
 		int saitan_dijkstra(int goal_size, POS* goal_pos);//�΂߂̃_�C�N�X�g���@�ɑ����Ď��̍s����Ԃ��֐�
 		void SetObj(MiceStatus* status, MakePotential* potential, Map* map);//�K�v�ȃI�u�W�F�N�g���Z�b�g����֐�
 		void UpDataVecPos(enum Vec vec);//���ɐi�ތ���(���C�E�C�O�C��)����C���̈ʒu�C�������X�V����֐�

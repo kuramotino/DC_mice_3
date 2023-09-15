@@ -16,9 +16,9 @@ namespace controll
 	{
 		int g_WallControllStatus;//壁の存在状態(2進数で1bit目が左、2bit目が右)
 		int wall_status[2];
-		float THRESHOLD_R=110;//1右壁の閾値130
+		float THRESHOLD_R=110;//1右壁の閾値110
 		float THRESHOLD_DIFF_R=15;//1右壁の変化量の閾値20
-		float THRESHOLD_L=150;//2左壁の閾値200
+		float THRESHOLD_L=150;//2左壁の閾値150
 		float THRESHOLD_DIFF_L=30;//2左壁の変化量の閾値20
 		float R_SENSOR_GAIN=1.8;//1壁制御のゲイン0.0033/2
 		float L_SENSOR_GAIN=1.8;//1壁制御のゲイン0.0033/2

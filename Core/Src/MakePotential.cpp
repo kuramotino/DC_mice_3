@@ -205,6 +205,17 @@ namespace Algorizm
 		}
 	}
 
+	void Algorizm::MakePotential::InitSerch_Dist(void)//歩数マップの初期化を行う関数
+	{
+		for (int x = 0; x < 16; x++)
+		{
+			for (int y = 0; y < 16; y++)
+			{
+				DistMap[x][y] = 999;
+			}
+		}
+	}
+
 	void Algorizm::MakePotential::search_dijkstra(int goal_size,POS* goal_pos)
 	{
 		map->MapDecide();//�Ǐ��̍X�V
@@ -212,7 +223,8 @@ namespace Algorizm
 		int now_y;
 		map->RetPos(&now_x, &now_y);
 		updata_knowmap(now_x, now_y);//���m��Ԃ̍X�V
-		Init_Dist();//�����}�b�v�̏�����
+		//Init_Dist();//�����}�b�v�̏�����
+		InitSerch_Dist();
 		init_search_node();//�m�[�h�̏�����
 
 		POS bupos = { 0,0 };//�V���Ɋm�肵���m�[�h�̍��W
@@ -598,5 +610,10 @@ namespace Algorizm
 	int* Algorizm::MakePotential::RetKnowArray()
 	{
 		return isKnowMap;
+	}
+
+	void Algorizm::MakePotential::SetKnowMap(int x, int y)//ある位置x,yの既知区画を変更する関数
+	{
+		isKnowMap[x] = (isKnowMap[x] | (1 << y));
 	}
 }

@@ -41,10 +41,10 @@ namespace Algorizm
 		NODE saitan_node_column[15][16];//�ŒZ�p�̃m�[�h
 		NODE saitan_node_row[15][16];//�ŒZ�p�̃m�[�h
 		NODE no_conect_node;//�q����Ȃ��m�[�h
-		int strate_edge_cost = 4;//7
+		int strate_edge_cost = 7;//7
 		int diagonal_edge_cost = 5;//5
 		int continue_st_edge_cost = 3;//3
-		int continue_dag_edge_cost = 7;//3
+		int continue_dag_edge_cost = 3;//3
 		Map* map;
 
 	public:
@@ -53,6 +53,7 @@ namespace Algorizm
 		POS popQueue_walk(QUEUE_T* queue);//queue��pop
 		void Init_Dist(void);//�����}�b�v�̏��������s���֐�
 		void DecideDist(int goal_size,POS* goal_pos);//�����}�b�v�̍X�V���s���֐�
+		void InitSerch_Dist(void);//歩数マップの初期化を行う関数
 		void search_dijkstra(int goal_size, POS* goal_pos);//�T���_�C�N�X�g���@�̕����}�b�v�X�V���s���֐�
 		int RetDist(int x, int y);//�����}�b�v�̒l��Ԃ��֐�
 		void SetMap(Map* bu_map);//�}�b�v�̃Z�b�g���s���֐�
@@ -68,6 +69,7 @@ namespace Algorizm
 		void BlockKnowWall();//���m��Ԃ̕ǂ��ӂ����֐�
 		int RetKnowMap(int x,int y);//ある位置x,yが既知かどうかを返す関数
 		int* RetKnowArray();
+		void SetKnowMap(int x, int y);//ある位置x,yの既知区画を変更する関数
 	};
 }
 

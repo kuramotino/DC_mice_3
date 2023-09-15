@@ -159,31 +159,31 @@ int main(void)
   while (1)
   {
 
-	  if(!isBattSafe)
-	  {
-		  for(int i=0;i<500;i++)
-		  {
-
-			  //HAL_ADCEx_Calibration_Start(&hadc2, ADC_SINGLE_ENDED);
-			  HAL_ADC_Start(&hadc2);
-			  //HAL_ADC_PollForConversion(&hadc2, 100);
-			  bat = HAL_ADC_GetValue(&hadc2);
-			  HAL_ADC_Stop(&hadc2);
-			  batf = (float) bat / 1024.0 * (100.0 + 50.0) / 50.0/1.1;
-			  batave+=batf;
-		  }
-		  batave/=500;
-		  if(batave<7.8)
-		  {
-			  printf("Warning!! BATT=%f\n\r",batave);
-			  continue;
-		  }
-		  else
-		  {
-			  isBattSafe=true;
-			  printf("BATT=%f\n\r",batave);
-		  }
-	  }
+//	  if(!isBattSafe)
+//	  {
+//		  for(int i=0;i<500;i++)
+//		  {
+//
+//			  //HAL_ADCEx_Calibration_Start(&hadc2, ADC_SINGLE_ENDED);
+//			  HAL_ADC_Start(&hadc2);
+//			  //HAL_ADC_PollForConversion(&hadc2, 100);
+//			  bat = HAL_ADC_GetValue(&hadc2);
+//			  HAL_ADC_Stop(&hadc2);
+//			  batf = (float) bat / 1024.0 * (100.0 + 50.0) / 50.0/1.1;
+//			  batave+=batf;
+//		  }
+//		  batave/=500;
+//		  if(batave<7.8)
+//		  {
+//			  printf("Warning!! BATT=%f\n\r",batave);
+//			  continue;
+//		  }
+//		  else
+//		  {
+//			  isBattSafe=true;
+//			  printf("BATT=%f\n\r",batave);
+//		  }
+//	  }
 
 //	  while(1)//debug
 //	  {
@@ -315,25 +315,25 @@ int main(void)
 //			  App_Set_Command(Stra_de_180,1,800,800,0);
 
 //			  App_Set_Command(first_Stra,1,0,1000,1000);
-			  App_Set_Command(Stra_ac_90,1,0,800,800);
-			  application::App_Set_Command(S_Diag_V90_L_foff);
-			  application::App_Set_Command(S_Wall_Break,1,800,800,800);
-			  application::App_Set_Command(S_Diag_V90_L);
-			  application::App_Set_Command(S_Diag_V90_L_boff);
-			  application::App_Set_Command(S_Wall_Break,1,800,800,800);
-			  App_Set_Command(Stra_de_180,1,800,800,0);
+//			  App_Set_Command(Stra_ac_90,1,0,800,800);
+//			  application::App_Set_Command(S_Diag_V90_L_foff);
+//			  application::App_Set_Command(S_Wall_Break,1,800,800,800);
+//			  application::App_Set_Command(S_Diag_V90_L);
+//			  application::App_Set_Command(S_Diag_V90_L_boff);
+//			  application::App_Set_Command(S_Wall_Break,1,800,800,800);
+//			  App_Set_Command(Stra_de_180,1,800,800,0);
 
 //
 //			  App_Set_Command(first_Stra,1,0,1000,1000);
 //			  App_Set_Command(Stra_ac_90,2,1000,1000,1000);
-//			  application::App_Set_Command(Stra_ac_180);
-//			  application::App_Set_Command(Left_f_off);
+			  application::App_Set_Command(Stra_ac_180);
+			  application::App_Set_Command(Left_f_off);
 //			  for(int i=0;i<4;i++)
 //			  {
-//			  application::App_Set_Command(Left_sla);
+			  application::App_Set_Command(Right_sla);
 //			  }
-//			  application::App_Set_Command(Left_b_off);
-//			  application::App_Set_Command(Stra_de_180);
+			  application::App_Set_Command(Left_b_off);
+			  application::App_Set_Command(Stra_de_180);
 
 //			  App_Set_Command(Left_sen);
 

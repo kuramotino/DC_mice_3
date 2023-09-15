@@ -60,7 +60,7 @@ namespace controll
 				bu_tar_v_start=0;//2目標初速度
 				bu_tar_v_max=480;//3目標最高速度
 				bu_tar_v_end=0;//4目標終端速度
-				bu_tar_x=87.5;//5目標距離
+				bu_tar_x=90;//5目標距離
 				gv=500;//6重心速度
 				ga=3000;//7重心加速度
 				MoveVec=true;//左回転
@@ -92,7 +92,7 @@ namespace controll
 				bu_tar_v_start=0;//2目標初速度
 				bu_tar_v_max=286;//3目標最高速度
 				bu_tar_v_end=0;//4目標終端速度
-				bu_tar_x=92;//5目標距離
+				bu_tar_x=115;//5目標距離
 				gv=0;//6重心速度
 				ga=0;//7重心加速度
 				MoveVec=true;//左回転
@@ -109,7 +109,7 @@ namespace controll
 				bu_tar_v_start=0;//2目標初速度
 				bu_tar_v_max=286;//3目標最高速度
 				bu_tar_v_end=0;//4目標終端速度
-				bu_tar_x=92;//5目標距離
+				bu_tar_x=115;//5目標距離
 				gv=0;//6重心速度
 				ga=0;//7重心加速度
 				MoveVec=false;//右回転
@@ -126,7 +126,7 @@ namespace controll
 				bu_tar_v_start=0;//2目標初速度
 				bu_tar_v_max=250;//3目標最高速度
 				bu_tar_v_end=0;//4目標終端速度
-				bu_tar_x=100;//5目標距離
+				bu_tar_x=50;//5目標距離
 				gv=500;//6重心速度
 				MoveVec=false;//後進
 				isStop=false;//stopさせるかどうか
@@ -143,7 +143,7 @@ namespace controll
 				bu_tar_v_end=500;//4目標終端速度
 				bu_tar_x=100;//5目標距離
 				gv=500;//6重心速度
-				turn_start_ad=235;//7前壁制御でターンを始めるAD値
+				turn_start_ad=200;//7前壁制御でターンを始めるAD値
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
@@ -151,7 +151,7 @@ namespace controll
 				isWall_PID_Stop=false;
 				isTurn=false;//turnかどうか
 				isFrontOffset=true;//前壁制御をおこなうかどうか
-				offset_x=10;
+				offset_x=0;
 				break;
 
 			case Left_b_off:
@@ -159,7 +159,7 @@ namespace controll
 				bu_tar_v_start=500;//2目標初速度
 				bu_tar_v_max=500;//3目標最高速度
 				bu_tar_v_end=500;//4目標終端速度
-				bu_tar_x=8;//5目標距離
+				bu_tar_x=30;//5目標距離
 				gv=500;//6重心速度
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
@@ -177,7 +177,7 @@ namespace controll
 				bu_tar_v_end=500;//4目標終端速度
 				bu_tar_x=100;//5目標距離
 				gv=500;//6重心速度
-				turn_start_ad=235;//7前壁制御でターンを始めるAD値
+				turn_start_ad=200;//7前壁制御でターンを始めるAD値
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
@@ -185,7 +185,7 @@ namespace controll
 				isWall_PID_Stop=false;
 				isTurn=false;//turnかどうか
 				isFrontOffset=true;//前壁制御をおこなうかどうか
-				offset_x=10;
+				offset_x=0;
 				break;
 
 			case Right_b_off:
@@ -193,7 +193,7 @@ namespace controll
 				bu_tar_v_start=500;//2目標初速度
 				bu_tar_v_max=500;//3目標最高速度
 				bu_tar_v_end=500;//4目標終端速度
-				bu_tar_x=8;//5目標距離
+				bu_tar_x=30;//5目標距離
 				gv=500;//6重心速度
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
@@ -302,7 +302,7 @@ namespace controll
 				bu_tar_v_start=0;//2目標初速度
 				bu_tar_v_max=500;//3目標最高速度
 				bu_tar_v_end=500;//4目標終端速度
-				bu_tar_x=90;//5目標距離
+				bu_tar_x=180;//5目標距離
 				gv=500;//6重心速度
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
@@ -317,7 +317,7 @@ namespace controll
 				bu_tar_v_start=500;//2目標初速度
 				bu_tar_v_max=500;//3目標最高速度
 				bu_tar_v_end=0;//4目標終端速度
-				bu_tar_x=90;//5目標距離
+				bu_tar_x=180;//5目標距離
 				gv=500;//6重心速度
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
@@ -904,7 +904,7 @@ namespace controll
 				bu_tar_v_start=0;//2目標初速度
 				bu_tar_v_max=500;//3目標最高速度
 				bu_tar_v_end=0;//4目標終端速度
-				bu_tar_x=80;//5目標距離
+				bu_tar_x=50;//5目標距離
 				gv=500;//6重心速度
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
