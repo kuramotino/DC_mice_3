@@ -37,7 +37,7 @@ namespace controll
 
 		float Ksp=40;//1直進時の直進成分のPゲイン15
 		float Ksi=0.5;//1直進時の直進成分のIゲイン1
-		float Ksd=-20;//1直進時の直進成分のDゲイン0
+		float Ksd=0;//1直進時の直進成分のDゲイン0
 		float K_st_tu_p=15;//1直進時の回転成分のPゲイン15
 		float K_st_tu_i=0.01;//1直進時の回転成分のIゲイン1
 		float K_st_tu_d=0;//1直進時の回転成分のDゲイン0

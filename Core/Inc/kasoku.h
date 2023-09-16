@@ -32,6 +32,15 @@ namespace controll
 		float xde;//減速距離
 		float axde;//加速距離
 
+		//sin加速に用いるパラメータ
+		float x1_sin=0;
+		float t1_sin=0;
+		float x2_sin=0;
+		float t2_sin=0;
+		float x3_sin=0;
+		float t3_sin=0;
+		float now_t_sin=0.0;
+
 		Command now_cm;//現在のコマンド
 		PWM_Out* my_pwm;//pwmのオブジェクト
 

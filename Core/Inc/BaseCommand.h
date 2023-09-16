@@ -58,6 +58,7 @@ namespace controll
 		bool isSmooth=false;//オフセットをなめらかに接続させるかどうか
 		bool isDiagWallPID=false;//斜めの壁制御を行うかどうか
 		bool isUseDiagSensor=false;//再帰的でない壁切れで斜め45°センサーを用いるかどうか
+		bool isSinAccel=true;//Sin加速を行うかどうか
 
 	public:
 		Command();

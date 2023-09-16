@@ -36,46 +36,110 @@ namespace controll
 		//break_wall_offset=(now_cm.isBreakWallStra && target_x!=now_cm.bu_tar_x) ? 0 : break_wall_offset;//もし使ったなら壁切れ後の距離をリセット
 		break_wall_offset=0;//0壁切れ後の距離をリセット
 
-		target_v_max=((target_v_max*target_v_max-target_v_start*target_v_start)/(2*target_a)+
-				(target_v_max*target_v_max-target_v_end*target_v_end)/(2*target_a)>target_x)?
-				sqrt(target_a*target_x+(target_v_start*target_v_start+target_v_end*target_v_end)/2):target_v_max;//最高速を調整
-		xde=(target_v_max*target_v_max-target_v_end*target_v_end)/(2*target_a);//減速距離の計算
+		if(!now_cm.isSinAccel)//台形加速の場合
+		{
+//			target_v_max=((target_v_max*target_v_max-target_v_start*target_v_start)/(2*target_a)+
+//					(target_v_max*target_v_max-target_v_end*target_v_end)/(2*target_a)>target_x)?
+//							sqrt(target_a*target_x+(target_v_start*target_v_start+target_v_end*target_v_end)/2):target_v_max;//最高速を調整
+//			xde=(target_v_max*target_v_max-target_v_end*target_v_end)/(2*target_a);//減速距離の計算
+		}
+		else//sin加速の場合
+		{
+			now_t_sin=0;
+			t1_sin=(M_PI*(target_v_max-target_v_start))/(2*target_a);
+			x1_sin=(target_v_max*target_v_max-target_v_start*target_v_start)/(4*target_a)*M_PI;
+			t3_sin=(M_PI*(target_v_max-target_v_end))/(2*target_a);
+			x3_sin=(target_v_max*target_v_max-target_v_end*target_v_end)/(4*target_a)*M_PI;
+			if(target_x > x1_sin + x3_sin)
+			{
+				x2_sin=target_x-x1_sin-x3_sin;
+				t2_sin=x2_sin/target_v_max;
+			}
+			else
+			{
+				//target_x=x1_sin + x3_sin;
+				target_v_max=sqrt(2*target_a*target_x/M_PI + (target_v_start*target_v_start+target_v_end*target_v_end)/2);//1最高速を調整
+				t1_sin=(M_PI*(target_v_max-target_v_start))/(2*target_a);
+				x1_sin=(target_v_max*target_v_max-target_v_start*target_v_start)/(4*target_a)*M_PI;
+				x2_sin=0;
+				t2_sin=0;
+				t3_sin=(M_PI*(target_v_max-target_v_end))/(2*target_a);
+				x3_sin=(target_v_max*target_v_max-target_v_end*target_v_end)/(4*target_a)*M_PI;
+			}
+		}
 	}
 
 	void controll::kasoku::daikei()//台形加速を行う
 	{
 		if(isKasokuEnd==false)
 		{
-			if(now_v<target_v_max&&target_x-now_x>xde)//1加速区間
+			if(!now_cm.isSinAccel)
 			{
-				now_x+=now_v*dt;
-				now_v+=target_a*dt;
-				now_v=(now_v>target_v_max) ? target_v_max : now_v;
-				v_status=accel;
+//				if(now_v<target_v_max&&target_x-now_x>xde)//1加速区間
+//				{
+//					now_x+=now_v*dt;
+//					now_v+=target_a*dt;
+//					now_v=(now_v>target_v_max) ? target_v_max : now_v;
+//					v_status=accel;
+//				}
+//				else if(target_x-now_x>xde)//2定速区間
+//				{
+//					now_x+=now_v*dt;
+//					v_status=constant;
+//				}
+//				else if(now_v>target_v_end)//3減速区間
+//				{
+//					now_x+=now_v*dt;
+//					now_v-=target_a*dt;
+//					v_status=deceleration;
+//				}
+//				else
+//				{
+//					pre_target_v_end=now_v;//前回の終端速度の更新
+//					isKasokuEnd=true;
+//					if(now_v<=0)
+//					{
+//						isBreak=true;
+//					}
+//					else
+//					{
+//						isBreak=false;
+//					}
+//				}
 			}
-			else if(target_x-now_x>xde)//2定速区間
+			else//sin加速の場合
 			{
-				now_x+=now_v*dt;
-				v_status=constant;
-			}
-			else if(now_v>target_v_end)//3減速区間
-			{
-				now_x+=now_v*dt;
-				now_v-=target_a*dt;
-				v_status=deceleration;
-			}
-			else
-			{
-				pre_target_v_end=now_v;//前回の終端速度の更新
-				isKasokuEnd=true;
-				if(now_v<=0)
+				if(now_t_sin<t1_sin)//1加速区間
 				{
-					isBreak=true;
+					now_v=(target_v_max-target_v_start)/2*(1-cos(2*target_a*now_t_sin/(target_v_max-target_v_start)))+target_v_start;
+					now_x+=now_v*dt;
+					v_status=accel;
+				}
+				else if(now_t_sin<t1_sin+t2_sin)//2定速区間
+				{
+					now_x+=now_v*dt;
+					v_status=constant;
+				}
+				else if(now_t_sin<t1_sin+t2_sin+t3_sin)//3減速区間
+				{
+					now_v=(target_v_max-target_v_end)/2*(1+cos(2*target_a*(now_t_sin-t1_sin-t2_sin)/(target_v_max-target_v_end)))+target_v_end;
+					now_x+=now_v*dt;
+					v_status=deceleration;
 				}
 				else
 				{
-					isBreak=false;
+					pre_target_v_end=now_v;//前回の終端速度の更新
+					isKasokuEnd=true;
+					if(now_v<=0)
+					{
+						isBreak=true;
+					}
+					else
+					{
+						isBreak=false;
+					}
 				}
+				now_t_sin+=dt;
 			}
 
 		if(log_count!=1200)

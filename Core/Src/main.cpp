@@ -185,19 +185,6 @@ int main(void)
 //		  }
 //	  }
 
-//	  while(1)//debug
-//	  {
-//		  HAL_Delay(300);
-//		  led_obj.set_all_led(0b00000001);
-//		  HAL_Delay(300);
-//		  led_obj.set_all_led(0b00000000);
-//	  }
-
-//	  while(1)
-//	  {
-//		  HAL_Delay(100);
-//		  printf("Hello");
-//	  }
 
 
 	  //mode=(int)(modenum*fabs(input_obj.enc_v_R_sum)/(32767.0));//modeの決??��?��?
@@ -326,14 +313,14 @@ int main(void)
 //
 //			  App_Set_Command(first_Stra,1,0,1000,1000);
 //			  App_Set_Command(Stra_ac_90,2,1000,1000,1000);
-			  application::App_Set_Command(Stra_ac_180);
-			  application::App_Set_Command(Left_f_off);
-//			  for(int i=0;i<4;i++)
-//			  {
-			  application::App_Set_Command(Right_sla);
-//			  }
-			  application::App_Set_Command(Left_b_off);
-			  application::App_Set_Command(Stra_de_180);
+			  application::App_Set_Command(Stra_ac_180,1,0,1500,0);
+//			  application::App_Set_Command(Left_f_off);
+////			  for(int i=0;i<4;i++)
+////			  {
+//			  application::App_Set_Command(Left_sla);
+////			  }
+//			  application::App_Set_Command(Left_b_off);
+//			  application::App_Set_Command(Stra_de_180);
 
 //			  App_Set_Command(Left_sen);
 
