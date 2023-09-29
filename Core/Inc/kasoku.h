@@ -41,7 +41,7 @@ namespace controll
 		float t3_sin=0;
 		float now_t_sin=0.0;
 
-		Command now_cm;//現在のコマンド
+		Command* now_cm;//現在のコマンド
 		PWM_Out* my_pwm;//pwmのオブジェクト
 
 		float add_back_offset=0;//1後距離の補正量
@@ -58,7 +58,7 @@ namespace controll
 		void set_kasoku();//台形加速に必要なパラメータを設定する関数
 		void daikei();//台形加速を行う関数
 		void add_pwm(PWM_Out* pwm);//pwm_outオブジェクトを登録する
-		void updata(Command cm);//コマンドを更新する(CommandExecuterに呼ばれる)
+		void updata(Command* cm);//コマンドを更新する(CommandExecuterに呼ばれる)
 		void transmit_pwm();//pwm_outに計算した速度と位置とフラグを送る関数
 		float show_v();//now_vを返す関数(PID_Ctrlに呼ばれる)
 		float show_x();//now_xを返す関数(PID_Ctrlに呼ばれる)

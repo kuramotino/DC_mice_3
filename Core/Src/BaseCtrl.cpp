@@ -13,10 +13,10 @@
 
 namespace controll
 {
-	void controll::BaseCtrl::updata(Command cm)
+	void controll::BaseCtrl::updata(Command* cm)
 	{
 		now_cm=cm;
-		isStop=now_cm.isStop;
+		isStop=now_cm->isStop;
 	}
 
 	void controll::BaseCtrl::add_obj(kasoku* ka,PWM_Out* pwm,InputData* input,CommandStatus* cs)

@@ -9,12 +9,12 @@
 
 namespace controll
 {
-	void controll::Front_Offset_Ctrl::updata(Command cm)
+	void controll::Front_Offset_Ctrl::updata(Command* cm)
 	{
 		now_cm=cm;
-		isStop=(!(now_cm.isFrontOffset) || now_cm.isStop);
-		offset_x=now_cm.offset_x;
-		turn_start_ad=now_cm.turn_start_ad;
+		isStop=(!(now_cm->isFrontOffset) || now_cm->isStop);
+		offset_x=now_cm->offset_x;
+		turn_start_ad=now_cm->turn_start_ad;
 	}
 
 	void controll::Front_Offset_Ctrl::BreakFrontOffset()

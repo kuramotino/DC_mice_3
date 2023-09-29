@@ -74,18 +74,18 @@ namespace Algorizm
 			F_Stra=first_Stra;
 			S_WBreak=S_Wall_Break;
 			S_D_WBreak=S_Diag_Wall_Break;
-			TURN_V=700;
-			OO90_V=1000;
-			OO180_V=1000;
-			Diag_in45_V=1000;
-			Diag_out45_V=1000;
-			Diag_in135_V=1000;
-			Diag_out135_V=1000;
-			Diag_V90_V=1000;
-			MAX_V=2000;
-			MAX_DIAG_V=1000;
-			MAX_LAST_V=1000;
-			isBW=true;
+			TURN_V=800;
+			OO90_V=800;
+			OO180_V=800;
+			Diag_in45_V=800;
+			Diag_out45_V=800;
+			Diag_in135_V=800;
+			Diag_out135_V=800;
+			Diag_V90_V=800;
+			MAX_V=1500;
+			MAX_DIAG_V=800;
+			MAX_LAST_V=800;
+			isBW=false;
 			break;
 
 		case 1:

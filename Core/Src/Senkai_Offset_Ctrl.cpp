@@ -9,10 +9,10 @@
 
 namespace controll
 {
-	void controll::Senkai_Offset_Ctrl::updata(Command cm)
+	void controll::Senkai_Offset_Ctrl::updata(Command* cm)
 	{
 		now_cm=cm;
-		isStop=(!(now_cm.isSenkaiOffset) || now_cm.isStop);
+		isStop=(!(now_cm->isSenkaiOffset) || now_cm->isStop);
 	}
 
 	void controll::Senkai_Offset_Ctrl::BreakFrontOffset()

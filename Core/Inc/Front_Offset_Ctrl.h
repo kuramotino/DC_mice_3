@@ -18,7 +18,7 @@ namespace controll
 		BaseCtrl* my_back;
 		float offset_x=0;//1前壁の制御なしで進むオフセット量
 	public:
-		void updata(Command cm);//overrideする
+		void updata(Command* cm);//overrideする
 		void BreakFrontOffset();//前壁との距離より前オフセットを調整する関数
 		void transmit(float message);//後距離の補正量をBack_Offset_Ctrlに送信する関数
 		void SetBackOffset(BaseCtrl* back_obj);

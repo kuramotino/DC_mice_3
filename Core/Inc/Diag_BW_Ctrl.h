@@ -32,7 +32,7 @@ class Diag_BW_Ctrl : public BaseCtrl
 		int BW_Status=0;//1壁切れの状態,(0壁切れ無し,1右で壁切れ、2左で壁切れ)
 
 	public:
-		void updata(Command cm);//overrideする
+		void updata(Command* cm);//overrideする
 		void DiagBreakWall();//壁切れを判定する関数
 		int RetData();
 	};

@@ -87,27 +87,29 @@ namespace Algorizm
 						application::App_Set_Command(Right_sen);
 						application::App_Set_Command(Right_sen);
 						application::App_Set_Command(Stra_Back);
-						//HAL_Delay(1000);
+						HAL_Delay(500);
 						application::App_Set_Command(Stra_ac_142);
 					}
 					else if(lfr_wall_status==2)//2前壁+左壁
 					{
 						application::App_Set_Command(Right_sen);
 						application::App_Set_Command(Stra_Back);
+						HAL_Delay(500);
 						application::App_Set_Command(Stra_Wall_Hit);
 						application::App_Set_Command(Right_sen);
 						application::App_Set_Command(Stra_Back);
-						//HAL_Delay(1000);
+						HAL_Delay(500);
 						application::App_Set_Command(Stra_ac_142);
 					}
 					else if(lfr_wall_status==3)//3前壁+右壁
 					{
 						application::App_Set_Command(Left_sen);
 						application::App_Set_Command(Stra_Back);
+						HAL_Delay(500);
 						application::App_Set_Command(Stra_Wall_Hit);
 						application::App_Set_Command(Left_sen);
 						application::App_Set_Command(Stra_Back);
-						//HAL_Delay(1000);
+						HAL_Delay(500);
 						application::App_Set_Command(Stra_ac_142);
 					}
 				}
@@ -218,13 +220,20 @@ namespace Algorizm
 				else if (nextpass <= -100)
 				{
 					isContinueStra=true;
-					while(1)
+					if(s_param.isBW)
+					{
+						while(1)
+						{
+							application::App_Set_Command(s_param.Diag_Stra,nextpass/(-100),conect_v_start,s_param.MAX_DIAG_V,conect_v_end);
+							if(!isContinueStra)
+							{
+								break;
+							}
+						}
+					}
+					else
 					{
 						application::App_Set_Command(s_param.Diag_Stra,nextpass/(-100),conect_v_start,s_param.MAX_DIAG_V,conect_v_end);
-						if(!isContinueStra)
-						{
-							break;
-						}
 					}
 				}
 				else if (nextpass == -2)

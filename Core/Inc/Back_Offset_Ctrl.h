@@ -13,8 +13,8 @@ namespace controll
 {
 	class Back_Offset_Ctrl : public BaseCtrl
 	{
-		float r_back_offset=30;
-		float l_back_offset=30;
+		float r_back_offset=25;
+		float l_back_offset=25;
 		float CENTER_R=177;//R機体が中心にあるときの右AD値
 		float CENTER_L=175;//L機体が中心にあるときの左AD値255
 		float ABS_CENTER_R=170;
@@ -28,7 +28,7 @@ namespace controll
 		float max_back_offset=5;//0袋小路での位置補正の最大の補正量
 
 	public:
-		void updata(Command cm);//overrideする
+		void updata(Command* cm);//overrideする
 		float Side_Wall_Offset();//横壁制御を行う関数
 		void Transmit_Back_Offset(float bu_back_offset);//kasokuに後距離の制御量を送信する関数
 		void receive(float message);

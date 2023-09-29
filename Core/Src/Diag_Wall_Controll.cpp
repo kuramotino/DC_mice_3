@@ -8,10 +8,10 @@
 
 namespace controll
 {
-	void controll::Diag_Wall_Ctrl::updata(Command cm)//overrideする
+	void controll::Diag_Wall_Ctrl::updata(Command* cm)//overrideする
 	{
 		now_cm=cm;
-		isStop=(!now_cm.isDiagWallPID || now_cm.isStop);
+		isStop=(!now_cm->isDiagWallPID || now_cm->isStop);
 	}
 
 	void controll::Diag_Wall_Ctrl::transmit_DiagWall_PID()

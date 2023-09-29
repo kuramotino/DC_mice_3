@@ -33,7 +33,7 @@ namespace controll
 		float diag_breakwall_offset=0;//6残り90での壁切れ時にどれだけ直進を追加するか
 
 	public:
-		void updata(Command cm);//overrideする
+		void updata(Command* cm);//overrideする
 		void BreakWall();//壁切れを判定する関数
 	};
 }

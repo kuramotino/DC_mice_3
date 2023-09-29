@@ -30,14 +30,15 @@ namespace controll
 		CommandStatus* my_cs;
 
 	public:
+		Command cx_cm;
 		void addCtrl(BaseCtrl* ctrl);//BaseCtrlを継承したオブジェクトを通知リストに登録する
 		void add_kasoku_PWM(kasoku* ka,PWM_Out* pwm);//kasoku、pwmオブジェクトを通知リストに登録する
-		void notify_Ctrl(Command cm);//BaseCtrlを継承したオブジェクトにCommandを通知する
-		void notify_kasoku_PWM(Command cm);//kasoku、pwmオブジェクトにCommandを通知する
+		void notify_Ctrl(Command* cm);//BaseCtrlを継承したオブジェクトにCommandを通知する
+		void notify_kasoku_PWM(Command* cm);//kasoku、pwmオブジェクトにCommandを通知する
 		void set_cs(CommandStatus* cs);//CommandStatusオブジェクトをセットする
 		void polling_cs();//TIM6割り込みでCommandStatusオブジェクトを監視し、変化があれば通知リストに通知する
 		enum status return_now_status();//現在のコマンドの実行状態を返す関数(Application層に呼ばれる)
-		void wake_CtrlSystem(Command cm);//制御システムを起動させる(Application層に呼ばれる)
+		void wake_CtrlSystem(Command* cm);//制御システムを起動させる(Application層に呼ばれる)
 
 	};
 }

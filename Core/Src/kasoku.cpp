@@ -24,19 +24,19 @@ namespace controll
 		v_status=accel;
 		isKasokuEnd=false;
 		now_x=0;
-		target_a=now_cm.bu_tar_a;//加速度
-		target_v_start=now_cm.bu_tar_v_start;//初速度
-		target_v_start=(now_cm.isSmooth)?pre_target_v_end:target_v_start;//オフセットをなめらかにつなぐ場合は初速度を前回の終端速度で上書きする
+		target_a=now_cm->bu_tar_a;//加速度
+		target_v_start=now_cm->bu_tar_v_start;//初速度
+		target_v_start=(now_cm->isSmooth)?pre_target_v_end:target_v_start;//オフセットをなめらかにつなぐ場合は初速度を前回の終端速度で上書きする
 		now_v=target_v_start;
-		target_v_max=now_cm.bu_tar_v_max;//最大速度
-		target_v_end=now_cm.bu_tar_v_end;//終端速度
-		target_x=(now_cm.isSetBackOffset) ? now_cm.bu_tar_x+add_back_offset : now_cm.bu_tar_x;//目標距離
-		add_back_offset=(target_x!=now_cm.bu_tar_x) ? 0 : add_back_offset;//もし使ったら後距離の補正量をリセット
-		target_x=(now_cm.isBreakWallStra || now_cm.isDiagBreakWallStra)?break_wall_offset:target_x;//壁切れ後の直進なら距離を変更
+		target_v_max=now_cm->bu_tar_v_max;//最大速度
+		target_v_end=now_cm->bu_tar_v_end;//終端速度
+		target_x=(now_cm->isSetBackOffset) ? now_cm->bu_tar_x+add_back_offset : now_cm->bu_tar_x;//目標距離
+		add_back_offset=(target_x!=now_cm->bu_tar_x) ? 0 : add_back_offset;//もし使ったら後距離の補正量をリセット
+		target_x=(now_cm->isBreakWallStra || now_cm->isDiagBreakWallStra)?break_wall_offset:target_x;//壁切れ後の直進なら距離を変更
 		//break_wall_offset=(now_cm.isBreakWallStra && target_x!=now_cm.bu_tar_x) ? 0 : break_wall_offset;//もし使ったなら壁切れ後の距離をリセット
 		break_wall_offset=0;//0壁切れ後の距離をリセット
 
-		if(!now_cm.isSinAccel)//台形加速の場合
+		if(!now_cm->isSinAccel)//台形加速の場合
 		{
 //			target_v_max=((target_v_max*target_v_max-target_v_start*target_v_start)/(2*target_a)+
 //					(target_v_max*target_v_max-target_v_end*target_v_end)/(2*target_a)>target_x)?
@@ -73,7 +73,7 @@ namespace controll
 	{
 		if(isKasokuEnd==false)
 		{
-			if(!now_cm.isSinAccel)
+			if(!now_cm->isSinAccel)
 			{
 //				if(now_v<target_v_max&&target_x-now_x>xde)//1加速区間
 //				{
@@ -156,10 +156,10 @@ namespace controll
 		my_pwm=pwm;
 	}
 
-	void controll::kasoku::updata(Command cm)//コマンドを更新する(CommandExecuterに呼ばれる)
+	void controll::kasoku::updata(Command* cm)//コマンドを更新する(CommandExecuterに呼ばれる)
 	{
 		now_cm=cm;
-		isKasokuEnd=now_cm.isStop;
+		isKasokuEnd=now_cm->isStop;
 		if(isKasokuEnd==false)
 		{
 			set_kasoku();

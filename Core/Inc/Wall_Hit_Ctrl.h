@@ -14,7 +14,7 @@ namespace controll
 	class Wall_Hit_Ctrl : public BaseCtrl
 	{
 	public:
-		void updata(Command cm);//overrideする
+		void updata(Command* cm);//overrideする
 		void Set_Wall_Status();
 	};
 }

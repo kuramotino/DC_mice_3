@@ -13,6 +13,7 @@
 namespace application
 {
 	using namespace controll;
+
 	void App_Set_Command(enum command_type c_type);//制御部にコマンドを発行し、動作が終わるまで待つ関数
 	void App_Set_Command(enum command_type c_type,int st_num,float start_speed,float max_speed,float end_speed);
 	void App_Set_Command(enum command_type c_type,float x);

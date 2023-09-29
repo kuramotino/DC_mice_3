@@ -166,7 +166,7 @@ int main(void)
 //
 //			  //HAL_ADCEx_Calibration_Start(&hadc2, ADC_SINGLE_ENDED);
 //			  HAL_ADC_Start(&hadc2);
-//			  //HAL_ADC_PollForConversion(&hadc2, 100);
+//			  HAL_ADC_PollForConversion(&hadc2, 100);
 //			  bat = HAL_ADC_GetValue(&hadc2);
 //			  HAL_ADC_Stop(&hadc2);
 //			  batf = (float) bat / 1024.0 * (100.0 + 50.0) / 50.0/1.1;
@@ -283,46 +283,52 @@ int main(void)
 //			  pl_obj.log_flag=true;
 //			  wall_obj.wall_log_flag=true;
 //
-//			  App_Set_Command(first_Stra,1,0,1000,1000);
-//			  App_Set_Command(Stra_ac_90,2,1000,1000,1000);
-//			  application::App_Set_Command(Saitan_OO_90_foff_L);
-//			  application::App_Set_Command(S_Wall_Break,1,1000,1000,1000);
-//			  application::App_Set_Command(Saitan_OO_90_L);
-//			  application::App_Set_Command(Saitan_OO_90_boff_L);
-//			  application::App_Set_Command(S_Wall_Break,1,1000,1000,1000);
-//			  App_Set_Command(Stra_de_180,1,1000,1000,0);
+//			  App_Set_Command(first_Stra,1,0,500,500);
+//			  App_Set_Command(Stra_ac_90,2,500,500,500);
+//			  App_Set_Command(Stra_de_180,1,500,500,0);
 
-//			  App_Set_Command(first_Stra,1,0,1000,1000);
-//			  App_Set_Command(Stra_ac_90,1,0,800,800);
-//			  application::App_Set_Command(Saitan_OO_90_foff_L);
+//			  App_Set_Command(first_Stra,1,0,800,800);
+//			  App_Set_Command(Stra_ac_90,2,800,800,800);
+//			  application::App_Set_Command(Saitan_OO_180_foff_L);
 //			  application::App_Set_Command(S_Wall_Break,1,800,800,800);
-//			  application::App_Set_Command(Saitan_OO_90_L);
-//			  application::App_Set_Command(Saitan_OO_90_boff_L);
+//			  application::App_Set_Command(Saitan_OO_180_L);
+//			  application::App_Set_Command(Saitan_OO_180_boff_L);
 //			  application::App_Set_Command(S_Wall_Break,1,800,800,800);
 //			  App_Set_Command(Stra_de_180,1,800,800,0);
 
-//			  App_Set_Command(first_Stra,1,0,1000,1000);
-//			  App_Set_Command(Stra_ac_90,1,0,800,800);
-//			  application::App_Set_Command(S_Diag_V90_L_foff);
-//			  application::App_Set_Command(S_Wall_Break,1,800,800,800);
-//			  application::App_Set_Command(S_Diag_V90_L);
-//			  application::App_Set_Command(S_Diag_V90_L_boff);
-//			  application::App_Set_Command(S_Wall_Break,1,800,800,800);
-//			  App_Set_Command(Stra_de_180,1,800,800,0);
+			  //App_Set_Command(first_Stra,1,0,800,800);
+			  //App_Set_Command(Stra_ac_90,2,800,800,800);
+			  App_Set_Command(TEST_Diag_Start,1,0,800,800);
+			  application::App_Set_Command(S_Diag_V90_L_foff);
+			  application::App_Set_Command(S_Wall_Break,1,800,800,800);
+			  application::App_Set_Command(S_Diag_V90_L);
+			  application::App_Set_Command(S_Diag_V90_L_boff);
+			  application::App_Set_Command(S_Wall_Break,1,800,800,800);
+			  App_Set_Command(TEST_Diag_Start,2,800,800,0);
+			  //App_Set_Command(Stra_de_180,1,800,800,0);
 
 //
-//			  App_Set_Command(first_Stra,1,0,1000,1000);
+//			  App_Set_Command(first_Stra,5,0,1000,0);
 //			  App_Set_Command(Stra_ac_90,2,1000,1000,1000);
-			  application::App_Set_Command(Stra_ac_180,1,0,1500,0);
+//			  application::App_Set_Command(Stra_ac_180);
 //			  application::App_Set_Command(Left_f_off);
-////			  for(int i=0;i<4;i++)
-////			  {
+//			  for(int i=0;i<4;i++)
+//			  {
 //			  application::App_Set_Command(Left_sla);
-////			  }
+//			  }
 //			  application::App_Set_Command(Left_b_off);
 //			  application::App_Set_Command(Stra_de_180);
 
-//			  App_Set_Command(Left_sen);
+//			  application::App_Set_Command(Right_sen);
+//			  HAL_Delay(100);
+//			  application::App_Set_Command(Stra_Back);
+//			  HAL_Delay(1000);
+//			  application::App_Set_Command(Stra_Wall_Hit);
+//			  application::App_Set_Command(Right_sen);
+//			  HAL_Delay(1000);
+//			  application::App_Set_Command(Stra_Back);
+//			  HAL_Delay(1000);
+//			  application::App_Set_Command(Stra_ac_142);
 
 //			  while(!issue_obj.isM_Stop)
 //			  {

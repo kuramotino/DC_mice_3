@@ -8,9 +8,9 @@
 
 namespace controll
 {
-	void controll::Wall_Hit_Ctrl::updata(Command cm)
+	void controll::Wall_Hit_Ctrl::updata(Command* cm)
 	{
-		if(cm.isHitWall)
+		if(cm->isHitWall)
 		{
 			Set_Wall_Status();
 		}

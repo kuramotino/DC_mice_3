@@ -21,14 +21,14 @@ namespace controll
 	{
 		omega_gyro=my_input->omega_gyro;
 		v_encoder=my_input->v_encoder;
-		if(now_cm.isSenkai==true)
+		if(now_cm->isSenkai==true)
 		{
 			v_encoder=(my_input->enc_v_R+my_input->enc_v_L)/2;
 		}
 
-		if(now_cm.isTurn==true)
+		if(now_cm->isTurn==true)
 		{
-			now_v=now_cm.gv;
+			now_v=now_cm->gv;
 			now_omega=my_kasoku->show_v();
 		}
 		else
@@ -44,7 +44,7 @@ namespace controll
 		{
 			get_enc_gyro();
 			float ccw=1;
-			if(now_cm.MoveVec==true)//前進、左回転の時
+			if(now_cm->MoveVec==true)//前進、左回転の時
 			{
 				ccw=1;
 			}
@@ -54,16 +54,17 @@ namespace controll
 			}
 			float lotvec=(omega_gyro>0) ? 1 : -1;
 
-			if(!now_cm.isTurn)//直進のとき
+			if(!now_cm->isTurn)//直進のとき
 			{
-				enc_error=(ccw!=-1) ? now_v-v_encoder : now_v-v_encoder;
+				enc_error=(ccw!=-1) ? now_v-v_encoder : (now_v-v_encoder);
 				enc_delta_error=enc_error-enc_old_error;
 				enc_old_error=enc_error;
 				enc_sigma_error+=enc_error;
+				enc_sigma_error=(ccw==-1)?0:enc_sigma_error;
 				fb_stra=1/V_bat/(10*10*10)*(Ksp*enc_error+Ksi*enc_sigma_error+Ksd*enc_delta_error);
 
-				gy_error= (now_cm.isWall_PID_Stop) ? now_omega-ccw*omega_gyro : now_omega-ccw*omega_gyro+gy_wall_pid;
-				gy_error=(now_cm.isDiagWallPID)?now_omega-ccw*omega_gyro+gy_diagwall_pid:gy_error;
+				gy_error= (now_cm->isWall_PID_Stop) ? now_omega-ccw*omega_gyro : now_omega-ccw*omega_gyro+gy_wall_pid;
+				gy_error=(now_cm->isDiagWallPID)?now_omega-ccw*omega_gyro+gy_diagwall_pid:gy_error;
 				gy_error=(ccw==-1)?0:gy_error;
 				gy_delta_error=gy_error-gy_old_error;
 				gy_old_error=gy_error;
@@ -72,7 +73,7 @@ namespace controll
 			}
 			else//スラロームか超信地旋回の時
 			{
-				if(now_cm.isSenkai==true)//超信地旋回のとき
+				if(now_cm->isSenkai==true)//超信地旋回のとき
 				{
 					if(my_input->enc_v_R>my_input->enc_v_L)//右回転
 					{
@@ -103,13 +104,14 @@ namespace controll
 					enc_delta_error=enc_error-enc_old_error;
 					enc_old_error=enc_error;
 					enc_sigma_error+=enc_error;
-					enc_sigma_error=(my_pwm->RetChangeflag()) ? 0 : enc_sigma_error;
+					//enc_sigma_error=(my_pwm->RetChangeflag()) ? 0 : enc_sigma_error;
 					fb_stra=1/V_bat/(10*10*10)*(K_tu_st_p*enc_error+K_tu_st_i*enc_sigma_error+K_tu_st_d*enc_delta_error);
 
 					gy_error=ccw*now_omega-omega_gyro;
 					gy_delta_error=gy_error-gy_old_error;
 					gy_old_error=gy_error;
 					gy_sigma_error+=gy_error;
+					gy_sigma_error=(my_pwm->RetChangeflag()) ? 0 : gy_sigma_error;//debug
 					fb_turn=1/V_bat/(10*10*10)*(Ktp*gy_error+Kti*gy_sigma_error+Ktd*gy_delta_error);
 				}
 			}
@@ -127,10 +129,10 @@ namespace controll
 		}
 	}
 
-	void controll::PID_Ctrl::updata(Command cm)//overrideする
+	void controll::PID_Ctrl::updata(Command* cm)//overrideする
 	{
 		now_cm=cm;
-		isStop=(now_cm.isPID_Stop || now_cm.isStop);
+		isStop=(now_cm->isPID_Stop || now_cm->isStop);
 		//if(now_cm.isFailStop || now_cm.isBreakStop)
 		//{
 			enc_old_error=0;

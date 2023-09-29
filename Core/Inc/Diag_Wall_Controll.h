@@ -77,7 +77,7 @@ namespace controll
 		BaseCtrl* diag_bw;
 
 	public:
-		void updata(Command cm);//overrideする
+		void updata(Command* cm);//overrideする
 		void transmit_DiagWall_PID();//壁制御の制御量を求めpid_ctrlに送信する関数(TIM6割り込みで呼ばれる)
 		void SetPIDCtrl(BaseCtrl* pid);
 		void SetDiagBW(BaseCtrl* diag);

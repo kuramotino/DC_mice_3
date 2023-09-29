@@ -8,15 +8,15 @@
 
 namespace controll
 {
-	void controll::Back_Offset_Ctrl::updata(Command cm)
+	void controll::Back_Offset_Ctrl::updata(Command* cm)
 	{
 		now_cm=cm;
-		isStop=(!(now_cm.isCalBackOffset) || now_cm.isStop);
+		isStop=(!(now_cm->isCalBackOffset) || now_cm->isStop);
 		if(isStop==false)
 		{
 			Transmit_Back_Offset(Side_Wall_Offset());//後距離の補正量をkasokuにセットする
 		}
-		if(now_cm.isCalSideWall)
+		if(now_cm->isCalSideWall)
 		{
 			float buoffset=Side_Wall_Offset();
 			if(isR)
@@ -49,7 +49,7 @@ namespace controll
 			float dif_len=center_len-len;
 
 			//5補正量を足した値がマイナスなら0にする
-			if(dif_len+l_back_offset<0 && !now_cm.isCalSideWall)
+			if(dif_len+l_back_offset<0 && !now_cm->isCalSideWall)
 			{
 				dif_len=-1*l_back_offset;
 			}
@@ -59,7 +59,7 @@ namespace controll
 			{
 				dif_len=max_offset_ctrl;
 			}
-			else if(now_cm.isCalSideWall && max_back_offset<dif_len)
+			else if(now_cm->isCalSideWall && max_back_offset<dif_len)
 			{
 				dif_len=max_back_offset;
 			}
@@ -84,7 +84,7 @@ namespace controll
 			float dif_len=center_len-len;
 
 			//5補正量を足した値がマイナスなら0にする
-			if(dif_len+r_back_offset<0 && !now_cm.isCalSideWall)
+			if(dif_len+r_back_offset<0 && !now_cm->isCalSideWall)
 			{
 				dif_len=-1*r_back_offset;
 			}
@@ -94,7 +94,7 @@ namespace controll
 			{
 				dif_len=max_offset_ctrl;
 			}
-			else if(now_cm.isCalSideWall && max_back_offset<dif_len)
+			else if(now_cm->isCalSideWall && max_back_offset<dif_len)
 			{
 				dif_len=max_back_offset;
 			}
@@ -104,7 +104,7 @@ namespace controll
 			return dif_len;
 		}
 
-		if(now_cm.isCalSideWall)
+		if(now_cm->isCalSideWall)
 		{
 			return 0;//0横壁がなく、袋小路での位置補正するとき、0を返す
 		}

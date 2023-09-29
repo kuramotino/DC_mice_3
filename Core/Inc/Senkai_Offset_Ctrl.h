@@ -19,7 +19,7 @@ namespace controll
 		float offset_x=40;//offsetで進む距離
 		BaseCtrl* my_back;
 	public:
-		void updata(Command cm);//overrideする
+		void updata(Command* cm);//overrideする
 		void BreakFrontOffset();//前壁との距離より前オフセットを調整する関数
 		void transmit(float message);//後距離の補正量をBack_Offset_Ctrlに送信する関数
 		void SetBackOffset(BaseCtrl* back_obj);

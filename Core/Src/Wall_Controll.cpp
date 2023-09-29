@@ -9,10 +9,10 @@
 
 namespace controll
 {
-	void controll::Wall_Ctrl::updata(Command cm)//overrideする
+	void controll::Wall_Ctrl::updata(Command* cm)//overrideする
 	{
 		now_cm=cm;
-		isStop=(now_cm.isWall_PID_Stop || now_cm.isStop);
+		isStop=(now_cm->isWall_PID_Stop || now_cm->isStop);
 	}
 
 	void controll::Wall_Ctrl::transmit_Wall_PID()//壁制御の制御量を求めpid_ctrlに送信する関数(TIM6割り込みで呼ばれる)

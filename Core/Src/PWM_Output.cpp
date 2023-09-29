@@ -22,10 +22,10 @@ namespace controll
 		my_cs=cs;
 	}
 
-	void controll::PWM_Out::updata(Command cm)//現在のコマンドを更新(CommandExecuterに呼ばれる)
+	void controll::PWM_Out::updata(Command* cm)//現在のコマンドを更新(CommandExecuterに呼ばれる)
 	{
 		now_cm=cm;
-		isDutyEnd=now_cm.isStop;
+		isDutyEnd=now_cm->isStop;
 		duty_FF_stra=0;
 		duty_FF_turn=0;
 		duty_FB_stra=0;
@@ -60,7 +60,7 @@ namespace controll
 
 	void controll::PWM_Out::set_pwm()//duty変換を開始する関数
 	{
-		target_a=now_cm.bu_tar_a;
+		target_a=now_cm->bu_tar_a;
 	}
 
 	void controll::PWM_Out::pwm()//duty変換を行う関数
@@ -68,12 +68,14 @@ namespace controll
 		if(isDutyEnd==false)
 		{
 
-			if(!now_cm.isTurn)//直進のとき
+			if(!now_cm->isTurn)//直進のとき
 			{
 				duty_FF_stra=1/V_bat*(st_A*R/kt*(m*target_a/(2*10*10*10))*taiya_dirmeter/n+ke*(st_B*60*n*now_v/2/3.14/taiya_dirmeter) + st_C);
 				duty_FF_stra=(v_status==constant)?1/V_bat*(ke*(st_B*60*n*now_v/2/3.14/taiya_dirmeter) + st_const_C):duty_FF_stra;
 				duty_FF_stra=(v_status==deceleration)?1/V_bat*(st_A*R/kt*(m*-1.0*target_a/(2*10*10*10))*taiya_dirmeter/n+ke*(st_B*60*n*now_v/2/3.14/taiya_dirmeter + st_de_C)):duty_FF_stra;
 				duty_FF_turn=0;
+
+				duty_FF_stra=0;//debug
 
 //				if(now_cm.MoveVec==true)//前進のとき
 //				{
@@ -88,8 +90,8 @@ namespace controll
 
 				duty_R=duty_FF_stra+duty_FF_turn+duty_FB_stra+duty_FB_turn;
 				duty_L=duty_FF_stra-duty_FF_turn+duty_FB_stra-duty_FB_turn;
-				duty_R=(now_cm.MoveVec==false) ? -1*duty_R : duty_R;
-				duty_L=(now_cm.MoveVec==false) ? -1*duty_L : duty_L;
+				duty_R=(now_cm->MoveVec==false) ? -1*duty_R : duty_R;
+				duty_L=(now_cm->MoveVec==false) ? -1*duty_L : duty_L;
 
 				cw_R=(duty_R<0) ? Back : Front;//右のモータの回転方向の決定
 				cw_L=(duty_L<0) ? Back : Front;//左のモータの回転方向の決定
@@ -100,12 +102,12 @@ namespace controll
 			else//スラローム又は超信地旋回のとき
 			{
 				//turn_C=(now_v<threshold_turn_C) ? first_turn_C : second_turn_C;
-				duty_FF_stra=1/V_bat*(ke*(st_B*60*n*now_cm.gv/2/3.14/taiya_dirmeter));
+				duty_FF_stra=1/V_bat*(ke*(st_B*60*n*now_cm->gv/2/3.14/taiya_dirmeter));
 				//duty_FF_stra=(!now_cm.isSenkai)?duty_FF_stra+1/V_bat*turn_const_C:duty_FF_stra;
 				duty_FF_turn=1/V_bat*((turn_A*R*10*10*10)/kt*(I*target_a*(3.14/180)/L)*taiya_dirmeter/n+ke*(turn_B*60*n*L*now_v*(3.14/180)/4/3.14/taiya_dirmeter) + turn_C);
 				duty_FF_turn=(v_status==constant)?1/V_bat*((turn_A*R*10*10*10)/kt*(I*target_a*(3.14/180)/L)*taiya_dirmeter/n+ke*(turn_B*60*n*L*now_v*(3.14/180)/4/3.14/taiya_dirmeter) + turn_const_C):duty_FF_turn;
 				duty_FF_turn=(v_status==deceleration)?1/V_bat*((-1.0*turn_A*R*10*10*10)/kt*(I*target_a*(3.14/180)/L)*taiya_dirmeter/n+ke*(turn_de_B*60*n*L*now_v*(3.14/180)/4/3.14/taiya_dirmeter) + turn_de_C):duty_FF_turn;
-				duty_FF_turn=(now_cm.MoveVec) ? duty_FF_turn : -1*duty_FF_turn;
+				duty_FF_turn=(now_cm->MoveVec) ? duty_FF_turn : -1*duty_FF_turn;
 				//duty_FF_stra=0;
 				//duty_FF_turn=0;//FFをオフにする
 
@@ -137,7 +139,7 @@ namespace controll
 		*dutyL=duty_L;
 		*bu_cw_R=cw_R;
 		*bu_cw_L=cw_L;
-		if(now_cm.isFailStop==true || now_cm.isBreakStop==true)
+		if(now_cm->isFailStop==true || now_cm->isBreakStop==true)
 		{
 			*dutyR=0;
 			*dutyL=0;

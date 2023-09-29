@@ -22,7 +22,8 @@ namespace module
 		uint8_t who_am_i;
 		float gyro_offset=0;
 		int offset_count=0;
-		float gyro_a=1.00138889;
+		//float gyro_a=1.00138889;
+		float gyro_a=0.98;
 		bool isStartOffset=false;
 
 	public:

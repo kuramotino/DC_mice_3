@@ -54,7 +54,7 @@ namespace Algorizm
 			{
 				pass[n] = 1;//180mm���i
 				n++;
-				pass[n] = 1;
+				pass[n] = 0;
 				break;
 			}
 		}
