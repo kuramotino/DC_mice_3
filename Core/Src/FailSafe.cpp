@@ -23,14 +23,32 @@ namespace controll
 
 		accel_logical_y=(my_input->y_ac_gyro<threshold_accel_y);
 		//enc_logical=(fabs((my_input->enc_v_R-my_input->enc_v_L))>threshold_enc);
-		if(!now_cm->isTurn && !now_cm->MoveVec)
-		{
-			accel_logical_y=false;
-		}
+//		if(!now_cm->isTurn && !now_cm->MoveVec)
+//		{
+//			accel_logical_y=false;
+//		}
 		who_logical=(my_input->who_am_i!=0x98)?true:false;
 		//zero_gyro_logical=(my_input->omega_gyro==0)?true:false;
+		if(!now_cm->isTurn && !now_cm->isStop)
+		{
+			back_enc_logical=(my_input->v_encoder<threshold_back_v)?true:false;
+//			if(my_input->v_encoder==0)
+//			{
+//				back_zeroenc_cnt++;
+//			}
+//			else
+//			{
+//				back_zeroenc_cnt=0;
+//			}
+//
+//			back_enc_logical=(back_zeroenc_cnt>100)?true:back_enc_logical;
+		}
+		else
+		{
+			back_zeroenc_cnt=0;
+		}
 
-		if(v_logical||accel_logical_y||enc_logical||who_logical)
+		if(v_logical||accel_logical_y||enc_logical||who_logical||back_enc_logical)
 		{
 			status_off(Abnormal_End);
 			led_obj.set_all_led(0b111111111);

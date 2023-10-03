@@ -49,9 +49,9 @@ namespace controll
 		float K_tu_st_i=0.5;//1回転時の直進成分のIゲイン0.05/1
 		float K_tu_st_d=0;//1回転時の直進成分のDゲイン/30
 
-		float K_tu_senkai_p=15;//2超信地旋回時の回転成分のPゲイン17/5/12.5
-		float K_tu_senkai_i=0.1;//2超信地旋回時の回転成分のIゲイン2/0.09/0.05
-		float K_tu_senkai_d=0;//2超信地旋回時の回転成分のDゲイン0.25/0/0.25
+		float K_tu_senkai_p=12;//2超信地旋回時の回転成分のPゲイン17/5/12.5
+		float K_tu_senkai_i=0.5;//2超信地旋回時の回転成分のIゲイン2/0.09/0.05
+		float K_tu_senkai_d=-5;//2超信地旋回時の回転成分のDゲイン0.25/0/0.25
 		float K_senkai_p=5;//1超信地旋回時の直進成分のPゲイン5
 		float K_senkai_i=0;//1超信地旋回時の直進成分のIゲイン0.1
 		float K_senkai_d=0;//1超信地旋回時の直進成分のDゲイン0

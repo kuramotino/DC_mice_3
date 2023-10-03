@@ -115,23 +115,25 @@ namespace Algorizm
 				}
 				else//壁当てできないとき
 				{
+					offset=0;
 					if(offset==0)
 					{
-						application::App_Set_Command(Right_sen);
-						application::App_Set_Command(Right_sen);
-					}
-					else if(offset>0)//1右に寄っているとき
-					{
 						application::App_Set_Command(Left_sen);
-						application::App_Set_Command(UturnOffset, offset);
 						application::App_Set_Command(Left_sen);
+						HAL_Delay(500);
 					}
-					else if(offset<0)//2左に寄っているとき
-					{
-						application::App_Set_Command(Right_sen);
-						application::App_Set_Command(UturnOffset, -1.0*offset);
-						application::App_Set_Command(Right_sen);
-					}
+//					else if(offset>0)//1右に寄っているとき
+//					{
+//						application::App_Set_Command(Left_sen);
+//						application::App_Set_Command(UturnOffset, offset);
+//						application::App_Set_Command(Left_sen);
+//					}
+//					else if(offset<0)//2左に寄っているとき
+//					{
+//						application::App_Set_Command(Right_sen);
+//						application::App_Set_Command(UturnOffset, -1.0*offset);
+//						application::App_Set_Command(Right_sen);
+//					}
 					application::App_Set_Command(Stra_Senkai_ac_90);
 				}
 				break;
@@ -196,7 +198,7 @@ namespace Algorizm
 					}
 					else if(my_pass->Ret_NextPass()==0)
 					{
-						application::App_Set_Command(s_param.L_Stra,nextpass,conect_v_start,s_param.MAX_LAST_V,0);
+						application::App_Set_Command(s_param.L_Stra,nextpass,conect_v_start,s_param.MAX_LAST_V,conect_v_end);
 					}
 					else
 					{
@@ -441,7 +443,7 @@ namespace Algorizm
 		isContinueStra=true;
 		while(1)
 		{
-			application::App_Set_Command(S_Diag_Stra,10,0,500,0);
+			application::App_Set_Command(S_Diag_Stra,9,800,1500,800);
 			if(!isContinueStra)
 			{
 				break;

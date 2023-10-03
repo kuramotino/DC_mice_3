@@ -260,7 +260,7 @@ namespace Algorizm
 
 		if(passcount!=0)
 		{
-			if((pass[passcount+1]==-2 || pass[passcount+1]==-3))//1現在が直進、一個前がスラローム
+			if((pass[passcount-1]==-2 || pass[passcount-1]==-3))//1現在が直進、一個前がスラローム
 			{
 				*M_start_conect_v=s_param->TURN_V;
 			}
@@ -300,7 +300,7 @@ namespace Algorizm
 		int ret=0;
 		if(passcount!=254)
 		{
-			ret = pass[passcount + 1];
+			ret = pass[passcount];
 		}
 		return ret;
 	}

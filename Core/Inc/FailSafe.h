@@ -15,14 +15,17 @@ namespace controll
 	{
 		float threshold_v=500;
 		float threshold_omega=500;
-		float threshold_accel_y=-8;//-5
+		float threshold_accel_y=-5;//-5
 		float threshold_enc=15000;
+		float threshold_back_v=-120;
+		int back_zeroenc_cnt=0;
 
 		bool v_logical=false;
 		bool accel_logical_y;
 		bool enc_logical=false;
 		bool who_logical;
 		bool zero_gyro_logical;
+		bool back_enc_logical;
 	public:
 		bool isFail=false;
 

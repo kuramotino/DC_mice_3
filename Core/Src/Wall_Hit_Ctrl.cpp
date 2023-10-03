@@ -20,13 +20,13 @@ namespace controll
 	{
 		if(my_input->g_sensor_now[2]>my_input->FRONT_SLESHOLD)//1前壁有り
 		{
-			if(my_input->g_sensor_now[1]>my_input->LEFT_SLESHOLD)//2左壁有り
-			{
-				my_ctrlwin->Set_HitStatus(2);
-			}
-			else if(my_input->g_sensor_now[3]>my_input->RIGHT_SLESHOLD)//3右壁有り
+			if(my_input->g_sensor_now[3]>my_input->RIGHT_SLESHOLD)//3右壁有り
 			{
 				my_ctrlwin->Set_HitStatus(3);
+			}
+			else if(my_input->g_sensor_now[1]>my_input->LEFT_SLESHOLD)//2左壁有り
+			{
+				my_ctrlwin->Set_HitStatus(2);
 			}
 			else//1前壁のみ
 			{

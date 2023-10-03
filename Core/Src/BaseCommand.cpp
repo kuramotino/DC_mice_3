@@ -56,11 +56,11 @@ namespace controll
 				break;
 
 			case Left_sla:
-				bu_tar_a=8000;//1目標加速度
+				bu_tar_a=15000;//1目標加速度
 				bu_tar_v_start=0;//2目標初速度
-				bu_tar_v_max=700;//3目標最高速度
+				bu_tar_v_max=800;//3目標最高速度
 				bu_tar_v_end=0;//4目標終端速度
-				bu_tar_x=90;//5目標距離
+				bu_tar_x=92.0;//5目標距離
 				gv=500;//6重心速度
 				ga=3000;//7重心加速度
 				MoveVec=true;//左回転
@@ -72,11 +72,11 @@ namespace controll
 				break;
 
 			case Right_sla:
-				bu_tar_a=8000;//1目標加速度
+				bu_tar_a=15000;//1目標加速度
 				bu_tar_v_start=0;//2目標初速度
-				bu_tar_v_max=700;//3目標最高速度
+				bu_tar_v_max=800;//3目標最高速度
 				bu_tar_v_end=0;//4目標終端速度
-				bu_tar_x=88;//5目標距離
+				bu_tar_x=90;//5目標距離
 				gv=500;//6重心速度
 				ga=3000;//7重心加速度
 				MoveVec=false;//右回転
@@ -90,9 +90,9 @@ namespace controll
 			case Left_sen:
 				bu_tar_a=8000;//1目標加速度
 				bu_tar_v_start=0;//2目標初速度
-				bu_tar_v_max=500;//3目標最高速度
+				bu_tar_v_max=700;//3目標最高速度
 				bu_tar_v_end=0;//4目標終端速度
-				bu_tar_x=100;//5目標距離
+				bu_tar_x=91.0;//5目標距離
 				gv=0;//6重心速度
 				ga=0;//7重心加速度
 				MoveVec=true;//左回転
@@ -107,9 +107,9 @@ namespace controll
 			case Right_sen:
 				bu_tar_a=8000;//1目標加速度
 				bu_tar_v_start=0;//2目標初速度
-				bu_tar_v_max=500;//3目標最高速度
+				bu_tar_v_max=700;//3目標最高速度
 				bu_tar_v_end=0;//4目標終端速度
-				bu_tar_x=100;//5目標距離
+				bu_tar_x=90;//5目標距離
 				gv=0;//6重心速度
 				ga=0;//7重心加速度
 				MoveVec=false;//右回転
@@ -127,7 +127,7 @@ namespace controll
 				bu_tar_v_max=100;//3目標最高速度
 				bu_tar_v_end=100;//4目標終端速度
 				bu_tar_x=100;//5目標距離
-				gv=500;//6重心速度
+				gv=0;//6重心速度
 				MoveVec=false;//後進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
@@ -143,7 +143,7 @@ namespace controll
 				bu_tar_v_end=500;//4目標終端速度
 				bu_tar_x=100;//5目標距離
 				gv=500;//6重心速度
-				turn_start_ad=180;//7前壁制御でターンを始めるAD値
+				turn_start_ad=300;//7前壁制御でターンを始めるAD値
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
@@ -151,7 +151,7 @@ namespace controll
 				isWall_PID_Stop=false;
 				isTurn=false;//turnかどうか
 				isFrontOffset=true;//前壁制御をおこなうかどうか
-				offset_x=0;
+				offset_x=15;
 				break;
 
 			case Left_b_off:
@@ -159,7 +159,7 @@ namespace controll
 				bu_tar_v_start=500;//2目標初速度
 				bu_tar_v_max=500;//3目標最高速度
 				bu_tar_v_end=500;//4目標終端速度
-				bu_tar_x=25;//5目標距離
+				bu_tar_x=43;//5目標距離
 				gv=500;//6重心速度
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
@@ -177,7 +177,7 @@ namespace controll
 				bu_tar_v_end=500;//4目標終端速度
 				bu_tar_x=100;//5目標距離
 				gv=500;//6重心速度
-				turn_start_ad=180;//7前壁制御でターンを始めるAD値
+				turn_start_ad=260;//7前壁制御でターンを始めるAD値
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
@@ -185,7 +185,7 @@ namespace controll
 				isWall_PID_Stop=false;
 				isTurn=false;//turnかどうか
 				isFrontOffset=true;//前壁制御をおこなうかどうか
-				offset_x=0;
+				offset_x=5;
 				break;
 
 			case Right_b_off:
@@ -193,7 +193,7 @@ namespace controll
 				bu_tar_v_start=500;//2目標初速度
 				bu_tar_v_max=500;//3目標最高速度
 				bu_tar_v_end=500;//4目標終端速度
-				bu_tar_x=25;//5目標距離
+				bu_tar_x=48;//5目標距離
 				gv=500;//6重心速度
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
@@ -209,7 +209,7 @@ namespace controll
 				bu_tar_v_start=500;//2目標初速度
 				bu_tar_v_max=500;//3目標最高速度
 				bu_tar_v_end=500;//4目標終端速度
-				bu_tar_x=5;//5目標距離
+				bu_tar_x=10;//5目標距離
 				gv=500;//6重心速度
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
@@ -225,7 +225,7 @@ namespace controll
 				bu_tar_v_start=500;//2目標初速度
 				bu_tar_v_max=500;//3目標最高速度
 				bu_tar_v_end=500;//4目標終端速度
-				bu_tar_x=175;//5目標距離
+				bu_tar_x=170;//5目標距離
 				gv=500;//6重心速度
 				breakwall_start_offset=10;//7壁切れ制御開始時に中心線から10mm進んだ位置にいる
 				MoveVec=true;//前進
@@ -327,42 +327,42 @@ namespace controll
 				isTurn=false;//turnかどうか
 				break;
 
-			case Stra_Senkai_ac_77:
-				bu_tar_a=3000;//1目標加速度
-				bu_tar_v_start=0;//2目標初速度
-				bu_tar_v_max=500;//3目標最高速度
-				bu_tar_v_end=500;//4目標終端速度
-				bu_tar_x=77;//5目標距離
-				gv=500;//6重心速度
-				MoveVec=true;//前進
-				isStop=false;//stopさせるかどうか
-				isFailStop=false;//FailSafeでstopさせるか
-				isPID_Stop=false;//PIDをstopさせるか
-				isWall_PID_Stop=false;
-				isTurn=false;//turnかどうか
-				break;
+//			case Stra_Senkai_ac_77:
+//				bu_tar_a=3000;//1目標加速度
+//				bu_tar_v_start=0;//2目標初速度
+//				bu_tar_v_max=500;//3目標最高速度
+//				bu_tar_v_end=500;//4目標終端速度
+//				bu_tar_x=77;//5目標距離
+//				gv=500;//6重心速度
+//				MoveVec=true;//前進
+//				isStop=false;//stopさせるかどうか
+//				isFailStop=false;//FailSafeでstopさせるか
+//				isPID_Stop=false;//PIDをstopさせるか
+//				isWall_PID_Stop=false;
+//				isTurn=false;//turnかどうか
+//				break;
 
-			case Stra_Senkai_de_73:
-				bu_tar_a=3000;//1目標加速度
-				bu_tar_v_start=500;//2目標初速度
-				bu_tar_v_max=500;//3目標最高速度
-				bu_tar_v_end=0;//4目標終端速度
-				bu_tar_x=75;//5目標距離
-				gv=500;//6重心速度
-				MoveVec=true;//前進
-				isStop=false;//stopさせるかどうか
-				isFailStop=false;//FailSafeでstopさせるか
-				isPID_Stop=false;//PIDをstopさせるか
-				isWall_PID_Stop=false;
-				isTurn=false;//turnかどうか
-				break;
+//			case Stra_Senkai_de_73:
+//				bu_tar_a=3000;//1目標加速度
+//				bu_tar_v_start=500;//2目標初速度
+//				bu_tar_v_max=500;//3目標最高速度
+//				bu_tar_v_end=0;//4目標終端速度
+//				bu_tar_x=75;//5目標距離
+//				gv=500;//6重心速度
+//				MoveVec=true;//前進
+//				isStop=false;//stopさせるかどうか
+//				isFailStop=false;//FailSafeでstopさせるか
+//				isPID_Stop=false;//PIDをstopさせるか
+//				isWall_PID_Stop=false;
+//				isTurn=false;//turnかどうか
+//				break;
 
 			case Stra_Senkai_ac_90:
 				bu_tar_a=3000;//1目標加速度
 				bu_tar_v_start=0;//2目標初速度
 				bu_tar_v_max=500;//3目標最高速度
 				bu_tar_v_end=500;//4目標終端速度
-				bu_tar_x=90;//5目標距離
+				bu_tar_x=97;//5目標距離
 				gv=500;//6重心速度
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
@@ -406,73 +406,73 @@ namespace controll
 				isTurn=false;//turnかどうか
 				break;
 
-			case FF_Test_Stra_1:
-				bu_tar_a=12000;//1目標加速度
-				bu_tar_v_start=500;//2目標初速度
-				bu_tar_v_max=500;//3目標最高速度
-				bu_tar_v_end=500;//4目標終端速度
-				bu_tar_x=90;//5目標距離862
-				gv=500;//6重心速度
-				breakwall_start_offset=90;//8壁切れ制御開始時に中心線から90mm進んだ位置にいる
-				isBreakWall=true;//壁切れを見る
-				isBreakWallStra=true;//壁切れ後の直進
-				isSmooth=true;//なめらかにつなぐ
-				MoveVec=true;//前進
-				isStop=false;//stopさせるかどうか
-				isFailStop=false;//FailSafeでstopさせるか
-				isPID_Stop=false;//PIDをstopさせるか
-				isWall_PID_Stop=false;//壁制御のPIDをstopさせるか
-				isTurn=false;//turnかどうか
-				break;
-
-			case FF_Test_Stra_2:
-				bu_tar_a=12000;//1目標加速度
-				bu_tar_v_start=0;//2目標初速度
-				bu_tar_v_max=500;//3目標最高速度
-				bu_tar_v_end=0;//4目標終端速度
-				bu_tar_x=635;//5目標距離/2700
-				gv=500;//6重心速度
-				MoveVec=true;//前進
-				isStop=false;//stopさせるかどうか
-				isFailStop=false;//FailSafeでstopさせるか
-				isPID_Stop=false;//PIDをstopさせるか
-				isWall_PID_Stop=false;//壁制御のPIDをstopさせるか
-				isTurn=false;//turnかどうか
-				break;
-
-			case FF_Test_Senkai_1:
-				bu_tar_a=3900;//1目標加速度
-				bu_tar_v_start=0;//2目標初速度
-				bu_tar_v_max=286;//3目標最高速度
-				bu_tar_v_end=286;//4目標終端速度
-				bu_tar_x=10;//5目標距離
-				gv=0;//6重心速度
-				ga=0;//7重心加速度
-				MoveVec=true;//左回転
-				isStop=false;//stopさせるかどうか
-				isFailStop=false;//FailSafeでstopさせるか
-				isPID_Stop=false;//PIDをstopさせるか
-				isWall_PID_Stop=true;//壁制御のPIDをstopさせるか
-				isTurn=true;//turnかどうか
-				isSenkai=true;//旋回
-				break;
-
-			case FF_Test_Senkai_2:
-				bu_tar_a=12000;//1目標加速度
-				bu_tar_v_start=0;//2目標初速度
-				bu_tar_v_max=500;//3目標最高速度
-				bu_tar_v_end=0;//4目標終端速度
-				bu_tar_x=90;//5目標距離
-				gv=0;//6重心速度
-				ga=0;//7重心加速度
-				MoveVec=true;//左回転
-				isStop=false;//stopさせるかどうか
-				isFailStop=false;//FailSafeでstopさせるか
-				isPID_Stop=false;//PIDをstopさせるか
-				isWall_PID_Stop=true;//壁制御のPIDをstopさせるか
-				isTurn=true;//turnかどうか
-				isSenkai=true;//旋回
-				break;
+//			case FF_Test_Stra_1:
+//				bu_tar_a=12000;//1目標加速度
+//				bu_tar_v_start=500;//2目標初速度
+//				bu_tar_v_max=500;//3目標最高速度
+//				bu_tar_v_end=500;//4目標終端速度
+//				bu_tar_x=90;//5目標距離862
+//				gv=500;//6重心速度
+//				breakwall_start_offset=90;//8壁切れ制御開始時に中心線から90mm進んだ位置にいる
+//				isBreakWall=true;//壁切れを見る
+//				isBreakWallStra=true;//壁切れ後の直進
+//				isSmooth=true;//なめらかにつなぐ
+//				MoveVec=true;//前進
+//				isStop=false;//stopさせるかどうか
+//				isFailStop=false;//FailSafeでstopさせるか
+//				isPID_Stop=false;//PIDをstopさせるか
+//				isWall_PID_Stop=false;//壁制御のPIDをstopさせるか
+//				isTurn=false;//turnかどうか
+//				break;
+//
+//			case FF_Test_Stra_2:
+//				bu_tar_a=12000;//1目標加速度
+//				bu_tar_v_start=0;//2目標初速度
+//				bu_tar_v_max=500;//3目標最高速度
+//				bu_tar_v_end=0;//4目標終端速度
+//				bu_tar_x=635;//5目標距離/2700
+//				gv=500;//6重心速度
+//				MoveVec=true;//前進
+//				isStop=false;//stopさせるかどうか
+//				isFailStop=false;//FailSafeでstopさせるか
+//				isPID_Stop=false;//PIDをstopさせるか
+//				isWall_PID_Stop=false;//壁制御のPIDをstopさせるか
+//				isTurn=false;//turnかどうか
+//				break;
+//
+//			case FF_Test_Senkai_1:
+//				bu_tar_a=3900;//1目標加速度
+//				bu_tar_v_start=0;//2目標初速度
+//				bu_tar_v_max=286;//3目標最高速度
+//				bu_tar_v_end=286;//4目標終端速度
+//				bu_tar_x=10;//5目標距離
+//				gv=0;//6重心速度
+//				ga=0;//7重心加速度
+//				MoveVec=true;//左回転
+//				isStop=false;//stopさせるかどうか
+//				isFailStop=false;//FailSafeでstopさせるか
+//				isPID_Stop=false;//PIDをstopさせるか
+//				isWall_PID_Stop=true;//壁制御のPIDをstopさせるか
+//				isTurn=true;//turnかどうか
+//				isSenkai=true;//旋回
+//				break;
+//
+//			case FF_Test_Senkai_2:
+//				bu_tar_a=12000;//1目標加速度
+//				bu_tar_v_start=0;//2目標初速度
+//				bu_tar_v_max=500;//3目標最高速度
+//				bu_tar_v_end=0;//4目標終端速度
+//				bu_tar_x=90;//5目標距離
+//				gv=0;//6重心速度
+//				ga=0;//7重心加速度
+//				MoveVec=true;//左回転
+//				isStop=false;//stopさせるかどうか
+//				isFailStop=false;//FailSafeでstopさせるか
+//				isPID_Stop=false;//PIDをstopさせるか
+//				isWall_PID_Stop=true;//壁制御のPIDをstopさせるか
+//				isTurn=true;//turnかどうか
+//				isSenkai=true;//旋回
+//				break;
 
 			case Senkai_Offset_40:
 				bu_tar_a=3000;//1目標加速度
@@ -524,136 +524,136 @@ namespace controll
 				isBreakWallStra=true;//壁切れ後の直進
 				break;
 
-			case UturnOffset:
-				bu_tar_a=3000;//1目標加速度
-				bu_tar_v_start=0;//2目標初速度
-				bu_tar_v_max=300;//3目標最高速度
-				bu_tar_v_end=0;//4目標終端速度
-				bu_tar_x=10;//5目標距離
-				gv=300;//6重心速度
-				MoveVec=true;//前進
-				isStop=false;//stopさせるかどうか
-				isFailStop=false;//FailSafeでstopさせるか
-				isPID_Stop=false;//PIDをstopさせるか
-				isWall_PID_Stop=true;//壁制御を止める
-				isTurn=false;//turnかどうか
-				break;
+//			case UturnOffset:
+//				bu_tar_a=3000;//1目標加速度
+//				bu_tar_v_start=0;//2目標初速度
+//				bu_tar_v_max=300;//3目標最高速度
+//				bu_tar_v_end=0;//4目標終端速度
+//				bu_tar_x=10;//5目標距離
+//				gv=300;//6重心速度
+//				MoveVec=true;//前進
+//				isStop=false;//stopさせるかどうか
+//				isFailStop=false;//FailSafeでstopさせるか
+//				isPID_Stop=false;//PIDをstopさせるか
+//				isWall_PID_Stop=true;//壁制御を止める
+//				isTurn=false;//turnかどうか
+//				break;
 
-			case Saitan_Right_f_off:
-				bu_tar_a=3000;//1目標加速度
-				bu_tar_v_start=500;//2目標初速度
-				bu_tar_v_max=500;//3目標最高速度
-				bu_tar_v_end=500;//4目標終端速度
-				bu_tar_x=20;//5目標距離
-				gv=500;//6重心速度
-				MoveVec=true;//前進
-				isStop=false;//stopさせるかどうか
-				isFailStop=false;//FailSafeでstopさせるか
-				isPID_Stop=false;//PIDをstopさせるか
-				isWall_PID_Stop=true;
-				isTurn=false;//turnかどうか
-				isFrontOffset=true;//前壁制御をおこなうかどうか
-				offset_x=20;
-				break;
+//			case Saitan_Right_f_off:
+//				bu_tar_a=3000;//1目標加速度
+//				bu_tar_v_start=500;//2目標初速度
+//				bu_tar_v_max=500;//3目標最高速度
+//				bu_tar_v_end=500;//4目標終端速度
+//				bu_tar_x=20;//5目標距離
+//				gv=500;//6重心速度
+//				MoveVec=true;//前進
+//				isStop=false;//stopさせるかどうか
+//				isFailStop=false;//FailSafeでstopさせるか
+//				isPID_Stop=false;//PIDをstopさせるか
+//				isWall_PID_Stop=true;
+//				isTurn=false;//turnかどうか
+//				isFrontOffset=true;//前壁制御をおこなうかどうか
+//				offset_x=20;
+//				break;
+//
+//			case Saitan_Left_f_off:
+//				bu_tar_a=3000;//1目標加速度
+//				bu_tar_v_start=500;//2目標初速度
+//				bu_tar_v_max=500;//3目標最高速度
+//				bu_tar_v_end=500;//4目標終端速度
+//				bu_tar_x=20;//5目標距離
+//				gv=500;//6重心速度
+//				MoveVec=true;//前進
+//				isStop=false;//stopさせるかどうか
+//				isFailStop=false;//FailSafeでstopさせるか
+//				isPID_Stop=false;//PIDをstopさせるか
+//				isWall_PID_Stop=true;
+//				isTurn=false;//turnかどうか
+//				isFrontOffset=true;//前壁制御をおこなうかどうか
+//				offset_x=20;
+//				break;
 
-			case Saitan_Left_f_off:
-				bu_tar_a=3000;//1目標加速度
-				bu_tar_v_start=500;//2目標初速度
-				bu_tar_v_max=500;//3目標最高速度
-				bu_tar_v_end=500;//4目標終端速度
-				bu_tar_x=20;//5目標距離
-				gv=500;//6重心速度
-				MoveVec=true;//前進
-				isStop=false;//stopさせるかどうか
-				isFailStop=false;//FailSafeでstopさせるか
-				isPID_Stop=false;//PIDをstopさせるか
-				isWall_PID_Stop=true;
-				isTurn=false;//turnかどうか
-				isFrontOffset=true;//前壁制御をおこなうかどうか
-				offset_x=20;
-				break;
-
-			case Mid_Stra_180:
-				bu_tar_a=3000;//1目標加速度
-				bu_tar_v_start=500;//2目標初速度
-				bu_tar_v_max=500;//3目標最高速度
-				bu_tar_v_end=500;//4目標終端速度
-				bu_tar_x=180;//5目標距離
-				gv=500;//6重心速度
-				MoveVec=true;//前進
-				isStop=false;//stopさせるかどうか
-				isFailStop=false;//FailSafeでstopさせるか
-				isPID_Stop=false;//PIDをstopさせるか
-				isWall_PID_Stop=false;
-				isTurn=false;//turnかどうか
-				isBreakWall=false;//壁切れを見る
-				break;
+//			case Mid_Stra_180:
+//				bu_tar_a=3000;//1目標加速度
+//				bu_tar_v_start=500;//2目標初速度
+//				bu_tar_v_max=500;//3目標最高速度
+//				bu_tar_v_end=500;//4目標終端速度
+//				bu_tar_x=180;//5目標距離
+//				gv=500;//6重心速度
+//				MoveVec=true;//前進
+//				isStop=false;//stopさせるかどうか
+//				isFailStop=false;//FailSafeでstopさせるか
+//				isPID_Stop=false;//PIDをstopさせるか
+//				isWall_PID_Stop=false;
+//				isTurn=false;//turnかどうか
+//				isBreakWall=false;//壁切れを見る
+//				break;
 
 			case Saitan_KO_90_foff:
-				bu_tar_a=3000;//1目標加速度
-				bu_tar_v_start=500;//2目標初速度
-				bu_tar_v_max=500;//3目標最高速度
-				bu_tar_v_end=500;//4目標終端速度
-				bu_tar_x=100;//5目標距離
-				gv=500;//6重心速度
-				turn_start_ad=160;//7前壁制御でターンを始めるAD値
-				MoveVec=true;//前進
-				isStop=false;//stopさせるかどうか
-				isFailStop=false;//FailSafeでstopさせるか
-				isPID_Stop=false;//PIDをstopさせるか
-				isWall_PID_Stop=false;
-				isTurn=false;//turnかどうか
-				isFrontOffset=true;//前壁制御をおこなうかどうか
-				offset_x=10;
-				isCalBackOffset=true;//back_offsetの補正量を計算させる
+//				bu_tar_a=3000;//1目標加速度
+//				bu_tar_v_start=500;//2目標初速度
+//				bu_tar_v_max=500;//3目標最高速度
+//				bu_tar_v_end=500;//4目標終端速度
+//				bu_tar_x=100;//5目標距離
+//				gv=500;//6重心速度
+//				turn_start_ad=160;//7前壁制御でターンを始めるAD値
+//				MoveVec=true;//前進
+//				isStop=false;//stopさせるかどうか
+//				isFailStop=false;//FailSafeでstopさせるか
+//				isPID_Stop=false;//PIDをstopさせるか
+//				isWall_PID_Stop=false;
+//				isTurn=false;//turnかどうか
+//				isFrontOffset=true;//前壁制御をおこなうかどうか
+//				offset_x=10;
+//				isCalBackOffset=true;//back_offsetの補正量を計算させる
 				break;
 
 			case Saitan_KO_90_R:
-				bu_tar_a=12000;//1目標加速度
-				bu_tar_v_start=0;//2目標初速度
-				bu_tar_v_max=480;//3目標最高速度
-				bu_tar_v_end=0;//4目標終端速度
-				bu_tar_x=90;//5目標距離
-				gv=500;//6重心速度
-				ga=3000;//7重心加速度
-				MoveVec=false;//右回転
-				isStop=false;//stopさせるかどうか
-				isFailStop=false;//FailSafeでstopさせるか
-				isPID_Stop=false;//PIDをstopさせるか
-				isWall_PID_Stop=true;//壁制御のPIDをstopさせるか
-				isTurn=true;//turnかどうか
+//				bu_tar_a=12000;//1目標加速度
+//				bu_tar_v_start=0;//2目標初速度
+//				bu_tar_v_max=480;//3目標最高速度
+//				bu_tar_v_end=0;//4目標終端速度
+//				bu_tar_x=90;//5目標距離
+//				gv=500;//6重心速度
+//				ga=3000;//7重心加速度
+//				MoveVec=false;//右回転
+//				isStop=false;//stopさせるかどうか
+//				isFailStop=false;//FailSafeでstopさせるか
+//				isPID_Stop=false;//PIDをstopさせるか
+//				isWall_PID_Stop=true;//壁制御のPIDをstopさせるか
+//				isTurn=true;//turnかどうか
 				break;
 
 			case Saitan_KO_90_L:
-				bu_tar_a=12000;//1目標加速度
-				bu_tar_v_start=0;//2目標初速度
-				bu_tar_v_max=480;//3目標最高速度
-				bu_tar_v_end=0;//4目標終端速度
-				bu_tar_x=90.0;//5目標距離
-				gv=500;//6重心速度
-				ga=3000;//7重心加速度
-				MoveVec=true;//左回転
-				isStop=false;//stopさせるかどうか
-				isFailStop=false;//FailSafeでstopさせるか
-				isPID_Stop=false;//PIDをstopさせるか
-				isWall_PID_Stop=true;//壁制御のPIDをstopさせるか
-				isTurn=true;//turnかどうか
+//				bu_tar_a=12000;//1目標加速度
+//				bu_tar_v_start=0;//2目標初速度
+//				bu_tar_v_max=480;//3目標最高速度
+//				bu_tar_v_end=0;//4目標終端速度
+//				bu_tar_x=90.0;//5目標距離
+//				gv=500;//6重心速度
+//				ga=3000;//7重心加速度
+//				MoveVec=true;//左回転
+//				isStop=false;//stopさせるかどうか
+//				isFailStop=false;//FailSafeでstopさせるか
+//				isPID_Stop=false;//PIDをstopさせるか
+//				isWall_PID_Stop=true;//壁制御のPIDをstopさせるか
+//				isTurn=true;//turnかどうか
 				break;
 
 			case Saitan_KO_90_boff:
-				bu_tar_a=3000;//1目標加速度
-				bu_tar_v_start=500;//2目標初速度
-				bu_tar_v_max=500;//3目標最高速度
-				bu_tar_v_end=500;//4目標終端速度
-				bu_tar_x=30;//5目標距離
-				gv=500;//6重心速度
-				MoveVec=true;//前進
-				isStop=false;//stopさせるかどうか
-				isFailStop=false;//FailSafeでstopさせるか
-				isPID_Stop=false;//PIDをstopさせるか
-				isWall_PID_Stop=false;
-				isTurn=false;//turnかどうか
-				isSetBackOffset=true;//back_offsetの補正量をセットする
+//				bu_tar_a=3000;//1目標加速度
+//				bu_tar_v_start=500;//2目標初速度
+//				bu_tar_v_max=500;//3目標最高速度
+//				bu_tar_v_end=500;//4目標終端速度
+//				bu_tar_x=30;//5目標距離
+//				gv=500;//6重心速度
+//				MoveVec=true;//前進
+//				isStop=false;//stopさせるかどうか
+//				isFailStop=false;//FailSafeでstopさせるか
+//				isPID_Stop=false;//PIDをstopさせるか
+//				isWall_PID_Stop=false;
+//				isTurn=false;//turnかどうか
+//				isSetBackOffset=true;//back_offsetの補正量をセットする
 				break;
 
 			case Saitan_OO_90_foff_R:
@@ -663,10 +663,10 @@ namespace controll
 				bu_tar_v_end=800;//4目標終端速度
 				bu_tar_x=100;//5目標距離
 				gv=500;//6重心速度
-				turn_start_ad=110;//7前壁制御でターンを始めるAD値
+				turn_start_ad=100;//7前壁制御でターンを始めるAD値
 				breakwall_start_offset=90;//8壁切れ制御開始時に中心線から90mm進んだ位置にいる
-				isBreakWall=false;//壁切れを見る
-				breakwall_right_offset=65;//8壁切れから進む距離
+				isBreakWall=true;//壁切れを見る
+				breakwall_right_offset=60;//8壁切れから進む距離
 				breakwall_left_offset=85;//8壁切れから進む距離
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
@@ -686,10 +686,10 @@ namespace controll
 				bu_tar_v_end=800;//4目標終端速度
 				bu_tar_x=100;//5目標距離
 				gv=500;//6重心速度
-				turn_start_ad=116;//7前壁制御でターンを始めるAD値
+				turn_start_ad=113;//7前壁制御でターンを始めるAD値
 				breakwall_start_offset=90;//8壁切れ制御開始時に中心線から90mm進んだ位置にいる
 				isBreakWall=true;//壁切れを見る
-				breakwall_right_offset=63;//8壁切れから進む距離
+				breakwall_right_offset=66;//8壁切れから進む距離
 				breakwall_left_offset=83;//8壁切れから進む距離
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
@@ -707,7 +707,7 @@ namespace controll
 				bu_tar_v_start=0;//2目標初速度
 				bu_tar_v_max=550;//3目標最高速度
 				bu_tar_v_end=0;//4目標終端速度
-				bu_tar_x=89;//5目標距離
+				bu_tar_x=89.0;//5目標距離
 				gv=800;//6重心速度
 				ga=3000;//7重心加速度
 				MoveVec=false;//右回転
@@ -760,12 +760,12 @@ namespace controll
 				bu_tar_v_start=800;//2目標初速度
 				bu_tar_v_max=800;//3目標最高速度
 				bu_tar_v_end=800;//4目標終端速度
-				bu_tar_x=85;//5目標距離
+				bu_tar_x=80;//5目標距離
 				gv=500;//6重心速度
 				breakwall_start_offset=10;//7壁切れ制御開始時に中心線から10mm進んだ位置にいる
 				isBreakWall=true;//壁切れを見る
-				breakwall_right_offset=5;//8壁切れから進む距離
-				breakwall_left_offset=20;//8壁切れから進む距離
+				breakwall_right_offset=2.5;//8壁切れから進む距離
+				breakwall_left_offset=25;//8壁切れから進む距離
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
@@ -783,11 +783,11 @@ namespace controll
 				bu_tar_v_end=800;//4目標終端速度
 				bu_tar_x=100;//5目標距離
 				gv=500;//6重心速度
-				turn_start_ad=111;//7前壁制御でターンを始めるAD値
+				turn_start_ad=90;//7前壁制御でターンを始めるAD値
 				breakwall_start_offset=90;//8壁切れ制御開始時に中心線から90mm進んだ位置にいる
 				isBreakWall=true;//壁切れを見る
-				breakwall_right_offset=65;//8壁切れから進む距離
-				breakwall_left_offset=90;//8壁切れから進む距離
+				breakwall_right_offset=50;//8壁切れから進む距離
+				breakwall_left_offset=75;//8壁切れから進む距離
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
@@ -795,7 +795,7 @@ namespace controll
 				isWall_PID_Stop=false;
 				isTurn=false;//turnかどうか
 				isFrontOffset=true;//前壁制御をおこなうかどうか
-				offset_x=60;
+				offset_x=50;
 				isUseDiagSensor=true;
 				break;
 
@@ -806,11 +806,11 @@ namespace controll
 				bu_tar_v_end=800;//4目標終端速度
 				bu_tar_x=100;//5目標距離
 				gv=500;//6重心速度
-				turn_start_ad=111;//7前壁制御でターンを始めるAD値/215
+				turn_start_ad=95;//7前壁制御でターンを始めるAD値/215
 				breakwall_start_offset=90;//8壁切れ制御開始時に中心線から90mm進んだ位置にいる
 				isBreakWall=true;//壁切れを見る
-				breakwall_right_offset=65;//8壁切れから進む距離
-				breakwall_left_offset=90;//8壁切れから進む距離
+				breakwall_right_offset=50;//8壁切れから進む距離
+				breakwall_left_offset=73;//8壁切れから進む距離
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
@@ -818,16 +818,16 @@ namespace controll
 				isWall_PID_Stop=false;
 				isTurn=false;//turnかどうか
 				isFrontOffset=true;//前壁制御をおこなうかどうか
-				offset_x=60;//90
+				offset_x=50;//90
 				isUseDiagSensor=true;
 				break;
 
 			case Saitan_OO_180_R:
-				bu_tar_a=8000;//1目標加速度
+				bu_tar_a=10000;//1目標加速度
 				bu_tar_v_start=0;//2目標初速度
-				bu_tar_v_max=500;//3目標最高速度
+				bu_tar_v_max=520;//3目標最高速度
 				bu_tar_v_end=0;//4目標終端速度
-				bu_tar_x=178;//5目標距離
+				bu_tar_x=176.7;//5目標距離
 				gv=800;//6重心速度
 				ga=3000;//7重心加速度
 				MoveVec=false;//右回転
@@ -839,11 +839,11 @@ namespace controll
 				break;
 
 			case Saitan_OO_180_L:
-				bu_tar_a=8000;//1目標加速度
+				bu_tar_a=10000;//1目標加速度
 				bu_tar_v_start=0;//2目標初速度
-				bu_tar_v_max=480;//3目標最高速度
+				bu_tar_v_max=495;//3目標最高速度
 				bu_tar_v_end=0;//4目標終端速度
-				bu_tar_x=180.0;//5目標距離
+				bu_tar_x=179.0;//5目標距離
 				gv=800;//6重心速度
 				ga=3000;//7重心加速度
 				MoveVec=true;//左回転
@@ -859,12 +859,12 @@ namespace controll
 				bu_tar_v_start=800;//2目標初速度
 				bu_tar_v_max=800;//3目標最高速度
 				bu_tar_v_end=800;//4目標終端速度
-				bu_tar_x=80;//5目標距離
+				bu_tar_x=73;//5目標距離
 				gv=500;//6重心速度
 				breakwall_start_offset=-10;//7壁切れ制御開始時に中心線から-10mm進んだ位置にいる
 				isBreakWall=true;//壁切れを見る
 				breakwall_right_offset=0;//8壁切れから進む距離
-				breakwall_left_offset=25;//8壁切れから進む距離
+				breakwall_left_offset=20;//8壁切れから進む距離/30
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
@@ -880,12 +880,12 @@ namespace controll
 				bu_tar_v_start=800;//2目標初速度
 				bu_tar_v_max=800;//3目標最高速度
 				bu_tar_v_end=800;//4目標終端速度
-				bu_tar_x=80;//5目標距離
+				bu_tar_x=70;//5目標距離
 				gv=500;//6重心速度
 				breakwall_start_offset=-10;//7壁切れ制御開始時に中心線から-10mm進んだ位置にいる
 				isBreakWall=true;//壁切れを見る
-				breakwall_right_offset=0;//8壁切れから進む距離
-				breakwall_left_offset=30;//8壁切れから進む距離
+				breakwall_right_offset=3;//8壁切れから進む距離
+				breakwall_left_offset=33;//8壁切れから進む距離
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
@@ -916,7 +916,7 @@ namespace controll
 				bu_tar_v_start=0;//2目標初速度
 				bu_tar_v_max=500;//3目標最高速度
 				bu_tar_v_end=0;//4目標終端速度
-				bu_tar_x=40;//5目標距離
+				bu_tar_x=45;//5目標距離
 				gv=500;//6重心速度
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
@@ -932,7 +932,7 @@ namespace controll
 				bu_tar_v_start=800;//2目標初速度
 				bu_tar_v_max=800;//3目標最高速度
 				bu_tar_v_end=800;//4目標終端速度
-				bu_tar_x=100;//5目標距離
+				bu_tar_x=22;//5目標距離
 				gv=500;//6重心速度
 				turn_start_ad=70;//7前壁制御でターンを始めるAD値/215
 				breakwall_start_offset=90;//8壁切れ制御開始時に中心線から90mm進んだ位置にいる
@@ -945,8 +945,8 @@ namespace controll
 				isPID_Stop=false;//PIDをstopさせるか
 				isWall_PID_Stop=false;
 				isTurn=false;//turnかどうか
-				isFrontOffset=true;//前壁制御をおこなうかどうか
-				offset_x=20;//90
+				isFrontOffset=false;//前壁制御をおこなうかどうか
+				offset_x=22;//90
 				isSmooth=false;//前オフセットを連続的につなげるかどうか
 				isUseDiagSensor=true;
 				break;
@@ -970,7 +970,7 @@ namespace controll
 				isWall_PID_Stop=false;
 				isTurn=false;//turnかどうか
 				isFrontOffset=true;//前壁制御をおこなうかどうか
-				offset_x=15;//90
+				offset_x=12;//90
 				isSmooth=false;//前オフセットを連続的につなげるかどうか
 				isUseDiagSensor=true;
 				break;
@@ -980,7 +980,7 @@ namespace controll
 				bu_tar_v_start=0;//2目標初速度
 				bu_tar_v_max=600;//3目標最高速度
 				bu_tar_v_end=0;//4目標終端速度
-				bu_tar_x=45.5;//5目標距離
+				bu_tar_x=46.5;//5目標距離
 				gv=800;//6重心速度
 				ga=3000;//7重心加速度
 				MoveVec=true;//左回転
@@ -996,7 +996,7 @@ namespace controll
 				bu_tar_v_start=0;//2目標初速度
 				bu_tar_v_max=600;//3目標最高速度
 				bu_tar_v_end=0;//4目標終端速度
-				bu_tar_x=45.0;//5目標距離
+				bu_tar_x=46.3;//5目標距離/47
 				gv=800;//6重心速度
 				ga=3000;//7重心加速度
 				MoveVec=false;//左回転
@@ -1012,7 +1012,7 @@ namespace controll
 				bu_tar_v_start=800;//2目標初速度
 				bu_tar_v_max=800;//3目標最高速度
 				bu_tar_v_end=800;//4目標終端速度
-				bu_tar_x=82;//5目標距離
+				bu_tar_x=82;//5目標距離/82
 				gv=500;//6重心速度
 				isDiagBreakWall=false;//7斜めの壁切れを見る
 				breakwall_right_offset=17;//8壁切れから進む距離
@@ -1030,10 +1030,10 @@ namespace controll
 				bu_tar_v_start=800;//2目標初速度
 				bu_tar_v_max=800;//3目標最高速度
 				bu_tar_v_end=800;//4目標終端速度
-				bu_tar_x=85;//5目標距離
+				bu_tar_x=88;//5目標距離/85
 				gv=500;//6重心速度
 				isDiagBreakWall=false;//7斜めの壁切れを見る
-				breakwall_left_offset=23;//8壁切れから進む距離
+				breakwall_left_offset=25.5;//8壁切れから進む距離
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
@@ -1049,11 +1049,11 @@ namespace controll
 				bu_tar_v_start=800;//2目標初速度
 				bu_tar_v_max=800;//3目標最高速度
 				bu_tar_v_end=800;//4目標終端速度
-				bu_tar_x=62;//5目標距離
+				bu_tar_x=45;//5目標距離/62
 				gv=500;//6重心速度
 				turn_start_ad=175;//7前壁制御でターンを始めるAD値/215
 				isDiagBreakWall=false;//7斜めの壁切れを見る
-				breakwall_left_offset=0;//8壁切れから進む距離
+				breakwall_left_offset=25;//8壁切れから進む距離
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
@@ -1071,11 +1071,11 @@ namespace controll
 				bu_tar_v_start=800;//2目標初速度
 				bu_tar_v_max=800;//3目標最高速度
 				bu_tar_v_end=800;//4目標終端速度
-				bu_tar_x=50;//5目標距離
+				bu_tar_x=40;//5目標距離/50
 				gv=500;//6重心速度
 				turn_start_ad=175;//7前壁制御でターンを始めるAD値/215
 				isDiagBreakWall=false;//7斜めの壁切れを見る
-				breakwall_right_offset=0;//8壁切れから進む距離
+				breakwall_right_offset=17;//8壁切れから進む距離
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
@@ -1125,11 +1125,11 @@ namespace controll
 				bu_tar_v_start=800;//2目標初速度
 				bu_tar_v_max=800;//3目標最高速度
 				bu_tar_v_end=800;//4目標終端速度
-				bu_tar_x=20;//5目標距離
+				bu_tar_x=27;//5目標距離
 				gv=500;//6重心速度
 				isBreakWall=true;//7壁切れを見る
 				breakwall_right_offset=0;//8壁切れから進む距離
-				breakwall_left_offset=20;//9壁切れから進む距離
+				breakwall_left_offset=23;//9壁切れから進む距離
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
@@ -1144,11 +1144,11 @@ namespace controll
 				bu_tar_v_start=800;//2目標初速度
 				bu_tar_v_max=800;//3目標最高速度
 				bu_tar_v_end=800;//4目標終端速度
-				bu_tar_x=35;//5目標距離
+				bu_tar_x=45;//5目標距離
 				gv=500;//6重心速度
 				isBreakWall=true;//7壁切れを見る
 				breakwall_right_offset=0;//8壁切れから進む距離
-				breakwall_left_offset=23;//9壁切れから進む距離
+				breakwall_left_offset=17;//9壁切れから進む距離
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
@@ -1164,9 +1164,9 @@ namespace controll
 				bu_tar_v_start=800;//2目標初速度
 				bu_tar_v_max=800;//3目標最高速度
 				bu_tar_v_end=800;//4目標終端速度
-				bu_tar_x=100;//5目標距離
+				bu_tar_x=45;//5目標距離
 				gv=500;//6重心速度
-				turn_start_ad=95;//7前壁制御でターンを始めるAD値/215
+				turn_start_ad=85;//7前壁制御でターンを始めるAD値/215
 				breakwall_start_offset=90;//8壁切れ制御開始時に中心線から90mm進んだ位置にいる
 				isBreakWall=true;//壁切れを見る
 				breakwall_right_offset=50;//8壁切れから進む距離
@@ -1177,8 +1177,8 @@ namespace controll
 				isPID_Stop=false;//PIDをstopさせるか
 				isWall_PID_Stop=false;
 				isTurn=false;//turnかどうか
-				isFrontOffset=true;//前壁制御をおこなうかどうか
-				offset_x=50;//90
+				isFrontOffset=false;//前壁制御をおこなうかどうか
+				offset_x=35;//90
 				isSmooth=false;//前オフセットを連続的につなげるかどうか
 				isUseDiagSensor=true;
 				break;
@@ -1188,7 +1188,7 @@ namespace controll
 				bu_tar_v_start=800;//2目標初速度
 				bu_tar_v_max=800;//3目標最高速度
 				bu_tar_v_end=800;//4目標終端速度
-				bu_tar_x=100;//5目標距離
+				bu_tar_x=30;//5目標距離
 				gv=500;//6重心速度
 				turn_start_ad=75;//7前壁制御でターンを始めるAD値/215
 				breakwall_start_offset=90;//8壁切れ制御開始時に中心線から90mm進んだ位置にいる
@@ -1201,8 +1201,8 @@ namespace controll
 				isPID_Stop=false;//PIDをstopさせるか
 				isWall_PID_Stop=false;
 				isTurn=false;//turnかどうか
-				isFrontOffset=true;//前壁制御をおこなうかどうか
-				offset_x=35;//90
+				isFrontOffset=false;//前壁制御をおこなうかどうか
+				offset_x=30;//90
 				isSmooth=false;//前オフセットを連続的につなげるかどうか
 				isUseDiagSensor=true;
 				break;
@@ -1228,7 +1228,7 @@ namespace controll
 				bu_tar_v_start=0;//2目標初速度
 				bu_tar_v_max=550;//3目標最高速度
 				bu_tar_v_end=0;//4目標終端速度
-				bu_tar_x=133.0;//5目標距離
+				bu_tar_x=132.75;//5目標距離
 				gv=800;//6重心速度
 				ga=3000;//7重心加速度
 				MoveVec=false;//左回転
@@ -1244,10 +1244,10 @@ namespace controll
 				bu_tar_v_start=800;//2目標初速度
 				bu_tar_v_max=800;//3目標最高速度
 				bu_tar_v_end=800;//4目標終端速度
-				bu_tar_x=45;//5目標距離
+				bu_tar_x=100;//5目標距離/45
 				gv=500;//6重心速度
-				isDiagBreakWall=false;//7斜めの壁切れを見る
-				breakwall_right_offset=55;//8壁切れから進む距離
+				isDiagBreakWall=true;//7斜めの壁切れを見る
+				breakwall_right_offset=28;//8壁切れから進む距離
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
@@ -1262,10 +1262,10 @@ namespace controll
 				bu_tar_v_start=800;//2目標初速度
 				bu_tar_v_max=800;//3目標最高速度
 				bu_tar_v_end=800;//4目標終端速度
-				bu_tar_x=42;//5目標距離
+				bu_tar_x=42;//5目標距離/42
 				gv=500;//6重心速度
 				isDiagBreakWall=false;//7斜めの壁切れを見る
-				breakwall_left_offset=25;//8壁切れから進む距離
+				breakwall_left_offset=30;//8壁切れから進む距離
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
@@ -1281,8 +1281,10 @@ namespace controll
 				bu_tar_v_start=800;//2目標初速度
 				bu_tar_v_max=800;//3目標最高速度
 				bu_tar_v_end=800;//4目標終端速度
-				bu_tar_x=60;//5目標距離
+				bu_tar_x=60;//5目標距離/60
 				gv=500;//6重心速度
+				isDiagBreakWall=true;//7斜めの壁切れを見る
+				breakwall_left_offset=20;//8壁切れから進む距離
 				turn_start_ad=175;//7前壁制御でターンを始めるAD値/215
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
@@ -1293,6 +1295,7 @@ namespace controll
 				isFrontOffset=false;//前壁制御をおこなうかどうか
 				offset_x=80;//90
 				isSmooth=false;//前オフセットを連続的につなげるかどうか
+				isUseDiagSensor=false;
 				break;
 
 			case S_Diag_out135_R_foff:
@@ -1300,9 +1303,11 @@ namespace controll
 				bu_tar_v_start=800;//2目標初速度
 				bu_tar_v_max=800;//3目標最高速度
 				bu_tar_v_end=800;//4目標終端速度
-				bu_tar_x=47;//5目標距離
+				bu_tar_x=47;//5目標距離/47
 				gv=500;//6重心速度
 				turn_start_ad=175;//7前壁制御でターンを始めるAD値/215
+				isDiagBreakWall=true;//7斜めの壁切れを見る
+				breakwall_right_offset=12;//8壁切れから進む距離
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
@@ -1312,6 +1317,7 @@ namespace controll
 				isFrontOffset=false;//前壁制御をおこなうかどうか
 				offset_x=80;//90
 				isSmooth=false;//前オフセットを連続的につなげるかどうか
+				isUseDiagSensor=false;
 				break;
 
 			case S_Diag_out135_L:
@@ -1390,7 +1396,7 @@ namespace controll
 				bu_tar_v_start=800;//2目標初速度
 				bu_tar_v_max=800;//3目標最高速度
 				bu_tar_v_end=800;//4目標終端速度
-				bu_tar_x=13;//5目標距離
+				bu_tar_x=3;//5目標距離
 				gv=500;//6重心速度
 				turn_start_ad=175;//7前壁制御でターンを始めるAD値/215
 				MoveVec=true;//前進
@@ -1462,8 +1468,8 @@ namespace controll
 				bu_tar_v_end=800;//4目標終端速度
 				bu_tar_x=30;//5目標距離
 				gv=500;//6重心速度
-				isDiagBreakWall=false;//7壁切れを見る
-				breakwall_right_offset=37;//8壁切れから進む距離
+				isDiagBreakWall=true;//7壁切れを見る
+				breakwall_right_offset=28;//8壁切れから進む距離
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
@@ -1480,8 +1486,8 @@ namespace controll
 				bu_tar_v_end=800;//4目標終端速度
 				bu_tar_x=45;//5目標距離
 				gv=500;//6重心速度
-				isDiagBreakWall=false;//7壁切れを見る
-				breakwall_left_offset=17;//8壁切れから進む距離
+				isDiagBreakWall=true;//7壁切れを見る
+				breakwall_left_offset=30;//8壁切れから進む距離
 				MoveVec=true;//前進
 				isStop=false;//stopさせるかどうか
 				isFailStop=false;//FailSafeでstopさせるか
@@ -1504,10 +1510,10 @@ namespace controll
 				isPID_Stop=false;//PIDをstopさせるか
 				isWall_PID_Stop=true;//壁制御のPIDをstopさせるか
 				isTurn=false;//turnかどうか
-				isDiagBreakWall=false;//斜めの壁切れを見るか
-				isDiagBreakWallStra=false;//斜めの壁切れ後の直線かどうか
+				isDiagBreakWall=true;//斜めの壁切れを見るか
+				isDiagBreakWallStra=true;//斜めの壁切れ後の直線かどうか
 				isSmooth=true;//なめらかにつなぐ
-				isDiagWallPID=false;//斜めの壁制御を行う
+				isDiagWallPID=true;//斜めの壁制御を行う
 				break;
 
 			case S_Wall_Break:

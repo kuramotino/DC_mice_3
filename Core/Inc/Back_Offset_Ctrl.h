@@ -13,8 +13,8 @@ namespace controll
 {
 	class Back_Offset_Ctrl : public BaseCtrl
 	{
-		float r_back_offset=25;
-		float l_back_offset=25;
+		float r_back_offset=48;
+		float l_back_offset=43;
 		float CENTER_R=177;//R機体が中心にあるときの右AD値
 		float CENTER_L=175;//L機体が中心にあるときの左AD値255
 		float ABS_CENTER_R=170;

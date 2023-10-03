@@ -77,7 +77,7 @@ void Sync_Module()//TIM6の割り込み処理
 	front_offset_obj.BreakFrontOffset();
 	senkai_offset_obj.BreakFrontOffset();
 	break_wall_obj.BreakWall();
-	//diag_bw_obj.DiagBreakWall();
+	diag_bw_obj.DiagBreakWall();
 	cx_obj.polling_cs();
 	pl_obj.pl_interupt_getSensor();
 	pl_obj.sensor_input();
@@ -87,7 +87,7 @@ void Sync_Module()//TIM6の割り込み処理
 	ksk_obj.transmit_pwm();//isKasokuEnd==trueならCommandStatusをオフにする
 	fail_obj.FailStop();
 	wall_obj.transmit_Wall_PID();
-	//diag_wall_obj.transmit_DiagWall_PID();
+	diag_wall_obj.transmit_DiagWall_PID();
 	pid_obj.PID();
 	pwm_obj.pwm();
 	Sync_Mo_R();
