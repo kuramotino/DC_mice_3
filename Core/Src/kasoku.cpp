@@ -46,10 +46,10 @@ namespace controll
 		else//sin加速の場合
 		{
 			now_t_sin=0;
-			t1_sin=(M_PI*(target_v_max-target_v_start))/(2*target_a);
-			x1_sin=(target_v_max*target_v_max-target_v_start*target_v_start)/(4*target_a)*M_PI;
-			t3_sin=(M_PI*(target_v_max-target_v_end))/(2*target_a);
-			x3_sin=(target_v_max*target_v_max-target_v_end*target_v_end)/(4*target_a)*M_PI;
+			t1_sin=(PI*(target_v_max-target_v_start))/(2*target_a);
+			x1_sin=(target_v_max*target_v_max-target_v_start*target_v_start)/(4*target_a)*PI;
+			t3_sin=(PI*(target_v_max-target_v_end))/(2*target_a);
+			x3_sin=(target_v_max*target_v_max-target_v_end*target_v_end)/(4*target_a)*PI;
 			if(target_x > x1_sin + x3_sin)
 			{
 				x2_sin=target_x-x1_sin-x3_sin;
@@ -58,13 +58,13 @@ namespace controll
 			else
 			{
 				//target_x=x1_sin + x3_sin;
-				target_v_max=sqrt(2*target_a*target_x/M_PI + (target_v_start*target_v_start+target_v_end*target_v_end)/2);//1最高速を調整
-				t1_sin=(M_PI*(target_v_max-target_v_start))/(2*target_a);
-				x1_sin=(target_v_max*target_v_max-target_v_start*target_v_start)/(4*target_a)*M_PI;
+				target_v_max=sqrt(2*target_a*target_x/PI + (target_v_start*target_v_start+target_v_end*target_v_end)/2);//1最高速を調整
+				t1_sin=(PI*(target_v_max-target_v_start))/(2*target_a);
+				x1_sin=(target_v_max*target_v_max-target_v_start*target_v_start)/(4*target_a)*PI;
 				x2_sin=0;
 				t2_sin=0;
-				t3_sin=(M_PI*(target_v_max-target_v_end))/(2*target_a);
-				x3_sin=(target_v_max*target_v_max-target_v_end*target_v_end)/(4*target_a)*M_PI;
+				t3_sin=(PI*(target_v_max-target_v_end))/(2*target_a);
+				x3_sin=(target_v_max*target_v_max-target_v_end*target_v_end)/(4*target_a)*PI;
 			}
 		}
 	}

@@ -20,7 +20,7 @@ namespace Algorizm
 	{
 		Planning* my_plan;
 		Pass_Generator* my_pass;
-		POS goal_pos[4] = { {1,0},{1,0},{1,0},{1,0} };//{ {1,0},{1,1},{2,0},{2,1} }
+		POS goal_pos[4] = { {8,5},{8,6},{9,5},{9,6} };//{ {1,0},{1,1},{2,0},{2,1} }
 		POS start_pos[1] = { {0,0} };
 		enum Vec nextVec;
 

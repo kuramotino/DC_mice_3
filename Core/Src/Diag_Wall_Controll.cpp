@@ -103,20 +103,22 @@ namespace controll
 				}
 				else
 				{
-					float ad=R_BW_Diag_R_XtoAD[0]+R_BW_Diag_R_XtoAD[1]*x+R_BW_Diag_R_XtoAD[2]*x*x+R_BW_Diag_R_XtoAD[3]*x*x*x;
-					return ad;
+					//float ad=R_BW_Diag_R_XtoAD[0]+R_BW_Diag_R_XtoAD[1]*x+R_BW_Diag_R_XtoAD[2]*x*x+R_BW_Diag_R_XtoAD[3]*x*x*x;
+					//return ad;
+					return 0;
 				}
 			}
 			else
 			{
 				if(isSide)
 				{
-					float ad=R_BW_Side_L_XtoAD[0]+R_BW_Side_L_XtoAD[1]*x+R_BW_Side_L_XtoAD[2]*x*x+R_BW_Side_L_XtoAD[3]*x*x*x+R_BW_SIDE_L_offset;
-					return ad;
+					//float ad=R_BW_Side_L_XtoAD[0]+R_BW_Side_L_XtoAD[1]*x+R_BW_Side_L_XtoAD[2]*x*x+R_BW_Side_L_XtoAD[3]*x*x*x+R_BW_SIDE_L_offset;
+					//return ad;
+					return 0;
 				}
 				else
 				{
-					float ad=R_BW_Diag_L_XtoAD[0]+R_BW_Diag_L_XtoAD[1]*x+R_BW_Diag_L_XtoAD[2]*x*x+R_BW_Diag_L_XtoAD[3]*x*x*x;
+					float ad=R_BW_Diag_L_XtoAD[0]+R_BW_Diag_L_XtoAD[1]*x+R_BW_Diag_L_XtoAD[2]*x*x+R_BW_Diag_L_XtoAD[3]*x*x*x+R_BW_Diag_L_offset;
 					return ad;
 				}
 			}
@@ -133,20 +135,22 @@ namespace controll
 				}
 				else
 				{
-					float ad=L_BW_Diag_R_XtoAD[0]+L_BW_Diag_R_XtoAD[1]*x+L_BW_Diag_R_XtoAD[2]*x*x+L_BW_Diag_R_XtoAD[3]*x*x*x;
-					return ad;
+					//float ad=L_BW_Diag_R_XtoAD[0]+L_BW_Diag_R_XtoAD[1]*x+L_BW_Diag_R_XtoAD[2]*x*x+L_BW_Diag_R_XtoAD[3]*x*x*x;
+					//return ad;
+					return 0;
 				}
 			}
 			else
 			{
 				if(isSide)
 				{
-					float ad=L_BW_Side_L_XtoAD[0]+L_BW_Side_L_XtoAD[1]*x+L_BW_Side_L_XtoAD[2]*x*x+L_BW_Side_L_XtoAD[3]*x*x*x+L_BW_Side_L_XtoAD[4]*x*x*x*x+L_BW_SIDE_L_offset;
-					return ad;
+					//float ad=L_BW_Side_L_XtoAD[0]+L_BW_Side_L_XtoAD[1]*x+L_BW_Side_L_XtoAD[2]*x*x+L_BW_Side_L_XtoAD[3]*x*x*x+L_BW_Side_L_XtoAD[4]*x*x*x*x+L_BW_SIDE_L_offset;
+					//return ad;
+					return 0;
 				}
 				else
 				{
-					float ad=L_BW_Diag_L_XtoAD[0]+L_BW_Diag_L_XtoAD[1]*x+L_BW_Diag_L_XtoAD[2]*x*x+L_BW_Diag_L_XtoAD[3]*x*x*x;
+					float ad=L_BW_Diag_L_XtoAD[0]+L_BW_Diag_L_XtoAD[1]*x+L_BW_Diag_L_XtoAD[2]*x*x+L_BW_Diag_L_XtoAD[3]*x*x*x+L_BW_Diag_L_offset;
 					return ad;
 				}
 			}

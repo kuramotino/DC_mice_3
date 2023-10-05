@@ -58,10 +58,10 @@ namespace controll
 		float L_BW_SIDE_R_WallCtrl_Range_1[2]={0,45};//1左壁切れ後に制御する範囲1
 		float L_BW_SIDE_R_WallCtrl_Range_2[2]={0,120};//2左壁切れ後に制御する範囲2
 
-		float R_BW_SIDE_R_offset=0;
-		float R_BW_SIDE_L_offset=0;
-		float L_BW_SIDE_R_offset=0;
-		float L_BW_SIDE_L_offset=0;
+		float R_BW_SIDE_R_offset=30;
+		float R_BW_Diag_L_offset=-30;
+		float L_BW_SIDE_R_offset=30;
+		float L_BW_Diag_L_offset=-30;
 
 		float sum_x=0;
 		int BW_Status=0;//1壁切れの状態,(0壁切れ無し,1右で壁切れ、2左で壁切れ)

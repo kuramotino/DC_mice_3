@@ -222,8 +222,8 @@ namespace Algorizm
 				else if (nextpass <= -100)
 				{
 					isContinueStra=true;
-					if(s_param.isBW)
-					{
+//					if(s_param.isBW)
+//					{
 						while(1)
 						{
 							application::App_Set_Command(s_param.Diag_Stra,nextpass/(-100),conect_v_start,s_param.MAX_DIAG_V,conect_v_end);
@@ -232,11 +232,11 @@ namespace Algorizm
 								break;
 							}
 						}
-					}
-					else
-					{
-						application::App_Set_Command(s_param.Diag_Stra,nextpass/(-100),conect_v_start,s_param.MAX_DIAG_V,conect_v_end);
-					}
+//					}
+//					else
+//					{
+//						application::App_Set_Command(s_param.Diag_Stra,nextpass/(-100),conect_v_start,s_param.MAX_DIAG_V,conect_v_end);
+//					}
 				}
 				else if (nextpass == -2)
 				{

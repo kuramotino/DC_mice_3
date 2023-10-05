@@ -244,10 +244,10 @@ int main(void)
 			  gyro_obj.OffsetStart();
 			  //potential_obj.init_knowmap();
 			  HAL_Delay(1200);
-//			  while(!issue_obj.isStop)
-//			  {
-//				  UpDataAlgo();
-//			  }
+			  while(!issue_obj.isStop)
+			  {
+				  UpDataAlgo();
+			  }
 			  HAL_Delay(3000);
 			  issue_obj.Init();//flagのリセ?��??��?
 		  }
@@ -258,14 +258,14 @@ int main(void)
 		  if(isStart[2]==true)
 		  {
 			  isStart[2]=false;
-//			  t=0;
-//			  for(int i=0;i<1200;i++)
-//			  {
-//				  //printf("%f,%f,%f,%f,%f,%f,%f,%f,%f\n\r",t,ksk_obj.now_v_log[i],ksk_obj.now_x_log[i],pwm_obj.now_R_log[i],pwm_obj.now_L_log[i],pid_obj.log_enc[i],pid_obj.log_enc_r[i],pid_obj.log_enc_l[i],pid_obj.log_gyro[i]);
-//				  //printf("%f,%d,%d,%d,%d,%d,%f,%f,%f,%f,%f,\n\r",t,pl_obj.log_sensor_lr[0][i],pl_obj.log_sensor_lr[1][i],pl_obj.log_sensor_lr[2][i],pl_obj.log_sensor_lr[3][i],pl_obj.log_sensor_lr[4][i],ksk_obj.now_x_log[i],pl_obj.log_diff_lr[0][i],pl_obj.log_diff_diag_lr[0][i],pl_obj.log_diff_diag_lr[1][i],pl_obj.log_diff_lr[1][i]);
-//				  printf("%f,%f,%d,%d,%d,%d,\n\r",t,ksk_obj.now_x_log[i],pl_obj.log_sensor_lr[0][i],pl_obj.log_sensor_lr[1][i],pl_obj.log_sensor_lr[3][i],pl_obj.log_sensor_lr[4][i]);
-//				  t+=0.001;
-//			  }
+			  t=0;
+			  for(int i=0;i<1200;i++)
+			  {
+				  printf("%f,%f,%f,%f,%f,%f,%f,%f,%f\n\r",t,ksk_obj.now_v_log[i],ksk_obj.now_x_log[i],pwm_obj.now_R_log[i],pwm_obj.now_L_log[i],pid_obj.log_enc[i],pid_obj.log_enc_r[i],pid_obj.log_enc_l[i],pid_obj.log_gyro[i]);
+				  //printf("%f,%d,%d,%d,%d,%d,%f,%f,%f,%f,%f,\n\r",t,pl_obj.log_sensor_lr[0][i],pl_obj.log_sensor_lr[1][i],pl_obj.log_sensor_lr[2][i],pl_obj.log_sensor_lr[3][i],pl_obj.log_sensor_lr[4][i],ksk_obj.now_x_log[i],pl_obj.log_diff_lr[0][i],pl_obj.log_diff_diag_lr[0][i],pl_obj.log_diff_diag_lr[1][i],pl_obj.log_diff_lr[1][i]);
+				  //printf("%f,%f,%d,%d,%d,%d,\n\r",t,ksk_obj.now_x_log[i],pl_obj.log_sensor_lr[0][i],pl_obj.log_sensor_lr[1][i],pl_obj.log_sensor_lr[3][i],pl_obj.log_sensor_lr[4][i]);
+				  t+=0.001;
+			  }
 //			  map_obj.ShowMap();
 //			  map_obj.ShowKnowMap();
 //
@@ -281,12 +281,12 @@ int main(void)
 			  isStart[3]=false;
 			  gyro_obj.OffsetStart();
 			  HAL_Delay(1200);
-			  pl_obj.log_flag=true;
+			  //pl_obj.log_flag=true;
 //			  wall_obj.wall_log_flag=true;
 //
-//			  App_Set_Command(first_Stra,1,0,500,500);
-//			  App_Set_Command(Stra_ac_90,2,500,500,500);
-//			  App_Set_Command(Stra_de_180,1,500,500,0);
+			  App_Set_Command(first_Stra,1,0,500,500);
+			  App_Set_Command(Stra_ac_90,5,500,500,0);
+			  //App_Set_Command(Stra_de_180,1,500,500,0);
 
 //			  App_Set_Command(first_Stra,1,0,800,800);
 //			  App_Set_Command(Stra_ac_90,2,800,800,800);
@@ -297,26 +297,24 @@ int main(void)
 //			  application::App_Set_Command(S_Wall_Break,1,800,800,800);
 //			  App_Set_Command(Stra_de_180,1,800,800,0);
 
-			  App_Set_Command(first_Stra,1,0,800,800);
-			  //App_Set_Command(Stra_ac_90,2,800,800,800);
-			  //App_Set_Command(TEST_Diag_Start,1,0,800,800);
-			  application::App_Set_Command(S_Diag_in45_R_foff);
-			  application::App_Set_Command(S_Wall_Break,1,800,800,800);
-			  application::App_Set_Command(S_Diag_in45_R);
-			  //pl_obj.log_flag=true;
-			  application::App_Set_Command(S_Diag_in45_R_boff);
-			  application::App_Set_Command(S_Wall_Break,1,800,800,800);
+//			  App_Set_Command(first_Stra,1,0,800,800);
+//			  App_Set_Command(Stra_ac_90,2,800,800,800);
+//			  //App_Set_Command(TEST_Diag_Start,1,0,800,800);
+//			  application::App_Set_Command(S_Diag_in135_L_foff);
+//			  application::App_Set_Command(S_Wall_Break,1,800,800,800);
+//			  application::App_Set_Command(S_Diag_in135_L);
+//			  application::App_Set_Command(S_Diag_in135_L_boff);
+//			  application::App_Set_Command(S_Wall_Break,1,800,800,800);
 
-			  issue_obj.DebugDiagBW();
-			  application::App_Set_Command(S_Diag_out45_R_foff);
-			  application::App_Set_Command(S_Wall_Break,1,800,800,800);
-			  application::App_Set_Command(S_Diag_out45_R);
-			  application::App_Set_Command(S_Diag_out45_R_boff);
-			  application::App_Set_Command(S_Wall_Break,1,800,800,800);
+//			  //issue_obj.DebugDiagBW();
+//			  application::App_Set_Command(S_Diag_out45_R_foff);
+//			  application::App_Set_Command(S_Wall_Break,1,800,800,800);
+//			  application::App_Set_Command(S_Diag_out45_R);
+//			  application::App_Set_Command(S_Diag_out45_R_boff);
+//			  application::App_Set_Command(S_Wall_Break,1,800,800,800);
 
-			  //App_Set_Command(TEST_Diag_Start,4,800,800,0);
-
-			  App_Set_Command(Stra_de_180,1,800,800,0);
+//			  App_Set_Command(TEST_Diag_Start,2,800,800,0);
+//			  //App_Set_Command(Stra_de_180,1,800,800,0);
 
 //
 //			  App_Set_Command(first_Stra,1,0,500,500);
@@ -388,10 +386,10 @@ int main(void)
 			  isStart[5]=false;
 			  gyro_obj.OffsetStart();
 			  HAL_Delay(1200);
-			  while(!issue_obj.isM_Stop)
-			  {
-				  No_Zip_M_UpDataAlgo(1);
-			  }
+//			  while(!issue_obj.isM_Stop)
+//			  {
+//				  No_Zip_M_UpDataAlgo(1);
+//			  }
 			  issue_obj.Init();//flagのリセ?��??��?
 			  HAL_Delay(5000);
 		  }
@@ -404,10 +402,10 @@ int main(void)
 			  isStart[6]=false;
 			  gyro_obj.OffsetStart();
 			  HAL_Delay(1200);
-			  while(!issue_obj.isM_Stop)
-			  {
-				  No_Zip_M_UpDataAlgo(2);
-			  }
+//			  while(!issue_obj.isM_Stop)
+//			  {
+//				  No_Zip_M_UpDataAlgo(2);
+//			  }
 			  issue_obj.Init();//flagのリセ?��??��?
 			  HAL_Delay(5000);
 		  }
@@ -420,10 +418,10 @@ int main(void)
 			  isStart[7]=false;
 			  gyro_obj.OffsetStart();
 			  HAL_Delay(1200);
-			  while(!issue_obj.isM_Stop)
-			  {
-				  No_Zip_M_UpDataAlgo(3);
-			  }
+//			  while(!issue_obj.isM_Stop)
+//			  {
+//				  No_Zip_M_UpDataAlgo(3);
+//			  }
 			  issue_obj.Init();//flagのリセ?��??��?
 			  HAL_Delay(5000);
 		  }

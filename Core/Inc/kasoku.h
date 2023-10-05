@@ -40,6 +40,7 @@ namespace controll
 		float x3_sin=0;
 		float t3_sin=0;
 		float now_t_sin=0.0;
+		float PI=3.14;
 
 		Command* now_cm;//現在のコマンド
 		PWM_Out* my_pwm;//pwmのオブジェクト
