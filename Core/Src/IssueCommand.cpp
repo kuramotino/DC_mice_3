@@ -35,9 +35,9 @@ namespace Algorizm
 		if (!isStop && isStart && !fail_obj.isFail)
 		{
 			application::App_Command(Front_offset);
-			//int bu_next_vec = (!my_plan->RetReturn()) ? my_plan->Adati(4, goal_pos,false) : my_plan->Adati(1, start_pos,false);
+			int bu_next_vec = (!my_plan->RetReturn()) ? my_plan->Adati(4, goal_pos,false) : my_plan->Adati(1, start_pos,false);
 			//int bu_next_vec = (!my_plan->RetReturn()) ? my_plan->Adati(4, goal_pos,false) : my_plan->s_dijkstra(1, start_pos,false);
-			int bu_next_vec = (!my_plan->RetReturn()) ? my_plan->Adati(4, goal_pos,false) : my_plan->z_dijkstra(false);
+			//int bu_next_vec = (!my_plan->RetReturn()) ? my_plan->Adati(4, goal_pos,false) : my_plan->z_dijkstra(false);
 			nextVec = (bu_next_vec > 0) ? Front : ((bu_next_vec == -3) ? Right : ((bu_next_vec == -2) ? Left : Back));
 			application::App_Wait();
 
@@ -449,5 +449,10 @@ namespace Algorizm
 				break;
 			}
 		}
+	}
+
+	void IssueCommand::Debug_Pass()
+	{
+		my_pass->M_Pass(4, goal_pos);//pass�̐���
 	}
 }

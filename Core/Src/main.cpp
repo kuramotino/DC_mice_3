@@ -258,18 +258,18 @@ int main(void)
 		  if(isStart[2]==true)
 		  {
 			  isStart[2]=false;
-			  t=0;
-			  for(int i=0;i<1200;i++)
-			  {
-				  printf("%f,%f,%f,%f,%f,%f,%f,%f,%f\n\r",t,ksk_obj.now_v_log[i],ksk_obj.now_x_log[i],pwm_obj.now_R_log[i],pwm_obj.now_L_log[i],pid_obj.log_enc[i],pid_obj.log_enc_r[i],pid_obj.log_enc_l[i],pid_obj.log_gyro[i]);
-				  //printf("%f,%d,%d,%d,%d,%d,%f,%f,%f,%f,%f,\n\r",t,pl_obj.log_sensor_lr[0][i],pl_obj.log_sensor_lr[1][i],pl_obj.log_sensor_lr[2][i],pl_obj.log_sensor_lr[3][i],pl_obj.log_sensor_lr[4][i],ksk_obj.now_x_log[i],pl_obj.log_diff_lr[0][i],pl_obj.log_diff_diag_lr[0][i],pl_obj.log_diff_diag_lr[1][i],pl_obj.log_diff_lr[1][i]);
-				  //printf("%f,%f,%d,%d,%d,%d,\n\r",t,ksk_obj.now_x_log[i],pl_obj.log_sensor_lr[0][i],pl_obj.log_sensor_lr[1][i],pl_obj.log_sensor_lr[3][i],pl_obj.log_sensor_lr[4][i]);
-				  t+=0.001;
-			  }
+//			  t=0;
+//			  for(int i=0;i<1200;i++)
+//			  {
+//				  printf("%f,%f,%f,%f,%f,%f,%f,%f,%f\n\r",t,ksk_obj.now_v_log[i],ksk_obj.now_x_log[i],pwm_obj.now_R_log[i],pwm_obj.now_L_log[i],pid_obj.log_enc[i],pid_obj.log_enc_r[i],pid_obj.log_enc_l[i],pid_obj.log_gyro[i]);
+//				  //printf("%f,%d,%d,%d,%d,%d,%f,%f,%f,%f,%f,\n\r",t,pl_obj.log_sensor_lr[0][i],pl_obj.log_sensor_lr[1][i],pl_obj.log_sensor_lr[2][i],pl_obj.log_sensor_lr[3][i],pl_obj.log_sensor_lr[4][i],ksk_obj.now_x_log[i],pl_obj.log_diff_lr[0][i],pl_obj.log_diff_diag_lr[0][i],pl_obj.log_diff_diag_lr[1][i],pl_obj.log_diff_lr[1][i]);
+//				  //printf("%f,%f,%d,%d,%d,%d,\n\r",t,ksk_obj.now_x_log[i],pl_obj.log_sensor_lr[0][i],pl_obj.log_sensor_lr[1][i],pl_obj.log_sensor_lr[3][i],pl_obj.log_sensor_lr[4][i]);
+//				  t+=0.001;
+//			  }
 //			  map_obj.ShowMap();
-//			  map_obj.ShowKnowMap();
+			  map_obj.ShowKnowMap();
 //
-//			  pass_gene_obj.Show_Pass();
+			  pass_gene_obj.Show_Pass();
 			  HAL_Delay(1000);
 		  }
 		  break;
@@ -285,7 +285,7 @@ int main(void)
 //			  wall_obj.wall_log_flag=true;
 //
 			  App_Set_Command(first_Stra,1,0,500,500);
-			  App_Set_Command(Stra_ac_90,5,500,500,0);
+			  App_Set_Command(Stra_ac_90,7,500,500,0);
 			  //App_Set_Command(Stra_de_180,1,500,500,0);
 
 //			  App_Set_Command(first_Stra,1,0,800,800);
@@ -385,13 +385,16 @@ int main(void)
 		  {
 			  isStart[5]=false;
 			  gyro_obj.OffsetStart();
+			  issue_obj.Debug_Pass();
 			  HAL_Delay(1200);
+
+
 //			  while(!issue_obj.isM_Stop)
 //			  {
 //				  No_Zip_M_UpDataAlgo(1);
 //			  }
 			  issue_obj.Init();//flagのリセ?��??��?
-			  HAL_Delay(5000);
+			  HAL_Delay(1000);
 		  }
 		  break;
 

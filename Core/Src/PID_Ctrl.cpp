@@ -63,7 +63,8 @@ namespace controll
 				enc_sigma_error=(ccw==-1)?0:enc_sigma_error;
 				fb_stra=1/V_bat/(10*10*10)*(Ksp*enc_error+Ksi*enc_sigma_error+Ksd*enc_delta_error);
 
-				gy_error= (now_cm->isWall_PID_Stop) ? now_omega-ccw*omega_gyro : now_omega-ccw*omega_gyro+gy_wall_pid;
+				//gy_error= (now_cm->isWall_PID_Stop) ? now_omega-ccw*omega_gyro : now_omega-ccw*omega_gyro+gy_wall_pid;
+				gy_error= (now_cm->isWall_PID_Stop) ? now_omega-ccw*omega_gyro : now_omega-ccw*omega_gyro;
 				//gy_error=(now_cm->isDiagWallPID)?now_omega-ccw*omega_gyro+gy_diagwall_pid:gy_error;
 				gy_error=(ccw==-1)?0:gy_error;
 				gy_delta_error=gy_error-gy_old_error;
@@ -71,6 +72,7 @@ namespace controll
 				gy_sigma_error+=gy_error;
 				fb_turn=1/V_bat/(10*10*10)*(K_st_tu_p*gy_error+K_st_tu_i*gy_sigma_error+K_st_tu_d*gy_delta_error);
 				fb_turn=(now_cm->isDiagWallPID)?fb_turn+gy_diagwall_pid:fb_turn;
+				fb_turn=(!now_cm->isWall_PID_Stop)?fb_turn+gy_wall_pid:fb_turn;
 			}
 			else//スラロームか超信地旋回の時
 			{

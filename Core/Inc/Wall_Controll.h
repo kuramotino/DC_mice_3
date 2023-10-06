@@ -20,10 +20,10 @@ namespace controll
 		float THRESHOLD_DIFF_R=15;//1右壁の変化量の閾値20
 		float THRESHOLD_L=150;//2左壁の閾値150
 		float THRESHOLD_DIFF_L=30;//2左壁の変化量の閾値20
-		float R_SENSOR_GAIN=1.8;//1壁制御のゲイン0.0033/2
-		float L_SENSOR_GAIN=1.8;//1壁制御のゲイン0.0033/2
-		float CENTER_R=177;//機体が中心にあるときの右AD値
-		float CENTER_L=175;//機体が中心にあるときの左AD値255
+		float R_SENSOR_GAIN=0.0033;//1壁制御のゲイン0.0033/1.8
+		float L_SENSOR_GAIN=0.0033;//1壁制御のゲイン0.0033/1.8
+		float CENTER_R=185;//機体が中心にあるときの右AD値/177
+		float CENTER_L=165;//機体が中心にあるときの左AD値/175
 		float ABS_CENTER_R=170;
 		float ABS_CENTER_L=185;
 		float Side_R_ADtoX[5]={219.14,-2.0648,0.0092,-0.00002,0.00000002};//R距離変換関数の係数

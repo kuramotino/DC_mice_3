@@ -74,7 +74,7 @@ namespace Algorizm
 			F_Stra=first_Stra;
 			S_WBreak=S_Wall_Break;
 			S_D_WBreak=S_Diag_Wall_Break;
-			TURN_V=800;
+			TURN_V=500;
 			OO90_V=800;
 			OO180_V=800;
 			Diag_in45_V=800;
